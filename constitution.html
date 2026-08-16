@@ -21,7 +21,7 @@ nav{
     flex-wrap:wrap;
     gap:10px;
     padding:14px 20px;
-    background:rgba(255,255,255,.05);
+    background:rgba(0,0,0,.10);
     backdrop-filter:blur(12px);
     position:sticky;
     top:0;
@@ -178,7 +178,7 @@ nav{
 }
 .section{
     margin-top:25px;
-    background:rgba(0,0,0,.68);
+    background:rgba(0,0,0,.10);
     padding:40px;
     border-radius:14px;
     border:1px solid rgba(33,150,255,.25);
@@ -207,7 +207,7 @@ nav{
     text-align:left;
     margin-bottom:22px;
     line-height:1.7;
-    font-size:16px;
+    font-size:25px;
     opacity:.9;
 }
 .emoji-text:last-child{margin-bottom:0}
@@ -402,7 +402,7 @@ footer{
 .history-photo{
     margin:0;
     overflow:hidden;
-    background:rgba(255,255,255,.05);
+    background:rgba(0,0,0,.10);
     border:1px solid rgba(33,150,255,.25);
     border-radius:14px;
     box-shadow:0 0 20px rgba(33,150,255,.08);
@@ -418,8 +418,9 @@ footer{
 .history-photo img{
     display:block;
     width:100%;
-    height:260px;
-    object-fit:cover;
+    height:320px;
+    object-fit:contain;
+    object-position:center;
     background:#111;
 }
 
@@ -445,7 +446,7 @@ footer{
         grid-template-columns:1fr;
     }
     .history-photo img{
-        height:240px;
+        height:260px;
     }
 }
 
