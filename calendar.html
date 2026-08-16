@@ -15,7 +15,7 @@ body{background:#0b0b0b;color:#fff;overflow-x:hidden}
 /* ============================= */
 nav{
     display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px;
-    padding:14px 20px;background:rgba(255,255,255,.05);
+    padding:14px 20px;background:rgba(0,0,0,.10);
     backdrop-filter:blur(12px);position:sticky;top:0;z-index:10000;
 }
 .main-nav{isolation:isolate}
@@ -123,7 +123,7 @@ body::before{
     display:flex;justify-content:center;align-items:center;gap:25px;
     flex-wrap:wrap;margin:0 0 22px;
 }
-.legend-item{display:flex;align-items:center;gap:8px;font-size:13px;opacity:.9}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:23px;opacity:.9}
 .legend-box{
     width:18px;height:18px;border-radius:5px;border:1px solid rgba(255,255,255,.25)
 }
@@ -138,7 +138,7 @@ body::before{
 .weekday{
     text-align:center;padding:12px 5px;font-weight:800;color:#2196ff;
     background:rgba(33,150,255,.09);border:1px solid rgba(33,150,255,.18);
-    border-radius:8px;font-size:13px;
+    border-radius:8px;font-size:23px;
 }
 .day{
     min-height:105px;padding:9px;border-radius:10px;
@@ -151,9 +151,9 @@ body::before{
     box-shadow:0 0 14px rgba(33,150,255,.12);
 }
 .day.empty{background:rgba(255,255,255,.015);border-color:transparent}
-.day-number{font-size:17px;font-weight:800}
+.day-number{font-size:23px;font-weight:800}
 .day-status{
-    display:block;margin-top:8px;font-size:10px;font-weight:800;
+    display:block;margin-top:8px;font-size:18px;font-weight:800;
     text-transform:uppercase;letter-spacing:.5px;
 }
 .day.holiday{
@@ -173,13 +173,13 @@ body::before{
     box-shadow:0 0 16px rgba(33,150,255,.65),inset 0 0 15px rgba(33,150,255,.12);
 }
 .day.today .day-number::after{
-    content:" TODAY";font-size:8px;color:#2196ff;vertical-align:middle;margin-left:5px;
+    content:" TODAY";font-size:18px;color:#2196ff;vertical-align:middle;margin-left:5px;
 }
 .day.holiday.today{outline-color:#ff4545}
 .day.partial.today{outline-color:#ffd54f}
 
 .calendar-note{
-    text-align:center;margin-top:20px;font-size:12px;opacity:.62;
+    text-align:center;margin-top:20px;font-size:18px;opacity:.62;
 }
 
 /* ============================= */
@@ -276,13 +276,13 @@ footer{
     color:#fff;
     background:rgba(33,150,255,.16);
     border-bottom:1px solid rgba(33,150,255,.35);
-    font-size:13px;
+    font-size:23px;
 }
 .holiday-table td{
     padding:13px 15px;
     color:#eee;
     border-bottom:1px solid rgba(255,255,255,.08);
-    font-size:13px;
+    font-size:23px;
     vertical-align:middle;
 }
 .holiday-table tbody tr{
