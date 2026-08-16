@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FORMER CHIEF JUSTICES OF INDIA | NYAYA SETU</title>
+<title>REGISTRY OFFICERS | NYAYA SETU</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
@@ -660,97 +660,171 @@ body::before{
         padding: 8px 6px;
     }
 }
+/* =========================================
+   REGISTRY OFFICERS / REGISTRARS GALLERY
+   ========================================= */
 
+.registry-officers-section{
+    margin-top:50px;
+    padding-top:35px;
+    border-top:1px solid rgba(33,150,255,.25);
+}
 
-/* ============================= */
-/* CHIEF JUSTICE PROFILE + JUDGES GALLERY */
-/* ============================= */
-.chief-justice-profile{
-    max-width:1200px;
-    margin:45px auto 50px;
-    padding:32px;
-    background:rgba(0,0,0,.68);
-    border:1px solid rgba(33,150,255,.28);
-    border-radius:18px;
-    box-shadow:0 0 30px rgba(33,150,255,.08), inset 0 0 25px rgba(33,150,255,.025);
-    text-align:left;
-}
-.chief-justice-top{
-    display:grid;
-    grid-template-columns:280px minmax(0,1fr);
-    gap:35px;
-    align-items:start;
-}
-.chief-justice-photo-wrap{text-align:center}
-.chief-justice-photo{
-    width:100%;
-    max-width:280px;
-    height:340px;
-    object-fit:cover;
-    object-position:top center;
-    display:block;
-    margin:0 auto;
-    border-radius:14px;
-    border:2px solid rgba(33,150,255,.55);
-    box-shadow:0 0 25px rgba(33,150,255,.18);
-    background:#111;
-}
-.chief-justice-details h2{
-    color:#2196ff;
-    font-size:30px;
-    line-height:1.25;
-    margin:0 0 18px;
-    text-shadow:0 0 12px rgba(33,150,255,.45);
-}
-.chief-justice-details .cj-meta{
-    margin:7px 0;
-    font-size:17px;
-    line-height:1.55;
-}
-.chief-justice-details .cj-meta strong{color:#2196ff}
-.chief-justice-bio{
-    margin-top:28px;
-    padding-top:24px;
-    border-top:1px solid rgba(33,150,255,.22);
-    font-size:16px;
-    line-height:1.8;
-    opacity:.92;
-    text-align:left;
-}
-.chief-justice-bio p{margin:0 0 18px}
-.chief-justice-bio p:last-child{margin-bottom:0}
-.judges-gallery{
-    max-width:1200px;
-    margin:0 auto 55px;
-    padding:35px 32px 40px;
-    background:rgba(0,0,0,.58);
-    border:1px solid rgba(33,150,255,.25);
-    border-radius:18px;
-    box-shadow:0 0 25px rgba(33,150,255,.06);
-}
-.judges-gallery h2{
-    color:#2196ff;
+.registry-officers-title{
     text-align:center;
-    margin:0 0 28px;
+    color:#2196ff;
     font-size:30px;
+    margin:0 0 30px;
     text-shadow:0 0 12px rgba(33,150,255,.5);
 }
-.judges-photo-grid{
+
+/* Secretary General */
+
+.secretary-general-card{
+    width:280px;
+    margin:0 auto 55px;
+    text-align:center;
+    padding:18px;
+    background:rgba(0,0,0,.68);
+    border:1px solid rgba(33,150,255,.35);
+    border-radius:16px;
+    box-shadow:
+        0 0 25px rgba(33,150,255,.10),
+        inset 0 0 20px rgba(33,150,255,.03);
+    transition:.3s ease;
+}
+
+.secretary-general-card:hover{
+    transform:translateY(-7px);
+    border-color:#2196ff;
+    box-shadow:
+        0 0 30px rgba(33,150,255,.25),
+        0 0 55px rgba(33,150,255,.10);
+}
+
+.secretary-general-card img{
+    display:block;
+    width:100%;
+    height:300px;
+    object-fit:contain; /* DON'T CROP */
+    border-radius:12px;
+    background:#111;
+    border:1px solid rgba(255,255,255,.12);
+}
+
+.secretary-general-card .designation{
+    margin-top:16px;
+    color:#2196ff;
+    font-size:14px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.secretary-general-card .person-name{
+    margin-top:7px;
+    color:#fff;
+    font-size:18px;
+    font-weight:700;
+}
+
+/* Registrars */
+
+.registrars-title{
+    text-align:center;
+    color:#2196ff;
+    font-size:30px;
+    margin:0 0 30px;
+    text-shadow:0 0 12px rgba(33,150,255,.5);
+}
+
+.registrars-grid{
     display:grid;
     grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:20px;
+    gap:22px;
 }
-.judge-card{
-    background:transparent !important;
-    border:none !important;
-    box-shadow:none !important;
-    padding:10px;
+
+.registrar-card{
     text-align:center;
+    overflow:hidden;
+    background:rgba(0,0,0,.68);
+    border:1px solid rgba(33,150,255,.25);
+    border-radius:14px;
+    padding:12px;
+    box-shadow:0 0 20px rgba(33,150,255,.08);
+    transition:.3s ease;
 }
-.judge-card:hover{
-    transform:translateY(-5px);
+
+.registrar-card:hover{
+    transform:translateY(-6px);
     border-color:#2196ff;
-    box-shadow:0 0 25px rgba(33,150,255,.2);
+    box-shadow:
+        0 0 25px rgba(33,150,255,.22),
+        0 0 45px rgba(33,150,255,.08);
+}
+
+.registrar-card img{
+    display:block;
+    width:100%;
+    height:230px;
+    object-fit:contain; /* DON'T CROP */
+    border-radius:10px;
+    background:#111;
+    border:1px solid rgba(255,255,255,.10);
+}
+
+.registrar-card .designation{
+    margin-top:12px;
+    color:#2196ff;
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+}
+
+.registrar-card .person-name{
+    margin-top:6px;
+    color:#fff;
+    font-size:15px;
+    font-weight:700;
+    line-height:1.4;
+}
+
+/* Responsive */
+
+@media(max-width:1000px){
+    .registrars-grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+}
+
+@media(max-width:700px){
+    .registrars-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:15px;
+    }
+
+    .registrar-card img{
+        height:210px;
+    }
+
+    .registrar-card .person-name{
+        font-size:13px;
+    }
+}
+
+@media(max-width:450px){
+    .registrars-grid{
+        grid-template-columns:1fr;
+    }
+
+    .secretary-general-card{
+        width:min(280px,100%);
+    }
+
+    .registrar-card img{
+        height:280px;
+    }
 }
 .judge-card img{
     display:block;
@@ -763,42 +837,6 @@ body::before{
     box-shadow:none !important;
     border-radius:0;
 }
-.judge-card figcaption{
-    min-height:72px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:13px 10px;
-    color:#fff;
-    font-size:20px;
-    font-weight:700;
-    line-height:1.35;
-}
-@media(max-width:1000px){
-    .judges-photo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-}
-@media(max-width:800px){
-    .chief-justice-profile{padding:24px 20px}
-    .chief-justice-top{grid-template-columns:1fr;gap:25px}
-    .chief-justice-photo{height:360px}
-    .chief-justice-details h2{text-align:center;font-size:25px}
-    .chief-justice-details .cj-meta{text-align:center;font-size:15px}
-    .judges-gallery{padding:28px 20px 32px}
-    .judges-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-    .judge-card img{height:240px}
-}
-@media(max-width:500px){
-    .judges-photo-grid{grid-template-columns:1fr}
-    .judge-card img{
-        width:140px;
-        height:180px;
-        background:transparent !important;
-        border:none !important;
-        box-shadow:none !important;
-    }
-}
-
 </style>
 <style id="magenta-theme-vars">
 :root{
@@ -816,7 +854,7 @@ body::before{
 </video>
 
 <nav class="main-nav">
-    <a href="/" class="nav-home">Home</a>
+    <a href="index.html" class="nav-home">Home</a>
 
     <div class="nav-dropdown" data-popup="aboutPopup">
         <a href="javascript:void(0)" class="nav-trigger">About</a>
@@ -849,236 +887,132 @@ body::before{
 
 <section class="about">
 
-<!-- ============================= -->
-<!-- CURRENT CHIEF JUSTICE & JUDGES -->
-<!-- ============================= -->
-<section class="judges-gallery" aria-label="Former Chief Justices of India">
-    <h2>FORMER CHIEF JUSTICES OF INDIA</h2>
-    <div class="judges-photo-grid">
+<!-- =========================================
+     SECRETARY GENERAL & REGISTRARS
+     ========================================= -->
 
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/1.jpg" alt="Justice Harilal Jekisundas Kania">
-            <figcaption>Justice Harilal Jekisundas Kania</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/2.jpg" alt="Justice M. Patanjali Sastri">
-            <figcaption>Justice M. Patanjali Sastri</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/3.jpg" alt="Justice Mehr Chand Mahajan">
-            <figcaption>Justice Mehr Chand Mahajan</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/4.jpg" alt="Justice Bijan Kumar Mukherjea">
-            <figcaption>Justice Bijan Kumar Mukherjea</figcaption>
-        </figure>
+    <!-- SECRETARY GENERAL -->
+    <h2 class="registry-officers-title">REGISTRY OFFICERS</h2>
 
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/5.jpg" alt="Justice Sudhi Ranjan Das">
-            <figcaption>Justice Sudhi Ranjan Das</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/6.jpg" alt="Justice Bhuvneshwar Prasad Sinha">
-            <figcaption>Justice Bhuvneshwar Prasad Sinha</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/7.jpg" alt="Justice P.B. Gajendragadkar">
-            <figcaption>Justice P.B. Gajendragadkar</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/8.jpg" alt="Justice A.K. Sarkar">
-            <figcaption>Justice A.K. Sarkar</figcaption>
-        </figure>
+    <div class="secretary-general-card">
+        <img
+            src="registry-officers-images/1.jpg"
+            alt="Shri Bharat Parashar - Secretary General"
+        >
 
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/9.jpg" alt="Justice K. Subba Rao">
-            <figcaption>Justice K. Subba Rao</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/10.jpg" alt="Justice K.N. Wanchoo">
-            <figcaption>Justice K.N. Wanchoo</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/11.jpg" alt="Justice M. Hidayatullah">
-            <figcaption>Justice M. Hidayatullah</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/12.jpg" alt="Justice J.C. Shah">
-            <figcaption>Justice J.C. Shah</figcaption>
-        </figure>
+        <div class="designation">
+            Secretary General
+        </div>
 
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/13.jpg" alt="Justice S.M. Sikri">
-            <figcaption>Justice S.M. Sikri</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/14.jpg" alt="Justice A.N. Ray">
-            <figcaption>Justice A.N. Ray</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/15.jpg" alt="Justice M. Hameedullah Beg">
-            <figcaption>Justice M. Hameedullah Beg</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/16.jpg" alt="Justice Y.V. Chandrachud">
-            <figcaption>Justice Y.V. Chandrachud</figcaption>
-        </figure>
-
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/17.png" alt="Justice P.N. Bhagwati">
-            <figcaption>Justice P.N. Bhagwati</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/18.jpg" alt="Justice R.S. Pathak">
-            <figcaption>Justice R.S. Pathak</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/19.jpg" alt="Justice E.S. Venkataramiah">
-            <figcaption>Justice E.S. Venkataramiah</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/20.jpg" alt="Justice Sabyasachi Mukherjee">
-            <figcaption>Justice Sabyasachi Mukherjee</figcaption>
-        </figure>
-
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/21.jpg" alt="Justice Ranganath Misra">
-            <figcaption>Justice Ranganath Misra</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/22.jpg" alt="Justice K.N. Singh">
-            <figcaption>Justice K.N. Singh</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/23.jpg" alt="Justice M.H. Kania">
-            <figcaption>Justice M.H. Kania</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/24.jpg" alt="Justice L.M. Sharma">
-            <figcaption>Justice L.M. Sharma</figcaption>
-        </figure>
-
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/25.jpg" alt="Justice N.M. Venkatachaliah">
-            <figcaption>Justice N.M. Venkatachaliah</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/26.jpg" alt="Justice A.M. Ahmadi">
-            <figcaption>Justice A.M. Ahmadi</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/27.jpg" alt="Justice J.S. Verma">
-            <figcaption>Justice J.S. Verma</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/28.jpg" alt="Justice M.M. Punchhi">
-            <figcaption>Justice M.M. Punchhi</figcaption>
-        </figure>
-
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/29.jpg" alt="Justice A.S. Anand">
-            <figcaption>Justice A.S. Anand</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/30.jpg" alt="Justice S.P. Bharucha">
-            <figcaption>Justice S.P. Bharucha</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/31.jpg" alt="Justice B.N. Kirpal">
-            <figcaption>Justice B.N. Kirpal</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/32.jpg" alt="Justice G.B. Patnaik">
-            <figcaption>Justice G.B. Patnaik</figcaption>
-        </figure>
-
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/33.jpg" alt="Justice S. Rajendra Babu">
-            <figcaption>Justice S. Rajendra Babu</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/34.jpg" alt="Justice V.N. Khare">
-            <figcaption>Justice V.N. Khare</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/35.jpg" alt="Justice R.C. Lahoti">
-            <figcaption>Justice R.C. Lahoti</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/36.jpg" alt="Justice V.K. Sabharwal">
-            <figcaption>Justice V.K. Sabharwal</figcaption>
-        </figure>
-
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/37.jpg" alt="Justice K.G. Balakrishnan">
-            <figcaption>Justice K.G. Balakrishnan</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/38.jpg" alt="Justice S.H. Kapadia">
-            <figcaption>Justice S.H. Kapadia</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/39.jpg" alt="Justice Altamas Kabir">
-            <figcaption>Justice Altamas Kabir</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/40.jpg" alt="Justice R. Sathasivam">
-            <figcaption>Justice R. Sathasivam</figcaption>
-        </figure>
-
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/41.jpg" alt="Justice R.M. Lodha">
-            <figcaption>Justice R.M. Lodha</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/42.jpg" alt="Justice H.L. Dattu">
-            <figcaption>Justice H.L. Dattu</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/43.jpg" alt="Justice T.S. Thakur">
-            <figcaption>Justice T.S. Thakur</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/44.jpg" alt="Justice Jagdish Singh Khehar">
-            <figcaption>Justice Jagdish Singh Khehar</figcaption>
-        </figure>
-
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/45.jpg" alt="Justice Dipak Misra">
-            <figcaption>Justice Dipak Misra</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/46.jpg" alt="Justice Ranjan Gogoi">
-            <figcaption>Justice Ranjan Gogoi</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/47.jpeg" alt="Justice Sharad Arvind Bobde">
-            <figcaption>Justice Sharad Arvind Bobde</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/48.jpg" alt="Justice N.V. Ramana">
-            <figcaption>Justice N.V. Ramana</figcaption>
-        </figure>
-
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/49.jpg" alt="Justice Uday Umesh Lalit">
-            <figcaption>Justice Uday Umesh Lalit</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/50.jpg" alt="Dr. Justice D.Y. Chandrachud">
-            <figcaption>Dr. Justice D.Y. Chandrachud</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/51.jpeg" alt="Justice Sanjiv Khanna">
-            <figcaption>Justice Sanjiv Khanna</figcaption>
-        </figure>
-        <figure class="judge-card">
-            <img src="former-chief-justice-images/52.jpg" alt="Justice Dhananjaya Ramchandra Gavai">
-            <figcaption>Justice Dhananjaya Ramchandra Gavai</figcaption>
-        </figure>
-
+        <div class="person-name">
+            Shri Bharat Parashar
+        </div>
     </div>
-</section>
+
+
+    <!-- REGISTRARS -->
+
+<div class="registrars-grid">
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/2.png" alt="Shri Rakesh Kumar">
+        <div class="designation">Registrar</div>
+        <div class="person-name">Shri Rakesh Kumar</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/3.jpg" alt="Shri Devender Pal Walia">
+        <div class="designation">Registrar</div>
+        <div class="person-name">Shri Devender Pal Walia</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/4.jpg" alt="Ms. Aparna Ajitsaria">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Ms. Aparna Ajitsaria</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/5.jpg" alt="Shri Santosh Kumar">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Shri Santosh Kumar</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/6.jpg" alt="Shri Satish Kumar Arora">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Shri Satish Kumar Arora</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/7.jpg" alt="Shri Tauzeeh-UI-Islam Rajput">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Shri Tauzeeh-UI-Islam Rajput</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/8.jpeg" alt="Ms. Gracy L. Bawitlung">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Ms. Gracy L. Bawitlung</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/9.jpeg" alt="Ms. Kaveri">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Ms. Kaveri</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/10.jpg" alt="Shri Kuntal Sharma Pathak">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Shri Kuntal Sharma Pathak</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/11.jpeg" alt="Shri Rajesh Sharma">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Shri Rajesh Sharma</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/12.jpg" alt="Shri Apoorv Singh">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Shri Apoorv Singh</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/13.jpeg" alt="Dr. Ajit Atri">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Dr. Ajit Atri</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/14.png" alt="Ms. Aarti Singh">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Ms. Aarti Singh</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/15.jpg" alt="Shri Vishal">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Shri Vishal</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/16.png" alt="Ms. Shivani Handique">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Ms. Shivani Handique</div>
+    </div>
+
+    <div class="registrar-card">
+        <img src="registry-officers-images/17.jpg" alt="Dr. Saleena V.G. Nair">
+        <div class="designation">Registrar (J)</div>
+        <div class="person-name">Dr. Saleena V.G. Nair</div>
+    </div>
+
+</div>
+
+</div>
 
 <footer>
     <div class="footer-logo">
