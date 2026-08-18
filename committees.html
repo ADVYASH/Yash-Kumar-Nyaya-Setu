@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>COMMITTEES | NYAYA SETU</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<style id="theme-vars">
+:root{
+    --theme-primary:var(--theme-primary);
+    --theme-primary-soft:var(--theme-primary-glow);
+    --theme-primary-glow:var(--theme-primary-glow);
+    --theme-primary-border:var(--theme-primary-glow);
+}
+</style>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 html{scroll-behavior:smooth}
@@ -19,108 +29,70 @@ nav{
     justify-content:center;
     align-items:center;
     flex-wrap:wrap;
-    gap:10px;
-    padding:14px 20px;
+    gap:12px;
+    padding:16px 22px;
     background:rgba(255,255,255,.05);
     backdrop-filter:blur(12px);
     position:sticky;
     top:0;
     z-index:10000;
 }
-.main-nav{isolation:isolate}
-.nav-dropdown{position:relative;display:flex;align-items:center}
-.nav-trigger,.nav-home{
+
+.main-nav{
+    isolation:isolate;
+}
+
+.nav-dropdown{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+.nav-trigger,
+.nav-home{
     display:flex;
     align-items:center;
     justify-content:center;
     color:#fff;
     text-decoration:none;
-    font-weight:600;
+    font-weight:700;
     position:relative;
-    padding:10px 13px;
-    border-radius:10px;
+    padding:13px 18px;
+    min-height:46px;
+    border-radius:12px;
     transition:.25s ease;
     white-space:nowrap;
+    font-size:15px;
+    letter-spacing:.2px;
 }
-.nav-trigger:hover,.nav-home:hover,
-.nav-dropdown:has(.nav-popup-menu:hover) .nav-trigger,
-.nav-dropdown:hover .nav-trigger{
+
+.nav-trigger:hover,
+.nav-home:hover{
     color:#fff;
     background:rgba(20,20,25,.96);
     border:1px solid rgba(255,255,255,.18);
-    box-shadow:0 0 18px rgba(255,60,172,.20);
+    box-shadow:0 0 18px rgba(0,149,255,.20);
 }
-.nav-trigger::after,.nav-home::after{
+
+.nav-trigger::after,
+.nav-home::after{
     content:"";
     position:absolute;
-    left:0;right:0;bottom:-1px;
-    width:100%;height:3px;
-    background:#ff3cac;
+    left:0;
+    right:0;
+    bottom:-1px;
+    width:100%;
+    height:3px;
+    background:#0095ff;
     border-radius:3px 3px 0 0;
     transform:scaleX(0);
     transform-origin:center;
     transition:.22s ease;
 }
-.nav-trigger:hover::after,.nav-home:hover::after,
-.nav-dropdown:hover .nav-trigger::after{transform:scaleX(1)}
-.nav-dropdown::after{
-    content:"";
-    position:absolute;
-    left:0;right:0;top:100%;
-    height:10px;
-    background:transparent;
-    z-index:10001;
-}
-.nav-popup-menu{
-    position:absolute;
-    top:100%;
-    left:50%;
-    transform:translateX(-50%) translateY(-8px);
-    width:min(590px,88vw);
-    max-height:70vh;
-    overflow-y:auto;
-    padding:12px;
-    display:grid;
-    grid-template-columns:repeat(3,minmax(120px,1fr));
-    gap:8px;
-    background:rgba(20,20,25,.96);
-    backdrop-filter:blur(25px);
-    border:1px solid rgba(255,255,255,.18);
-    border-radius:18px;
-    box-shadow:0 0 30px rgba(0,0,0,.45),0 0 55px rgba(255,60,172,.14);
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-    transition:.22s ease;
-}
-.nav-dropdown:hover .nav-popup-menu,
-.nav-dropdown:focus-within .nav-popup-menu{
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-    transform:translateX(-50%) translateY(0);
-}
-.nav-popup-menu a{
-    min-height:48px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:8px 9px;
-    border-radius:9px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.14);
-    color:#fff;
-    text-decoration:none;
-    font-size:11px;
-    font-weight:700;
-    transition:.25s ease;
-}
-.nav-popup-menu a:hover{
-    transform:translateY(-4px);
-    background:rgba(255,60,172,.18);
-    border-color:#ff3cac;
-    box-shadow:0 0 15px rgba(255,60,172,.35);
+
+.nav-trigger:hover::after,
+.nav-home:hover::after{
+    transform:scaleX(1);
 }
 
 /* ============================= */
@@ -136,15 +108,68 @@ nav{
     text-align:center;
 }
 .about h1{
-    font-size:60px;
-    color:#2196ff;
-    margin-bottom:20px;
-    text-shadow:0 0 10px #2196ff,0 0 25px rgba(33,150,255,.6);
-    animation:titleGlow 2.5s infinite ease-in-out;
+    font-family:"Permanent Marker", cursive;
+    font-size:42px;
+    font-weight:700;
+    letter-spacing:3px;
+    color:#0095ff;
+    display:inline-block;
+    position:relative;
+    padding-bottom:12px;
+    text-shadow:0 0 8px rgba(0,149,255,.45);
+    animation:committeePulse 3s ease-in-out infinite;
 }
-@keyframes titleGlow{
-    0%,100%{text-shadow:0 0 10px #2196ff,0 0 20px rgba(33,150,255,.4)}
-    50%{text-shadow:0 0 20px #2196ff,0 0 45px rgba(33,150,255,.8)}
+
+/* Text animation */
+@keyframes committeePulse{
+    0%,100%{
+        transform:scale(1);
+        letter-spacing:3px;
+    }
+
+    50%{
+        transform:scale(1.03);
+        letter-spacing:5px;
+    }
+}
+
+/* Animated underline */
+.about h1::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width:0;
+    height:3px;
+    background:#0095ff;
+    border-radius:10px;
+    box-shadow:
+        0 0 8px #0095ff,
+        0 0 18px #0095ff;
+    transform:translateX(-50%);
+    animation:lineExpand 2s ease-in-out infinite;
+}
+
+@keyframes lineExpand{
+    0%,100%{
+        width:0;
+        opacity:.3;
+    }
+
+    40%{
+        width:100%;
+        opacity:1;
+    }
+
+    70%{
+        width:100%;
+        opacity:1;
+    }
+
+    90%{
+        width:0;
+        opacity:.3;
+    }
 }
 .intro{max-width:1100px;margin:0 auto;font-size:24px;line-height:1.7;opacity:.9}
 .container{max-width:950px;margin:0 auto}
@@ -289,29 +314,66 @@ nav{
 
 footer{
     background:#050505;
-    padding:60px 10%;
+    padding:35px 7%;
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    gap:40px;
+    gap:25px;
     flex-wrap:wrap;
     border-top:1px solid rgba(33,150,255,.12);
 }
-.footer-logo{display:flex;flex-direction:column;min-width:200px}
-.footer-logo img{width:130px;margin-bottom:10px}
-.footer-logo p{opacity:.7;font-size:14px}
-.footer-links{min-width:150px}
-.footer-links h4{color:#2196ff;margin-bottom:12px;font-size:16px}
-.footer-links a{
-    display:block;color:#fff;opacity:.7;text-decoration:none;
-    margin:7px 0;transition:.3s ease;
-}
-.footer-links a:hover{color:#2196ff;opacity:1;transform:translateX(4px)}
-.bottom{
-    text-align:center;padding:18px;background:#030303;
-    opacity:.75;font-size:13px;border-top:1px solid rgba(255,255,255,.05);
+
+.footer-logo{
+    display:flex;
+    flex-direction:column;
+    min-width:170px;
 }
 
+.footer-logo img{
+    width:150px;
+    margin-bottom:8px;
+}
+
+.footer-logo p{
+    opacity:.7;
+    font-size:15px;
+    margin:3px 0;
+}
+
+.footer-links{
+    min-width:130px;
+}
+
+.footer-links h4{
+    color:#2196ff;
+    margin-bottom:9px;
+    font-size:14px;
+}
+
+.footer-links a{
+    display:block;
+    color:#fff;
+    opacity:.7;
+    text-decoration:none;
+    margin:5px 0;
+    font-size:15px;
+    transition:.3s ease;
+}
+
+.footer-links a:hover{
+    color:#2196ff;
+    opacity:1;
+    transform:translateX(4px);
+}
+
+.bottom{
+    text-align:center;
+    padding:12px;
+    background:#030303;
+    opacity:.75;
+    font-size:15px;
+    border-top:1px solid rgba(255,255,255,.05);
+}
 /* ============================= */
 /* RESPONSIVE */
 /* ============================= */
@@ -332,7 +394,11 @@ footer{
     .section h2{font-size:23px}
     .emoji-text{font-size:15px;gap:10px}
     .emoji-text img{height:38px;width:38px}
-    footer{padding:45px 25px;flex-direction:column}
+footer{
+    padding:30px 20px;
+    flex-direction:column;
+    gap:20px;
+}
 }
 @media(max-width:600px){
     .main-nav{
@@ -341,7 +407,11 @@ footer{
         flex-wrap:nowrap;
         scrollbar-width:thin;
     }
-    .nav-trigger,.nav-home{font-size:12px;padding:8px 9px}
+.nav-trigger,.nav-home{
+    font-size:13px;
+    padding:10px 13px;
+    min-height:42px;
+}
     .nav-popup-menu{
         position:fixed;
         top:64px;
@@ -590,34 +660,41 @@ body::before{
 /* ============================= */
 /* SUPREME COURT COMMITTEES TABLE */
 /* ============================= */
+
 .committees-section {
     width: 100%;
     padding: 35px 0 45px;
 }
+
 .committees-container {
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
 }
+
 .committees-title {
     text-align: center;
     margin: 0 0 22px;
     font-weight: 800;
 }
+
 .committees-table-wrap {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    overflow: visible;
+    display: block;
+    overflow-x: auto;
+    padding: 0;
 }
+
 .committees-table {
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
     border: 3px solid rgba(33,150,255,.75);
     border-collapse: collapse;
     table-layout: fixed;
 }
+
 .committees-table th,
 .committees-table td {
     border: 2px solid rgba(33,150,255,.55);
@@ -627,47 +704,83 @@ body::before{
     overflow-wrap: anywhere;
     line-height: 1.45;
 }
+
 .committees-table th {
     border: 3px solid rgba(33,150,255,.75);
     text-align: center;
     font-weight: 800;
 }
+
 .committees-table th:nth-child(1),
 .committees-table td:nth-child(1) {
     width: 7%;
     text-align: center;
 }
+
 .committees-table th:nth-child(2),
 .committees-table td:nth-child(2) {
     width: 39%;
 }
+
 .committees-table th:nth-child(3),
 .committees-table td:nth-child(3) {
     width: 54%;
 }
+
 .committee-composition {
     white-space: normal;
 }
+
 @media (max-width: 800px) {
     .committees-container {
-        width: 98%;
+        width: 100%;
+        padding: 0;
     }
+
     .committees-table {
+        width: 100%;
         font-size: 11px;
     }
+
     .committees-table th,
     .committees-table td {
         padding: 8px 6px;
     }
 }
 
-</style>
-<style id="magenta-theme-vars">
-:root{
-    --theme-primary:#2196ff;
-    --theme-primary-soft:rgba(33,150,255,.18);
-    --theme-primary-glow:rgba(33,150,255,.35);
-    --theme-primary-border:rgba(33,150,255,.35);
+/* ============================= */
+/* COMMITTEE PDF BUTTON */
+/* ============================= */
+
+.pdf-button-wrap{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-top:25px;
+}
+
+.pdf-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:12px 28px;
+    background:#0095ff;
+    color:#fff;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:700;
+    border-radius:10px;
+    border:1px solid #0095ff;
+    box-shadow:0 0 12px rgba(0,149,255,.35);
+    transition:.3s ease;
+}
+
+.pdf-button:hover{
+    background:#007dcc;
+    transform:translateY(-2px);
+    box-shadow:
+        0 0 15px #0095ff,
+        0 0 30px rgba(0,149,255,.45);
 }
 </style>
 </head>
@@ -756,6 +869,11 @@ body::before{
 <tr><td class="committee-sno"><strong>27</strong></td><td class="committee-subject"><strong>National Judicial Museum and Archive (NJMA) Committee.</strong></td><td class="committee-composition">1. Justice K. Viswanathan<br>2. Justice Joymalya Bagchi<br>3. Justice Vipul M. Pancholi<br>w.e.f. 15.12.2025 till further orders.</td></tr>
                 </tbody>
             </table>
+<div class="pdf-button-wrap">
+    <a href="pdf/1.pdf" target="_blank" class="pdf-button">
+        📚Download/View PDF
+    </a>
+</div>
         </div>
     </div>
 </section>
@@ -973,88 +1091,103 @@ body::before{
 </div>
 
 <script>
-function showSection(sectionId,clickedButton){
+function showSection(sectionId, clickedButton){
     document.querySelectorAll(".tab-section").forEach(section=>{
         section.classList.remove("active");
     });
+
     document.querySelectorAll(".asrp-buttons button").forEach(button=>{
         button.classList.remove("active");
     });
+
     document.getElementById(sectionId).classList.add("active");
     clickedButton.classList.add("active");
 }
 
-/* Build the exact same navbar hover popup menus from the full popup links. */
-function buildNavPopupMenus(){
-    document.querySelectorAll(".nav-dropdown[data-popup]").forEach(function(navItem){
-        const popupId=navItem.getAttribute("data-popup");
-        const sourcePopup=document.getElementById(popupId);
-        if(!sourcePopup)return;
 
-        const sourceGrid=sourcePopup.querySelector(".popup-grid");
-        if(!sourceGrid)return;
+/* =========================================
+   NAVBAR CLICK → CENTER POPUP
+========================================= */
 
-        const menu=document.createElement("div");
-        menu.className="nav-popup-menu";
-        menu.setAttribute("role","menu");
-
-        sourceGrid.querySelectorAll("a").forEach(function(sourceLink){
-            const link=sourceLink.cloneNode(true);
-            link.setAttribute("role","menuitem");
-            menu.appendChild(link);
-        });
-
-        navItem.appendChild(menu);
-    });
-}
-
-function openPopup(popupId){
-    const popup=document.getElementById(popupId);
-    if(popup){
-        popup.classList.add("active");
-        document.body.style.overflow="hidden";
-    }
-}
-
-function closePopup(popupId){
-    const popup=document.getElementById(popupId);
-    if(popup){
-        popup.classList.remove("active");
-        document.body.style.overflow="";
-    }
-}
-
-buildNavPopupMenus();
-
-/* Mobile: tap navbar button to open its full popup. */
 document.querySelectorAll(".nav-dropdown .nav-trigger").forEach(function(trigger){
-    trigger.addEventListener("click",function(event){
-        if(window.matchMedia("(max-width:600px)").matches){
-            event.preventDefault();
-            const navItem=trigger.closest(".nav-dropdown");
-            openPopup(navItem.getAttribute("data-popup"));
-        }
-    });
-});
 
-/* Close when clicking outside the popup. */
-document.querySelectorAll(".popup-overlay").forEach(function(popup){
-    popup.addEventListener("click",function(event){
-        if(event.target===popup){
-            popup.classList.remove("active");
-            document.body.style.overflow="";
-        }
-    });
-});
+    trigger.addEventListener("click", function(event){
 
-/* ESC closes every popup. */
-document.addEventListener("keydown",function(event){
-    if(event.key==="Escape"){
+        event.preventDefault();
+        event.stopPropagation();
+
+        const navItem = trigger.closest(".nav-dropdown");
+        const popupId = navItem.getAttribute("data-popup");
+
+        /* Close any other popup first */
         document.querySelectorAll(".popup-overlay").forEach(function(popup){
             popup.classList.remove("active");
         });
-        document.body.style.overflow="";
+
+        /* Open selected popup in center */
+        openPopup(popupId);
+    });
+
+});
+
+
+function openPopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.add("active");
+        document.body.style.overflow = "hidden";
     }
+
+}
+
+
+function closePopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+}
+
+
+/* =========================================
+   CLICK OUTSIDE → CLOSE
+========================================= */
+
+document.querySelectorAll(".popup-overlay").forEach(function(popup){
+
+    popup.addEventListener("click", function(event){
+
+        if(event.target === popup){
+            popup.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   ESC → CLOSE
+========================================= */
+
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Escape"){
+
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        document.body.style.overflow = "";
+    }
+
 });
 </script>
 
