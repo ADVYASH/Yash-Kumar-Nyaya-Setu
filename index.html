@@ -2337,6 +2337,164 @@ font-size:14px;
     box-shadow:0 0 15px rgba(255,60,172,0.35);
 }
 
+
+/* =====================================================
+   DIGITAL LEGAL SERVICES - LOCKED ACCESS
+===================================================== */
+.digital-legal-locked{
+    position:relative;
+}
+
+.digital-legal-locked .digital-legal-content{
+    filter:blur(7px);
+    pointer-events:none;
+    user-select:none;
+    transition:filter .35s ease;
+}
+
+.digital-legal-locked.is-unlocked .digital-legal-content{
+    filter:none;
+    pointer-events:auto;
+    user-select:auto;
+}
+
+.digital-lock-overlay{
+    position:absolute;
+    inset:0;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    background:rgba(0,0,0,.28);
+    backdrop-filter:blur(1px);
+}
+
+.digital-lock-overlay.hidden{
+    display:none;
+}
+
+.digital-unlock-btn{
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:999px;
+    padding:15px 30px;
+    background:linear-gradient(135deg,#ff3cac,#7b2cff);
+    color:#fff;
+    font:800 16px 'Poppins',sans-serif;
+    letter-spacing:.6px;
+    cursor:pointer;
+    box-shadow:0 0 25px rgba(255,60,172,.35);
+    transition:.25s ease;
+}
+
+.digital-unlock-btn:hover{
+    transform:translateY(-3px) scale(1.03);
+    box-shadow:0 0 35px rgba(255,60,172,.5);
+}
+
+.digital-auth-box{
+    width:min(430px,94vw);
+    padding:30px;
+}
+
+.digital-auth-box h2{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.digital-auth-box .auth-subtitle{
+    text-align:center;
+    opacity:.65;
+    font-size:13px;
+    margin-bottom:22px;
+}
+
+.digital-auth-step{
+    display:none;
+}
+
+.digital-auth-step.active{
+    display:block;
+}
+
+.digital-auth-label{
+    display:block;
+    margin:0 0 8px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.digital-auth-input{
+    width:100%;
+    height:48px;
+    padding:0 14px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.18);
+    outline:none;
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    font:500 15px 'Poppins',sans-serif;
+    margin-bottom:14px;
+}
+
+.digital-auth-input::placeholder{
+    color:rgba(255,255,255,.45);
+}
+
+.digital-auth-input:focus{
+    border-color:#ff3cac;
+    box-shadow:0 0 16px rgba(255,60,172,.18);
+}
+
+.digital-auth-btn{
+    width:100%;
+    min-height:48px;
+    border:0;
+    border-radius:12px;
+    background:#ff3cac;
+    color:#fff;
+    font:800 14px 'Poppins',sans-serif;
+    cursor:pointer;
+    transition:.25s ease;
+}
+
+.digital-auth-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 20px rgba(255,60,172,.35);
+}
+
+.digital-auth-message{
+    min-height:22px;
+    margin-top:12px;
+    text-align:center;
+    font-size:12px;
+    opacity:.8;
+}
+
+.digital-demo-note{
+    margin-top:18px;
+    text-align:center;
+    font-size:11px;
+    opacity:.45;
+}
+
+.digital-auth-back{
+    margin-top:12px;
+    width:100%;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:10px;
+    background:rgba(255,255,255,.05);
+    color:#fff;
+    padding:9px;
+    cursor:pointer;
+}
+
+@media(max-width:600px){
+    .digital-auth-box{
+        padding:24px 18px;
+    }
+}
+
 </style>
 </head>
 
@@ -2411,10 +2569,11 @@ font-size:14px;
     <div class="button-section">
 
         <!-- INFORMATION -->
-        <div class="button-category">
-            <h2>DIGITAL LEGAL SERVICES</h2>
+        <div class="button-category digital-legal-locked" id="digitalLegalServices">
+            <div class="digital-legal-content">
+                <h2>DIGITAL LEGAL SERVICES</h2>
 
-            <div class="button-grid">
+                <div class="button-grid">
 
                 <a href="eestampall.html" class="square-btn">
                     <img src="digitalbutton/1.png">
@@ -2475,6 +2634,13 @@ font-size:14px;
                     <img src="digitalbutton/24.png">
                     <span>Draft</span>
                 </a>
+                </div>
+            </div>
+
+            <div class="digital-lock-overlay" id="digitalLockOverlay">
+                <button type="button" class="digital-unlock-btn" onclick="openDigitalAuth()">
+                    🔒 Unlock Now
+                </button>
             </div>
         </div>
 
@@ -2797,6 +2963,58 @@ font-size:14px;
 
 </div>
 
+
+
+<!-- =====================================================
+     DIGITAL LEGAL SERVICES - DEMO MOBILE/OTP UNLOCK
+===================================================== -->
+<div class="popup-overlay" id="digitalAuthPopup">
+    <div class="popup-box digital-auth-box">
+        <button class="popup-close" type="button" onclick="closeDigitalAuth()">×</button>
+
+        <h2>UNLOCK DIGITAL LEGAL SERVICES</h2>
+        <p class="auth-subtitle">Enter your mobile number to continue</p>
+
+        <div class="digital-auth-step active" id="digitalMobileStep">
+            <label class="digital-auth-label" for="digitalMobile">Mobile Number</label>
+            <input
+                id="digitalMobile"
+                class="digital-auth-input"
+                type="tel"
+                inputmode="numeric"
+                maxlength="10"
+                placeholder="Enter 10-digit mobile number"
+                autocomplete="off"
+            >
+            <button type="button" class="digital-auth-btn" onclick="sendDigitalOtp()">
+                Send OTP
+            </button>
+            <div class="digital-auth-message" id="digitalMobileMessage"></div>
+        </div>
+
+        <div class="digital-auth-step" id="digitalOtpStep">
+            <label class="digital-auth-label" for="digitalOtp">OTP</label>
+            <input
+                id="digitalOtp"
+                class="digital-auth-input"
+                type="password"
+                inputmode="numeric"
+                maxlength="8"
+                placeholder="Enter OTP"
+                autocomplete="off"
+            >
+            <button type="button" class="digital-auth-btn" onclick="verifyDigitalOtp()">
+                Verify &amp; Unlock
+            </button>
+            <button type="button" class="digital-auth-back" onclick="backToDigitalMobile()">
+                ← Change Mobile Number
+            </button>
+            <div class="digital-auth-message" id="digitalOtpMessage"></div>
+        </div>
+
+        <div class="digital-demo-note">Demo access • OTP verification is handled locally on this page.</div>
+    </div>
+</div>
 
 <!-- =====================================================
      POPUPS
@@ -3836,6 +4054,104 @@ document.addEventListener("keydown", function(event){
     }
 
 });
+
+/* =====================================================
+   DIGITAL LEGAL SERVICES - LOCAL DEMO AUTH
+===================================================== */
+const DIGITAL_DEMO_MOBILE = "9310347827";
+const DIGITAL_DEMO_OTP = "20232028";
+
+function openDigitalAuth(){
+    const popup = document.getElementById("digitalAuthPopup");
+    if(!popup) return;
+
+    document.getElementById("digitalMobileStep").classList.add("active");
+    document.getElementById("digitalOtpStep").classList.remove("active");
+    document.getElementById("digitalMobileMessage").textContent = "";
+    document.getElementById("digitalOtpMessage").textContent = "";
+    document.getElementById("digitalMobile").value = "";
+    document.getElementById("digitalOtp").value = "";
+
+    popup.classList.add("active");
+    document.body.style.overflow = "hidden";
+
+    setTimeout(() => document.getElementById("digitalMobile").focus(), 100);
+}
+
+function closeDigitalAuth(){
+    const popup = document.getElementById("digitalAuthPopup");
+    if(popup) popup.classList.remove("active");
+    document.body.style.overflow = "";
+}
+
+function sendDigitalOtp(){
+    const mobileInput = document.getElementById("digitalMobile");
+    const message = document.getElementById("digitalMobileMessage");
+    const mobile = mobileInput.value.trim();
+
+    if(!/^\d{10}$/.test(mobile)){
+        message.textContent = "Please enter a valid 10-digit mobile number.";
+        return;
+    }
+
+    if(mobile !== DIGITAL_DEMO_MOBILE){
+        message.textContent = "Mobile number not recognized for this demo.";
+        return;
+    }
+
+    message.textContent = "OTP sent. Enter the 8-digit OTP to continue.";
+    document.getElementById("digitalMobileStep").classList.remove("active");
+    document.getElementById("digitalOtpStep").classList.add("active");
+    setTimeout(() => document.getElementById("digitalOtp").focus(), 100);
+}
+
+function backToDigitalMobile(){
+    document.getElementById("digitalOtpStep").classList.remove("active");
+    document.getElementById("digitalMobileStep").classList.add("active");
+    document.getElementById("digitalOtpMessage").textContent = "";
+    setTimeout(() => document.getElementById("digitalMobile").focus(), 100);
+}
+
+function verifyDigitalOtp(){
+    const otp = document.getElementById("digitalOtp").value.trim();
+    const message = document.getElementById("digitalOtpMessage");
+
+    if(otp !== DIGITAL_DEMO_OTP){
+        message.textContent = "Invalid OTP. Please try again.";
+        return;
+    }
+
+    const section = document.getElementById("digitalLegalServices");
+    const overlay = document.getElementById("digitalLockOverlay");
+
+    section.classList.add("is-unlocked");
+    overlay.classList.add("hidden");
+    closeDigitalAuth();
+
+    // Keep the unlock state for this browser tab/session.
+    sessionStorage.setItem("digitalLegalServicesUnlocked", "true");
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+    if(sessionStorage.getItem("digitalLegalServicesUnlocked") === "true"){
+        const section = document.getElementById("digitalLegalServices");
+        const overlay = document.getElementById("digitalLockOverlay");
+        if(section && overlay){
+            section.classList.add("is-unlocked");
+            overlay.classList.add("hidden");
+        }
+    }
+
+    const authPopup = document.getElementById("digitalAuthPopup");
+    if(authPopup){
+        authPopup.addEventListener("click", function(event){
+            if(event.target === authPopup){
+                closeDigitalAuth();
+            }
+        });
+    }
+});
+
 </script>
 
 </body>
