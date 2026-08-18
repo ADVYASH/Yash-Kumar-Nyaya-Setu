@@ -3012,7 +3012,7 @@ font-size:14px;
             <div class="digital-auth-message" id="digitalOtpMessage"></div>
         </div>
 
-        <div class="digital-demo-note">Demo access • OTP verification is handled locally on this page.</div>
+        <div class="digital-demo-note">OTP verification is handled locally on this page.</div>
     </div>
 </div>
 
@@ -4128,19 +4128,82 @@ function verifyDigitalOtp(){
     overlay.classList.add("hidden");
     closeDigitalAuth();
 
-    // Keep the unlock state for this browser tab/session.
-    sessionStorage.setItem("digitalLegalServicesUnlocked", "true");
+    startDigitalUnlockTimer(600);
 }
 
-document.addEventListener("DOMContentLoaded", function(){
-    if(sessionStorage.getItem("digitalLegalServicesUnlocked") === "true"){
-        const section = document.getElementById("digitalLegalServices");
-        const overlay = document.getElementById("digitalLockOverlay");
-        if(section && overlay){
-            section.classList.add("is-unlocked");
-            overlay.classList.add("hidden");
+let digitalUnlockTimer = null;
+let digitalUnlockSeconds = 0;
+
+function startDigitalUnlockTimer(seconds){
+    clearInterval(digitalUnlockTimer);
+
+    digitalUnlockSeconds = seconds;
+    showDigitalTimer();
+
+    digitalUnlockTimer = setInterval(function(){
+        digitalUnlockSeconds--;
+
+        if(digitalUnlockSeconds <= 0){
+            clearInterval(digitalUnlockTimer);
+            digitalUnlockTimer = null;
+            lockDigitalLegalServices();
+            return;
         }
+
+        showDigitalTimer();
+    }, 1000);
+}
+
+function showDigitalTimer(){
+    const section = document.getElementById("digitalLegalServices");
+    if(!section) return;
+
+    let timer = document.getElementById("digitalUnlockTimer");
+
+    if(!timer){
+        timer = document.createElement("div");
+        timer.id = "digitalUnlockTimer";
+        timer.style.cssText = `
+            position:absolute;
+            top:12px;
+            right:12px;
+            z-index:25;
+            padding:7px 12px;
+            border-radius:999px;
+            background:rgba(0,0,0,.72);
+            color:#fff;
+            font:700 12px 'Poppins',sans-serif;
+            box-shadow:0 4px 15px rgba(0,0,0,.2);
+        `;
+        section.appendChild(timer);
     }
+
+    timer.textContent = "🔓 Unlocked: " + digitalUnlockSeconds + "s";
+}
+
+function lockDigitalLegalServices(){
+    clearInterval(digitalUnlockTimer);
+    digitalUnlockTimer = null;
+
+    const section = document.getElementById("digitalLegalServices");
+    const overlay = document.getElementById("digitalLockOverlay");
+    const timer = document.getElementById("digitalUnlockTimer");
+
+    if(section) section.classList.remove("is-unlocked");
+    if(overlay) overlay.classList.remove("hidden");
+    if(timer) timer.remove();
+
+    // Clear any partially entered authentication data.
+    const mobile = document.getElementById("digitalMobile");
+    const otp = document.getElementById("digitalOtp");
+    if(mobile) mobile.value = "";
+    if(otp) otp.value = "";
+}
+
+// IMPORTANT: every fresh page load starts locked.
+// No unlock state is restored from localStorage/sessionStorage.
+document.addEventListener("DOMContentLoaded", function(){
+    lockDigitalLegalServices();
 
     const authPopup = document.getElementById("digitalAuthPopup");
     if(authPopup){
