@@ -2198,231 +2198,70 @@ font-size:14px;
 /* ================= POPUP OVERLAY ================= */
 
 .popup-overlay{
-
     position:fixed;
-
     inset:0;
-
     display:none;
-
     align-items:center;
     justify-content:center;
-
     padding:30px;
-
-    background:rgba(0,0,0,0.75);
-
+    background:rgba(0,0,0,.75);
     backdrop-filter:blur(10px);
-
-    z-index:9999;
-
+    z-index:99999;
 }
-
-
-/* SHOW POPUP */
-
-.popup-overlay.active{
-
-    display:flex;
-
-    animation:popupFade 0.25s ease;
-
-}
-
-
-/* ================= POPUP BOX ================= */
-
+.popup-overlay.active{display:flex;animation:popupFade .25s ease}
 .popup-box{
-
     position:relative;
-
     width:min(900px,95vw);
-
     max-height:85vh;
-
     overflow-y:auto;
-
     padding:35px;
-
-    background:rgba(20,20,25,0.92);
-
+    background:rgba(20,20,25,.92);
     backdrop-filter:blur(25px);
-
-    border:1px solid rgba(255,255,255,0.18);
-
+    border:1px solid rgba(255,255,255,.18);
     border-radius:22px;
-
-    box-shadow:
-        0 0 40px rgba(0,0,0,0.5),
-        0 0 80px rgba(255,60,172,0.12);
-
-    animation:popupScale 0.3s ease;
-
+    box-shadow:0 0 40px rgba(0,0,0,.5),0 0 80px rgba(33,150,255,.12);
+    animation:popupScale .3s ease;
 }
-
-
-/* ================= TITLE ================= */
-
-.popup-box h2{
-
-    text-align:center;
-
-    font-size:25px;
-
-    letter-spacing:2px;
-
-    margin-bottom:5px;
-
-}
-
-
-.popup-box > p{
-
-    text-align:center;
-
-    font-size:13px;
-
-    opacity:0.6;
-
-    margin-bottom:25px;
-
-}
-
-
-/* ================= CLOSE BUTTON ================= */
-
+.popup-box h2{text-align:center;font-size:25px;letter-spacing:2px;margin-bottom:5px}
+.popup-box>p{text-align:center;font-size:13px;opacity:.6;margin-bottom:25px}
 .popup-close{
-
     position:absolute;
-
-    top:15px;
-    right:18px;
-
-    width:40px;
-    height:40px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,0.08);
-
-    color:white;
-
-    font-size:28px;
-
-    line-height:40px;
-
-    cursor:pointer;
-
-    transition:0.3s;
-
+    top:15px;right:18px;
+    width:40px;height:40px;
+    border:none;border-radius:50%;
+    background:rgba(255,255,255,.08);
+    color:#fff;font-size:28px;line-height:40px;
+    cursor:pointer;transition:.3s;
 }
-
-
-.popup-close:hover{
-
-    background:#ff3cac;
-
-    transform:rotate(90deg);
-
-    box-shadow:0 0 20px rgba(255,60,172,0.5);
-
-}
-
-
-/* ================= POPUP BUTTON GRID ================= */
-
-.popup-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:15px;
-
-}
-
-
-/* ================= POPUP LINK ================= */
-
+.popup-close:hover{background:#2196ff;transform:rotate(90deg);box-shadow:0 0 20px rgba(33,150,255,.5)}
+.popup-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
 .popup-grid a{
-
     min-height:70px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     text-align:center;
-
     padding:15px;
-
     border-radius:14px;
-
-    background:rgba(255,255,255,0.06);
-
-    border:1px solid rgba(255,255,255,0.14);
-
-    color:white;
-
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    color:#fff;
     text-decoration:none;
-
-    font-size:14px;
-
+    font-size:15px;
     font-weight:700;
-
-    transition:0.3s ease;
-
+    transition:.3s ease;
 }
-
-
 .popup-grid a:hover{
-
     transform:translateY(-5px);
-
-    background:rgba(255,60,172,0.18);
-
-    border-color:#ff3cac;
-
-    box-shadow:
-        0 0 15px rgba(255,60,172,0.35);
-
+    background:rgba(33,150,255,.18);
+    border-color:#2196ff;
+    box-shadow:0 0 15px rgba(33,150,255,.35);
 }
-
-
-/* ================= ANIMATION ================= */
-
-@keyframes popupFade{
-
-    from{
-        opacity:0;
-    }
-
-    to{
-        opacity:1;
-    }
-
-}
-
-
+@keyframes popupFade{from{opacity:0}to{opacity:1}}
 @keyframes popupScale{
-
-    from{
-        opacity:0;
-        transform:scale(0.9) translateY(20px);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1) translateY(0);
-    }
-
+    from{opacity:0;transform:scale(.9) translateY(20px)}
+    to{opacity:1;transform:scale(1) translateY(0)}
 }
-
 
 /* ================= MOBILE ================= */
 
@@ -3821,47 +3660,6 @@ function updateLastUpdated(){
 updateLastUpdated();
 
 /* =====================================================
-   NAVBAR HOVER POPUP MENUS
-   Reuses the exact links/names from Quick Access popups.
-===================================================== */
-
-function buildNavPopupMenus(){
-    document.querySelectorAll(".nav-dropdown[data-popup]").forEach(function(navItem){
-        const popupId = navItem.getAttribute("data-popup");
-        const sourcePopup = document.getElementById(popupId);
-        if(!sourcePopup) return;
-
-        const sourceGrid = sourcePopup.querySelector(".popup-grid");
-        if(!sourceGrid) return;
-
-        const menu = document.createElement("div");
-        menu.className = "nav-popup-menu";
-        menu.setAttribute("role", "menu");
-
-        sourceGrid.querySelectorAll("a").forEach(function(sourceLink){
-            const link = sourceLink.cloneNode(true);
-            link.setAttribute("role", "menuitem");
-            menu.appendChild(link);
-        });
-
-        navItem.appendChild(menu);
-    });
-}
-
-buildNavPopupMenus();
-
-/* Touch/mobile fallback: tap a navbar item to open its full popup. */
-document.querySelectorAll(".nav-dropdown .nav-trigger").forEach(function(trigger){
-    trigger.addEventListener("click", function(event){
-        if(window.matchMedia("(max-width:600px)").matches){
-            event.preventDefault();
-            const navItem = trigger.closest(".nav-dropdown");
-            openPopup(navItem.getAttribute("data-popup"));
-        }
-    });
-});
-
-/* =====================================================
    QUICK ACCESS POPUPS
 ===================================================== */
 
@@ -3936,6 +3734,105 @@ document.addEventListener("keydown", function(event){
 
         document.body.style.overflow = "";
 
+    }
+
+});
+
+function showSection(sectionId, clickedButton){
+    document.querySelectorAll(".tab-section").forEach(section=>{
+        section.classList.remove("active");
+    });
+
+    document.querySelectorAll(".asrp-buttons button").forEach(button=>{
+        button.classList.remove("active");
+    });
+
+    document.getElementById(sectionId).classList.add("active");
+    clickedButton.classList.add("active");
+}
+
+
+/* =========================================
+   NAVBAR CLICK → CENTER POPUP
+========================================= */
+
+document.querySelectorAll(".nav-dropdown .nav-trigger").forEach(function(trigger){
+
+    trigger.addEventListener("click", function(event){
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const navItem = trigger.closest(".nav-dropdown");
+        const popupId = navItem.getAttribute("data-popup");
+
+        /* Close any other popup first */
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        /* Open selected popup in center */
+        openPopup(popupId);
+    });
+
+});
+
+
+function openPopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
+
+}
+
+
+function closePopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+}
+
+
+/* =========================================
+   CLICK OUTSIDE → CLOSE
+========================================= */
+
+document.querySelectorAll(".popup-overlay").forEach(function(popup){
+
+    popup.addEventListener("click", function(event){
+
+        if(event.target === popup){
+            popup.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   ESC → CLOSE
+========================================= */
+
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Escape"){
+
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        document.body.style.overflow = "";
     }
 
 });
