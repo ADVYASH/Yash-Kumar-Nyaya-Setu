@@ -3,8 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CONSTITUTIONS | NYAYA SETU</title>
+<title>CONSTITUTION | NYAYA SETU</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<style id="theme-vars">
+:root{
+    --theme-primary:var(--theme-primary);
+    --theme-primary-soft:var(--theme-primary-glow);
+    --theme-primary-glow:var(--theme-primary-glow);
+    --theme-primary-border:var(--theme-primary-glow);
+}
+
+/* NAVBAR BUTTON BOX */
+.navbar a,
+.navbar button,
+nav a,
+nav button {
+    border: 1px solid rgba(33,150,255,.55);
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: rgba(33,150,255,.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar a:hover,
+.navbar button:hover,
+nav a:hover,
+nav button:hover {
+    background: rgba(33,150,255,.16);
+}
+
+
+/* POPUP BUTTON TEXT SIZE */
+.popup button,
+.popup .btn,
+.modal button,
+.modal .btn,
+.popup-buttons button,
+.popup-buttons .btn {
+    font-size: 20px;
+}
+
+</style>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 html{scroll-behavior:smooth}
@@ -19,108 +61,70 @@ nav{
     justify-content:center;
     align-items:center;
     flex-wrap:wrap;
-    gap:10px;
-    padding:14px 20px;
-    background:rgba(0,0,0,.10);
+    gap:12px;
+    padding:16px 22px;
+    background:rgba(255,255,255,.05);
     backdrop-filter:blur(12px);
     position:sticky;
     top:0;
     z-index:10000;
 }
-.main-nav{isolation:isolate}
-.nav-dropdown{position:relative;display:flex;align-items:center}
-.nav-trigger,.nav-home{
+
+.main-nav{
+    isolation:isolate;
+}
+
+.nav-dropdown{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+.nav-trigger,
+.nav-home{
     display:flex;
     align-items:center;
     justify-content:center;
     color:#fff;
     text-decoration:none;
-    font-weight:600;
+    font-weight:700;
     position:relative;
-    padding:10px 13px;
-    border-radius:10px;
+    padding:13px 18px;
+    min-height:46px;
+    border-radius:12px;
     transition:.25s ease;
     white-space:nowrap;
+    font-size:15px;
+    letter-spacing:.2px;
 }
-.nav-trigger:hover,.nav-home:hover,
-.nav-dropdown:has(.nav-popup-menu:hover) .nav-trigger,
-.nav-dropdown:hover .nav-trigger{
+
+.nav-trigger:hover,
+.nav-home:hover{
     color:#fff;
     background:rgba(20,20,25,.96);
     border:1px solid rgba(255,255,255,.18);
-    box-shadow:0 0 18px rgba(255,60,172,.20);
+    box-shadow:0 0 18px rgba(0,149,255,.20);
 }
-.nav-trigger::after,.nav-home::after{
+
+.nav-trigger::after,
+.nav-home::after{
     content:"";
     position:absolute;
-    left:0;right:0;bottom:-1px;
-    width:100%;height:3px;
-    background:#ff3cac;
+    left:0;
+    right:0;
+    bottom:-1px;
+    width:100%;
+    height:3px;
+    background:#0095ff;
     border-radius:3px 3px 0 0;
     transform:scaleX(0);
     transform-origin:center;
     transition:.22s ease;
 }
-.nav-trigger:hover::after,.nav-home:hover::after,
-.nav-dropdown:hover .nav-trigger::after{transform:scaleX(1)}
-.nav-dropdown::after{
-    content:"";
-    position:absolute;
-    left:0;right:0;top:100%;
-    height:10px;
-    background:transparent;
-    z-index:10001;
-}
-.nav-popup-menu{
-    position:absolute;
-    top:100%;
-    left:50%;
-    transform:translateX(-50%) translateY(-8px);
-    width:min(590px,88vw);
-    max-height:70vh;
-    overflow-y:auto;
-    padding:12px;
-    display:grid;
-    grid-template-columns:repeat(3,minmax(120px,1fr));
-    gap:8px;
-    background:rgba(20,20,25,.96);
-    backdrop-filter:blur(25px);
-    border:1px solid rgba(255,255,255,.18);
-    border-radius:18px;
-    box-shadow:0 0 30px rgba(0,0,0,.45),0 0 55px rgba(255,60,172,.14);
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-    transition:.22s ease;
-}
-.nav-dropdown:hover .nav-popup-menu,
-.nav-dropdown:focus-within .nav-popup-menu{
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-    transform:translateX(-50%) translateY(0);
-}
-.nav-popup-menu a{
-    min-height:48px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:8px 9px;
-    border-radius:9px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.14);
-    color:#fff;
-    text-decoration:none;
-    font-size:11px;
-    font-weight:700;
-    transition:.25s ease;
-}
-.nav-popup-menu a:hover{
-    transform:translateY(-4px);
-    background:rgba(255,60,172,.18);
-    border-color:#ff3cac;
-    box-shadow:0 0 15px rgba(255,60,172,.35);
+
+.nav-trigger:hover::after,
+.nav-home:hover::after{
+    transform:scaleX(1);
 }
 
 /* ============================= */
@@ -136,15 +140,68 @@ nav{
     text-align:center;
 }
 .about h1{
-    font-size:60px;
-    color:#2196ff;
-    margin-bottom:20px;
-    text-shadow:0 0 10px #2196ff,0 0 25px rgba(33,150,255,.6);
-    animation:titleGlow 2.5s infinite ease-in-out;
+    font-family:"Permanent Marker", cursive;
+    font-size:42px;
+    font-weight:700;
+    letter-spacing:3px;
+    color:#0095ff;
+    display:inline-block;
+    position:relative;
+    padding-bottom:12px;
+    text-shadow:0 0 8px rgba(0,149,255,.45);
+    animation:committeePulse 3s ease-in-out infinite;
 }
-@keyframes titleGlow{
-    0%,100%{text-shadow:0 0 10px #2196ff,0 0 20px rgba(33,150,255,.4)}
-    50%{text-shadow:0 0 20px #2196ff,0 0 45px rgba(33,150,255,.8)}
+
+/* Text animation */
+@keyframes committeePulse{
+    0%,100%{
+        transform:scale(1);
+        letter-spacing:3px;
+    }
+
+    50%{
+        transform:scale(1.03);
+        letter-spacing:5px;
+    }
+}
+
+/* Animated underline */
+.about h1::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width:0;
+    height:3px;
+    background:#0095ff;
+    border-radius:10px;
+    box-shadow:
+        0 0 8px #0095ff,
+        0 0 18px #0095ff;
+    transform:translateX(-50%);
+    animation:lineExpand 2s ease-in-out infinite;
+}
+
+@keyframes lineExpand{
+    0%,100%{
+        width:0;
+        opacity:.3;
+    }
+
+    40%{
+        width:100%;
+        opacity:1;
+    }
+
+    70%{
+        width:100%;
+        opacity:1;
+    }
+
+    90%{
+        width:0;
+        opacity:.3;
+    }
 }
 .intro{max-width:1100px;margin:0 auto;font-size:24px;line-height:1.7;opacity:.9}
 .container{max-width:950px;margin:0 auto}
@@ -178,7 +235,7 @@ nav{
 }
 .section{
     margin-top:25px;
-    background:rgba(0,0,0,.10);
+    background:rgba(0,0,0,.68);
     padding:40px;
     border-radius:14px;
     border:1px solid rgba(33,150,255,.25);
@@ -207,7 +264,7 @@ nav{
     text-align:left;
     margin-bottom:22px;
     line-height:1.7;
-    font-size:25px;
+    font-size:16px;
     opacity:.9;
 }
 .emoji-text:last-child{margin-bottom:0}
@@ -267,7 +324,7 @@ nav{
     border:1px solid rgba(255,255,255,.14);
     color:#fff;
     text-decoration:none;
-    font-size:14px;
+    font-size:20px;
     font-weight:700;
     transition:.3s ease;
 }
@@ -289,29 +346,66 @@ nav{
 
 footer{
     background:#050505;
-    padding:60px 10%;
+    padding:35px 7%;
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    gap:40px;
+    gap:25px;
     flex-wrap:wrap;
     border-top:1px solid rgba(33,150,255,.12);
 }
-.footer-logo{display:flex;flex-direction:column;min-width:200px}
-.footer-logo img{width:130px;margin-bottom:10px}
-.footer-logo p{opacity:.7;font-size:14px}
-.footer-links{min-width:150px}
-.footer-links h4{color:#2196ff;margin-bottom:12px;font-size:16px}
-.footer-links a{
-    display:block;color:#fff;opacity:.7;text-decoration:none;
-    margin:7px 0;transition:.3s ease;
-}
-.footer-links a:hover{color:#2196ff;opacity:1;transform:translateX(4px)}
-.bottom{
-    text-align:center;padding:18px;background:#030303;
-    opacity:.75;font-size:13px;border-top:1px solid rgba(255,255,255,.05);
+
+.footer-logo{
+    display:flex;
+    flex-direction:column;
+    min-width:170px;
 }
 
+.footer-logo img{
+    width:150px;
+    margin-bottom:8px;
+}
+
+.footer-logo p{
+    opacity:.7;
+    font-size:15px;
+    margin:3px 0;
+}
+
+.footer-links{
+    min-width:130px;
+}
+
+.footer-links h4{
+    color:#2196ff;
+    margin-bottom:9px;
+    font-size:14px;
+}
+
+.footer-links a{
+    display:block;
+    color:#fff;
+    opacity:.7;
+    text-decoration:none;
+    margin:5px 0;
+    font-size:15px;
+    transition:.3s ease;
+}
+
+.footer-links a:hover{
+    color:#2196ff;
+    opacity:1;
+    transform:translateX(4px);
+}
+
+.bottom{
+    text-align:center;
+    padding:12px;
+    background:#030303;
+    opacity:.75;
+    font-size:16px;
+    border-top:1px solid rgba(255,255,255,.05);
+}
 /* ============================= */
 /* RESPONSIVE */
 /* ============================= */
@@ -332,16 +426,24 @@ footer{
     .section h2{font-size:23px}
     .emoji-text{font-size:15px;gap:10px}
     .emoji-text img{height:38px;width:38px}
-    footer{padding:45px 25px;flex-direction:column}
+footer{
+    padding:30px 20px;
+    flex-direction:column;
+    gap:20px;
+}
 }
 @media(max-width:600px){
     .main-nav{
         justify-content:flex-start;
-        overflow-x:auto;
+        overflow:visible;
         flex-wrap:nowrap;
         scrollbar-width:thin;
     }
-    .nav-trigger,.nav-home{font-size:12px;padding:8px 9px}
+.nav-trigger,.nav-home{
+    font-size:13px;
+    padding:10px 13px;
+    min-height:42px;
+}
     .nav-popup-menu{
         position:fixed;
         top:64px;
@@ -402,7 +504,7 @@ footer{
 .history-photo{
     margin:0;
     overflow:hidden;
-    background:rgba(0,0,0,.10);
+    background:rgba(255,255,255,.05);
     border:1px solid rgba(33,150,255,.25);
     border-radius:14px;
     box-shadow:0 0 20px rgba(33,150,255,.08);
@@ -418,9 +520,8 @@ footer{
 .history-photo img{
     display:block;
     width:100%;
-    height:320px;
-    object-fit:contain;
-    object-position:center;
+    height:260px;
+    object-fit:cover;
     background:#111;
 }
 
@@ -446,7 +547,7 @@ footer{
         grid-template-columns:1fr;
     }
     .history-photo img{
-        height:260px;
+        height:240px;
     }
 }
 
@@ -484,14 +585,260 @@ body::before{
 }
 .history-subheading:first-of-type{margin-top:5px}
 
-</style>
-<style id="magenta-theme-vars">
-:root{
-    --theme-primary:#2196ff;
-    --theme-primary-soft:rgba(33,150,255,.18);
-    --theme-primary-glow:rgba(33,150,255,.35);
-    --theme-primary-border:rgba(33,150,255,.35);
+
+
+.high-court-table-section{
+    margin-top:45px;
+    padding-top:35px;
+    border-top:1px solid rgba(33,150,255,.25);
 }
+.high-court-table-wrap{
+    width:100%;
+    overflow:visible;
+    margin-top:20px;
+    border-radius:12px;
+    border:1px solid rgba(33,150,255,.25);
+}
+.high-court-table{
+    width:100%;
+    min-width:1050px;
+    border-collapse:collapse;
+    background:rgba(0,0,0,.45);
+    text-align:left;
+}
+.high-court-table th,.high-court-table td{
+    padding:15px 14px;
+    border:1px solid rgba(255,255,255,.12);
+    vertical-align:top;
+    line-height:1.55;
+    font-size:14px;
+}
+.high-court-table th{
+    color:#2196ff;
+    background:rgba(33,150,255,.10);
+    font-weight:700;
+    text-align:center;
+}
+.high-court-table td:first-child{
+    text-align:center;
+    font-weight:700;
+    width:65px;
+}
+.high-court-table td:nth-child(2){font-weight:700;min-width:190px}
+.high-court-table td:nth-child(3){text-align:center;white-space:nowrap}
+.high-court-table strong{color:#2196ff}
+.high-court-table tbody tr:hover{background:rgba(33,150,255,.07)}
+@media(max-width:800px){
+    .high-court-table-section{margin-top:35px;padding-top:25px}
+    .high-court-table th,.high-court-table td{padding:12px 10px;font-size:13px}
+}
+
+/* FULL HIGH COURTS TABLE — KEEP ALL ROWS VISIBLE */
+.high-courts-table-wrap{width:100%;overflow:visible !important;}
+.high-courts-table{width:100% !important;min-width:0 !important;table-layout:fixed;border-collapse:collapse;}
+.high-courts-table th,.high-courts-table td{white-space:normal !important;word-break:normal;overflow-wrap:anywhere;vertical-align:top;}
+.high-courts-table th:nth-child(1),.high-courts-table td:nth-child(1){width:6%}
+.high-courts-table th:nth-child(2),.high-courts-table td:nth-child(2){width:20%}
+.high-courts-table th:nth-child(3),.high-courts-table td:nth-child(3){width:13%}
+.high-courts-table th:nth-child(4),.high-courts-table td:nth-child(4){width:22%}
+.high-courts-table th:nth-child(5),.high-courts-table td:nth-child(5){width:39%}
+@media(max-width:800px){.high-courts-table{font-size:11px}.high-courts-table th,.high-courts-table td{padding:8px 5px !important;}}
+
+/* HIGH COURTS TABLE — CENTERED + FULL BORDER */
+.high-courts-table-wrap{
+    width:100%;
+    max-width:1200px;
+    margin:35px auto 0 !important;
+    overflow:visible !important;
+}
+.high-courts-table{
+    width:100% !important;
+    margin:0 auto !important;
+    border:3px solid rgba(33,150,255,.75) !important;
+    border-collapse:collapse !important;
+    border-spacing:0;
+    table-layout:fixed;
+}
+.high-courts-table th,
+.high-courts-table td{
+    border:2px solid rgba(33,150,255,.55) !important;
+    white-space:normal !important;
+    word-break:normal;
+    overflow-wrap:anywhere;
+    vertical-align:top;
+}
+.high-courts-table th{
+    border:3px solid rgba(33,150,255,.75) !important;
+}
+
+
+/* FINAL: CENTER THE HIGH COURTS TABLE */
+.high-courts-table-wrap {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    overflow: visible !important;
+}
+.high-courts-table {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+/* ============================= */
+/* COMMITTEES INFORMATION + PHOTO GALLERY */
+/* ============================= */
+
+.committees-content {
+    width: 100%;
+    padding: 35px 0 55px;
+}
+
+.committees-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.committees-content h2 {
+    color: #2196ff;
+    font-size: 30px;
+    margin: 32px 0 14px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(33,150,255,.35);
+}
+
+.committees-content h2:first-child {
+    margin-top: 0;
+}
+
+.committees-content p {
+    margin: 0 0 22px;
+    text-align: left;
+    font-size: 22px;
+    line-height: 1.8;
+    color: rgba(255,255,255,.92);
+}
+
+.committee-photo-gallery {
+    margin-top: 45px;
+    padding-top: 35px;
+    border-top: 1px solid rgba(33,150,255,.25);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.committee-photo {
+    margin: 0;
+    overflow: hidden;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(33,150,255,.25);
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(33,150,255,.08);
+    transition: .3s ease;
+}
+
+.committee-photo:hover {
+    transform: translateY(-5px);
+    border-color: #2196ff;
+    box-shadow: 0 0 25px rgba(33,150,255,.20);
+}
+
+/* Full photo visible — no cropping. */
+.committee-photo-frame {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+    padding: 8px;
+}
+
+.committee-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    background: #111;
+}
+
+.committee-photo figcaption {
+    padding: 18px;
+    text-align: left;
+}
+
+.committee-photo h3 {
+    color: #2196ff;
+    margin-bottom: 8px;
+    font-size: 22px;
+}
+
+.committee-photo p {
+    font-size: 20px;
+    line-height: 1.6;
+    opacity: .85;
+    margin: 0;
+}
+
+
+.committee-pdf-download {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.pdf-download-button {
+    display: inline-block;
+    padding: 13px 28px;
+    border-radius: 8px;
+    background: #2196ff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(33,150,255,.25);
+    transition: .25s ease;
+}
+
+.pdf-download-button:hover {
+    background: #42a5ff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 22px rgba(33,150,255,.4);
+}
+
+@media (max-width: 900px) {
+    .committee-photo-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .committee-photo-frame {
+        height: auto;
+        min-height: 280px;
+    }
+}
+
+@media (max-width: 800px) {
+    .committees-container {
+        padding: 0 20px;
+    }
+
+    .committees-content h2 {
+        font-size: 24px;
+    }
+
+    .committees-content p {
+        font-size: 22px;
+        line-height: 1.7;
+    }
+}
+
 </style>
 </head>
 
@@ -533,35 +880,476 @@ body::before{
 </nav>
 
 <section class="about">
+    <h1>CONSTITUTION</h1>
 
-        <div class="section tab-section active" id="what">
-            <h2>Constitution</h2>
-            <h3 class="history-subheading">LAW, COURTS AND THE CONSTITUTION</h3>                   
-            <p class="emoji-text"><span>India’s commitment to the rule of law is grounded in the Constitution which establishes India as a ‘Sovereign Socialist Secular Democratic Republic’ with a Parliamentary form of Government. The Constitution of India is the supreme legal authority which binds the legislative, executive, and judicial organs of government. The Constitution grants all citizens Fundamental Rights and empowers the independent judiciary to invalidate legislations or government actions which violate the Constitution. Some of the other key features of the Constitution are a federal system of governance between the Union and the States, separation of powers between the three organs of the Government, free and fair elections, equality before the law, and a secular state that recognizes freedom of conscience and religion.</span></p>
+<!-- ============================= -->
+<!-- ============================= -->
+<!-- COMMITTEES INFORMATION -->
+<!-- ============================= -->
+<section class="committees-content">
 
-            <h3 class="history-subheading">SOURCES OF LAW</h3>                   
-            <p class="emoji-text"> <span>The Constitution of India is the source of legal authority and empowers Parliament and the Legislatures of States and Union Territories to enact statutes. There is also a vast body of laws known as subordinate legislation in the form of rules, regulations, and by-laws made by Central and State Governments and local authorities like Municipal Corporations, Municipalities, Gram Panchayats and other local bodies. This subordinate legislation is made under the authority conferred or delegated either by Parliament or the concerned Legislature of the State or Union Territory. The decisions of the Supreme Court are binding on all Courts within the territory of India. As India is a land of diversities, local customs and conventions which do not contradict a statute or the Constitution are recognised and taken into account by Courts while administering justice in certain spheres.</span></p>
+<h2>Supreme Court – Constitutional Provisions</h2>
 
-            <h3 class="history-subheading">ENACTMENT OF LAWS</h3>                   
-            <p class="emoji-text"> <span>The Seventh Schedule of the Constitution contains three lists: a Union List, a State List, and a Concurrent List. These lists set out the various subjects on which Parliament and State Legislatures are empowered to make laws. The Indian Parliament is competent to make laws on matters enumerated in the Union List. State Legislatures are competent to make laws on matters enumerated in the State List. While both the Union and the States have the power to legislate on matters enumerated in the Concurrent List, only Parliament has power to make laws on matters not included in the State List or the Concurrent List. In the event of repugnancy, laws made by Parliament shall prevail over laws made by State Legislatures, to the extent of the repugnancy. The State law shall be void unless it has received the assent of the President, and in such case, shall prevail in that State.</span></p>
+<p>The Supreme Court of India is the highest court in the Indian judicial system and occupies a central position in the constitutional structure of the country. The Constitution of India establishes the Supreme Court and defines its composition, jurisdiction, powers, independence, and relationship with the other organs of the State. Unlike an ordinary court created by legislation, the Supreme Court derives its authority directly from the Constitution.</p>
 
-            <h3 class="history-subheading">APPLICABILITY OF LAWS</h3>                   
-            <p class="emoji-text"> <span>Laws made by Parliament may extend throughout or in any part of the territory of India and those made by State Legislatures generally apply only within the territory of the State concerned. Hence, variations are likely to exist from State to State in provisions of law relating to matters falling in the State and Concurrent Lists.</span></p>
+<p>The constitutional provisions relating to the Supreme Court are mainly contained in Part V of the Constitution, under Chapter IV, which deals with “The Union Judiciary.” Articles 124 to 147 contain the principal provisions relating to the Supreme Court. These provisions deal with the establishment and constitution of the Court, appointment and qualifications of judges, tenure and removal, salaries and conditions of service, jurisdiction and powers, review of judgments, advisory jurisdiction, binding nature of its decisions, and other matters.</p>
 
-            <h3 class="history-subheading">JUDICIARY</h3>                   
-            <p class="emoji-text"> <span>One of the unique features of the Indian Constitution is that, notwithstanding the adoption of a federal system and existence of Union and State Acts in their respective spheres, it provides for a single integrated system of courts to administer both Union and State laws. At the apex of the entire judicial system is the Supreme Court of India followed by the High Courts in each State or group of States. Under the administration of each High Court are the District Courts. Village/Panchayat Courts also function in some States under various names like Nyaya Panchayat, Gram Nyayalaya, Gram Kachheri to decide civil and criminal disputes of petty and local nature. Each State is divided into judicial districts presided over by a District and Sessions Judge, which is the principal civil court of original jurisdiction and can try all offences including those punishable with death. The District and Sessions Judge is the highest judicial authority in a district. District Courts have courts of civil jurisdiction, presided over by judges known in different States as Munsifs, Sub-Judges, Civil Judges. Similarly, the classes of criminal courts include the Chief Judicial Magistrates and Judicial Magistrates of First and Second Class.</span></p>
-            <h3 class="history-subheading">CONSTITUTION OF SUPREME COURT</h3>                   
-            <p class="emoji-text"> <span>The Supreme Court of India comprises the Chief Justice of India and not more than 33 other Judges appointed by the President of India. Supreme Court Judges retire at the age of 65. In order to be appointed as a Judge of the Supreme Court, a person must be a citizen of India and must have been, for at least five years, a Judge of a High Court or an Advocate of a High Court for at least 10 years or he must be, in the opinion of the President, a distinguished jurist. The Constitution also contains provisions for a Judge of the High Court who may be appointed as an ad-hoc Judge of the Supreme Court and for retired Judges of the Supreme Court or High Courts to sit and act as Judges of that Court. The independence of judiciary is part of the basic structure of the Indian Constitution. A Supreme Court Judge cannot be removed from office except by an order of the President passed after an address in each House of Parliament supported by a majority of the total membership of that House and by a majority of not less than two-thirds of members present and voting, and presented to the President in the same Session for such removal on the ground of proved misbehavior or incapacity. A person who has been a Judge of the Supreme Court is debarred from practicing in any court of law or before any other authority in India.</span></p>
+<h2>Constitutional Basis of the Supreme Court</h2>
 
-            <h3 class="history-subheading">SUPREME COURT REGISTRY</h3>                   
-            <p class="emoji-text"> <span>The administrative wing of the Supreme Court is known as the Registry. For systematic functioning and efficient disposal of work, the Registry is divided into two main wings, viz. Administration and Judicial, which are further divided into various Divisions, Branches, Sections and Cells. The administrative power for determining the work structure of the Court and the Registry exclusively vests in the Chief Justice of India. The Secretary General who is of the rank of Secretary to the Government of India is the highest Administrative Officer of the Supreme Court. He is assisted by Registrars/Officers on Special Duty and Additional Registrars who are assigned work of specific branches and they, in turn, are assisted by Deputy Registrars, Assistant Registrars and other officers/staff.</span></p>
+<p>Article 124 provides for the establishment and constitution of the Supreme Court of India. It declares that there shall be a Supreme Court of India consisting of a Chief Justice of India and such number of other judges as Parliament may by law prescribe.</p>
 
-            <h3 class="history-subheading">ATTORNEY GENERAL</h3>                   
-            <p class="emoji-text"> <span>The Attorney General of India is the highest law officer of the country appointed by the President. He shall be a person qualified to be appointed as a Judge of the Supreme Court. It is the duty of the Attorney General of India to give advice to the Government of India upon such legal matters and to perform such other duties of legal character as may be referred or assigned to him by the President. In the performance of his duties, he has the right of audience in all Courts in India as well as the right to take part in the proceedings of Parliament without the right to vote. In discharge of his functions, the Attorney General is assisted by a Solicitor General and Additional Solicitors Generals.</span></p>
-  
-            <h3 class="history-subheading">AMICUS CURIAE</h3>                   
-            <p class="emoji-text"> <span>If a petition is received from the jail or in any other criminal matter where the accused is unrepresented, then an Advocate is appointed as amicus curiae by the Court to defend and argue the case of the accused. In civil matters, the Court can appoint an Advocate as amicus curiae if it thinks it necessary in case of an unrepresented party. Courts can also appoint amicus curiae in any matter of general public importance or in which the interest of the public at large is involved.</span></p>
+<p>The original Constitution contemplated a Chief Justice and seven other judges. The strength of the Court has subsequently been increased by Parliament because of the growth in population, litigation, and constitutional responsibilities. Thus, while the Constitution establishes the Court, Parliament has the power to determine its numerical strength through legislation.</p>
 
+<p>The constitutional position of the Supreme Court is different from that of subordinate courts. Its authority does not depend upon an ordinary law creating the institution. Its existence and essential constitutional functions are guaranteed by the Constitution itself.</p>
+
+<h2>Part V of the Constitution</h2>
+
+<p>The Supreme Court forms part of the Union Judiciary under Part V of the Constitution. Chapter IV of Part V, comprising Articles 124 to 147, deals specifically with the Supreme Court.</p>
+
+<p>These provisions establish the basic constitutional framework of the Court. They also provide the foundation for its independence and powers. Other provisions of the Constitution, including those relating to fundamental rights, federal relations, constitutional remedies, and judicial review, also significantly affect the work of the Supreme Court.</p>
+
+<p>The constitutional provisions relating to the Supreme Court are therefore not limited to Articles 124 to 147. The Court's wider constitutional role is also connected with provisions such as Article 32, which provides the right to approach the Supreme Court for enforcement of fundamental rights.</p>
+
+<h2>Article 124 – Establishment and Constitution of the Supreme Court</h2>
+
+<p>Article 124 is the principal provision dealing with the establishment and constitution of the Supreme Court. It provides for a Supreme Court consisting of the Chief Justice of India and other judges as Parliament may prescribe.</p>
+
+<p>The article also contains provisions concerning the appointment of Supreme Court judges. Judges are formally appointed by the President of India in accordance with the constitutional procedure. The process of judicial appointments has evolved through constitutional interpretation and the decisions commonly known as the Judges Cases.</p>
+
+<p>Article 124 also provides qualifications, tenure, resignation, removal, and other conditions relating to judges of the Supreme Court.</p>
+
+<h2>Appointment of Supreme Court Judges</h2>
+
+<p>The Constitution provides that judges of the Supreme Court are appointed by the President of India. In the case of judges other than the Chief Justice of India, the President is required to consult such judges of the Supreme Court and High Courts as may be considered necessary.</p>
+
+<p>The appointment process has developed significantly through judicial interpretation. The Supreme Court's decisions in the Second Judges Case and Third Judges Case led to the development of the collegium system, under which senior judges of the higher judiciary play the principal role in recommending appointments.</p>
+
+<p>Thus, the constitutional text provides the formal framework for appointment, while constitutional interpretation has shaped the practical operation of the appointment process.</p>
+
+<h2>Appointment of the Chief Justice of India</h2>
+
+<p>The Constitution does not expressly prescribe a separate detailed procedure for the appointment of the Chief Justice of India. The Chief Justice is appointed by the President.</p>
+
+<p>By established constitutional convention, the senior-most judge of the Supreme Court considered suitable for the office is generally appointed as the Chief Justice of India. The convention has become an important feature of the functioning of the Supreme Court.</p>
+
+<p>The Chief Justice performs important administrative and judicial functions and plays a significant role in the constitution of benches and the administration of the Court.</p>
+
+<h2>Qualifications of Supreme Court Judges</h2>
+
+<p>Article 124 prescribes the constitutional qualifications for appointment as a judge of the Supreme Court. A person must be a citizen of India and must satisfy one of the prescribed professional qualifications.</p>
+
+<p>A person is qualified if he or she has been a judge of a High Court or of two or more such courts in succession for at least five years. Alternatively, a person may qualify if he or she has been an advocate of a High Court or of two or more such courts in succession for at least ten years.</p>
+
+<p>The Constitution also provides that a person may be appointed if, in the opinion of the President, he or she is a distinguished jurist. This provision has remained an available constitutional qualification, although the appointment of judges through this route has not been the normal practice.</p>
+
+<h2>Tenure of Supreme Court Judges</h2>
+
+<p>A judge of the Supreme Court holds office until attaining the age of 65 years. The Constitution therefore provides a fixed retirement age for Supreme Court judges.</p>
+
+<p>The fixed tenure and constitutional protection of office are important aspects of judicial independence. A judge cannot ordinarily be removed from office simply because the executive or legislature disagrees with a judicial decision.</p>
+
+<p>A judge may also resign from office by writing to the President. Apart from resignation or retirement, removal is possible only through the special constitutional procedure provided by Article 124.</p>
+
+<h2>Removal of Supreme Court Judges</h2>
+
+<p>The Constitution provides a special procedure for the removal of Supreme Court judges. A judge can be removed from office only on the grounds of proved misbehaviour or incapacity.</p>
+
+<p>The removal process requires an address by each House of Parliament supported by the required special majority. After Parliament adopts such an address, the President may issue an order removing the judge.</p>
+
+<p>The constitutional procedure is deliberately difficult. This protection is intended to ensure that judges can perform their duties independently and without fear of arbitrary removal.</p>
+
+<h2>Judicial Independence</h2>
+
+<p>Judicial independence is a fundamental feature of the constitutional position of the Supreme Court. The Constitution contains several safeguards designed to protect judges from political or executive pressure.</p>
+
+<p>Security of tenure, the special removal procedure, protection of salaries and conditions of service, restrictions on post-retirement practice, and institutional autonomy are among the important safeguards connected with judicial independence.</p>
+
+<p>Judicial independence is essential because the Supreme Court is empowered to review legislative and executive actions. The Court must therefore be able to decide constitutional questions independently of the authorities whose actions may be challenged before it.</p>
+
+<h2>Article 125 – Salaries and Conditions of Service</h2>
+
+<p>Article 125 deals with the salaries, allowances, and other conditions of service of judges of the Supreme Court. Parliament determines these matters by law, subject to the constitutional protections applicable to judges.</p>
+
+<p>The Constitution provides protection against reducing a judge's salary or allowances after appointment, except in circumstances permitted by the Constitution. Such safeguards are intended to protect the financial independence of the judiciary.</p>
+
+<h2>Article 126 – Acting Chief Justice</h2>
+
+<p>Article 126 provides for the appointment of an Acting Chief Justice of India when the office of the Chief Justice is vacant or when the Chief Justice is unable to perform the duties of the office due to absence or otherwise.</p>
+
+<p>The Acting Chief Justice performs the functions of the Chief Justice during the relevant period. This provision ensures continuity in the administration and functioning of the Supreme Court.</p>
+
+<h2>Article 127 – Ad Hoc Judges</h2>
+
+<p>Article 127 provides for the appointment of ad hoc judges of the Supreme Court in certain circumstances. If at any time there is a lack of quorum of the judges available to hold or continue a session of the Court, the Chief Justice of India may request a qualified judge of a High Court to attend the sittings of the Supreme Court as an ad hoc judge.</p>
+
+<p>The appointment requires the necessary constitutional consultations and consent. An ad hoc judge exercises the jurisdiction, powers, and privileges of a Supreme Court judge while sitting in the Court.</p>
+
+<p>This provision helps ensure that the Supreme Court can continue functioning effectively even when there is an insufficient number of judges available.</p>
+
+<h2>Article 128 – Attendance of Retired Judges</h2>
+
+<p>Article 128 allows retired judges of the Supreme Court or qualified former judges of the higher judiciary to sit and act as judges of the Supreme Court when requested by the Chief Justice of India and with the necessary consent.</p>
+
+<p>This provision provides additional judicial capacity when required. A retired judge sitting under this provision exercises the jurisdiction and powers of the Supreme Court judge for the period during which the judge participates in the Court's proceedings.</p>
+
+<h2>Article 129 – Court of Record</h2>
+
+<p>Article 129 declares the Supreme Court to be a court of record. It also gives the Court the power to punish for contempt of itself.</p>
+
+<p>A court of record is a court whose records and judicial proceedings are recognized as authoritative and are preserved as permanent records. The judgments and proceedings of the Supreme Court have important legal value and form part of the country's body of judicial precedent.</p>
+
+<p>The power to punish for contempt enables the Supreme Court to protect the administration of justice and the authority of its judicial process.</p>
+
+<h2>Article 130 – Seat of the Supreme Court</h2>
+
+<p>Article 130 provides that the Supreme Court shall sit in Delhi or at such other place or places as the Chief Justice of India may, with the approval of the President, appoint from time to time.</p>
+
+<p>The constitutional provision therefore permits the Supreme Court to sit at locations other than Delhi if the constitutional requirements are satisfied. The principal seat of the Supreme Court is in New Delhi.</p>
+
+<h2>Article 131 – Original Jurisdiction</h2>
+
+<p>Article 131 provides the Supreme Court with original jurisdiction in certain disputes involving the Union and the States or between States. This jurisdiction is an important feature of India's federal constitutional structure.</p>
+
+<p>The Court can exercise original jurisdiction in disputes between the Government of India and one or more States, between the Government of India and one or more States on one side and other States on the other side, and between two or more States, provided that the dispute involves a legal right.</p>
+
+<p>This jurisdiction enables the Supreme Court to act as a constitutional forum for resolving disputes within the federal structure.</p>
+
+<h2>Article 132 – Constitutional Appeals</h2>
+
+<p>Article 132 provides for appeals to the Supreme Court from judgments, decrees, or final orders of High Courts in cases involving a substantial question of law concerning the interpretation of the Constitution.</p>
+
+<p>This provision gives the Supreme Court an important role in maintaining uniformity in constitutional interpretation throughout India.</p>
+
+<p>When different High Courts interpret constitutional provisions differently, the Supreme Court can provide an authoritative interpretation that becomes binding throughout the country.</p>
+
+<h2>Article 133 – Civil Appeals</h2>
+
+<p>Article 133 deals with civil appeals to the Supreme Court from High Courts. The constitutional provision allows appeals in civil matters subject to the requirements specified by the Constitution and applicable law.</p>
+
+<p>The Supreme Court's civil appellate jurisdiction enables it to hear important questions arising from civil disputes and ensures that significant legal issues can receive consideration by the highest court.</p>
+
+<h2>Article 134 – Criminal Appeals</h2>
+
+<p>Article 134 provides for appeals to the Supreme Court in criminal cases from High Courts in specified circumstances.</p>
+
+<p>The provision recognizes the importance of having a final national judicial authority in serious criminal matters. It also contributes to uniformity in the interpretation and application of criminal law throughout the country.</p>
+
+<h2>Article 134A – Certificate for Appeal</h2>
+
+<p>Article 134A deals with the certificate required for certain appeals to the Supreme Court. When a judgment is delivered by a High Court, the High Court may determine whether the case involves the necessary constitutional or legal requirements for an appeal to the Supreme Court.</p>
+
+<p>This provision helps regulate the appellate jurisdiction of the Supreme Court and ensures that appeals requiring consideration by the highest court can reach it through the prescribed constitutional procedure.</p>
+
+<h2>Article 136 – Special Leave to Appeal</h2>
+
+<p>Article 136 gives the Supreme Court a very wide discretionary power to grant special leave to appeal against judgments, decrees, determinations, sentences, or orders passed by courts or tribunals in India.</p>
+
+<p>The power under Article 136 is exceptional and discretionary. It does not create an ordinary right of appeal. The Supreme Court may exercise this power when it considers that substantial injustice or an important legal issue requires its intervention.</p>
+
+<p>The special leave jurisdiction has become one of the most significant sources of the Supreme Court's appellate workload.</p>
+
+<h2>Article 137 – Review of Judgments</h2>
+
+<p>Article 137 gives the Supreme Court the power to review its own judgments and orders, subject to the Constitution and laws made by Parliament.</p>
+
+<p>The review power recognizes that even the highest court may make an error that requires correction. However, review jurisdiction is limited and is not intended to function as an ordinary appeal against the Court's own judgment.</p>
+
+<p>The Constitution therefore combines finality of Supreme Court decisions with a limited mechanism for correcting serious errors.</p>
+
+<h2>Article 138 – Enlargement of Jurisdiction</h2>
+
+<p>Article 138 allows the jurisdiction of the Supreme Court to be enlarged by Parliament in certain circumstances. Parliament may confer additional jurisdiction on the Supreme Court with respect to matters in the Union List.</p>
+
+<p>The provision provides flexibility for the development of the Court's jurisdiction according to changing legal and administrative requirements.</p>
+
+<h2>Article 139 – Additional Writ Jurisdiction</h2>
+
+<p>Article 139 permits Parliament to confer upon the Supreme Court the power to issue certain writs for purposes other than the enforcement of fundamental rights.</p>
+
+<p>This provision is related to the Court's constitutional power to issue writs. Article 32 already gives the Supreme Court jurisdiction for the enforcement of fundamental rights, while Article 139 provides a constitutional basis for additional writ jurisdiction if Parliament confers it.</p>
+
+<h2>Article 139A – Transfer of Certain Cases</h2>
+
+<p>Article 139A deals with the transfer of certain cases. The Supreme Court may transfer cases from one High Court to another when the same or substantially the same questions of law of general importance are pending before the Supreme Court and one or more High Courts.</p>
+
+<p>The Supreme Court may also withdraw certain cases from High Courts when they involve substantial questions of law of general importance requiring authoritative determination.</p>
+
+<p>This provision helps prevent conflicting decisions and promotes uniformity in the interpretation of important legal questions.</p>
+
+<h2>Article 140 – Ancillary Powers</h2>
+
+<p>Article 140 allows Parliament to make provisions for conferring supplementary powers on the Supreme Court that are not otherwise provided by the Constitution and are necessary or desirable for enabling the Court to exercise its jurisdiction effectively.</p>
+
+<p>This provision recognizes that a constitutional court may require additional procedural or administrative powers to perform its functions effectively.</p>
+
+<h2>Article 141 – Binding Nature of Supreme Court Decisions</h2>
+
+<p>Article 141 provides that the law declared by the Supreme Court shall be binding on all courts within the territory of India.</p>
+
+<p>This is one of the most important constitutional provisions relating to judicial precedent. Decisions of the Supreme Court establish authoritative legal principles that must be followed by subordinate courts and High Courts.</p>
+
+<p>Article 141 ensures uniformity in the interpretation and application of law throughout the country. It also establishes the Supreme Court as the final judicial authority on questions of law.</p>
+
+<h2>Article 142 – Complete Justice</h2>
+
+<p>Article 142 gives the Supreme Court the power to make any order necessary for doing complete justice in any cause or matter pending before it.</p>
+
+<p>This is one of the distinctive powers of the Supreme Court. It allows the Court, within the constitutional framework, to pass orders necessary to ensure effective justice where ordinary legal remedies may be insufficient.</p>
+
+<p>The power under Article 142 has been used in a wide range of cases. At the same time, its exercise remains subject to constitutional principles and cannot be understood as an unlimited power to disregard substantive law.</p>
+
+<h2>Article 143 – Advisory Jurisdiction</h2>
+
+<p>Article 143 gives the President of India the power to refer certain questions of law or fact to the Supreme Court for its advisory opinion.</p>
+
+<p>The President may refer a question that has arisen or is likely to arise and is of such public importance that obtaining the opinion of the Supreme Court is considered necessary.</p>
+
+<p>The Supreme Court considers the reference and may provide its opinion. The advisory jurisdiction is different from ordinary contentious litigation because the Court is not necessarily deciding a dispute between opposing parties in the same manner as an ordinary case.</p>
+
+<h2>Article 144 – Authorities to Act in Aid of the Supreme Court</h2>
+
+<p>Article 144 provides that all authorities, civil and judicial, in the territory of India shall act in aid of the Supreme Court.</p>
+
+<p>This provision emphasizes the authority of Supreme Court judgments and ensures cooperation by governmental and judicial institutions in implementing the Court's decisions.</p>
+
+<p>The effectiveness of judicial decisions depends not only on the Court's power to issue judgments but also on the willingness and constitutional obligation of other authorities to give effect to those judgments.</p>
+
+<h2>Article 145 – Rules of Court</h2>
+
+<p>Article 145 empowers the Supreme Court to make rules for regulating its practice and procedure. The rules are subject to the Constitution and to laws made by Parliament.</p>
+
+<p>The Constitution also provides for certain matters to be determined by rules made by the Court. This gives the Supreme Court institutional autonomy over many aspects of its procedure.</p>
+
+<p>Article 145 also provides that no judgment involving a substantial question of law as to the interpretation of the Constitution shall be delivered by a bench of fewer than five judges. This is the constitutional basis for Constitution Benches.</p>
+
+<h2>Constitution Benches</h2>
+
+<p>Constitution Benches are larger benches of the Supreme Court constituted to decide substantial constitutional questions. Article 145 provides that a minimum of five judges must sit when a substantial question concerning the interpretation of the Constitution is involved.</p>
+
+<p>Constitution Benches have played an important role in the development of Indian constitutional law. Major cases concerning fundamental rights, constitutional amendments, federalism, judicial independence, privacy, and other constitutional questions have been decided by larger benches.</p>
+
+<p>Larger benches also help maintain consistency in constitutional interpretation and allow the Court to reconsider important questions when necessary.</p>
+
+<h2>Article 146 – Officers and Servants of the Supreme Court</h2>
+
+<p>Article 146 deals with the officers and servants of the Supreme Court. It provides for appointments and conditions of service relating to the administrative staff of the Court.</p>
+
+<p>The Chief Justice of India has an important role in appointments to the Court's administrative establishment, subject to the constitutional and statutory framework.</p>
+
+<p>This provision contributes to the administrative independence of the Supreme Court by giving the Court substantial control over its internal establishment.</p>
+
+<h2>Article 147 – Interpretation</h2>
+
+<p>Article 147 provides an interpretation clause for the purposes of Chapter IV of Part V. It explains the meaning of certain references to the Constitution and constitutional provisions in the context of the jurisdiction of the Supreme Court.</p>
+
+<p>The provision assists in understanding the scope of constitutional questions referred to in the provisions concerning the Court's jurisdiction.</p>
+
+<h2>Article 32 and the Supreme Court</h2>
+
+<p>Although Article 32 is located in Part III of the Constitution rather than in Chapter IV of Part V, it is one of the most important provisions concerning the Supreme Court.</p>
+
+<p>Article 32 guarantees the right to approach the Supreme Court for the enforcement of fundamental rights. The Court can issue appropriate directions, orders, and writs for the protection of these rights.</p>
+
+<p>The five traditional writs associated with this jurisdiction are habeas corpus, mandamus, prohibition, certiorari, and quo warranto. Through Article 32, the Supreme Court serves as an important constitutional protector of fundamental rights.</p>
+
+<h2>Habeas Corpus</h2>
+
+<p>Habeas corpus is a writ used primarily to protect personal liberty. It enables the Court to examine whether a person has been unlawfully detained.</p>
+
+<p>The writ is historically associated with protection against arbitrary detention. In the Indian constitutional system, it has played an important role in protecting personal liberty under Article 21 and related constitutional provisions.</p>
+
+<h2>Mandamus</h2>
+
+<p>Mandamus is a writ directing a public authority to perform a legal duty. It may be issued when a public authority has failed to perform a duty required by law.</p>
+
+<p>The writ contributes to accountability in public administration and ensures that public authorities do not unlawfully refuse to perform their statutory or constitutional obligations.</p>
+
+<h2>Prohibition</h2>
+
+<p>Prohibition is a writ issued by a superior court to prevent an inferior court or tribunal from exceeding its jurisdiction or acting contrary to law.</p>
+
+<p>The writ is generally preventive in nature because it seeks to stop an unlawful proceeding before it is completed.</p>
+
+<h2>Certiorari</h2>
+
+<p>Certiorari is a writ through which a superior court may review and, in appropriate circumstances, quash an order of an inferior court, tribunal, or authority where there has been a jurisdictional or legal error.</p>
+
+<p>The writ is an important instrument of judicial review and helps ensure that subordinate judicial and quasi-judicial bodies remain within the limits of their lawful authority.</p>
+
+<h2>Quo Warranto</h2>
+
+<p>Quo warranto is a writ used to question the legal authority by which a person occupies a public office.</p>
+
+<p>The writ helps prevent unlawful occupation of public offices and promotes compliance with constitutional and statutory requirements relating to public appointments.</p>
+
+<h2>Supreme Court as Guardian of the Constitution</h2>
+
+<p>The Supreme Court is often described as the guardian of the Constitution because it has the authority to interpret constitutional provisions and examine the validity of laws and governmental actions.</p>
+
+<p>Judicial review enables the Court to determine whether legislation or executive action is consistent with constitutional requirements. This function is particularly important in a written Constitution in which governmental powers are legally limited.</p>
+
+<p>The Court's constitutional role has developed through numerous decisions concerning fundamental rights, federalism, constitutional amendments, separation of powers, and judicial independence.</p>
+
+<h2>Supreme Court and Judicial Review</h2>
+
+<p>Judicial review is an essential feature of the constitutional system. The Supreme Court can examine whether laws passed by Parliament or State legislatures comply with the Constitution.</p>
+
+<p>Where a law violates a constitutional provision, the Court may declare it invalid to the extent of the inconsistency. Similarly, executive actions may be reviewed when they violate constitutional or legal requirements.</p>
+
+<p>The power of judicial review ensures that constitutional limitations remain effective and that no organ of government possesses unlimited authority.</p>
+
+<h2>Supreme Court and the Basic Structure</h2>
+
+<p>The Supreme Court developed the basic structure doctrine in Kesavananda Bharati v. State of Kerala. According to this doctrine, Parliament's power to amend the Constitution does not extend to destroying its basic structure.</p>
+
+<p>The doctrine has become a major constitutional principle. Features such as constitutional supremacy, rule of law, judicial review, separation of powers, federalism, and certain aspects of fundamental rights have been recognized as important elements of the constitutional structure.</p>
+
+<p>The basic structure doctrine demonstrates the significant constitutional role of the Supreme Court in maintaining the identity and fundamental principles of the Constitution.</p>
+
+<h2>Supreme Court and Federal Structure</h2>
+
+<p>The Supreme Court has an important constitutional role in maintaining the federal structure of India. Article 131 gives it original jurisdiction over specified disputes involving the Union and States.</p>
+
+<p>The Court also interprets constitutional provisions concerning the distribution of legislative powers between the Union and the States. Its decisions therefore contribute to maintaining constitutional boundaries within the federal system.</p>
+
+<h2>Finality of Supreme Court Decisions</h2>
+
+<p>The Supreme Court is the highest court in India, and its judgments have final authority within the judicial system. Article 141 makes the law declared by the Supreme Court binding on all courts in India.</p>
+
+<p>However, the Constitution permits the Supreme Court to review its own judgments under Article 137. In exceptional circumstances, the Court may also entertain curative petitions under the principles developed through its judicial decisions.</p>
+
+<p>This combination of finality and limited review attempts to balance certainty in law with the need to correct serious judicial errors.</p>
+
+<h2>Advisory Role of the Supreme Court</h2>
+
+<p>The advisory jurisdiction under Article 143 gives the Supreme Court a role beyond ordinary litigation. The President may refer questions of law or fact of public importance to the Court for its opinion.</p>
+
+<p>The advisory jurisdiction allows the constitutional authorities to obtain the considered opinion of the country's highest court on significant constitutional or legal questions.</p>
+
+<p>This function demonstrates that the Supreme Court has both adjudicatory and advisory dimensions within the constitutional structure.</p>
+
+<h2>Supreme Court as a Court of Record</h2>
+
+<p>The Supreme Court's status as a court of record under Article 129 gives constitutional recognition to the permanent and authoritative nature of its records and proceedings.</p>
+
+<p>Its judgments form an important source of legal precedent. The Court also possesses contempt powers to protect the administration of justice and maintain the authority of its judicial proceedings.</p>
+
+<h2>Independence of the Supreme Court</h2>
+
+<p>The Constitution seeks to ensure that the Supreme Court functions independently. Judges enjoy security of tenure and can be removed only through the special procedure prescribed by the Constitution.</p>
+
+<p>The financial and administrative provisions concerning judges and the Court also contribute to institutional independence. The Supreme Court's constitutional powers of judicial review further make independence essential because the Court may be required to examine actions of the government and legislature.</p>
+
+<p>Judicial independence is therefore not merely an administrative principle. It is closely connected with the constitutional responsibility of the Supreme Court to protect the Constitution and fundamental rights.</p>
+
+<h2>Relationship with High Courts</h2>
+
+<p>The Supreme Court stands at the top of India's integrated judicial system. High Courts operate at the State level, while subordinate courts function under the supervision of High Courts.</p>
+
+<p>Supreme Court decisions are binding on High Courts under Article 141. The Supreme Court also hears appeals from High Courts under various constitutional and statutory provisions.</p>
+
+<p>This hierarchical structure ensures consistency in the interpretation and application of law throughout India.</p>
+
+<h2>Relationship with Parliament</h2>
+
+<p>The Supreme Court and Parliament have distinct constitutional functions. Parliament makes laws, while the Supreme Court interprets the Constitution and laws and exercises judicial review.</p>
+
+<p>The Constitution does not give Parliament unlimited legislative power. Laws made by Parliament must comply with constitutional provisions. At the same time, the judiciary generally recognizes the constitutional authority of Parliament in matters falling within its legislative competence.</p>
+
+<p>The relationship between the two institutions has therefore developed through a continuing constitutional balance between legislative authority and judicial review.</p>
+
+<h2>Relationship with the Executive</h2>
+
+<p>The executive is responsible for implementing laws and administering government. The Supreme Court can review executive actions when they are challenged on constitutional or legal grounds.</p>
+
+<p>The Constitution also requires authorities to act in aid of the Supreme Court under Article 144. This ensures that judicial decisions are implemented by the appropriate authorities.</p>
+
+<p>The relationship demonstrates the principle that executive power must operate within constitutional and legal limits.</p>
+
+<h2>Constitutional Importance of the Supreme Court</h2>
+
+<p>The Supreme Court occupies a unique position in the Constitution of India. It is simultaneously the highest appellate court, a constitutional court, a federal court, a court of record, and a protector of fundamental rights.</p>
+
+<p>Its constitutional jurisdiction allows it to resolve disputes between governments, interpret the Constitution, protect fundamental rights, review legislation, and establish binding principles of law.</p>
+
+<p>The Court's powers have developed through both constitutional provisions and judicial interpretation. This has enabled it to respond to changing social, political, and legal conditions while remaining within the constitutional framework.</p>
+
+<h2>Conclusion</h2>
+
+<p>The Constitution of India provides a comprehensive framework for the Supreme Court and establishes it as the highest judicial institution of the country. The principal constitutional provisions relating to the Court are contained in Articles 124 to 147, which deal with its establishment, composition, appointment of judges, qualifications, tenure, removal, jurisdiction, powers, procedure, and administration.</p>
+
+<p>Article 124 establishes the Supreme Court, while Articles 125 to 128 deal with matters concerning judges and the functioning of the Court. Article 129 declares the Supreme Court to be a court of record, and Article 130 deals with its seat. Articles 131 to 136 establish different forms of jurisdiction, including original, appellate, and special leave jurisdiction. Articles 137 to 143 provide for review, additional jurisdiction, transfer of cases, complete justice, and advisory jurisdiction.</p>
+
+<p>Articles 144 to 147 contain further provisions relating to compliance with Supreme Court decisions, rules of the Court, officers and servants, and constitutional interpretation. In addition, Article 32 gives the Supreme Court a vital role in the enforcement of fundamental rights.</p>
+
+<p>The constitutional design of the Supreme Court reflects the importance given by the framers of the Constitution to judicial independence, constitutional supremacy, fundamental rights, and the rule of law. Through judicial review, binding precedent, constitutional remedies, and its other powers, the Supreme Court acts as an important institution for maintaining the constitutional balance among the legislature, executive, and judiciary.</p>
+
+<p>Thus, the constitutional provisions concerning the Supreme Court establish not merely a highest court of appeal but a central constitutional institution. Its powers and responsibilities enable it to protect the Constitution, safeguard fundamental rights, maintain uniformity in the interpretation of law, resolve federal disputes, and uphold the basic principles of the Indian constitutional system.</p>
+
+
+<div class="committee-photo-gallery">
+
+    <figure class="committee-photo">
+        <div class="committee-photo-frame">
+            <a href="1.html">
+                <img src="images/1.jpg" alt="Photo 1" loading="lazy">
+            </a>
+        </div>
+        <figcaption>
+            <p>Caption for photograph 1.</p>
+        </figcaption>
+    </figure>
+
+    <figure class="committee-photo">
+        <div class="committee-photo-frame">
+            <a href="2.html">
+                <img src="images/2.jpg" alt="Photo 2" loading="lazy">
+            </a>
+        </div>
+        <figcaption>
+            <p>Caption for photograph 2.</p>
+        </figcaption>
+    </figure>
+
+    <figure class="committee-photo">
+        <div class="committee-photo-frame">
+            <a href="3.html">
+                <img src="images/3.jpg" alt="Photo 3" loading="lazy">
+            </a>
+        </div>
+        <figcaption>
+            <p>Caption for photograph 3.</p>
+        </figcaption>
+    </figure>
+
+    <figure class="committee-photo">
+        <div class="committee-photo-frame">
+            <a href="4.html">
+                <img src="images/4.jpg" alt="Photo 4" loading="lazy">
+            </a>
+        </div>
+        <figcaption>
+            <p>Caption for photograph 4.</p>
+        </figcaption>
+    </figure>
+
+    <figure class="committee-photo">
+        <div class="committee-photo-frame">
+            <a href="5.html">
+                <img src="images/5.jpg" alt="Photo 5" loading="lazy">
+            </a>
+        </div>
+        <figcaption>
+            <p>Caption for photograph 5.</p>
+        </figcaption>
+    </figure>
+
+</div>
+
+        <div class="committee-pdf-download">
+            <a href="pdf/.pdf" download class="pdf-download-button">
+                📥 Download PDF
+            </a>
         </div>
 
     </div>
@@ -780,88 +1568,103 @@ body::before{
 </div>
 
 <script>
-function showSection(sectionId,clickedButton){
+function showSection(sectionId, clickedButton){
     document.querySelectorAll(".tab-section").forEach(section=>{
         section.classList.remove("active");
     });
+
     document.querySelectorAll(".asrp-buttons button").forEach(button=>{
         button.classList.remove("active");
     });
+
     document.getElementById(sectionId).classList.add("active");
     clickedButton.classList.add("active");
 }
 
-/* Build the exact same navbar hover popup menus from the full popup links. */
-function buildNavPopupMenus(){
-    document.querySelectorAll(".nav-dropdown[data-popup]").forEach(function(navItem){
-        const popupId=navItem.getAttribute("data-popup");
-        const sourcePopup=document.getElementById(popupId);
-        if(!sourcePopup)return;
 
-        const sourceGrid=sourcePopup.querySelector(".popup-grid");
-        if(!sourceGrid)return;
+/* =========================================
+   NAVBAR CLICK → CENTER POPUP
+========================================= */
 
-        const menu=document.createElement("div");
-        menu.className="nav-popup-menu";
-        menu.setAttribute("role","menu");
-
-        sourceGrid.querySelectorAll("a").forEach(function(sourceLink){
-            const link=sourceLink.cloneNode(true);
-            link.setAttribute("role","menuitem");
-            menu.appendChild(link);
-        });
-
-        navItem.appendChild(menu);
-    });
-}
-
-function openPopup(popupId){
-    const popup=document.getElementById(popupId);
-    if(popup){
-        popup.classList.add("active");
-        document.body.style.overflow="hidden";
-    }
-}
-
-function closePopup(popupId){
-    const popup=document.getElementById(popupId);
-    if(popup){
-        popup.classList.remove("active");
-        document.body.style.overflow="";
-    }
-}
-
-buildNavPopupMenus();
-
-/* Mobile: tap navbar button to open its full popup. */
 document.querySelectorAll(".nav-dropdown .nav-trigger").forEach(function(trigger){
-    trigger.addEventListener("click",function(event){
-        if(window.matchMedia("(max-width:600px)").matches){
-            event.preventDefault();
-            const navItem=trigger.closest(".nav-dropdown");
-            openPopup(navItem.getAttribute("data-popup"));
-        }
-    });
-});
 
-/* Close when clicking outside the popup. */
-document.querySelectorAll(".popup-overlay").forEach(function(popup){
-    popup.addEventListener("click",function(event){
-        if(event.target===popup){
-            popup.classList.remove("active");
-            document.body.style.overflow="";
-        }
-    });
-});
+    trigger.addEventListener("click", function(event){
 
-/* ESC closes every popup. */
-document.addEventListener("keydown",function(event){
-    if(event.key==="Escape"){
+        event.preventDefault();
+        event.stopPropagation();
+
+        const navItem = trigger.closest(".nav-dropdown");
+        const popupId = navItem.getAttribute("data-popup");
+
+        /* Close any other popup first */
         document.querySelectorAll(".popup-overlay").forEach(function(popup){
             popup.classList.remove("active");
         });
-        document.body.style.overflow="";
+
+        /* Open selected popup in center */
+        openPopup(popupId);
+    });
+
+});
+
+
+function openPopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.add("active");
+        document.body.style.overflow = "hidden";
     }
+
+}
+
+
+function closePopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+}
+
+
+/* =========================================
+   CLICK OUTSIDE → CLOSE
+========================================= */
+
+document.querySelectorAll(".popup-overlay").forEach(function(popup){
+
+    popup.addEventListener("click", function(event){
+
+        if(event.target === popup){
+            popup.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   ESC → CLOSE
+========================================= */
+
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Escape"){
+
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        document.body.style.overflow = "";
+    }
+
 });
 </script>
 
