@@ -3,8 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REGISTRY OFFICERS | NYAYA SETU</title>
+<title>FORMER CHIEF JUSTICE | NYAYA SETU</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<style id="theme-vars">
+:root{
+    --theme-primary:var(--theme-primary);
+    --theme-primary-soft:var(--theme-primary-glow);
+    --theme-primary-glow:var(--theme-primary-glow);
+    --theme-primary-border:var(--theme-primary-glow);
+}
+
+/* NAVBAR BUTTON BOX */
+.navbar a,
+.navbar button,
+nav a,
+nav button {
+    border: 1px solid rgba(33,150,255,.55);
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: rgba(33,150,255,.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar a:hover,
+.navbar button:hover,
+nav a:hover,
+nav button:hover {
+    background: rgba(33,150,255,.16);
+}
+
+
+/* POPUP BUTTON TEXT SIZE */
+.popup button,
+.popup .btn,
+.modal button,
+.modal .btn,
+.popup-buttons button,
+.popup-buttons .btn {
+    font-size: 20px;
+}
+
+</style>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 html{scroll-behavior:smooth}
@@ -19,108 +61,70 @@ nav{
     justify-content:center;
     align-items:center;
     flex-wrap:wrap;
-    gap:10px;
-    padding:14px 20px;
+    gap:12px;
+    padding:16px 22px;
     background:rgba(255,255,255,.05);
     backdrop-filter:blur(12px);
     position:sticky;
     top:0;
     z-index:10000;
 }
-.main-nav{isolation:isolate}
-.nav-dropdown{position:relative;display:flex;align-items:center}
-.nav-trigger,.nav-home{
+
+.main-nav{
+    isolation:isolate;
+}
+
+.nav-dropdown{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+.nav-trigger,
+.nav-home{
     display:flex;
     align-items:center;
     justify-content:center;
     color:#fff;
     text-decoration:none;
-    font-weight:600;
+    font-weight:700;
     position:relative;
-    padding:10px 13px;
-    border-radius:10px;
+    padding:13px 18px;
+    min-height:46px;
+    border-radius:12px;
     transition:.25s ease;
     white-space:nowrap;
+    font-size:15px;
+    letter-spacing:.2px;
 }
-.nav-trigger:hover,.nav-home:hover,
-.nav-dropdown:has(.nav-popup-menu:hover) .nav-trigger,
-.nav-dropdown:hover .nav-trigger{
+
+.nav-trigger:hover,
+.nav-home:hover{
     color:#fff;
     background:rgba(20,20,25,.96);
     border:1px solid rgba(255,255,255,.18);
-    box-shadow:0 0 18px rgba(255,60,172,.20);
+    box-shadow:0 0 18px rgba(0,149,255,.20);
 }
-.nav-trigger::after,.nav-home::after{
+
+.nav-trigger::after,
+.nav-home::after{
     content:"";
     position:absolute;
-    left:0;right:0;bottom:-1px;
-    width:100%;height:3px;
-    background:#ff3cac;
+    left:0;
+    right:0;
+    bottom:-1px;
+    width:100%;
+    height:3px;
+    background:#0095ff;
     border-radius:3px 3px 0 0;
     transform:scaleX(0);
     transform-origin:center;
     transition:.22s ease;
 }
-.nav-trigger:hover::after,.nav-home:hover::after,
-.nav-dropdown:hover .nav-trigger::after{transform:scaleX(1)}
-.nav-dropdown::after{
-    content:"";
-    position:absolute;
-    left:0;right:0;top:100%;
-    height:10px;
-    background:transparent;
-    z-index:10001;
-}
-.nav-popup-menu{
-    position:absolute;
-    top:100%;
-    left:50%;
-    transform:translateX(-50%) translateY(-8px);
-    width:min(590px,88vw);
-    max-height:70vh;
-    overflow-y:auto;
-    padding:12px;
-    display:grid;
-    grid-template-columns:repeat(3,minmax(120px,1fr));
-    gap:8px;
-    background:rgba(20,20,25,.96);
-    backdrop-filter:blur(25px);
-    border:1px solid rgba(255,255,255,.18);
-    border-radius:18px;
-    box-shadow:0 0 30px rgba(0,0,0,.45),0 0 55px rgba(255,60,172,.14);
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-    transition:.22s ease;
-}
-.nav-dropdown:hover .nav-popup-menu,
-.nav-dropdown:focus-within .nav-popup-menu{
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-    transform:translateX(-50%) translateY(0);
-}
-.nav-popup-menu a{
-    min-height:48px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:8px 9px;
-    border-radius:9px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.14);
-    color:#fff;
-    text-decoration:none;
-    font-size:11px;
-    font-weight:700;
-    transition:.25s ease;
-}
-.nav-popup-menu a:hover{
-    transform:translateY(-4px);
-    background:rgba(255,60,172,.18);
-    border-color:#ff3cac;
-    box-shadow:0 0 15px rgba(255,60,172,.35);
+
+.nav-trigger:hover::after,
+.nav-home:hover::after{
+    transform:scaleX(1);
 }
 
 /* ============================= */
@@ -136,15 +140,68 @@ nav{
     text-align:center;
 }
 .about h1{
-    font-size:60px;
-    color:#2196ff;
-    margin-bottom:20px;
-    text-shadow:0 0 10px #2196ff,0 0 25px rgba(33,150,255,.6);
-    animation:titleGlow 2.5s infinite ease-in-out;
+    font-family:"Permanent Marker", cursive;
+    font-size:42px;
+    font-weight:700;
+    letter-spacing:3px;
+    color:#0095ff;
+    display:inline-block;
+    position:relative;
+    padding-bottom:12px;
+    text-shadow:0 0 8px rgba(0,149,255,.45);
+    animation:committeePulse 3s ease-in-out infinite;
 }
-@keyframes titleGlow{
-    0%,100%{text-shadow:0 0 10px #2196ff,0 0 20px rgba(33,150,255,.4)}
-    50%{text-shadow:0 0 20px #2196ff,0 0 45px rgba(33,150,255,.8)}
+
+/* Text animation */
+@keyframes committeePulse{
+    0%,100%{
+        transform:scale(1);
+        letter-spacing:3px;
+    }
+
+    50%{
+        transform:scale(1.03);
+        letter-spacing:5px;
+    }
+}
+
+/* Animated underline */
+.about h1::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width:0;
+    height:3px;
+    background:#0095ff;
+    border-radius:10px;
+    box-shadow:
+        0 0 8px #0095ff,
+        0 0 18px #0095ff;
+    transform:translateX(-50%);
+    animation:lineExpand 2s ease-in-out infinite;
+}
+
+@keyframes lineExpand{
+    0%,100%{
+        width:0;
+        opacity:.3;
+    }
+
+    40%{
+        width:100%;
+        opacity:1;
+    }
+
+    70%{
+        width:100%;
+        opacity:1;
+    }
+
+    90%{
+        width:0;
+        opacity:.3;
+    }
 }
 .intro{max-width:1100px;margin:0 auto;font-size:24px;line-height:1.7;opacity:.9}
 .container{max-width:950px;margin:0 auto}
@@ -267,7 +324,7 @@ nav{
     border:1px solid rgba(255,255,255,.14);
     color:#fff;
     text-decoration:none;
-    font-size:14px;
+    font-size:20px;
     font-weight:700;
     transition:.3s ease;
 }
@@ -289,29 +346,66 @@ nav{
 
 footer{
     background:#050505;
-    padding:60px 10%;
+    padding:35px 7%;
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    gap:40px;
+    gap:25px;
     flex-wrap:wrap;
     border-top:1px solid rgba(33,150,255,.12);
 }
-.footer-logo{display:flex;flex-direction:column;min-width:200px}
-.footer-logo img{width:130px;margin-bottom:10px}
-.footer-logo p{opacity:.7;font-size:14px}
-.footer-links{min-width:150px}
-.footer-links h4{color:#2196ff;margin-bottom:12px;font-size:16px}
-.footer-links a{
-    display:block;color:#fff;opacity:.7;text-decoration:none;
-    margin:7px 0;transition:.3s ease;
-}
-.footer-links a:hover{color:#2196ff;opacity:1;transform:translateX(4px)}
-.bottom{
-    text-align:center;padding:18px;background:#030303;
-    opacity:.75;font-size:13px;border-top:1px solid rgba(255,255,255,.05);
+
+.footer-logo{
+    display:flex;
+    flex-direction:column;
+    min-width:170px;
 }
 
+.footer-logo img{
+    width:150px;
+    margin-bottom:8px;
+}
+
+.footer-logo p{
+    opacity:.7;
+    font-size:15px;
+    margin:3px 0;
+}
+
+.footer-links{
+    min-width:130px;
+}
+
+.footer-links h4{
+    color:#2196ff;
+    margin-bottom:9px;
+    font-size:14px;
+}
+
+.footer-links a{
+    display:block;
+    color:#fff;
+    opacity:.7;
+    text-decoration:none;
+    margin:5px 0;
+    font-size:15px;
+    transition:.3s ease;
+}
+
+.footer-links a:hover{
+    color:#2196ff;
+    opacity:1;
+    transform:translateX(4px);
+}
+
+.bottom{
+    text-align:center;
+    padding:12px;
+    background:#030303;
+    opacity:.75;
+    font-size:16px;
+    border-top:1px solid rgba(255,255,255,.05);
+}
 /* ============================= */
 /* RESPONSIVE */
 /* ============================= */
@@ -332,7 +426,11 @@ footer{
     .section h2{font-size:23px}
     .emoji-text{font-size:15px;gap:10px}
     .emoji-text img{height:38px;width:38px}
-    footer{padding:45px 25px;flex-direction:column}
+footer{
+    padding:30px 20px;
+    flex-direction:column;
+    gap:20px;
+}
 }
 @media(max-width:600px){
     .main-nav{
@@ -341,7 +439,11 @@ footer{
         flex-wrap:nowrap;
         scrollbar-width:thin;
     }
-    .nav-trigger,.nav-home{font-size:12px;padding:8px 9px}
+.nav-trigger,.nav-home{
+    font-size:13px;
+    padding:10px 13px;
+    min-height:42px;
+}
     .nav-popup-menu{
         position:fixed;
         top:64px;
@@ -588,262 +690,188 @@ body::before{
 
 
 /* ============================= */
-/* SUPREME COURT COMMITTEES TABLE */
+/* COMMITTEES INFORMATION + PHOTO GALLERY */
 /* ============================= */
-.committees-section {
+
+.committees-content {
     width: 100%;
-    padding: 35px 0 45px;
+    padding: 35px 0 55px;
 }
+
 .committees-container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 25px;
 }
-.committees-title {
-    text-align: center;
+
+.committees-content h2 {
+    color: #2196ff;
+    font-size: 30px;
+    margin: 32px 0 14px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(33,150,255,.35);
+}
+
+.committees-content h2:first-child { margin-top: 0; }
+
+.committees-content p {
     margin: 0 0 22px;
-    font-weight: 800;
+    text-align: left;
+    font-size: 22px;
+    line-height: 1.8;
+    color: rgba(255,255,255,.92);
 }
-.committees-table-wrap {
+
+/* FEATURED PHOTO + 34 NAME-ONLY PHOTOS */
+.committee-photo-gallery {
+    margin-top: 45px;
+    padding-top: 35px;
+    border-top: 1px solid rgba(33,150,255,.25);
+}
+
+.committee-featured {
+    max-width: 850px;
+    margin: 0 auto 35px;
+    overflow: hidden;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(33,150,255,.35);
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(33,150,255,.12);
+}
+
+.committee-featured .committee-photo-frame {
     width: 100%;
+    height: 520px;
     display: flex;
+    align-items: center;
     justify-content: center;
-    overflow: visible;
+    background: #111;
+    padding: 10px;
 }
-.committees-table {
+
+.committee-featured img {
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    border: 3px solid rgba(33,150,255,.75);
-    border-collapse: collapse;
-    table-layout: fixed;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
 }
-.committees-table th,
-.committees-table td {
-    border: 2px solid rgba(33,150,255,.55);
-    padding: 12px 11px;
-    vertical-align: top;
-    white-space: normal;
-    overflow-wrap: anywhere;
-    line-height: 1.45;
+
+.committee-featured figcaption {
+    padding: 22px 26px 26px;
+    text-align: left;
 }
-.committees-table th {
-    border: 3px solid rgba(33,150,255,.75);
+
+.committee-featured h3 {
+    color: #2196ff;
+    margin: 0 0 7px;
+    font-size: 28px;
+}
+
+.committee-featured .featured-title {
+    margin: 0 0 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.committee-featured p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.65;
+    opacity: .88;
+}
+
+.committee-photo-row {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.committee-photo-small {
+    margin: 0;
+    overflow: hidden;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(33,150,255,.25);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(33,150,255,.06);
+    transition: .25s ease;
+}
+
+.committee-photo-small:hover {
+    transform: translateY(-4px);
+    border-color: #2196ff;
+    box-shadow: 0 0 20px rgba(33,150,255,.18);
+}
+
+.committee-photo-small .photo-frame {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+    padding: 5px;
+}
+
+.committee-photo-small img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.committee-photo-small figcaption {
+    padding: 9px 6px 11px;
     text-align: center;
-    font-weight: 800;
 }
-.committees-table th:nth-child(1),
-.committees-table td:nth-child(1) {
-    width: 7%;
+
+.committee-photo-small h3 {
+    color: #2196ff;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.25;
+}
+
+.committee-pdf-download {
+    margin-top: 30px;
     text-align: center;
 }
-.committees-table th:nth-child(2),
-.committees-table td:nth-child(2) {
-    width: 39%;
+
+.pdf-download-button {
+    display: inline-block;
+    padding: 13px 28px;
+    border-radius: 8px;
+    background: #2196ff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(33,150,255,.25);
+    transition: .25s ease;
 }
-.committees-table th:nth-child(3),
-.committees-table td:nth-child(3) {
-    width: 54%;
+
+.pdf-download-button:hover {
+    background: #42a5ff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 22px rgba(33,150,255,.4);
 }
-.committee-composition {
-    white-space: normal;
+
+@media (max-width: 1100px) {
+    .committee-photo-row { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 }
+
 @media (max-width: 800px) {
-    .committees-container {
-        width: 98%;
-    }
-    .committees-table {
-        font-size: 11px;
-    }
-    .committees-table th,
-    .committees-table td {
-        padding: 8px 6px;
-    }
-}
-/* =========================================
-   REGISTRY OFFICERS / REGISTRARS GALLERY
-   ========================================= */
-
-.registry-officers-section{
-    margin-top:50px;
-    padding-top:35px;
-    border-top:1px solid rgba(33,150,255,.25);
+    .committees-container { padding: 0 20px; }
+    .committees-content h2 { font-size: 24px; }
+    .committees-content p { font-size: 20px; line-height: 1.7; }
+    .committee-featured .committee-photo-frame { height: 360px; }
+    .committee-photo-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
-.registry-officers-title{
-    text-align:center;
-    color:#2196ff;
-    font-size:30px;
-    margin:0 0 30px;
-    text-shadow:0 0 12px rgba(33,150,255,.5);
-}
-
-/* Secretary General */
-
-.secretary-general-card{
-    width:280px;
-    margin:0 auto 55px;
-    text-align:center;
-    padding:18px;
-    background:rgba(0,0,0,.68);
-    border:1px solid rgba(33,150,255,.35);
-    border-radius:16px;
-    box-shadow:
-        0 0 25px rgba(33,150,255,.10),
-        inset 0 0 20px rgba(33,150,255,.03);
-    transition:.3s ease;
-}
-
-.secretary-general-card:hover{
-    transform:translateY(-7px);
-    border-color:#2196ff;
-    box-shadow:
-        0 0 30px rgba(33,150,255,.25),
-        0 0 55px rgba(33,150,255,.10);
-}
-
-.secretary-general-card img{
-    display:block;
-    width:100%;
-    height:300px;
-    object-fit:contain; /* DON'T CROP */
-    border-radius:12px;
-    background:#111;
-    border:1px solid rgba(255,255,255,.12);
-}
-
-.secretary-general-card .designation{
-    margin-top:16px;
-    color:#2196ff;
-    font-size:14px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:1px;
-}
-
-.secretary-general-card .person-name{
-    margin-top:7px;
-    color:#fff;
-    font-size:18px;
-    font-weight:700;
-}
-
-/* Registrars */
-
-.registrars-title{
-    text-align:center;
-    color:#2196ff;
-    font-size:30px;
-    margin:0 0 30px;
-    text-shadow:0 0 12px rgba(33,150,255,.5);
-}
-
-.registrars-grid{
-    display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:22px;
-}
-
-.registrar-card{
-    text-align:center;
-    overflow:hidden;
-    background:rgba(0,0,0,.68);
-    border:1px solid rgba(33,150,255,.25);
-    border-radius:14px;
-    padding:12px;
-    box-shadow:0 0 20px rgba(33,150,255,.08);
-    transition:.3s ease;
-}
-
-.registrar-card:hover{
-    transform:translateY(-6px);
-    border-color:#2196ff;
-    box-shadow:
-        0 0 25px rgba(33,150,255,.22),
-        0 0 45px rgba(33,150,255,.08);
-}
-
-.registrar-card img{
-    display:block;
-    width:100%;
-    height:230px;
-    object-fit:contain; /* DON'T CROP */
-    border-radius:10px;
-    background:#111;
-    border:1px solid rgba(255,255,255,.10);
-}
-
-.registrar-card .designation{
-    margin-top:12px;
-    color:#2196ff;
-    font-size:12px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:.8px;
-}
-
-.registrar-card .person-name{
-    margin-top:6px;
-    color:#fff;
-    font-size:15px;
-    font-weight:700;
-    line-height:1.4;
-}
-
-/* Responsive */
-
-@media(max-width:1000px){
-    .registrars-grid{
-        grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-}
-
-@media(max-width:700px){
-    .registrars-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:15px;
-    }
-
-    .registrar-card img{
-        height:210px;
-    }
-
-    .registrar-card .person-name{
-        font-size:13px;
-    }
-}
-
-@media(max-width:450px){
-    .registrars-grid{
-        grid-template-columns:1fr;
-    }
-
-    .secretary-general-card{
-        width:min(280px,100%);
-    }
-
-    .registrar-card img{
-        height:280px;
-    }
-}
-.judge-card img{
-    display:block;
-    width:140px;
-    height:180px;
-    margin:0 auto;
-    object-fit:contain;
-    background:transparent !important;
-    border:none !important;
-    box-shadow:none !important;
-    border-radius:0;
-}
-</style>
-<style id="magenta-theme-vars">
-:root{
-    --theme-primary:#2196ff;
-    --theme-primary-soft:rgba(33,150,255,.18);
-    --theme-primary-glow:rgba(33,150,255,.35);
-    --theme-primary-border:rgba(33,150,255,.35);
+@media (max-width: 500px) {
+    .committee-photo-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .committee-featured .committee-photo-frame { height: 280px; }
 }
 </style>
 </head>
@@ -886,133 +914,380 @@ body::before{
 </nav>
 
 <section class="about">
+    <h1>FORMER CHIEF JUSTICE</h1>
 
-<!-- =========================================
-     SECRETARY GENERAL & REGISTRARS
-     ========================================= -->
+    <section class="committee-photo-gallery">
 
-    <!-- SECRETARY GENERAL -->
-    <h2 class="registry-officers-title">REGISTRY OFFICERS</h2>
+        <div class="committee-photo-row">
 
-    <div class="secretary-general-card">
-        <img
-            src="registry-officers-images/1.jpg"
-            alt="Shri Bharat Parashar - Secretary General"
-        >
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/1.jpg" alt="Justice Harilal Jekisundas Kania">
+                </div>
+                <figcaption><h3>Justice Harilal Jekisundas Kania</h3></figcaption>
+            </figure>
 
-        <div class="designation">
-            Secretary General
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/2.jpg" alt="Justice M. Patanjali Sastri">
+                </div>
+                <figcaption><h3>Justice M. Patanjali Sastri</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/3.jpg" alt="Justice Mehr Chand Mahajan">
+                </div>
+                <figcaption><h3>Justice Mehr Chand Mahajan</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/4.jpg" alt="Justice Bijan Kumar Mukherjea">
+                </div>
+                <figcaption><h3>Justice Bijan Kumar Mukherjea</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/5.jpg" alt="Justice Sudhi Ranjan Das">
+                </div>
+                <figcaption><h3>Justice Sudhi Ranjan Das</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/6.jpg" alt="Justice Bhuvaneshwar Prasad Sinha">
+                </div>
+                <figcaption><h3>Justice Bhuvaneshwar Prasad Sinha</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/7.jpg" alt="Justice P.B. Gajendragadkar">
+                </div>
+                <figcaption><h3>Justice P.B. Gajendragadkar</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/8.jpg" alt="Justice A.K. Sarkar">
+                </div>
+                <figcaption><h3>Justice A.K. Sarkar</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/9.jpg" alt="Justice K. Subba Rao">
+                </div>
+                <figcaption><h3>Justice K. Subba Rao</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/10.jpg" alt="Justice K.N. Wanchoo">
+                </div>
+                <figcaption><h3>Justice K.N. Wanchoo</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/11.jpg" alt="Justice M. Hidayatullah">
+                </div>
+                <figcaption><h3>Justice M. Hidayatullah</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/12.jpg" alt="Justice J.C. Shah">
+                </div>
+                <figcaption><h3>Justice J.C. Shah</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/13.jpg" alt="Justice S.M. Sikri">
+                </div>
+                <figcaption><h3>Justice S.M. Sikri</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/14.jpg" alt="Justice A.N. Ray">
+                </div>
+                <figcaption><h3>Justice A.N. Ray</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/15.jpg" alt="Justice M. Hameedullah Beg">
+                </div>
+                <figcaption><h3>Justice M. Hameedullah Beg</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/16.jpg" alt="Justice Y.V. Chandrachud">
+                </div>
+                <figcaption><h3>Justice Y.V. Chandrachud</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/17.png" alt="Justice P.N. Bhagwati">
+                </div>
+                <figcaption><h3>Justice P.N. Bhagwati</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/18.jpg" alt="Justice R.S. Pathak">
+                </div>
+                <figcaption><h3>Justice R.S. Pathak</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/19.jpg" alt="Justice E.S. Venkataramiah">
+                </div>
+                <figcaption><h3>Justice E.S. Venkataramiah</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/20.jpg" alt="Justice Sabyasachi Mukherjee">
+                </div>
+                <figcaption><h3>Justice Sabyasachi Mukherjee</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/21.jpg" alt="Justice Ranganath Misra">
+                </div>
+                <figcaption><h3>Justice Ranganath Misra</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/22.jpg" alt="Justice K.N. Singh">
+                </div>
+                <figcaption><h3>Justice K.N. Singh</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/23.jpg" alt="Justice M.H. Kania">
+                </div>
+                <figcaption><h3>Justice M.H. Kania</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/24.jpg" alt="Justice L.M. Sharma">
+                </div>
+                <figcaption><h3>Justice L.M. Sharma</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/25.jpg" alt="Justice M.L. Venkatachaliah">
+                </div>
+                <figcaption><h3>Justice M.L. Venkatachaliah</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/26.jpg" alt="Justice A.M. Ahmadi">
+                </div>
+                <figcaption><h3>Justice A.M. Ahmadi</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/27.jpg" alt="Justice J.S. Verma">
+                </div>
+                <figcaption><h3>Justice J.S. Verma</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/28.jpg" alt="Justice M.M. Punchhi">
+                </div>
+                <figcaption><h3>Justice M.M. Punchhi</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/29.jpg" alt="Justice A.S. Anand">
+                </div>
+                <figcaption><h3>Justice A.S. Anand</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/30.jpg" alt="Justice S.P. Bharucha">
+                </div>
+                <figcaption><h3>Justice S.P. Bharucha</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/31.jpg" alt="Justice B.N. Kirpal">
+                </div>
+                <figcaption><h3>Justice B.N. Kirpal</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/32.jpg" alt="Justice G.B. Patnaik">
+                </div>
+                <figcaption><h3>Justice G.B. Patnaik</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/33.jpg" alt="Justice S. Rajendra Babu">
+                </div>
+                <figcaption><h3>Justice S. Rajendra Babu</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/34.jpg" alt="Justice V.N. Khare">
+                </div>
+                <figcaption><h3>Justice V.N. Khare</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/35.jpg" alt="Justice R.C. Lahoti">
+                </div>
+                <figcaption><h3>Justice R.C. Lahoti</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/36.jpg" alt="Justice Y.K. Sabharwal">
+                </div>
+                <figcaption><h3>Justice Y.K. Sabharwal</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/37.jpg" alt="Justice K.G. Balakrishnan">
+                </div>
+                <figcaption><h3>Justice K.G. Balakrishnan</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/38.jpg" alt="Justice S.H. Kapadia">
+                </div>
+                <figcaption><h3>Justice S.H. Kapadia</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/39.jpg" alt="Justice Altamas Kabir">
+                </div>
+                <figcaption><h3>Justice Altamas Kabir</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/40.jpg" alt="Justice P. Sathasivam">
+                </div>
+                <figcaption><h3>Justice P. Sathasivam</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/41.jpg" alt="Justice R.M. Lodha">
+                </div>
+                <figcaption><h3>Justice R.M. Lodha</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/42.jpg" alt="Justice H.L. Dattu">
+                </div>
+                <figcaption><h3>Justice H.L. Dattu</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/43.jpg" alt="Justice T.S. Thakur">
+                </div>
+                <figcaption><h3>Justice T.S. Thakur</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/44.jpg" alt="Justice Jagdish Singh Khehar">
+                </div>
+                <figcaption><h3>Justice Jagdish Singh Khehar</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/45.jpg" alt="Justice Dipak Misra">
+                </div>
+                <figcaption><h3>Justice Dipak Misra</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/46.jpg" alt="Justice Ranjan Gogoi">
+                </div>
+                <figcaption><h3>Justice Ranjan Gogoi</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/47.jpeg" alt="Justice Sharad Arvind Bobde">
+                </div>
+                <figcaption><h3>Justice Sharad Arvind Bobde</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/48.jpg" alt="Justice N.V. Ramana">
+                </div>
+                <figcaption><h3>Justice N.V. Ramana</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/49.jpg" alt="Justice Uday Umesh Lalit">
+                </div>
+                <figcaption><h3>Justice Uday Umesh Lalit</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/50.jpg" alt="Justice D.Y. Chandrachud">
+                </div>
+                <figcaption><h3>Justice D.Y. Chandrachud</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/51.jpeg" alt="Justice Sanjiv Khanna">
+                </div>
+                <figcaption><h3>Justice Sanjiv Khanna</h3></figcaption>
+            </figure>
+
+            <figure class="committee-photo-small">
+                <div class="photo-frame">
+                    <img src="former-chief-justice-images/52.jpg" alt="Justice Bhushan Ramkrishna Gavai">
+                </div>
+                <figcaption><h3>Justice Bhushan Ramkrishna Gavai</h3></figcaption>
+            </figure>
+
         </div>
 
-        <div class="person-name">
-            Shri Bharat Parashar
-        </div>
-    </div>
-
-
-    <!-- REGISTRARS -->
-
-<div class="registrars-grid">
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/2.png" alt="Shri Rakesh Kumar">
-        <div class="designation">Registrar</div>
-        <div class="person-name">Shri Rakesh Kumar</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/3.jpg" alt="Shri Devender Pal Walia">
-        <div class="designation">Registrar</div>
-        <div class="person-name">Shri Devender Pal Walia</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/4.jpg" alt="Ms. Aparna Ajitsaria">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Ms. Aparna Ajitsaria</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/5.jpg" alt="Shri Santosh Kumar">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Shri Santosh Kumar</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/6.jpg" alt="Shri Satish Kumar Arora">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Shri Satish Kumar Arora</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/7.jpg" alt="Shri Tauzeeh-UI-Islam Rajput">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Shri Tauzeeh-UI-Islam Rajput</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/8.jpeg" alt="Ms. Gracy L. Bawitlung">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Ms. Gracy L. Bawitlung</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/9.jpeg" alt="Ms. Kaveri">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Ms. Kaveri</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/10.jpg" alt="Shri Kuntal Sharma Pathak">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Shri Kuntal Sharma Pathak</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/11.jpeg" alt="Shri Rajesh Sharma">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Shri Rajesh Sharma</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/12.jpg" alt="Shri Apoorv Singh">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Shri Apoorv Singh</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/13.jpeg" alt="Dr. Ajit Atri">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Dr. Ajit Atri</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/14.png" alt="Ms. Aarti Singh">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Ms. Aarti Singh</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/15.jpg" alt="Shri Vishal">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Shri Vishal</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/16.png" alt="Ms. Shivani Handique">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Ms. Shivani Handique</div>
-    </div>
-
-    <div class="registrar-card">
-        <img src="registry-officers-images/17.jpg" alt="Dr. Saleena V.G. Nair">
-        <div class="designation">Registrar (J)</div>
-        <div class="person-name">Dr. Saleena V.G. Nair</div>
-    </div>
-
-</div>
-
-</div>
+    </section>
+</section>
 
 <footer>
     <div class="footer-logo">
@@ -1227,88 +1502,103 @@ body::before{
 </div>
 
 <script>
-function showSection(sectionId,clickedButton){
+function showSection(sectionId, clickedButton){
     document.querySelectorAll(".tab-section").forEach(section=>{
         section.classList.remove("active");
     });
+
     document.querySelectorAll(".asrp-buttons button").forEach(button=>{
         button.classList.remove("active");
     });
+
     document.getElementById(sectionId).classList.add("active");
     clickedButton.classList.add("active");
 }
 
-/* Build the exact same navbar hover popup menus from the full popup links. */
-function buildNavPopupMenus(){
-    document.querySelectorAll(".nav-dropdown[data-popup]").forEach(function(navItem){
-        const popupId=navItem.getAttribute("data-popup");
-        const sourcePopup=document.getElementById(popupId);
-        if(!sourcePopup)return;
 
-        const sourceGrid=sourcePopup.querySelector(".popup-grid");
-        if(!sourceGrid)return;
+/* =========================================
+   NAVBAR CLICK → CENTER POPUP
+========================================= */
 
-        const menu=document.createElement("div");
-        menu.className="nav-popup-menu";
-        menu.setAttribute("role","menu");
-
-        sourceGrid.querySelectorAll("a").forEach(function(sourceLink){
-            const link=sourceLink.cloneNode(true);
-            link.setAttribute("role","menuitem");
-            menu.appendChild(link);
-        });
-
-        navItem.appendChild(menu);
-    });
-}
-
-function openPopup(popupId){
-    const popup=document.getElementById(popupId);
-    if(popup){
-        popup.classList.add("active");
-        document.body.style.overflow="hidden";
-    }
-}
-
-function closePopup(popupId){
-    const popup=document.getElementById(popupId);
-    if(popup){
-        popup.classList.remove("active");
-        document.body.style.overflow="";
-    }
-}
-
-buildNavPopupMenus();
-
-/* Mobile: tap navbar button to open its full popup. */
 document.querySelectorAll(".nav-dropdown .nav-trigger").forEach(function(trigger){
-    trigger.addEventListener("click",function(event){
-        if(window.matchMedia("(max-width:600px)").matches){
-            event.preventDefault();
-            const navItem=trigger.closest(".nav-dropdown");
-            openPopup(navItem.getAttribute("data-popup"));
-        }
-    });
-});
 
-/* Close when clicking outside the popup. */
-document.querySelectorAll(".popup-overlay").forEach(function(popup){
-    popup.addEventListener("click",function(event){
-        if(event.target===popup){
-            popup.classList.remove("active");
-            document.body.style.overflow="";
-        }
-    });
-});
+    trigger.addEventListener("click", function(event){
 
-/* ESC closes every popup. */
-document.addEventListener("keydown",function(event){
-    if(event.key==="Escape"){
+        event.preventDefault();
+        event.stopPropagation();
+
+        const navItem = trigger.closest(".nav-dropdown");
+        const popupId = navItem.getAttribute("data-popup");
+
+        /* Close any other popup first */
         document.querySelectorAll(".popup-overlay").forEach(function(popup){
             popup.classList.remove("active");
         });
-        document.body.style.overflow="";
+
+        /* Open selected popup in center */
+        openPopup(popupId);
+    });
+
+});
+
+
+function openPopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.add("active");
+        document.body.style.overflow = "hidden";
     }
+
+}
+
+
+function closePopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+}
+
+
+/* =========================================
+   CLICK OUTSIDE → CLOSE
+========================================= */
+
+document.querySelectorAll(".popup-overlay").forEach(function(popup){
+
+    popup.addEventListener("click", function(event){
+
+        if(event.target === popup){
+            popup.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   ESC → CLOSE
+========================================= */
+
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Escape"){
+
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        document.body.style.overflow = "";
+    }
+
 });
 </script>
 
