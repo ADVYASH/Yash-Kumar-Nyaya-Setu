@@ -3,8 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HISTORY | NYAYA SETU</title>
+<title>COMMITTEES | NYAYA SETU</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<style id="theme-vars">
+:root{
+    --theme-primary:var(--theme-primary);
+    --theme-primary-soft:var(--theme-primary-glow);
+    --theme-primary-glow:var(--theme-primary-glow);
+    --theme-primary-border:var(--theme-primary-glow);
+}
+
+/* NAVBAR BUTTON BOX */
+.navbar a,
+.navbar button,
+nav a,
+nav button {
+    border: 1px solid rgba(33,150,255,.55);
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: rgba(33,150,255,.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar a:hover,
+.navbar button:hover,
+nav a:hover,
+nav button:hover {
+    background: rgba(33,150,255,.16);
+}
+
+
+/* POPUP BUTTON TEXT SIZE */
+.popup button,
+.popup .btn,
+.modal button,
+.modal .btn,
+.popup-buttons button,
+.popup-buttons .btn {
+    font-size: 20px;
+}
+
+</style>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 html{scroll-behavior:smooth}
@@ -19,108 +61,70 @@ nav{
     justify-content:center;
     align-items:center;
     flex-wrap:wrap;
-    gap:10px;
-    padding:14px 20px;
+    gap:12px;
+    padding:16px 22px;
     background:rgba(255,255,255,.05);
     backdrop-filter:blur(12px);
     position:sticky;
     top:0;
     z-index:10000;
 }
-.main-nav{isolation:isolate}
-.nav-dropdown{position:relative;display:flex;align-items:center}
-.nav-trigger,.nav-home{
+
+.main-nav{
+    isolation:isolate;
+}
+
+.nav-dropdown{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+.nav-trigger,
+.nav-home{
     display:flex;
     align-items:center;
     justify-content:center;
     color:#fff;
     text-decoration:none;
-    font-weight:600;
+    font-weight:700;
     position:relative;
-    padding:10px 13px;
-    border-radius:10px;
+    padding:13px 18px;
+    min-height:46px;
+    border-radius:12px;
     transition:.25s ease;
     white-space:nowrap;
+    font-size:15px;
+    letter-spacing:.2px;
 }
-.nav-trigger:hover,.nav-home:hover,
-.nav-dropdown:has(.nav-popup-menu:hover) .nav-trigger,
-.nav-dropdown:hover .nav-trigger{
+
+.nav-trigger:hover,
+.nav-home:hover{
     color:#fff;
     background:rgba(20,20,25,.96);
     border:1px solid rgba(255,255,255,.18);
-    box-shadow:0 0 18px rgba(255,60,172,.20);
+    box-shadow:0 0 18px rgba(0,149,255,.20);
 }
-.nav-trigger::after,.nav-home::after{
+
+.nav-trigger::after,
+.nav-home::after{
     content:"";
     position:absolute;
-    left:0;right:0;bottom:-1px;
-    width:100%;height:3px;
-    background:#ff3cac;
+    left:0;
+    right:0;
+    bottom:-1px;
+    width:100%;
+    height:3px;
+    background:#0095ff;
     border-radius:3px 3px 0 0;
     transform:scaleX(0);
     transform-origin:center;
     transition:.22s ease;
 }
-.nav-trigger:hover::after,.nav-home:hover::after,
-.nav-dropdown:hover .nav-trigger::after{transform:scaleX(1)}
-.nav-dropdown::after{
-    content:"";
-    position:absolute;
-    left:0;right:0;top:100%;
-    height:10px;
-    background:transparent;
-    z-index:10001;
-}
-.nav-popup-menu{
-    position:absolute;
-    top:100%;
-    left:50%;
-    transform:translateX(-50%) translateY(-8px);
-    width:min(590px,88vw);
-    max-height:70vh;
-    overflow-y:auto;
-    padding:12px;
-    display:grid;
-    grid-template-columns:repeat(3,minmax(120px,1fr));
-    gap:8px;
-    background:rgba(20,20,25,.96);
-    backdrop-filter:blur(25px);
-    border:1px solid rgba(255,255,255,.18);
-    border-radius:18px;
-    box-shadow:0 0 30px rgba(0,0,0,.45),0 0 55px rgba(255,60,172,.14);
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-    transition:.22s ease;
-}
-.nav-dropdown:hover .nav-popup-menu,
-.nav-dropdown:focus-within .nav-popup-menu{
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-    transform:translateX(-50%) translateY(0);
-}
-.nav-popup-menu a{
-    min-height:48px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:8px 9px;
-    border-radius:9px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.14);
-    color:#fff;
-    text-decoration:none;
-    font-size:11px;
-    font-weight:700;
-    transition:.25s ease;
-}
-.nav-popup-menu a:hover{
-    transform:translateY(-4px);
-    background:rgba(255,60,172,.18);
-    border-color:#ff3cac;
-    box-shadow:0 0 15px rgba(255,60,172,.35);
+
+.nav-trigger:hover::after,
+.nav-home:hover::after{
+    transform:scaleX(1);
 }
 
 /* ============================= */
@@ -136,15 +140,68 @@ nav{
     text-align:center;
 }
 .about h1{
-    font-size:60px;
-    color:#2196ff;
-    margin-bottom:20px;
-    text-shadow:0 0 10px #2196ff,0 0 25px rgba(33,150,255,.6);
-    animation:titleGlow 2.5s infinite ease-in-out;
+    font-family:"Permanent Marker", cursive;
+    font-size:42px;
+    font-weight:700;
+    letter-spacing:3px;
+    color:#0095ff;
+    display:inline-block;
+    position:relative;
+    padding-bottom:12px;
+    text-shadow:0 0 8px rgba(0,149,255,.45);
+    animation:committeePulse 3s ease-in-out infinite;
 }
-@keyframes titleGlow{
-    0%,100%{text-shadow:0 0 10px #2196ff,0 0 20px rgba(33,150,255,.4)}
-    50%{text-shadow:0 0 20px #2196ff,0 0 45px rgba(33,150,255,.8)}
+
+/* Text animation */
+@keyframes committeePulse{
+    0%,100%{
+        transform:scale(1);
+        letter-spacing:3px;
+    }
+
+    50%{
+        transform:scale(1.03);
+        letter-spacing:5px;
+    }
+}
+
+/* Animated underline */
+.about h1::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width:0;
+    height:3px;
+    background:#0095ff;
+    border-radius:10px;
+    box-shadow:
+        0 0 8px #0095ff,
+        0 0 18px #0095ff;
+    transform:translateX(-50%);
+    animation:lineExpand 2s ease-in-out infinite;
+}
+
+@keyframes lineExpand{
+    0%,100%{
+        width:0;
+        opacity:.3;
+    }
+
+    40%{
+        width:100%;
+        opacity:1;
+    }
+
+    70%{
+        width:100%;
+        opacity:1;
+    }
+
+    90%{
+        width:0;
+        opacity:.3;
+    }
 }
 .intro{max-width:1100px;margin:0 auto;font-size:24px;line-height:1.7;opacity:.9}
 .container{max-width:950px;margin:0 auto}
@@ -178,7 +235,7 @@ nav{
 }
 .section{
     margin-top:25px;
-    background:rgba(0,0,0,.10);
+    background:rgba(0,0,0,.68);
     padding:40px;
     border-radius:14px;
     border:1px solid rgba(33,150,255,.25);
@@ -207,7 +264,7 @@ nav{
     text-align:left;
     margin-bottom:22px;
     line-height:1.7;
-    font-size:25px;
+    font-size:16px;
     opacity:.9;
 }
 .emoji-text:last-child{margin-bottom:0}
@@ -267,7 +324,7 @@ nav{
     border:1px solid rgba(255,255,255,.14);
     color:#fff;
     text-decoration:none;
-    font-size:14px;
+    font-size:20px;
     font-weight:700;
     transition:.3s ease;
 }
@@ -289,29 +346,66 @@ nav{
 
 footer{
     background:#050505;
-    padding:60px 10%;
+    padding:35px 7%;
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    gap:40px;
+    gap:25px;
     flex-wrap:wrap;
     border-top:1px solid rgba(33,150,255,.12);
 }
-.footer-logo{display:flex;flex-direction:column;min-width:200px}
-.footer-logo img{width:130px;margin-bottom:10px}
-.footer-logo p{opacity:.7;font-size:14px}
-.footer-links{min-width:150px}
-.footer-links h4{color:#2196ff;margin-bottom:12px;font-size:16px}
-.footer-links a{
-    display:block;color:#fff;opacity:.7;text-decoration:none;
-    margin:7px 0;transition:.3s ease;
-}
-.footer-links a:hover{color:#2196ff;opacity:1;transform:translateX(4px)}
-.bottom{
-    text-align:center;padding:18px;background:#030303;
-    opacity:.75;font-size:13px;border-top:1px solid rgba(255,255,255,.05);
+
+.footer-logo{
+    display:flex;
+    flex-direction:column;
+    min-width:170px;
 }
 
+.footer-logo img{
+    width:150px;
+    margin-bottom:8px;
+}
+
+.footer-logo p{
+    opacity:.7;
+    font-size:15px;
+    margin:3px 0;
+}
+
+.footer-links{
+    min-width:130px;
+}
+
+.footer-links h4{
+    color:#2196ff;
+    margin-bottom:9px;
+    font-size:14px;
+}
+
+.footer-links a{
+    display:block;
+    color:#fff;
+    opacity:.7;
+    text-decoration:none;
+    margin:5px 0;
+    font-size:15px;
+    transition:.3s ease;
+}
+
+.footer-links a:hover{
+    color:#2196ff;
+    opacity:1;
+    transform:translateX(4px);
+}
+
+.bottom{
+    text-align:center;
+    padding:12px;
+    background:#030303;
+    opacity:.75;
+    font-size:15px;
+    border-top:1px solid rgba(255,255,255,.05);
+}
 /* ============================= */
 /* RESPONSIVE */
 /* ============================= */
@@ -332,16 +426,24 @@ footer{
     .section h2{font-size:23px}
     .emoji-text{font-size:15px;gap:10px}
     .emoji-text img{height:38px;width:38px}
-    footer{padding:45px 25px;flex-direction:column}
+footer{
+    padding:30px 20px;
+    flex-direction:column;
+    gap:20px;
+}
 }
 @media(max-width:600px){
     .main-nav{
         justify-content:flex-start;
-        overflow-x:auto;
+        overflow:visible;
         flex-wrap:nowrap;
         scrollbar-width:thin;
     }
-    .nav-trigger,.nav-home{font-size:12px;padding:8px 9px}
+.nav-trigger,.nav-home{
+    font-size:13px;
+    padding:10px 13px;
+    min-height:42px;
+}
     .nav-popup-menu{
         position:fixed;
         top:64px;
@@ -402,7 +504,7 @@ footer{
 .history-photo{
     margin:0;
     overflow:hidden;
-    background:rgba(5,15,30,.10);
+    background:rgba(255,255,255,.05);
     border:1px solid rgba(33,150,255,.25);
     border-radius:14px;
     box-shadow:0 0 20px rgba(33,150,255,.08);
@@ -418,16 +520,14 @@ footer{
 .history-photo img{
     display:block;
     width:100%;
-    height:320px;
-    object-fit:contain;
-    object-position:center;
+    height:260px;
+    object-fit:cover;
     background:#111;
 }
 
 .history-photo figcaption{
     padding:18px;
     text-align:left;
-    background:rgba(5,15,30,.10);
 }
 
 .history-photo h3{
@@ -437,7 +537,7 @@ footer{
 }
 
 .history-photo p{
-    font-size:22px;
+    font-size:14px;
     line-height:1.6;
     opacity:.85;
 }
@@ -447,9 +547,7 @@ footer{
         grid-template-columns:1fr;
     }
     .history-photo img{
-        height:260px;
-        object-fit:contain;
-        object-position:center;
+        height:240px;
     }
 }
 
@@ -470,19 +568,277 @@ body::before{
     content:"";
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.12);
+    background:rgba(0,0,0,.42);
     z-index:-1;
     pointer-events:none;
 }
 
-</style>
-<style id="magenta-theme-vars">
-:root{
-    --theme-primary:#2196ff;
-    --theme-primary-soft:rgba(33,150,255,.18);
-    --theme-primary-glow:rgba(33,150,255,.35);
-    --theme-primary-border:rgba(33,150,255,.35);
+
+.history-subheading{
+    color:#2196ff;
+    font-size:22px;
+    margin:35px 0 18px;
+    padding-bottom:10px;
+    border-bottom:1px solid rgba(33,150,255,.25);
+    text-align:left;
+    text-shadow:0 0 10px rgba(33,150,255,.35);
 }
+.history-subheading:first-of-type{margin-top:5px}
+
+
+
+.high-court-table-section{
+    margin-top:45px;
+    padding-top:35px;
+    border-top:1px solid rgba(33,150,255,.25);
+}
+.high-court-table-wrap{
+    width:100%;
+    overflow:visible;
+    margin-top:20px;
+    border-radius:12px;
+    border:1px solid rgba(33,150,255,.25);
+}
+.high-court-table{
+    width:100%;
+    min-width:1050px;
+    border-collapse:collapse;
+    background:rgba(0,0,0,.45);
+    text-align:left;
+}
+.high-court-table th,.high-court-table td{
+    padding:15px 14px;
+    border:1px solid rgba(255,255,255,.12);
+    vertical-align:top;
+    line-height:1.55;
+    font-size:14px;
+}
+.high-court-table th{
+    color:#2196ff;
+    background:rgba(33,150,255,.10);
+    font-weight:700;
+    text-align:center;
+}
+.high-court-table td:first-child{
+    text-align:center;
+    font-weight:700;
+    width:65px;
+}
+.high-court-table td:nth-child(2){font-weight:700;min-width:190px}
+.high-court-table td:nth-child(3){text-align:center;white-space:nowrap}
+.high-court-table strong{color:#2196ff}
+.high-court-table tbody tr:hover{background:rgba(33,150,255,.07)}
+@media(max-width:800px){
+    .high-court-table-section{margin-top:35px;padding-top:25px}
+    .high-court-table th,.high-court-table td{padding:12px 10px;font-size:13px}
+}
+
+/* FULL HIGH COURTS TABLE — KEEP ALL ROWS VISIBLE */
+.high-courts-table-wrap{width:100%;overflow:visible !important;}
+.high-courts-table{width:100% !important;min-width:0 !important;table-layout:fixed;border-collapse:collapse;}
+.high-courts-table th,.high-courts-table td{white-space:normal !important;word-break:normal;overflow-wrap:anywhere;vertical-align:top;}
+.high-courts-table th:nth-child(1),.high-courts-table td:nth-child(1){width:6%}
+.high-courts-table th:nth-child(2),.high-courts-table td:nth-child(2){width:20%}
+.high-courts-table th:nth-child(3),.high-courts-table td:nth-child(3){width:13%}
+.high-courts-table th:nth-child(4),.high-courts-table td:nth-child(4){width:22%}
+.high-courts-table th:nth-child(5),.high-courts-table td:nth-child(5){width:39%}
+@media(max-width:800px){.high-courts-table{font-size:11px}.high-courts-table th,.high-courts-table td{padding:8px 5px !important;}}
+
+/* HIGH COURTS TABLE — CENTERED + FULL BORDER */
+.high-courts-table-wrap{
+    width:100%;
+    max-width:1200px;
+    margin:35px auto 0 !important;
+    overflow:visible !important;
+}
+.high-courts-table{
+    width:100% !important;
+    margin:0 auto !important;
+    border:3px solid rgba(33,150,255,.75) !important;
+    border-collapse:collapse !important;
+    border-spacing:0;
+    table-layout:fixed;
+}
+.high-courts-table th,
+.high-courts-table td{
+    border:2px solid rgba(33,150,255,.55) !important;
+    white-space:normal !important;
+    word-break:normal;
+    overflow-wrap:anywhere;
+    vertical-align:top;
+}
+.high-courts-table th{
+    border:3px solid rgba(33,150,255,.75) !important;
+}
+
+
+/* FINAL: CENTER THE HIGH COURTS TABLE */
+.high-courts-table-wrap {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    overflow: visible !important;
+}
+.high-courts-table {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+/* ============================= */
+/* COMMITTEES INFORMATION + PHOTO GALLERY */
+/* ============================= */
+
+.committees-content {
+    width: 100%;
+    padding: 35px 0 55px;
+}
+
+.committees-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.committees-content h2 {
+    color: #2196ff;
+    font-size: 30px;
+    margin: 32px 0 14px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(33,150,255,.35);
+}
+
+.committees-content h2:first-child {
+    margin-top: 0;
+}
+
+.committees-content p {
+    margin: 0 0 22px;
+    text-align: left;
+    font-size: 18px;
+    line-height: 1.8;
+    color: rgba(255,255,255,.92);
+}
+
+.committee-photo-gallery {
+    margin-top: 45px;
+    padding-top: 35px;
+    border-top: 1px solid rgba(33,150,255,.25);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.committee-photo {
+    margin: 0;
+    overflow: hidden;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(33,150,255,.25);
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(33,150,255,.08);
+    transition: .3s ease;
+}
+
+.committee-photo:hover {
+    transform: translateY(-5px);
+    border-color: #2196ff;
+    box-shadow: 0 0 25px rgba(33,150,255,.20);
+}
+
+/* Full photo visible — no cropping. */
+.committee-photo-frame {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+    padding: 8px;
+}
+
+.committee-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    background: #111;
+}
+
+.committee-photo figcaption {
+    padding: 18px;
+    text-align: left;
+}
+
+.committee-photo h3 {
+    color: #2196ff;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.committee-photo p {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: .85;
+    margin: 0;
+}
+
+
+.committee-pdf-download {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.pdf-download-button {
+    display: inline-block;
+    padding: 13px 28px;
+    border-radius: 8px;
+    background: #2196ff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(33,150,255,.25);
+    transition: .25s ease;
+}
+
+.pdf-download-button:hover {
+    background: #42a5ff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 22px rgba(33,150,255,.4);
+}
+
+@media (max-width: 900px) {
+    .committee-photo-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .committee-photo-frame {
+        height: auto;
+        min-height: 280px;
+    }
+}
+
+@media (max-width: 800px) {
+    .committees-container {
+        padding: 0 20px;
+    }
+
+    .committees-content h2 {
+        font-size: 24px;
+    }
+
+    .committees-content p {
+        font-size: 16px;
+        line-height: 1.7;
+    }
+}
+
 </style>
 </head>
 
@@ -524,48 +880,435 @@ body::before{
 </nav>
 
 <section class="about">
+    <h1>HISTORY</h1>
 
-        <div class="section tab-section active" id="what">
-            <h2>History</h2>
-            <p class="emoji-text">🔹 <span>The Supreme Court of India is the apex judicial body under the Constitution of India. Article 124 of the Constitution states that “There shall be a Supreme Court of India.” The Supreme Court came into existence on 26 January 1950 with the coming into force of the Constitution. The Supreme Court initially functioned from the old Parliament House till it moved to the present building located on Tilak Marg, New Delhi in 1958.</span></p>
-            <p class="emoji-text">🔹 <span>On 28 January 1950, two days after India became a Sovereign Democratic Republic, the Supreme Court was inaugurated. The inauguration took place in the Chamber of Princes in the old Parliament building where the Federal Court of India sat for 12 years from 1937 to 1950.</span></p>
-            <p class="emoji-text">🔹 <span>The inaugural proceedings began at 9:45 am. It was attended by the first Chief Justice of India, Harilal J. Kania and Judges of the Federal Court – Justices Saiyid Fazl Ali, M. Patanjali Sastri, Mehr Chand Mahajan, Bijan Kumar Mukherjea and S.R. Das, the Chief Justices of the High Courts of Allahabad, Bombay, Madras, Orissa, Assam, Nagpur, Punjab, Saurashtra, Patiala and the East Punjab States Union, Mysore, Hyderabad, Madhya Bharat and Travancore-Cochin.</span></p>
-            <p class="emoji-text">🔹 <span>The proceedings were also graced by the Prime Minister of India, ambassadors and diplomatic representatives of foreign States, the Attorney General of India M.C. Setalvad, the Advocate Generals of Bombay, Madras, Uttar Pradesh, Bihar, East Punjab, Orissa, Mysore, Hyderabad, and Madhya Bharat and a large number of advocates. To ensure that the Rules of the Supreme Court were published and the names of all the Advocates and agents of the Federal Court were brought on the rolls of the Supreme Court, the inaugural proceedings were put as part of the record of the Supreme Court.</span></p>
-            <p class="emoji-text">🔹 <span>After its inauguration on 28 January 1950, the Supreme Court commenced its sittings in a part of the old Parliament House. The Court moved into a new building in 1958. The first President of India Dr. Rajendra Prasad inaugurated the present building of the Supreme Court of India on 4 August 1958. The building is shaped to project the image of scales of justice. It has a 27.6 metre high dome and a spacious colonnaded verandah. The Central Wing of the building is the centre beam of the scales. The Chief Justice’s Court is the largest of the courts located in the centre of the Central Wing. There is a life size figure of Mahatma Gandhi, the apostle of truth and non-violence in the courtyard opposite the Chief Justice’s Court. The statue was unveiled by the 26th Chief Justice of India, Justice A.M. Ahmadi on 1 August 1996. There is also a 7-foot tall statue of Dr. B.R. Ambedkar which was unveiled by Hon’ble President of India, Smt. Droupadi Murmu in the presence of the 50th Chief Justice of India, Dr. Justice D.Y. Chandrachud on 26 November 2023. The statue honours the architect of the Constitution and captures him in a lawyer’s gown, holding a copy of the Constitution in his hand. To visit the building, one may book a guided tour from the Supreme Court website or obtain the visitor’s pass from the SuSwagatam portal or the front desk of the Supreme Court.</span></p>
-            <p class="emoji-text">🔹 <span>Three extensions were made to the original building- for the first time in 1979, then in 1994, and again in 2015. In 1979, two New Wings – the East Wing and the West Wing were added to the complex. There are 19 courtrooms in the various wings of the building. In 1994, the second extension of the building was made which connected the East and the West Wings.The third extension – the New Extension Block near the Supreme Court Museum was inaugurated by the then Chief Justice of India, Justice H.L. Dattu on 4 November 2015 and some of the Sections from the existing building were shifted to the new building. On 17 July 2019, Hon’ble President of India, Shri Ram Nath Kovind inaugurated the Additional Building Complex of the Supreme Court of India. The additional complex, with a total built up area of 1,80,700 sq. mts. has five functional blocks and one service block. The curvature of the building rises from the ground level in the colour scheme and sandstone external cladding, drawing inspiration from the original architecture of the Supreme Court. The Additional Building Complex also houses the New Judges’ Library.</span></p>
-            <p class="emoji-text">🔹 <span>The original Constitution of 1950 envisaged a Supreme Court with a Chief Justice and 7 puisne Judges – leaving it to Parliament to increase this number. In the early years, all the Judges of the Supreme Court sat together (en banc) to hear the cases presented before them. Considering the increase in workload, Parliament increased the number of Judges from 8 in 1950 to 11 in 1956, 14 in 1960, 18 in 1978, 26 in 1986, 31 in 2009 and 34 in 2019 (current strength). Today, the Judges sit in Benches of two and three and come together in larger Benches of 5 and more (Constitution Bench) to decide any conflicting decisions between benches of the Supreme Court or any substantial questions concerning the interpretation of the Constitution.</span></p>
-            <p class="emoji-text">🔹 <span>The proceedings of the Supreme Court are conducted in English. The practice and procedure of working of the Registry on the judicial side is regulated by the Supreme Court Rules, 2013 and Handbook on Practice and Procedure and Office Procedure. The Supreme Court Officers and Servants (Conditions of Service and Conduct) Rules, 1961 contains the rules with respect to the conditions of service and conduct of the staff attached to the Supreme Court of India.</span></p>                    
+<!-- ============================= -->
+<!-- ============================= -->
+<!-- COMMITTEES INFORMATION -->
+<!-- ============================= -->
+<section class="committees-content">
+<h2>History of the Supreme Court of India</h2>
 
+<p>The history of the Supreme Court of India is closely connected with the constitutional, political, and judicial development of India. The Supreme Court is the highest judicial authority in the country and stands at the top of India's unified judicial system. However, the institution did not emerge suddenly in 1950. Its historical roots can be traced to the judicial institutions established during British rule. The development of the Supreme Court passed through several important stages, including the establishment of the Supreme Court at Calcutta, the creation of the High Courts, the establishment of the Federal Court of India, and finally the establishment of the Supreme Court under the Constitution of India.</p>
 
-            <!-- ============================= -->
-            <!-- HISTORY PHOTO GALLERY -->
-            <!-- ============================= -->
-            <div class="history-gallery">
-                <h2>History in Pictures</h2>
-                <div class="history-photo-grid">
-                    <figure class="history-photo">
-                        <img src="images/1.jpg" alt="1">
-                        <figcaption>
-                            <p>A rare photograph of the first Chief Justice of India, Hon’ble Justice Harilal J.Kania with other Judges of the Supreme Court, 1950.</p>
-                        </figcaption>
-                    </figure>
+<p>The Supreme Court came into existence on 28 January 1950, shortly after India became a republic. It replaced the Federal Court of India and also brought to an end the remaining appellate authority of the Judicial Committee of the Privy Council in London. Since its establishment, the Supreme Court has developed into a major constitutional institution. Its history reflects the changing nature of Indian democracy, constitutional government, fundamental rights, federalism, judicial review, and the rule of law.</p>
 
-                    <figure class="history-photo">
-                        <img src="images/2.jpg" alt="2">
-                        <figcaption>
-                            <p>The first Chief Justice of India, Hon’ble Justice Harilal J. Kania with other Judges of the Supreme Court on the dais and the Chief Justices of all High Courts on the inaugural sitting of the Supreme Court on 28 January 1950.</p>
-                        </figcaption>
-                    </figure>
+<h2>Early Judicial System in India</h2>
 
-                    <figure class="history-photo">
-                        <img src="images/3.jpg" alt="3">
-                        <figcaption>
-                            <p>(From the left) Dr. Rajendra Prasad, President of India, Shri S.R. Das, Chief Justice of India, Dr. S. Radhakrishnan, Vice-President of India, Shri Ananthasayanam Ayyangar, Speaker, Lok Sabha and Shri Jawaharlal Nehru, Prime Minister of India on the occasion of inauguration of the Supreme Court building on 4 August 1958…</p>
-                        </figcaption>
-                    </figure>
+<p>Before the establishment of British rule, India did not have a single uniform judicial system. Different parts of the country followed different legal traditions. Hindu law, Islamic law, customary practices, local traditions, and the authority of rulers and local institutions all played important roles in the administration of justice.</p>
+
+<p>With the expansion of the British East India Company's political authority, new judicial institutions gradually developed. The East India Company initially established courts mainly for administrative purposes in the territories under its control. These courts were different from the courts established directly under the authority of the British Crown.</p>
+
+<p>After the East India Company obtained the Diwani rights of Bengal, Bihar, and Orissa in 1765, it became increasingly involved in the administration of civil justice and revenue. Various judicial reforms were introduced during the eighteenth century. Warren Hastings introduced important reforms in the organization of civil and criminal courts. These reforms laid some of the foundations for the later development of a formal judicial hierarchy in India.</p>
+
+<h2>Establishment of the Supreme Court at Calcutta</h2>
+
+<p>One of the earliest important developments in the history of India's higher judiciary was the establishment of the Supreme Court at Calcutta. The Regulating Act of 1773 authorized the establishment of the court, and it began functioning in 1774. It was the first Crown court established in India with a structure based largely on the English judicial system.</p>
+
+<p>The Supreme Court at Calcutta consisted of a Chief Justice and other judges appointed by the British Crown. Sir Elijah Impey became its first Chief Justice. The court exercised jurisdiction over the presidency town of Calcutta and over certain British subjects and persons connected with the Company's administration.</p>
+
+<p>The establishment of the Supreme Court was an important development because it introduced a superior Crown court into the Indian judicial structure. However, the court soon became involved in conflicts with the Governor-General and the East India Company's administration. There was uncertainty concerning the exact limits of its jurisdiction, especially outside Calcutta.</p>
+
+<p>The conflicts demonstrated the difficulties of operating two different judicial systems at the same time. The Supreme Court represented the authority of the Crown, while the Company's courts operated under the administrative authority of the East India Company. These difficulties eventually led to further reforms and clarification of judicial powers.</p>
+
+<h2>Supreme Courts of Madras and Bombay</h2>
+
+<p>Following the establishment of the Supreme Court at Calcutta, similar courts were established in the other major presidency towns. The Supreme Court at Madras was established in 1801, while the Supreme Court at Bombay was established in 1824.</p>
+
+<p>These courts administered English law in matters falling within their jurisdiction. They were important superior courts in the presidency towns, but they did not constitute a single judicial system for the whole of India. Outside the presidency towns, the East India Company's own courts continued to operate.</p>
+
+<p>The existence of different types of courts created a complicated judicial structure. The Crown courts and Company's courts had different powers and different legal origins. As British territorial control expanded, the need for a more uniform and organized judicial system became increasingly important.</p>
+
+<h2>Development of Codified Laws</h2>
+
+<p>During the nineteenth century, the British administration increasingly attempted to create a uniform body of laws for India. The Charter Act of 1833 strengthened the central legislative authority and contributed to the process of legal centralization.</p>
+
+<p>The establishment of Law Commissions played an important role in the development of Indian legislation. The First Law Commission, associated with Lord Macaulay, contributed to the preparation of important legal codes. The Indian Penal Code, the Code of Civil Procedure, the Code of Criminal Procedure, and later the Indian Evidence Act became important parts of the Indian legal system.</p>
+
+<p>The development of codified laws was significant for the future Indian judiciary. These laws created common legal standards that could be applied by courts in different parts of the country. The process of codification therefore contributed to the gradual development of a more uniform judicial system.</p>
+
+<h2>Establishment of the High Courts</h2>
+
+<p>A major change occurred with the Indian High Courts Act of 1861. This legislation provided for the establishment of High Courts in the presidency towns. The High Courts of Calcutta, Bombay, and Madras were established in 1862. The High Court of Allahabad was established later in 1866.</p>
+
+<p>The High Courts replaced the earlier Supreme Courts in the presidency towns as well as the Sadar Diwani Adalats and Sadar Nizamat Adalats. This was an important step toward creating a unified judicial hierarchy.</p>
+
+<p>The High Courts exercised original and appellate jurisdiction and supervised subordinate courts. They became the principal superior courts within British India. Although appeals could still reach the Privy Council in London, the High Courts represented an important stage in the development of India's modern judicial system.</p>
+
+<h2>The Judicial Committee of the Privy Council</h2>
+
+<p>Before India had its own national supreme court, the Judicial Committee of the Privy Council in London served as the highest appellate authority for British India. Appeals from the High Courts could be taken to the Privy Council in accordance with the applicable legal rules.</p>
+
+<p>The Privy Council played a significant role in the development of Indian law. Its decisions dealt with questions relating to property, contracts, personal laws, civil procedure, constitutional issues, and many other areas. Its judgments influenced the interpretation and development of Indian law for many decades.</p>
+
+<p>However, the final court of appeal being located in Britain was increasingly regarded as inconsistent with the aspirations of the Indian independence movement. The demand for greater self-government was accompanied by a demand for an independent judicial institution located within India.</p>
+
+<h2>Demand for an Indian Federal Court</h2>
+
+<p>The constitutional reforms introduced during the early twentieth century gradually increased Indian participation in government. The Government of India Act of 1919 introduced important reforms, but it did not create a national federal court.</p>
+
+<p>The Government of India Act of 1935 was a major constitutional development. It introduced a federal constitutional structure and provided for the establishment of a Federal Court of India. The creation of the Federal Court was an important step toward establishing a national judicial institution within India.</p>
+
+<h2>Establishment of the Federal Court of India</h2>
+
+<p>The Federal Court of India began functioning on 1 October 1937 in New Delhi. Sir Maurice Gwyer became its first Chief Justice. The Federal Court was the first national court in India to exercise constitutional jurisdiction over questions concerning the division of powers between the central and provincial governments.</p>
+
+<p>The Federal Court had original jurisdiction in certain disputes involving federal authorities. It also had appellate jurisdiction in specified constitutional matters. However, its powers were more limited than those later given to the Supreme Court.</p>
+
+<p>Appeals in many other matters could still ultimately be taken to the Judicial Committee of the Privy Council in London. Therefore, the Federal Court was an important national judicial institution, but it did not yet represent complete judicial independence from British authority.</p>
+
+<p>Despite its limited jurisdiction, the Federal Court made an important contribution to the development of Indian constitutional law. Its decisions dealt with legislative powers, federal relations, and constitutional interpretation. The experience of the Federal Court later influenced the design of the Supreme Court under the Constitution.</p>
+
+<h2>Independence of India and Judicial Development</h2>
+
+<p>India became independent on 15 August 1947 under the Indian Independence Act of 1947. The constitutional structure of the country underwent a major transformation. The Federal Court continued to function after independence, but the country was moving toward the creation of a new constitutional system.</p>
+
+<p>The Constituent Assembly was responsible for drafting the Constitution of independent India. One of its important responsibilities was to determine the structure, powers, and independence of the judiciary.</p>
+
+<p>The objective was to establish a national Supreme Court that would be independent of the executive and legislature and would have the authority to interpret the Constitution. The proposed court would also become the final court of appeal in the country.</p>
+
+<h2>Role of the Constituent Assembly</h2>
+
+<p>The Constituent Assembly devoted considerable attention to the organization of the judiciary. The framers of the Constitution recognized that a written Constitution required an independent institution capable of interpreting and enforcing constitutional provisions.</p>
+
+<p>The Supreme Court was therefore designed to occupy a central position in the constitutional structure. The Constitution gave the Court powers relating to constitutional interpretation, fundamental rights, appeals, disputes between governments, and other important matters.</p>
+
+<p>The framers also emphasized judicial independence. Judges were given security of tenure and could not be removed through ordinary executive action. A special constitutional procedure was established for the removal of judges. These provisions were intended to ensure that judges could decide cases without political pressure.</p>
+
+<h2>Adoption of the Constitution</h2>
+
+<p>The Constitution of India was adopted by the Constituent Assembly on 26 November 1949. It came into force on 26 January 1950, when India became a republic.</p>
+
+<p>The Constitution established the Supreme Court as the highest court of India. The Court replaced the Federal Court and became the final authority for the interpretation of the Constitution and Indian law.</p>
+
+<p>The establishment of the Supreme Court represented a major historical transformation. Judicial authority was no longer derived from the British Crown. Instead, the Supreme Court derived its authority from the Constitution of the Republic of India.</p>
+
+<h2>Establishment of the Supreme Court in 1950</h2>
+
+<p>The Supreme Court of India formally came into existence on 28 January 1950. It began functioning in the Chamber of Princes in the Parliament House building in New Delhi.</p>
+
+<p>The first Chief Justice of India was Sir Harilal Jekisundas Kania. He had previously served as a judge of the Federal Court. The first judges of the Supreme Court were drawn from the existing higher judicial institutions.</p>
+
+<p>The inauguration of the Supreme Court marked the final transition from the colonial judicial system to the constitutional judicial system of independent India. The Court became the highest judicial authority in the new republic.</p>
+
+<h2>Early Years of the Supreme Court</h2>
+
+<p>During its early years, the Supreme Court had a relatively small number of judges and a smaller workload compared with the present day. The Court dealt with constitutional questions, civil and criminal appeals, disputes involving governments, and questions concerning fundamental rights.</p>
+
+<p>One of its most important early responsibilities was interpreting the newly adopted Constitution. The Court had to determine the meaning and scope of fundamental rights and the relationship between Parliament, the executive, and the judiciary.</p>
+
+<p>The early decisions of the Supreme Court established the foundations of Indian constitutional jurisprudence. Questions concerning property, freedom of speech, personal liberty, equality, preventive detention, and legislative competence were among the major issues considered by the Court.</p>
+
+<h2>Fundamental Rights and the Supreme Court</h2>
+
+<p>The Constitution guarantees fundamental rights in Part III. These rights include equality before law, freedom of speech and expression, protection of life and personal liberty, freedom of religion, and other constitutional protections.</p>
+
+<p>The Supreme Court was given an important role in protecting these rights. Article 32 provides a constitutional right to approach the Supreme Court for the enforcement of fundamental rights.</p>
+
+<p>The Court was empowered to issue constitutional writs, including habeas corpus, mandamus, prohibition, certiorari, and quo warranto. This gave individuals a direct constitutional remedy against violations of fundamental rights.</p>
+
+<p>The protection of fundamental rights became one of the central features of the Court's history and contributed significantly to its position as the guardian of the Constitution.</p>
+
+<h2>Early Conflict over Constitutional Amendments</h2>
+
+<p>One of the earliest major constitutional conflicts involved Parliament's power to amend the Constitution. The issue became particularly important because the government introduced land reforms and other social and economic measures that affected property rights.</p>
+
+<p>Several laws were challenged before the Supreme Court on the ground that they violated fundamental rights. Parliament responded by introducing constitutional amendments designed to protect certain laws from judicial challenge.</p>
+
+<p>The resulting conflict between Parliament and the judiciary became one of the most important themes in the history of the Supreme Court.</p>
+
+<h2>Shankari Prasad Case</h2>
+
+<p>In Shankari Prasad v. Union of India in 1951, the Supreme Court considered whether Parliament could amend fundamental rights through the constitutional amendment procedure.</p>
+
+<p>The Court upheld Parliament's power to amend fundamental rights. It distinguished constitutional amendments from ordinary laws and held that the constitutional amendment power was not restricted in the same way as ordinary legislative power.</p>
+
+<p>The decision represented an early judicial acceptance of Parliament's broad constitutional amending authority.</p>
+
+<h2>Sajjan Singh Case</h2>
+
+<p>The issue was reconsidered in Sajjan Singh v. State of Rajasthan in 1965. The Supreme Court again upheld Parliament's power to amend fundamental rights.</p>
+
+<p>However, some judges expressed concerns regarding the possibility of unlimited constitutional amendment power. These concerns became increasingly important in later cases.</p>
+
+<h2>Golaknath Case</h2>
+
+<p>A major change occurred in I.C. Golaknath v. State of Punjab in 1967. The Supreme Court reconsidered its earlier position concerning constitutional amendments.</p>
+
+<p>By a narrow majority, the Court held that Parliament could not amend fundamental rights in a manner that abridged or took away those rights. The judgment significantly strengthened the judicial protection of fundamental rights.</p>
+
+<p>The decision created a serious constitutional conflict between Parliament and the judiciary. Parliament subsequently introduced further constitutional amendments in an attempt to clarify and strengthen its amending power.</p>
+
+<h2>Kesavananda Bharati Case</h2>
+
+<p>The most important constitutional decision in the history of the Supreme Court is generally regarded as Kesavananda Bharati v. State of Kerala, decided in 1973.</p>
+
+<p>A thirteen-judge bench considered the extent of Parliament's power to amend the Constitution. The case resulted in the development of the basic structure doctrine.</p>
+
+<p>The Supreme Court held that Parliament had a wide power to amend the Constitution, but that this power was not unlimited. Parliament could not destroy or alter the basic structure of the Constitution.</p>
+
+<p>The basic structure doctrine became a fundamental principle of Indian constitutional law. It established a constitutional limitation on Parliament's amending power and strengthened the role of the Supreme Court as the guardian of constitutional supremacy.</p>
+
+<h2>The Emergency Period</h2>
+
+<p>The Emergency declared in 1975 was one of the most difficult periods in the history of the Supreme Court. During the Emergency, fundamental rights were restricted, political opposition was suppressed, and many people were detained under preventive detention laws.</p>
+
+<p>The Supreme Court was required to decide important questions concerning personal liberty and the availability of judicial remedies during the Emergency.</p>
+
+<p>In Additional District Magistrate, Jabalpur v. Shivkant Shukla, the majority of the Court adopted a restrictive position regarding the ability of detained persons to seek judicial remedies for personal liberty during the Emergency.</p>
+
+<p>Justice H. R. Khanna gave a famous dissenting judgment in which he defended the importance of personal liberty. The decision later became one of the most criticized judgments in the history of the Supreme Court.</p>
+
+<h2>Post-Emergency Period</h2>
+
+<p>After the Emergency ended in 1977, the Supreme Court entered a new phase. The Court placed greater emphasis on individual liberty, access to justice, and protection of fundamental rights.</p>
+
+<p>The interpretation of Article 21 became broader. The Court increasingly understood the right to life and personal liberty as including the right to live with dignity and other related protections.</p>
+
+<p>The post-Emergency period therefore became an important stage in the development of judicial activism and public interest litigation.</p>
+
+<h2>Public Interest Litigation</h2>
+
+<p>Public interest litigation became one of the most important developments in the history of the Supreme Court. Traditionally, a person generally had to approach the court personally when his or her legal rights were violated. Public interest litigation relaxed some of these traditional requirements.</p>
+
+<p>Public-spirited individuals, organizations, and social activists were allowed in appropriate circumstances to approach the Court concerning issues affecting disadvantaged sections of society.</p>
+
+<p>The Supreme Court began hearing cases concerning bonded labour, prison conditions, child labour, environmental protection, custodial violence, women's rights, and other social issues.</p>
+
+<p>Judges such as Justice V. R. Krishna Iyer and Justice P. N. Bhagwati played important roles in the development of this approach. Public interest litigation significantly expanded the social role of the Supreme Court.</p>
+
+<h2>Expansion of Article 21</h2>
+
+<p>The interpretation of Article 21 changed significantly after the Emergency. In Maneka Gandhi v. Union of India in 1978, the Supreme Court adopted a broader understanding of personal liberty and constitutional procedure.</p>
+
+<p>The Court emphasized that a procedure affecting life or personal liberty could not be arbitrary and had to satisfy constitutional standards of fairness and reasonableness.</p>
+
+<p>Over the following decades, the Court interpreted Article 21 as protecting a wide range of interests connected with human dignity and personal liberty. This development became an important feature of the modern history of the Supreme Court.</p>
+
+<h2>Minerva Mills and Constitutional Limitations</h2>
+
+<p>In Minerva Mills v. Union of India in 1980, the Supreme Court reaffirmed the limitations on Parliament's power to amend the Constitution.</p>
+
+<p>The Court emphasized the importance of the balance between fundamental rights and Directive Principles of State Policy. It also reaffirmed the principle that Parliament could not use its amending power to destroy the basic structure of the Constitution.</p>
+
+<p>The decision strengthened the basic structure doctrine and reinforced the role of judicial review within the constitutional system.</p>
+
+<h2>Supreme Court and Federalism</h2>
+
+<p>The Supreme Court has played an important role in the development of Indian federalism. The Constitution distributes legislative and executive powers between the Union and the States.</p>
+
+<p>The Court has jurisdiction to decide certain disputes between the Union and States and between different States. It has also interpreted the constitutional provisions concerning legislative powers and federal relations.</p>
+
+<p>One of the most important decisions in this area was S. R. Bommai v. Union of India in 1994. The case concerned the use of Article 356 and the imposition of President's Rule in States.</p>
+
+<p>The Supreme Court placed important constitutional limitations on the use of Article 356 and emphasized the importance of federalism within the constitutional structure.</p>
+
+<h2>Development of Public Law</h2>
+
+<p>During the later decades of the twentieth century, the Supreme Court increasingly dealt with questions concerning public administration and governmental decision-making.</p>
+
+<p>Judicial review expanded beyond traditional disputes between private individuals. The Court examined administrative actions, government policies, public appointments, environmental decisions, and the exercise of constitutional powers.</p>
+
+<p>This expansion contributed to the development of modern Indian public law and increased the importance of the Supreme Court in the functioning of government.</p>
+
+<h2>Judicial Appointments and the Judges Cases</h2>
+
+<p>The appointment of judges became an important constitutional issue in the later history of the Supreme Court. The Constitution provides a framework for the appointment of judges to the Supreme Court and High Courts.</p>
+
+<p>In S. P. Gupta v. Union of India in 1981, the Supreme Court initially adopted an interpretation that gave significant importance to the executive in judicial appointments.</p>
+
+<p>The position changed in the Second Judges Case in 1993. The Supreme Court interpreted the Constitution in a way that gave primacy to the judiciary in the appointment of judges to the higher judiciary.</p>
+
+<p>The Third Judges Case in 1998 further clarified the functioning of the collegium system.</p>
+
+<p>The collegium system became a distinctive feature of the Indian judicial system. Under this system, senior judges of the Supreme Court play the leading role in recommending appointments to the higher judiciary.</p>
+
+<h2>National Judicial Appointments Commission</h2>
+
+<p>Parliament later attempted to replace the collegium system with the National Judicial Appointments Commission. Constitutional amendments and legislation were enacted to establish a new system involving the judiciary, executive, and other members.</p>
+
+<p>In 2015, the Supreme Court examined the constitutional validity of the National Judicial Appointments Commission. The Court declared the new system unconstitutional and restored the collegium system.</p>
+
+<p>The decision was based on the principle that judicial independence forms part of the basic structure of the Constitution. The controversy demonstrated the continuing debate concerning judicial independence, accountability, transparency, and institutional balance.</p>
+
+<h2>Supreme Court and Social Justice</h2>
+
+<p>Social justice has been an important part of the Supreme Court's history. The Court has dealt with cases concerning equality, reservations, education, labour rights, poverty, disadvantaged communities, and access to justice.</p>
+
+<p>Article 14, which guarantees equality before law and equal protection of laws, has been interpreted extensively by the Court. The Court has also considered the relationship between formal equality and substantive equality.</p>
+
+<p>The development of social justice jurisprudence demonstrates how the Supreme Court's role expanded beyond traditional private disputes to broader constitutional questions affecting society.</p>
+
+<h2>Reservation and Equality</h2>
+
+<p>Reservation policies have produced significant constitutional litigation before the Supreme Court. The Constitution permits special provisions for socially and educationally backward classes and for certain historically disadvantaged communities.</p>
+
+<p>In Indra Sawhney v. Union of India in 1992, the Supreme Court examined reservations for Other Backward Classes. The judgment dealt with questions concerning backwardness, reservation limits, and the exclusion of socially advanced sections of backward classes.</p>
+
+<p>Later constitutional amendments and judicial decisions continued to develop the law relating to reservations and equality.</p>
+
+<h2>Environmental Jurisprudence</h2>
+
+<p>Environmental protection became an increasingly important subject in the history of the Supreme Court during the late twentieth and early twenty-first centuries.</p>
+
+<p>Through public interest litigation, individuals and organizations brought cases concerning pollution, forests, industrial activity, rivers, wildlife, and environmental degradation.</p>
+
+<p>The Supreme Court developed constitutional principles concerning environmental protection and linked environmental quality with the right to life. Principles such as sustainable development, the precautionary principle, and the polluter-pays principle became important in environmental cases.</p>
+
+<h2>Women's Rights</h2>
+
+<p>The Supreme Court has played an important role in the development of constitutional protection for women. Cases before the Court have involved equality, discrimination, workplace rights, marriage, inheritance, violence, and personal liberty.</p>
+
+<p>In Vishaka v. State of Rajasthan in 1997, the Supreme Court issued guidelines concerning sexual harassment at the workplace. The judgment was an important development in the protection of women's rights and remained significant until comprehensive legislation was enacted.</p>
+
+<p>The Court has continued to consider questions concerning gender equality and individual dignity as part of its constitutional jurisdiction.</p>
+
+<h2>Freedom of Speech and Expression</h2>
+
+<p>Freedom of speech and expression under Article 19 has been an important subject throughout the history of the Supreme Court. The Court has considered the limits that may constitutionally be imposed on freedom of expression.</p>
+
+<p>Cases involving newspapers, films, political expression, artistic expression, public demonstrations, and digital communication have contributed to the development of freedom of speech jurisprudence.</p>
+
+<p>The Court has repeatedly attempted to balance individual freedom with constitutionally permitted restrictions relating to public order, security, morality, and other interests.</p>
+
+<h2>Right to Privacy</h2>
+
+<p>The recognition of privacy as a fundamental right represents an important modern development in the history of the Supreme Court.</p>
+
+<p>In Justice K. S. Puttaswamy (Retd.) v. Union of India in 2017, a nine-judge Constitution Bench unanimously recognized the right to privacy as a fundamental right protected by the Constitution.</p>
+
+<p>The judgment connected privacy with dignity, liberty, autonomy, and individual choice. It became particularly important in the context of digital technology, personal information, electronic communication, surveillance, and data protection.</p>
+
+<h2>Supreme Court and Criminal Justice</h2>
+
+<p>Criminal law has always formed a significant part of the work of the Supreme Court. The Court hears appeals involving serious criminal offences and develops principles concerning evidence, arrest, bail, investigation, sentencing, and fair trial.</p>
+
+<p>The Court has also considered the rights of accused persons, prisoners, undertrial detainees, and victims. The constitutional guarantee of life and personal liberty has played an important role in the development of criminal justice jurisprudence.</p>
+
+<p>The Court has repeatedly emphasized the importance of fair procedure and protection against arbitrary deprivation of liberty.</p>
+
+<h2>Prison Reform</h2>
+
+<p>The Supreme Court's public interest jurisdiction brought prison conditions under greater judicial scrutiny. Cases concerning overcrowding, custodial violence, treatment of prisoners, and the rights of undertrial prisoners were considered by the Court.</p>
+
+<p>The Court established that imprisonment does not remove all constitutional rights. Prisoners remain entitled to dignity and humane treatment, subject to restrictions that are legally justified by their imprisonment.</p>
+
+<p>This development represented an important expansion of constitutional protection within the criminal justice system.</p>
+
+<h2>Supreme Court and Parliamentary Privileges</h2>
+
+<p>The relationship between Parliament and the judiciary has been an important part of the history of the Supreme Court. Parliamentary privileges are intended to protect the functioning and independence of legislative institutions.</p>
+
+<p>At different times, disputes have arisen concerning the extent to which parliamentary actions can be reviewed by courts. The Supreme Court has recognized the importance of parliamentary privileges while also maintaining that constitutional supremacy cannot be completely excluded from judicial review.</p>
+
+<p>These disputes have contributed to the development of the constitutional relationship between the legislature and the judiciary.</p>
+
+<h2>Judicial Review</h2>
+
+<p>Judicial review is one of the most important features of the Supreme Court's constitutional role. It enables the Court to examine whether laws and governmental actions comply with the Constitution.</p>
+
+<p>The power of judicial review developed through constitutional interpretation and became particularly important in cases involving fundamental rights and constitutional amendments.</p>
+
+<p>The basic structure doctrine further strengthened the importance of judicial review by establishing that Parliament's power to amend the Constitution is subject to fundamental constitutional limitations.</p>
+
+<h2>Supreme Court and Separation of Powers</h2>
+
+<p>The Constitution establishes different functions for the legislature, executive, and judiciary. Although the Indian system does not follow an absolutely rigid separation of powers, each institution has constitutionally defined responsibilities.</p>
+
+<p>The Supreme Court has played an important role in defining the boundaries between these institutions. It has reviewed legislative and executive actions while also recognizing that courts should respect the constitutional functions of elected institutions.</p>
+
+<p>The history of the Supreme Court therefore reflects a continuing effort to maintain a balance between judicial review and institutional separation.</p>
+
+<h2>Growth of the Supreme Court</h2>
+
+<p>When the Supreme Court began functioning in 1950, it was a relatively small institution. As India's population increased and the country's legal system expanded, the number of cases coming before the Court increased considerably.</p>
+
+<p>The authorized strength of the Court has been increased at different times to deal with the growing workload. The Court also developed a larger administrative structure and more specialized systems for dealing with different categories of cases.</p>
+
+<p>The growth of the Supreme Court reflects the broader growth of India's constitutional and legal system.</p>
+
+<h2>Supreme Court Building</h2>
+
+<p>Initially, the Supreme Court functioned from the Chamber of Princes in the Parliament House building. As its workload and institutional requirements increased, a separate building became necessary.</p>
+
+<p>The present Supreme Court building at Tilak Marg in New Delhi was inaugurated in 1958. The building became the permanent institutional home of the Supreme Court.</p>
+
+<p>The physical development of the Court has continued as the number of judges, staff, cases, and technological requirements have increased.</p>
+
+<h2>Supreme Court in the Twenty-First Century</h2>
+
+<p>In the twenty-first century, the Supreme Court has continued to develop in response to changes in Indian society and technology. Constitutional cases now involve a wide range of issues, including digital rights, privacy, environmental protection, elections, economic regulation, social justice, and institutional accountability.</p>
+
+<p>The Court has also become more visible to the public through television, newspapers, online reporting, and social media. This increased public visibility has contributed to greater awareness of judicial proceedings and constitutional questions.</p>
+
+<p>At the same time, concerns regarding delays, case backlogs, access to justice, judicial appointments, transparency, and accountability have become important issues in discussions about the future of the Court.</p>
+
+<h2>Technological Development</h2>
+
+<p>Technology has become an important part of the recent history of the Supreme Court. The Court has introduced electronic filing, digital case records, online case information, and video-conferencing facilities.</p>
+
+<p>The COVID-19 pandemic accelerated the use of virtual hearings and digital court procedures. These technological changes allowed the Court to continue functioning when physical court proceedings were restricted.</p>
+
+<p>The increasing use of technology has also created new legal questions concerning privacy, electronic evidence, digital communication, cybersecurity, and access to justice.</p>
+
+<h2>Continuing Evolution of the Supreme Court</h2>
+
+<p>The history of the Supreme Court is a continuous process of institutional and constitutional development. The Court has changed significantly since its establishment in 1950, both in the volume of its work and in the nature of the issues it considers.</p>
+
+<p>Its historical development shows a movement from a primarily appellate institution toward a powerful constitutional court with a wide range of responsibilities. Fundamental rights, public interest litigation, judicial review, federalism, social justice, environmental protection, privacy, and digital rights have all contributed to this transformation.</p>
+
+<p>At the same time, the Court continues to operate within the constitutional framework created in 1950. The Constitution remains the foundation of its authority and provides the basic structure within which the Court performs its functions.</p>
+
+<h2>Conclusion</h2>
+
+<p>The history of the Supreme Court of India is a long process that began with the establishment of British judicial institutions and culminated in the creation of an independent constitutional court in 1950. The Supreme Court at Calcutta, the Supreme Courts at Madras and Bombay, the High Courts, the Judicial Committee of the Privy Council, and the Federal Court each represented important stages in the development of India's higher judiciary.</p>
+
+<p>The establishment of the Supreme Court on 28 January 1950 marked the beginning of a new era. The Court became the highest judicial authority of the Republic of India and received extensive powers to interpret the Constitution, protect fundamental rights, hear appeals, and resolve important constitutional disputes.</p>
+
+<p>During its history, the Supreme Court has experienced several major phases. The early period was dominated by questions concerning fundamental rights, property, legislative powers, and constitutional amendments. The decisions in Shankari Prasad, Sajjan Singh, Golaknath, Kesavananda Bharati, and Minerva Mills played important roles in defining the relationship between Parliament and the judiciary.</p>
+
+<p>The Emergency of 1975–1977 became a major test of the Court's role in protecting individual liberty. After the Emergency, the Court adopted a more expansive approach to fundamental rights and developed public interest litigation as an important means of providing access to justice.</p>
+
+<p>In later decades, the Supreme Court expanded its constitutional jurisprudence to include social justice, environmental protection, gender equality, federalism, privacy, digital rights, and many other areas. The development of the basic structure doctrine and the recognition of judicial review established important limitations on governmental power.</p>
+
+<p>From the colonial courts of the eighteenth century to the constitutional court of the twenty-first century, the Indian judiciary has undergone a remarkable transformation. The Supreme Court represents the culmination of this historical development and remains an essential institution in India's constitutional system. Its history is therefore not merely the history of a court; it is an important part of the history of India's constitutional democracy.</p>
+
+        <div class="committee-photo-gallery">
+            <figure class="committee-photo">
+                <div class="committee-photo-frame">
+                    <img src="images/1.jpg" alt="Supreme Court building" loading="lazy">
                 </div>
-            </div>
+                <figcaption>
+                    <h3>Supreme Court Building</h3>
+                    <p>A rare photograph of the first Chief Justice of India, Hon’ble Justice Harilal J.Kania with other Judges of the Supreme Court, 1950.</p>
+                </figcaption>
+            </figure>
 
+            <figure class="committee-photo">
+                <div class="committee-photo-frame">
+                    <img src="images/2.jpg" alt="Supreme Court courtroom" loading="lazy">
+                </div>
+                <figcaption>
+                    <h3>Courtroom and Judicial Work</h3>
+                    <p>The first Chief Justice of India, Hon’ble Justice Harilal J. Kania with other Judges of the Supreme Court on the dais and the Chief Justices of all High Courts on the inaugural sitting of the Supreme Court on 28 January 1950.</p>
+                </figcaption>
+            </figure>
+
+            <figure class="committee-photo">
+                <div class="committee-photo-frame">
+                    <img src="images/3.jpg" alt="Supreme Court premises" loading="lazy">
+                </div>
+                <figcaption>
+                    <h3>Institutional Facilities</h3>
+                    <p>(From the left) Dr. Rajendra Prasad, President of India, Shri S.R. Das, Chief Justice of India, Dr. S. Radhakrishnan, Vice-President of India, Shri Ananthasayanam Ayyangar, Speaker, Lok Sabha and Shri Jawaharlal Nehru, Prime Minister of India on the occasion of inauguration of the Supreme Court building on 4 August 1958…</p>
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="committee-pdf-download">
+            <a href="pdf/2.pdf" download class="pdf-download-button">
+                📥 Download PDF
+            </a>
         </div>
 
     </div>
@@ -784,88 +1527,103 @@ body::before{
 </div>
 
 <script>
-function showSection(sectionId,clickedButton){
+function showSection(sectionId, clickedButton){
     document.querySelectorAll(".tab-section").forEach(section=>{
         section.classList.remove("active");
     });
+
     document.querySelectorAll(".asrp-buttons button").forEach(button=>{
         button.classList.remove("active");
     });
+
     document.getElementById(sectionId).classList.add("active");
     clickedButton.classList.add("active");
 }
 
-/* Build the exact same navbar hover popup menus from the full popup links. */
-function buildNavPopupMenus(){
-    document.querySelectorAll(".nav-dropdown[data-popup]").forEach(function(navItem){
-        const popupId=navItem.getAttribute("data-popup");
-        const sourcePopup=document.getElementById(popupId);
-        if(!sourcePopup)return;
 
-        const sourceGrid=sourcePopup.querySelector(".popup-grid");
-        if(!sourceGrid)return;
+/* =========================================
+   NAVBAR CLICK → CENTER POPUP
+========================================= */
 
-        const menu=document.createElement("div");
-        menu.className="nav-popup-menu";
-        menu.setAttribute("role","menu");
-
-        sourceGrid.querySelectorAll("a").forEach(function(sourceLink){
-            const link=sourceLink.cloneNode(true);
-            link.setAttribute("role","menuitem");
-            menu.appendChild(link);
-        });
-
-        navItem.appendChild(menu);
-    });
-}
-
-function openPopup(popupId){
-    const popup=document.getElementById(popupId);
-    if(popup){
-        popup.classList.add("active");
-        document.body.style.overflow="hidden";
-    }
-}
-
-function closePopup(popupId){
-    const popup=document.getElementById(popupId);
-    if(popup){
-        popup.classList.remove("active");
-        document.body.style.overflow="";
-    }
-}
-
-buildNavPopupMenus();
-
-/* Mobile: tap navbar button to open its full popup. */
 document.querySelectorAll(".nav-dropdown .nav-trigger").forEach(function(trigger){
-    trigger.addEventListener("click",function(event){
-        if(window.matchMedia("(max-width:600px)").matches){
-            event.preventDefault();
-            const navItem=trigger.closest(".nav-dropdown");
-            openPopup(navItem.getAttribute("data-popup"));
-        }
-    });
-});
 
-/* Close when clicking outside the popup. */
-document.querySelectorAll(".popup-overlay").forEach(function(popup){
-    popup.addEventListener("click",function(event){
-        if(event.target===popup){
-            popup.classList.remove("active");
-            document.body.style.overflow="";
-        }
-    });
-});
+    trigger.addEventListener("click", function(event){
 
-/* ESC closes every popup. */
-document.addEventListener("keydown",function(event){
-    if(event.key==="Escape"){
+        event.preventDefault();
+        event.stopPropagation();
+
+        const navItem = trigger.closest(".nav-dropdown");
+        const popupId = navItem.getAttribute("data-popup");
+
+        /* Close any other popup first */
         document.querySelectorAll(".popup-overlay").forEach(function(popup){
             popup.classList.remove("active");
         });
-        document.body.style.overflow="";
+
+        /* Open selected popup in center */
+        openPopup(popupId);
+    });
+
+});
+
+
+function openPopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.add("active");
+        document.body.style.overflow = "hidden";
     }
+
+}
+
+
+function closePopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+}
+
+
+/* =========================================
+   CLICK OUTSIDE → CLOSE
+========================================= */
+
+document.querySelectorAll(".popup-overlay").forEach(function(popup){
+
+    popup.addEventListener("click", function(event){
+
+        if(event.target === popup){
+            popup.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   ESC → CLOSE
+========================================= */
+
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Escape"){
+
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        document.body.style.overflow = "";
+    }
+
 });
 </script>
 
