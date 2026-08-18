@@ -5,453 +5,1143 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CALENDAR | NYAYA SETU</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<style id="theme-vars">
+:root{
+    --theme-primary:var(--theme-primary);
+    --theme-primary-soft:var(--theme-primary-glow);
+    --theme-primary-glow:var(--theme-primary-glow);
+    --theme-primary-border:var(--theme-primary-glow);
+}
+
+/* NAVBAR BUTTON BOX */
+.navbar a,
+.navbar button,
+nav a,
+nav button {
+    border: 1px solid rgba(33,150,255,.55);
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: rgba(33,150,255,.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar a:hover,
+.navbar button:hover,
+nav a:hover,
+nav button:hover {
+    background: rgba(33,150,255,.16);
+}
+
+
+/* POPUP BUTTON TEXT SIZE */
+.popup button,
+.popup .btn,
+.modal button,
+.modal .btn,
+.popup-buttons button,
+.popup-buttons .btn {
+    font-size: 20px;
+}
+
+</style>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 html{scroll-behavior:smooth}
 body{background:#0b0b0b;color:#fff;overflow-x:hidden}
 
 /* ============================= */
-/* SAME NAVBAR */
+/* SAME NAVBAR + NAV POPUPS */
 /* ============================= */
+
 nav{
-    display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px;
-    padding:14px 20px;background:rgba(0,0,0,.10);
-    backdrop-filter:blur(12px);position:sticky;top:0;z-index:10000;
-}
-.main-nav{isolation:isolate}
-.nav-dropdown{position:relative;display:flex;align-items:center}
-.nav-trigger,.nav-home{
-    display:flex;align-items:center;justify-content:center;color:#fff;
-    text-decoration:none;font-weight:600;position:relative;padding:10px 13px;
-    border-radius:10px;transition:.25s ease;white-space:nowrap;
-}
-.nav-trigger:hover,.nav-home:hover,
-.nav-dropdown:hover .nav-trigger{
-    color:#fff;background:rgba(20,20,25,.96);
-    border:1px solid rgba(255,255,255,.18);
-    box-shadow:0 0 18px rgba(255,60,172,.20);
-}
-.nav-trigger::after,.nav-home::after{
-    content:"";position:absolute;left:0;right:0;bottom:-1px;width:100%;height:3px;
-    background:#ff3cac;border-radius:3px 3px 0 0;transform:scaleX(0);
-    transform-origin:center;transition:.22s ease;
-}
-.nav-trigger:hover::after,.nav-home:hover::after,
-.nav-dropdown:hover .nav-trigger::after{transform:scaleX(1)}
-.nav-dropdown::after{
-    content:"";position:absolute;left:0;right:0;top:100%;height:10px;
-    background:transparent;z-index:10001;
-}
-.nav-popup-menu{
-    position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(-8px);
-    width:min(590px,88vw);max-height:70vh;overflow-y:auto;padding:12px;
-    display:grid;grid-template-columns:repeat(3,minmax(120px,1fr));gap:8px;
-    background:rgba(20,20,25,.96);backdrop-filter:blur(25px);
-    border:1px solid rgba(255,255,255,.18);border-radius:18px;
-    box-shadow:0 0 30px rgba(0,0,0,.45),0 0 55px rgba(255,60,172,.14);
-    opacity:0;visibility:hidden;pointer-events:none;transition:.22s ease;
-}
-.nav-dropdown:hover .nav-popup-menu,
-.nav-dropdown:focus-within .nav-popup-menu{
-    opacity:1;visibility:visible;pointer-events:auto;
-    transform:translateX(-50%) translateY(0);
-}
-.nav-popup-menu a{
-    min-height:48px;display:flex;align-items:center;justify-content:center;
-    text-align:center;padding:8px 9px;border-radius:9px;
-    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
-    color:#fff;text-decoration:none;font-size:11px;font-weight:700;transition:.25s ease;
-}
-.nav-popup-menu a:hover{
-    transform:translateY(-4px);background:rgba(255,60,172,.18);
-    border-color:#ff3cac;box-shadow:0 0 15px rgba(255,60,172,.35);
-}
-
-/* ============================= */
-/* BACKGROUND */
-/* ============================= */
-#background-video{
-    position:fixed;inset:0;width:100%;height:100%;object-fit:cover;
-    z-index:-2;pointer-events:none;
-}
-body::before{
-    content:"";position:fixed;inset:0;background:rgba(0,0,0,.52);
-    z-index:-1;pointer-events:none;
-}
-
-/* ============================= */
-/* CALENDAR */
-/* ============================= */
-.calendar-page{
-    min-height:calc(100vh - 70px);
-    padding:75px 20px 90px;
-}
-.calendar-wrap{width:min(1150px,100%);margin:auto}
-.calendar-title{
-    text-align:center;color:#2196ff;font-size:52px;margin-bottom:10px;
-    text-shadow:0 0 10px #2196ff,0 0 25px rgba(33,150,255,.6);
-}
-.calendar-subtitle{
-    text-align:center;opacity:.78;font-size:16px;margin-bottom:30px;
-}
-.calendar-panel{
-    background:rgba(0,0,0,.72);border:1px solid rgba(33,150,255,.28);
-    border-radius:20px;padding:25px;
-    box-shadow:0 0 30px rgba(33,150,255,.08),inset 0 0 25px rgba(33,150,255,.02);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    padding:16px 22px;
+    background:rgba(255,255,255,.05);
     backdrop-filter:blur(12px);
+    position:sticky;
+    top:0;
+    z-index:10000;
 }
-.calendar-controls{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:15px;margin-bottom:22px;
-}
-.month-title{
-    color:#fff;text-align:center;font-size:28px;letter-spacing:.5px;
-    text-shadow:0 0 12px rgba(33,150,255,.45);
-}
-.calendar-btn{
-    border:1px solid rgba(33,150,255,.5);background:rgba(0,0,0,.75);
-    color:#fff;padding:11px 18px;border-radius:10px;cursor:pointer;
-    font-weight:700;transition:.25s ease;min-width:100px;
-}
-.calendar-btn:hover{
-    background:#2196ff;color:#000;transform:translateY(-2px);
-    box-shadow:0 0 15px rgba(33,150,255,.55);
-}
-.today-btn{min-width:125px}
 
-.legend{
-    display:flex;justify-content:center;align-items:center;gap:25px;
-    flex-wrap:wrap;margin:0 0 22px;
+.main-nav{
+    isolation:isolate;
 }
-.legend-item{display:flex;align-items:center;gap:8px;font-size:23px;opacity:.9}
-.legend-box{
-    width:18px;height:18px;border-radius:5px;border:1px solid rgba(255,255,255,.25)
-}
-.legend-holiday{background:rgba(255,45,45,.78);box-shadow:0 0 10px rgba(255,45,45,.35)}
-.legend-partial{background:rgba(255,193,7,.78);box-shadow:0 0 10px rgba(255,193,7,.28)}
-.legend-today{background:rgba(33,150,255,.55);box-shadow:0 0 10px rgba(33,150,255,.4)}
 
-.calendar-grid{
-    display:grid;grid-template-columns:repeat(7,1fr);
-    gap:7px;
+.nav-dropdown{
+    position:relative;
+    display:flex;
+    align-items:center;
 }
-.weekday{
-    text-align:center;padding:12px 5px;font-weight:800;color:#2196ff;
-    background:rgba(33,150,255,.09);border:1px solid rgba(33,150,255,.18);
-    border-radius:8px;font-size:23px;
-}
-.day{
-    min-height:105px;padding:9px;border-radius:10px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.09);
-    position:relative;overflow:hidden;transition:.2s ease;
-}
-.day:hover{
-    transform:translateY(-2px);border-color:rgba(33,150,255,.55);
-    box-shadow:0 0 14px rgba(33,150,255,.12);
-}
-.day.empty{background:rgba(255,255,255,.015);border-color:transparent}
-.day-number{font-size:23px;font-weight:800}
-.day-status{
-    display:block;margin-top:8px;font-size:18px;font-weight:800;
-    text-transform:uppercase;letter-spacing:.5px;
-}
-.day.holiday{
-    background:rgba(210,25,25,.38);
-    border-color:rgba(255,70,70,.8);
-    box-shadow:inset 0 0 18px rgba(255,40,40,.12);
-}
-.day.holiday .day-number,.day.holiday .day-status{color:#ff6464}
-.day.partial{
-    background:rgba(255,193,7,.25);
-    border-color:rgba(255,193,7,.75);
-    box-shadow:inset 0 0 18px rgba(255,193,7,.08);
-}
-.day.partial .day-number,.day.partial .day-status{color:#ffd54f}
-.day.today{
-    outline:2px solid #2196ff;
-    box-shadow:0 0 16px rgba(33,150,255,.65),inset 0 0 15px rgba(33,150,255,.12);
-}
-.day.today .day-number::after{
-    content:" TODAY";font-size:18px;color:#2196ff;vertical-align:middle;margin-left:5px;
-}
-.day.holiday.today{outline-color:#ff4545}
-.day.partial.today{outline-color:#ffd54f}
 
-.calendar-note{
-    text-align:center;margin-top:20px;font-size:18px;opacity:.62;
+.nav-trigger,
+.nav-home{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    position:relative;
+    padding:13px 18px;
+    min-height:46px;
+    border-radius:12px;
+    transition:.25s ease;
+    white-space:nowrap;
+    font-size:15px;
+    letter-spacing:.2px;
+}
+
+.nav-trigger:hover,
+.nav-home:hover{
+    color:#fff;
+    background:rgba(20,20,25,.96);
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 0 18px rgba(0,149,255,.20);
+}
+
+.nav-trigger::after,
+.nav-home::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-1px;
+    width:100%;
+    height:3px;
+    background:#0095ff;
+    border-radius:3px 3px 0 0;
+    transform:scaleX(0);
+    transform-origin:center;
+    transition:.22s ease;
+}
+
+.nav-trigger:hover::after,
+.nav-home:hover::after{
+    transform:scaleX(1);
 }
 
 /* ============================= */
-/* FOOTER */
+/* ABOUT PAGE */
 /* ============================= */
-footer{
-    background:#050505;padding:60px 10%;display:flex;justify-content:space-between;
-    align-items:flex-start;gap:40px;flex-wrap:wrap;
-    border-top:1px solid rgba(33,150,255,.12);
+
+.about{
+    min-height:100vh;
+    background:transparent;
+    position:relative;
+    z-index:0;
+    padding:100px 10% 100px;
+    text-align:center;
 }
-.footer-logo{display:flex;flex-direction:column;min-width:200px}
-.footer-logo img{width:130px;margin-bottom:10px}
-.footer-logo p{opacity:.7;font-size:14px}
-.footer-links{min-width:150px}
-.footer-links h4{color:#2196ff;margin-bottom:12px;font-size:16px}
-.footer-links a{
-    display:block;color:#fff;opacity:.7;text-decoration:none;margin:7px 0;transition:.3s ease;
-}
-.footer-links a:hover{color:#2196ff;opacity:1;transform:translateX(4px)}
-.bottom{
-    text-align:center;padding:18px;background:#030303;opacity:.75;font-size:13px;
-    border-top:1px solid rgba(255,255,255,.05);
+.about h1{
+    font-family:"Permanent Marker", cursive;
+    font-size:42px;
+    font-weight:700;
+    letter-spacing:3px;
+    color:#0095ff;
+    display:inline-block;
+    position:relative;
+    padding-bottom:12px;
+    text-shadow:0 0 8px rgba(0,149,255,.45);
+    animation:committeePulse 3s ease-in-out infinite;
 }
 
+/* Text animation */
+@keyframes committeePulse{
+    0%,100%{
+        transform:scale(1);
+        letter-spacing:3px;
+    }
+
+    50%{
+        transform:scale(1.03);
+        letter-spacing:5px;
+    }
+}
+
+/* Animated underline */
+.about h1::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width:0;
+    height:3px;
+    background:#0095ff;
+    border-radius:10px;
+    box-shadow:
+        0 0 8px #0095ff,
+        0 0 18px #0095ff;
+    transform:translateX(-50%);
+    animation:lineExpand 2s ease-in-out infinite;
+}
+
+@keyframes lineExpand{
+    0%,100%{
+        width:0;
+        opacity:.3;
+    }
+
+    40%{
+        width:100%;
+        opacity:1;
+    }
+
+    70%{
+        width:100%;
+        opacity:1;
+    }
+
+    90%{
+        width:0;
+        opacity:.3;
+    }
+}
+.intro{max-width:1100px;margin:0 auto;font-size:24px;line-height:1.7;opacity:.9}
+.container{max-width:950px;margin:0 auto}
+.asrp-buttons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin:55px auto 30px;
+    max-width:1000px;
+}
+.asrp-buttons button{
+    background:rgba(0,0,0,.78);
+    color:#fff;
+    border:1px solid rgba(33,150,255,.5);
+    padding:15px 25px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s ease;
+    box-shadow:0 0 8px rgba(33,150,255,.15);
+}
+.asrp-buttons button:hover,
+.asrp-buttons button.active{
+    background:#2196ff;
+    color:#000;
+    transform:translateY(-4px);
+    box-shadow:0 0 10px #2196ff,0 0 25px rgba(33,150,255,.6);
+}
+.section{
+    margin-top:25px;
+    background:rgba(0,0,0,.68);
+    padding:40px;
+    border-radius:14px;
+    border:1px solid rgba(33,150,255,.25);
+    box-shadow:0 0 25px rgba(33,150,255,.06),inset 0 0 20px rgba(33,150,255,.02);
+}
+.tab-section{display:none}
+.tab-section.active{display:block;animation:sectionFade .45s ease}
+@keyframes sectionFade{
+    from{opacity:0;transform:translateY(20px) scale(.98)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+.section h2{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    color:#2196ff;
+    margin-bottom:25px;
+    font-size:30px;
+    text-shadow:0 0 12px rgba(33,150,255,.5);
+}
+.emoji-text{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    text-align:left;
+    margin-bottom:22px;
+    line-height:1.7;
+    font-size:16px;
+    opacity:.9;
+}
+.emoji-text:last-child{margin-bottom:0}
+.emoji-text img{height:45px;width:45px;object-fit:contain;flex-shrink:0}
+
 /* ============================= */
-/* POPUPS */
+/* SAME FULL POPUPS */
 /* ============================= */
+
 .popup-overlay{
-    position:fixed;inset:0;display:none;align-items:center;justify-content:center;
-    padding:30px;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);z-index:99999;
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(10px);
+    z-index:99999;
 }
-.popup-overlay.active{display:flex}
+.popup-overlay.active{display:flex;animation:popupFade .25s ease}
 .popup-box{
-    position:relative;width:min(900px,95vw);max-height:85vh;overflow-y:auto;padding:35px;
-    background:rgba(20,20,25,.92);backdrop-filter:blur(25px);
-    border:1px solid rgba(255,255,255,.18);border-radius:22px;
+    position:relative;
+    width:min(900px,95vw);
+    max-height:85vh;
+    overflow-y:auto;
+    padding:35px;
+    background:rgba(20,20,25,.92);
+    backdrop-filter:blur(25px);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:22px;
     box-shadow:0 0 40px rgba(0,0,0,.5),0 0 80px rgba(33,150,255,.12);
+    animation:popupScale .3s ease;
 }
 .popup-box h2{text-align:center;font-size:25px;letter-spacing:2px;margin-bottom:5px}
 .popup-box>p{text-align:center;font-size:13px;opacity:.6;margin-bottom:25px}
 .popup-close{
-    position:absolute;top:15px;right:18px;width:40px;height:40px;border:none;border-radius:50%;
-    background:rgba(255,255,255,.08);color:#fff;font-size:28px;line-height:40px;
+    position:absolute;
+    top:15px;right:18px;
+    width:40px;height:40px;
+    border:none;border-radius:50%;
+    background:rgba(255,255,255,.08);
+    color:#fff;font-size:28px;line-height:40px;
     cursor:pointer;transition:.3s;
 }
 .popup-close:hover{background:#2196ff;transform:rotate(90deg);box-shadow:0 0 20px rgba(33,150,255,.5)}
 .popup-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
 .popup-grid a{
-    min-height:70px;display:flex;align-items:center;justify-content:center;text-align:center;
-    padding:15px;border-radius:14px;background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.14);color:#fff;text-decoration:none;
-    font-size:14px;font-weight:700;transition:.3s ease;
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:15px;
+    border-radius:14px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    color:#fff;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:700;
+    transition:.3s ease;
 }
 .popup-grid a:hover{
-    transform:translateY(-5px);background:rgba(33,150,255,.18);
-    border-color:#2196ff;box-shadow:0 0 15px rgba(33,150,255,.35);
+    transform:translateY(-5px);
+    background:rgba(33,150,255,.18);
+    border-color:#2196ff;
+    box-shadow:0 0 15px rgba(33,150,255,.35);
+}
+@keyframes popupFade{from{opacity:0}to{opacity:1}}
+@keyframes popupScale{
+    from{opacity:0;transform:scale(.9) translateY(20px)}
+    to{opacity:1;transform:scale(1) translateY(0)}
 }
 
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+footer{
+    background:#050505;
+    padding:35px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:25px;
+    flex-wrap:wrap;
+    border-top:1px solid rgba(33,150,255,.12);
+}
+
+.footer-logo{
+    display:flex;
+    flex-direction:column;
+    min-width:170px;
+}
+
+.footer-logo img{
+    width:150px;
+    margin-bottom:8px;
+}
+
+.footer-logo p{
+    opacity:.7;
+    font-size:15px;
+    margin:3px 0;
+}
+
+.footer-links{
+    min-width:130px;
+}
+
+.footer-links h4{
+    color:#2196ff;
+    margin-bottom:9px;
+    font-size:14px;
+}
+
+.footer-links a{
+    display:block;
+    color:#fff;
+    opacity:.7;
+    text-decoration:none;
+    margin:5px 0;
+    font-size:15px;
+    transition:.3s ease;
+}
+
+.footer-links a:hover{
+    color:#2196ff;
+    opacity:1;
+    transform:translateX(4px);
+}
+
+.bottom{
+    text-align:center;
+    padding:12px;
+    background:#030303;
+    opacity:.75;
+    font-size:16px;
+    border-top:1px solid rgba(255,255,255,.05);
+}
 /* ============================= */
 /* RESPONSIVE */
 /* ============================= */
 
-/* ============================= */
-/* HOLIDAY TABLE */
-/* ============================= */
-.holiday-table-wrap{
-    margin-top:42px;
-    border-top:1px solid rgba(33,150,255,.18);
-    padding-top:28px;
-}
-.holiday-table-title{
-    text-align:center;
-    color:#2196ff;
-    font-size:24px;
-    letter-spacing:1px;
-    margin-bottom:18px;
-    text-shadow:0 0 12px rgba(33,150,255,.4);
-}
-.holiday-table-scroll{
-    width:100%;
-    overflow-x:auto;
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,.12);
-}
-.holiday-table{
-    width:100%;
-    min-width:720px;
-    border-collapse:collapse;
-    background:rgba(0,0,0,.42);
-}
-.holiday-table th{
-    padding:14px 15px;
-    text-align:left;
-    color:#fff;
-    background:rgba(33,150,255,.16);
-    border-bottom:1px solid rgba(33,150,255,.35);
-    font-size:23px;
-}
-.holiday-table td{
-    padding:13px 15px;
-    color:#eee;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    font-size:23px;
-    vertical-align:middle;
-}
-.holiday-table tbody tr{
-    transition:.2s ease;
-}
-.holiday-table tbody tr:hover{
-    background:rgba(33,150,255,.08);
-}
-.holiday-table tbody tr:last-child td{
-    border-bottom:none;
-}
-.holiday-table td:nth-child(2){
-    color:#ff7272;
-    font-weight:700;
-}
-.holiday-table td:nth-child(3){
-    color:#bbb;
-    font-weight:600;
-}
-.holiday-table .partial-row{
-    background:rgba(255,193,7,.12);
-}
-.holiday-table .partial-row td:nth-child(2),
-.holiday-table .partial-row td:nth-child(3){
-    color:#ffd54f;
-}
-
-@media(max-width:800px){
-    .calendar-title{font-size:40px}
-    .calendar-panel{padding:15px}
-    .day{min-height:78px;padding:7px}
-    .day-number{font-size:14px}
-    .day-status{font-size:8px}
-    .calendar-controls{flex-wrap:wrap;justify-content:center}
-    .month-title{order:-1;width:100%;font-size:24px}
-    footer{padding:45px 25px;flex-direction:column}
-}
-
-@media(max-width:800px){
-    .holiday-table-title{font-size:20px}
-    .holiday-table th,.holiday-table td{padding:11px 12px;font-size:12px}
-}
-
-@media(max-width:600px){
-    .main-nav{justify-content:flex-start;overflow:visible;flex-wrap:nowrap}
-    .nav-trigger,.nav-home{font-size:12px;padding:8px 9px}
+@media(max-width:900px){
     .nav-popup-menu{
-        position:fixed;top:64px;left:50%;width:94vw;max-height:78vh;
-        grid-template-columns:repeat(2,1fr);transform:translateX(-50%) translateY(-8px);
+        width:min(650px,94vw);
+        grid-template-columns:repeat(2,minmax(140px,1fr));
     }
-    .nav-dropdown:hover .nav-popup-menu,.nav-dropdown:focus-within .nav-popup-menu{
+}
+@media(max-width:800px){
+    .about{padding:90px 20px 70px;background-attachment:scroll}
+    .about h1{font-size:44px}
+    .intro{font-size:18px;line-height:1.6}
+    .asrp-buttons{gap:10px;margin-top:35px}
+    .asrp-buttons button{width:100%;max-width:350px;padding:14px 18px}
+    .section{padding:25px 20px}
+    .section h2{font-size:23px}
+    .emoji-text{font-size:15px;gap:10px}
+    .emoji-text img{height:38px;width:38px}
+footer{
+    padding:30px 20px;
+    flex-direction:column;
+    gap:20px;
+}
+}
+@media(max-width:600px){
+    .main-nav{
+        justify-content:flex-start;
+        overflow:visible;
+        flex-wrap:nowrap;
+        scrollbar-width:thin;
+    }
+.nav-trigger,.nav-home{
+    font-size:13px;
+    padding:10px 13px;
+    min-height:42px;
+}
+    .nav-popup-menu{
+        position:fixed;
+        top:64px;
+        left:50%;
+        width:94vw;
+        max-height:78vh;
+        grid-template-columns:repeat(2,1fr);
+        transform:translateX(-50%) translateY(-8px);
+    }
+    .nav-dropdown:hover .nav-popup-menu,
+    .nav-dropdown:focus-within .nav-popup-menu{
         transform:translateX(-50%) translateY(0);
     }
-    .calendar-page{padding:50px 8px 65px}
-    .calendar-title{font-size:32px}
-    .calendar-subtitle{font-size:13px}
-    .calendar-grid{gap:3px}
-    .weekday{padding:8px 2px;font-size:10px}
-    .day{min-height:65px;padding:5px;border-radius:7px}
-    .day-number{font-size:12px}
-    .day-status{font-size:7px;margin-top:4px}
-    .day.today .day-number::after{display:none}
-    .legend{gap:12px}
-    .legend-item{font-size:11px}
     .popup-overlay{padding:15px}
     .popup-box{padding:25px 18px;max-height:90vh}
     .popup-grid{grid-template-columns:repeat(2,1fr);gap:10px}
     .popup-grid a{min-height:65px;padding:10px;font-size:12px}
 }
+@media(max-width:450px){
+    .about h1{font-size:36px}
+    .intro{font-size:17px}
+    .section{padding:22px 16px}
+    .section h2{font-size:20px;gap:5px}
+    .emoji-text{font-size:14px}
+}
 @media(max-width:400px){
     .nav-popup-menu,.popup-grid{grid-template-columns:1fr}
-    .day{min-height:58px}
-    .day-status{display:none}
 }
+
+/* ============================= */
+/* FONT AWESOME BACK ICON */
+/* ============================= */
+.back-icon{margin-right:7px}
+
+/* ============================= */
+/* FULL-PAGE VIDEO BACKGROUND */
+/* ============================= */
+#background-video{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+    pointer-events:none;
+}
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.42);
+    z-index:-1;
+    pointer-events:none;
+}
+
+
+.history-subheading{
+    color:#2196ff;
+    font-size:22px;
+    margin:35px 0 18px;
+    padding-bottom:10px;
+    border-bottom:1px solid rgba(33,150,255,.25);
+    text-align:left;
+    text-shadow:0 0 10px rgba(33,150,255,.35);
+}
+.history-subheading:first-of-type{margin-top:5px}
+
+
+
+.high-court-table-section{
+    margin-top:45px;
+    padding-top:35px;
+    border-top:1px solid rgba(33,150,255,.25);
+}
+.high-court-table-wrap{
+    width:100%;
+    overflow:visible;
+    margin-top:20px;
+    border-radius:12px;
+    border:1px solid rgba(33,150,255,.25);
+}
+.high-court-table{
+    width:100%;
+    min-width:1050px;
+    border-collapse:collapse;
+    background:rgba(0,0,0,.45);
+    text-align:left;
+}
+.high-court-table th,.high-court-table td{
+    padding:15px 14px;
+    border:1px solid rgba(255,255,255,.12);
+    vertical-align:top;
+    line-height:1.55;
+    font-size:14px;
+}
+.high-court-table th{
+    color:#2196ff;
+    background:rgba(33,150,255,.10);
+    font-weight:700;
+    text-align:center;
+}
+.high-court-table td:first-child{
+    text-align:center;
+    font-weight:700;
+    width:65px;
+}
+.high-court-table td:nth-child(2){font-weight:700;min-width:190px}
+.high-court-table td:nth-child(3){text-align:center;white-space:nowrap}
+.high-court-table strong{color:#2196ff}
+.high-court-table tbody tr:hover{background:rgba(33,150,255,.07)}
+@media(max-width:800px){
+    .high-court-table-section{margin-top:35px;padding-top:25px}
+    .high-court-table th,.high-court-table td{padding:12px 10px;font-size:13px}
+}
+
+/* FULL HIGH COURTS TABLE — KEEP ALL ROWS VISIBLE */
+.high-courts-table-wrap{width:100%;overflow:visible !important;}
+.high-courts-table{width:100% !important;min-width:0 !important;table-layout:fixed;border-collapse:collapse;}
+.high-courts-table th,.high-courts-table td{white-space:normal !important;word-break:normal;overflow-wrap:anywhere;vertical-align:top;}
+.high-courts-table th:nth-child(1),.high-courts-table td:nth-child(1){width:6%}
+.high-courts-table th:nth-child(2),.high-courts-table td:nth-child(2){width:20%}
+.high-courts-table th:nth-child(3),.high-courts-table td:nth-child(3){width:13%}
+.high-courts-table th:nth-child(4),.high-courts-table td:nth-child(4){width:22%}
+.high-courts-table th:nth-child(5),.high-courts-table td:nth-child(5){width:39%}
+@media(max-width:800px){.high-courts-table{font-size:11px}.high-courts-table th,.high-courts-table td{padding:8px 5px !important;}}
+
+/* HIGH COURTS TABLE — CENTERED + FULL BORDER */
+.high-courts-table-wrap{
+    width:100%;
+    max-width:1200px;
+    margin:35px auto 0 !important;
+    overflow:visible !important;
+}
+.high-courts-table{
+    width:100% !important;
+    margin:0 auto !important;
+    border:3px solid rgba(33,150,255,.75) !important;
+    border-collapse:collapse !important;
+    border-spacing:0;
+    table-layout:fixed;
+}
+.high-courts-table th,
+.high-courts-table td{
+    border:2px solid rgba(33,150,255,.55) !important;
+    white-space:normal !important;
+    word-break:normal;
+    overflow-wrap:anywhere;
+    vertical-align:top;
+}
+.high-courts-table th{
+    border:3px solid rgba(33,150,255,.75) !important;
+}
+
+
+/* FINAL: CENTER THE HIGH COURTS TABLE */
+.high-courts-table-wrap {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    overflow: visible !important;
+}
+.high-courts-table {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+
+/* ============================= */
+/* HISTORY CALENDAR */
+/* ============================= */
+.history-calendar{
+    margin:45px auto 0;
+    padding:30px;
+    max-width:1100px;
+    background:rgba(0,0,0,.62);
+    border:1px solid rgba(33,150,255,.28);
+    border-radius:16px;
+    box-shadow:0 0 25px rgba(33,150,255,.08);
+}
+.calendar-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+.calendar-header h2{
+    color:#2196ff;
+    font-size:28px;
+    text-shadow:0 0 12px rgba(33,150,255,.45);
+}
+.calendar-nav{
+    display:flex;
+    gap:10px;
+}
+.calendar-nav button{
+    border:1px solid rgba(33,150,255,.5);
+    background:rgba(33,150,255,.08);
+    color:#fff;
+    padding:9px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:700;
+}
+.calendar-nav button:hover{
+    background:#2196ff;
+    color:#000;
+}
+.calendar-weekdays,
+.calendar-days{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:8px;
+}
+.calendar-weekdays div{
+    text-align:center;
+    color:#2196ff;
+    font-weight:700;
+    padding:10px 4px;
+}
+.calendar-day{
+    min-height:85px;
+    padding:10px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:10px;
+    background:rgba(255,255,255,.035);
+    cursor:pointer;
+    transition:.2s ease;
+}
+.calendar-day:hover{
+    border-color:#2196ff;
+    background:rgba(33,150,255,.12);
+    transform:translateY(-2px);
+}
+.calendar-day.empty{
+    cursor:default;
+    background:transparent;
+    border-color:transparent;
+}
+.calendar-day.today{
+    border-color:#2196ff;
+    box-shadow:0 0 14px rgba(33,150,255,.25);
+}
+.calendar-day-number{
+    font-weight:700;
+}
+.calendar-event{
+    display:block;
+    margin-top:8px;
+    color:#2196ff;
+    font-size:12px;
+    line-height:1.3;
+}
+.calendar-selected{
+    margin-top:20px;
+    padding:14px 16px;
+    border-left:3px solid #2196ff;
+    background:rgba(33,150,255,.07);
+    color:rgba(255,255,255,.9);
+}
+
+
+/* 24-HOUR CALENDAR CLOCK */
+.calendar-clock{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    margin:0 auto 22px;
+    padding:14px 22px;
+    width:max-content;
+    max-width:90%;
+    border:2px solid rgba(33,150,255,.65);
+    border-radius:12px;
+    background:rgba(33,150,255,.12);
+    box-shadow:0 0 18px rgba(33,150,255,.18);
+}
+.calendar-clock-label{
+    font-size:22px;
+    font-weight:700;
+    color:#8ecbff;
+}
+.calendar-clock-time{
+    font-size:32px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:#fff;
+    font-variant-numeric:tabular-nums;
+}
+
+/* HOLIDAY CALENDAR COLORS */
+.calendar-day.sunday{
+    background:rgba(255,0,0,.32) !important;
+    border-color:rgba(255,70,70,.85) !important;
+    color:#fff;
+}
+.calendar-day.sunday .calendar-event{
+    color:#ff6b6b;
+}
+
+.calendar-day.today{
+    border:2px solid #2196ff !important;
+    background:rgba(33,150,255,.28) !important;
+    box-shadow:0 0 14px rgba(33,150,255,.45);
+    color:#fff;
+}
+.calendar-day.holiday{
+    background:rgba(255,0,0,.32) !important;
+    border-color:rgba(255,70,70,.85) !important;
+    color:#fff;
+}
+.calendar-day.partial{
+    background:rgba(255,193,7,.32) !important;
+    border-color:rgba(255,193,7,.9) !important;
+    color:#fff;
+}
+.calendar-day.holiday .calendar-event{color:#ff6b6b}
+.calendar-day.partial .calendar-event{color:#ffd54f}
+.calendar-day.today .calendar-event{color:#8ecbff}
+
+/* HOLIDAYS TABLE */
+.holidays-table-section{
+    margin:30px auto 0;
+    max-width:1100px;
+    padding:30px;
+    background:rgba(0,0,0,.62);
+    border:1px solid rgba(33,150,255,.28);
+    border-radius:16px;
+    box-shadow:0 0 25px rgba(33,150,255,.08);
+}
+.holidays-table-section h2{
+    color:#2196ff;
+    font-size:30px;
+    text-align:center;
+    margin-bottom:22px;
+    text-shadow:0 0 12px rgba(33,150,255,.45);
+}
+.holiday-legend{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+    font-size:18px;
+}
+.holiday-legend span{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+}
+.legend-box{
+    width:18px;
+    height:18px;
+    border-radius:4px;
+    display:inline-block;
+    border:1px solid rgba(255,255,255,.3);
+}
+.legend-red{background:rgba(255,0,0,.55)}
+.legend-yellow{background:rgba(255,193,7,.55)}
+.legend-blue{background:rgba(33,150,255,.55)}
+.holidays-table-wrap{
+    width:100%;
+    overflow-x:auto;
+    border:2px solid rgba(33,150,255,.55);
+    border-radius:12px;
+}
+.holidays-table{
+    width:100%;
+    min-width:850px;
+    border-collapse:collapse;
+    background:rgba(0,0,0,.45);
+}
+.holidays-table th,
+.holidays-table td{
+    border:1px solid rgba(255,255,255,.18);
+    padding:14px 16px;
+    vertical-align:middle;
+    font-size:22px;
+    line-height:1.4;
+}
+.holidays-table th{
+    font-size:24px;
+    color:#fff;
+    background:rgba(33,150,255,.18);
+    text-align:center;
+    font-weight:800;
+}
+.holidays-table td:first-child{font-weight:700}
+.holidays-table td:nth-child(2),
+.holidays-table td:nth-child(3){text-align:center}
+.holidays-table tr.holiday-row{background:rgba(255,0,0,.14)}
+.holidays-table tr.partial-row{background:rgba(255,193,7,.14)}
+@media(max-width:800px){
+    .holidays-table-section{padding:20px 12px}
+    .holidays-table th{font-size:24px}
+    .holidays-table td{font-size:22px}
+}
+
+@media(max-width:800px){
+    .history-calendar{padding:20px 12px}
+    .calendar-weekdays,.calendar-days{gap:5px}
+    .calendar-day{min-height:62px;padding:7px;font-size:13px}
+    .calendar-event{font-size:10px}
+}
+
 </style>
 </head>
 
 <body>
-
 <video id="background-video" autoplay muted loop playsinline preload="auto">
     <source src="background/tokyo.mp4" type="video/mp4">
 </video>
 
 <nav class="main-nav">
-    <a href="../../" class="nav-home">Home</a>
+    <a href="index.html" class="nav-home">Home</a>
 
-    <div class="nav-dropdown" data-popup="aboutPopup"><a href="javascript:void(0)" class="nav-trigger">About</a></div>
-    <div class="nav-dropdown" data-popup="judgesPopup"><a href="javascript:void(0)" class="nav-trigger">Judges</a></div>
-    <div class="nav-dropdown" data-popup="collegiumPopup"><a href="javascript:void(0)" class="nav-trigger">Publications</a></div>
-    <div class="nav-dropdown" data-popup="servicesPopup"><a href="javascript:void(0)" class="nav-trigger">Services</a></div>
-    <div class="nav-dropdown" data-popup="eservicesPopup"><a href="javascript:void(0)" class="nav-trigger">e-Services</a></div>
-    <div class="nav-dropdown" data-popup="advocatesPopup"><a href="javascript:void(0)" class="nav-trigger">Advocates</a></div>
-    <div class="nav-dropdown" data-popup="filingPopup"><a href="javascript:void(0)" class="nav-trigger">Court Filings</a></div>
-    <div class="nav-dropdown" data-popup="noticesPopup"><a href="javascript:void(0)" class="nav-trigger">Notices</a></div>
-    <div class="nav-dropdown" data-popup="newsPopup"><a href="javascript:void(0)" class="nav-trigger">News &amp; Events</a></div>
+    <div class="nav-dropdown" data-popup="aboutPopup">
+        <a href="javascript:void(0)" class="nav-trigger">About</a>
+    </div>
+    <div class="nav-dropdown" data-popup="judgesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Judges</a>
+    </div>
+    <div class="nav-dropdown" data-popup="collegiumPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Publications</a>
+    </div>
+    <div class="nav-dropdown" data-popup="servicesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Services</a>
+    </div>
+    <div class="nav-dropdown" data-popup="eservicesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">e-Services</a>
+    </div>
+    <div class="nav-dropdown" data-popup="advocatesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Advocates</a>
+    </div>
+    <div class="nav-dropdown" data-popup="filingPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Court Filings</a>
+    </div>
+    <div class="nav-dropdown" data-popup="noticesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Notices</a>
+    </div>
+    <div class="nav-dropdown" data-popup="newsPopup">
+        <a href="javascript:void(0)" class="nav-trigger">News &amp; Events</a>
+    </div>
 </nav>
 
-<section class="calendar-page">
-<div class="calendar-wrap">
+<section class="about">
+    <h1>CALENDAR</h1>
 
-    <h1 class="calendar-title">COURT CALENDAR</h1>
-
-    <div class="calendar-panel">
-
-        <div class="calendar-controls">
-            <button class="calendar-btn" id="prevMonth">‹ Previous</button>
-            <h2 class="month-title" id="monthTitle"></h2>
-            <button class="calendar-btn" id="nextMonth">Next ›</button>
-            <button class="calendar-btn today-btn" id="todayBtn">Today</button>
+<div class="history-calendar" aria-label="Supreme Court history calendar">
+    <div class="calendar-header">
+        <div class="calendar-clock" aria-label="Current time in 24-hour format">
+        <span class="calendar-clock-label">CURRENT TIME</span>
+        <span class="calendar-clock-time" id="calendarClock">00:00:00</span>
+    </div>
+    <h2 id="calendarMonth">Calendar</h2>
+        <div class="calendar-nav">
+            <button type="button" id="prevMonth">‹</button>
+            <button type="button" id="nextMonth">›</button>
         </div>
+    </div>
 
-        <div class="legend">
-            <div class="legend-item"><span class="legend-box legend-holiday"></span> Holiday</div>
-            <div class="legend-item"><span class="legend-box legend-partial"></span> Partial Working Day</div>
-            <div class="legend-item"><span class="legend-box legend-today"></span> Today</div>
-        </div>
+    <div class="calendar-weekdays">
+        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div>
+        <div>Thu</div><div>Fri</div><div>Sat</div>
+    </div>
 
-        <div class="calendar-grid" id="calendarGrid"></div>
-
-        <p class="calendar-note">
-            Red = Holiday &nbsp; | &nbsp; Yellow = Partial Working Day
-        </p>
-
-        <!-- ============================= -->
-        <!-- HOLIDAY TABLE -->
-        <!-- ============================= -->
-        <div class="holiday-table-wrap">
-            <h2 class="holiday-table-title">HOLIDAY LIST 2026</h2>
-            <div class="holiday-table-scroll">
-                <table class="holiday-table">
-                    <thead>
-                        <tr>
-                            <th>Month and Date</th>
-                            <th>Name of Holiday</th>
-                            <th>Days of the Week</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Christmas and New Year Holidays 2025</td><td>January 2</td><td>Friday</td></tr>
-                        <tr><td>Makar Sankranti/Magh Bihu/Pongal 2026</td><td>January 14</td><td>Wednesday</td></tr>
-                        <tr><td>Republic Day 2026</td><td>January 26</td><td>Monday</td></tr>
-                        <tr><td>Holi Holidays 2026</td><td>March 2 To March 7</td><td>Monday To Saturday</td></tr>
-                        <tr><td>Id-ul-Fitr 2026</td><td>March 21</td><td>Saturday</td></tr>
-                        <tr><td>Ram Navami 2026</td><td>March 26</td><td>Thursday</td></tr>
-                        <tr><td>Local Holiday 2026</td><td>March 27</td><td>Friday</td></tr>
-                        <tr><td>Local Holiday 2026</td><td>March 30</td><td>Monday</td></tr>
-                        <tr><td>Mahavir Jayanti 2026</td><td>March 31</td><td>Tuesday</td></tr>
-                        <tr><td>Good Friday 2026</td><td>April 3</td><td>Friday</td></tr>
-                        <tr><td>Budha Purnima 2026</td><td>May 1</td><td>Friday</td></tr>
-                        <tr><td>Id-ul-Zuha (Bakrid) 2026</td><td>May 27</td><td>Wednesday</td></tr>
-                        <tr class="partial-row"><td>Partial Court Working Days</td><td>June 1 To July 12</td><td>Monday To Sunday</td></tr>
-                        <tr><td>Muharram 2026</td><td>June 26</td><td>Friday</td></tr>
-                        <tr><td>Independence Day 2026</td><td>August 15</td><td>Saturday</td></tr>
-                        <tr><td>Milad-un-Nabi or Id-e-Milad 2026</td><td>August 26</td><td>Wednesday</td></tr>
-                        <tr><td>Raksha Bandhan 2026</td><td>August 28</td><td>Friday</td></tr>
-                        <tr><td>Janmashtami 2026</td><td>September 4</td><td>Friday</td></tr>
-                        <tr><td>Ganesh Chaturthi 2026</td><td>September 14</td><td>Monday</td></tr>
-                        <tr><td>Mahatma Gandhi's Birthday</td><td>October 2</td><td>Friday</td></tr>
-                        <tr><td>Dussehra Holidays 2026</td><td>October 19 To October 24</td><td>Monday To Saturday</td></tr>
-                        <tr><td>Diwali Holidays 2026</td><td>November 9 To November 14</td><td>Monday To Saturday</td></tr>
-                        <tr><td>Guru Nanak's Birthday 2026</td><td>November 24</td><td>Tuesday</td></tr>
-                        <tr><td>Christmas and New Year Holidays 2026</td><td>December 21 To January 1</td><td>Monday To Friday</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
+    <div class="calendar-days" id="calendarDays"></div>
+    <div class="calendar-selected" id="calendarSelected">
+        Select a date to view a history note.
     </div>
 </div>
+
+<div class="holidays-table-section" aria-label="Holidays table">
+    <h2>HOLIDAYS &amp; PARTIAL WORKING DAYS</h2>
+    <div class="holiday-legend">
+        <span><span class="legend-box legend-red"></span>Holiday</span>
+        <span><span class="legend-box legend-yellow"></span>Partial Working Day</span>
+        <span><span class="legend-box legend-blue"></span>Today</span>
+    </div>
+    <p style="font-size:22px;text-align:center;margin:0 0 18px;color:#0fb7ff;">
+        <strong>Every Sunday is marked as a Holiday.</strong>
+    </p>
+    <div class="holidays-table-wrap">
+        <table class="holidays-table">
+            <thead>
+                <tr>
+                    <th>Holiday / Occasion</th>
+                    <th>Date</th>
+                    <th>Day</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="holiday-row"><td>Christmas and New Year Holidays 2025</td><td>January 2</td><td>Friday</td></tr>
+                <tr class="holiday-row"><td>Makar Sankranti/Magh Bihu/Pongal 2026</td><td>January 14</td><td>Wednesday</td></tr>
+                <tr class="holiday-row"><td>Republic Day 2026</td><td>January 26</td><td>Monday</td></tr>
+                <tr class="holiday-row"><td>Holi Holidays 2026</td><td>March 2 To March 7</td><td>Monday To Saturday</td></tr>
+                <tr class="holiday-row"><td>Id-ul-Fitr 2026</td><td>March 21</td><td>Saturday</td></tr>
+                <tr class="holiday-row"><td>Ram Navami 2026</td><td>March 26</td><td>Thursday</td></tr>
+                <tr class="holiday-row"><td>Local Holiday 2026</td><td>March 27</td><td>Friday</td></tr>
+                <tr class="holiday-row"><td>Local Holiday 2026</td><td>March 30</td><td>Monday</td></tr>
+                <tr class="holiday-row"><td>Mahavir Jayanti 2026</td><td>March 31</td><td>Tuesday</td></tr>
+                <tr class="holiday-row"><td>Good Friday 2026</td><td>April 3</td><td>Friday</td></tr>
+                <tr class="holiday-row"><td>Budha Purnima 2026</td><td>May 1</td><td>Friday</td></tr>
+                <tr class="holiday-row"><td>Id-ul-Zuha (Bakrid) 2026</td><td>May 27</td><td>Wednesday</td></tr>
+                <tr class="partial-row"><td>Partial Court Working Days</td><td>June 1 To July 12</td><td>Monday To Sunday</td></tr>
+                <tr class="holiday-row"><td>Muharram 2026</td><td>June 26</td><td>Friday</td></tr>
+                <tr class="holiday-row"><td>Independence Day 2026</td><td>August 15</td><td>Saturday</td></tr>
+                <tr class="holiday-row"><td>Milad-un-Nabi or Id-e-Milad 2026</td><td>August 26</td><td>Wednesday</td></tr>
+                <tr class="holiday-row"><td>Raksha Bandhan 2026</td><td>August 28</td><td>Friday</td></tr>
+                <tr class="holiday-row"><td>Janmashtami 2026</td><td>September 4</td><td>Friday</td></tr>
+                <tr class="holiday-row"><td>Ganesh Chaturthi 2026</td><td>September 14</td><td>Monday</td></tr>
+                <tr class="holiday-row"><td>Mahatma Gandhi's Birthday</td><td>October 2</td><td>Friday</td></tr>
+                <tr class="holiday-row"><td>Dussehra Holidays 2026</td><td>October 19 To October 24</td><td>Monday To Saturday</td></tr>
+                <tr class="holiday-row"><td>Diwali Holidays 2026</td><td>November 9 To November 14</td><td>Monday To Saturday</td></tr>
+                <tr class="holiday-row"><td>Guru Nanak's Birthday 2026</td><td>November 24</td><td>Tuesday</td></tr>
+                <tr class="holiday-row"><td>Christmas and New Year Holidays 2026</td><td>December 21 To January 1</td><td>Monday To Friday</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+(() => {
+    const monthTitle = document.getElementById("calendarMonth");
+    const daysContainer = document.getElementById("calendarDays");
+    const selected = document.getElementById("calendarSelected");
+    const prev = document.getElementById("prevMonth");
+    const next = document.getElementById("nextMonth");
+    const calendarClock = document.getElementById("calendarClock");
+
+    function updateCalendarClock() {
+        if (!calendarClock) return;
+        const now = new Date();
+        calendarClock.textContent =
+            `${String(now.getHours()).padStart(2, "0")}:` +
+            `${String(now.getMinutes()).padStart(2, "0")}:` +
+            `${String(now.getSeconds()).padStart(2, "0")}`;
+    }
+
+    updateCalendarClock();
+    setInterval(updateCalendarClock, 1000);
+
+
+    let viewDate = new Date();
+
+    const events = {
+        "1-26": "Republic Day / Constitution in force",
+        "1-28": "Supreme Court established (1950)",
+        "10-1": "Federal Court began functioning (1937)",
+        "11-26": "Constitution adopted (1949)"
+    };
+
+    const holidayRanges = [
+        {start:"2025-01-02", end:"2025-01-02", name:"Christmas and New Year Holidays 2025", type:"holiday"},
+        {start:"2026-01-14", end:"2026-01-14", name:"Makar Sankranti/Magh Bihu/Pongal 2026", type:"holiday"},
+        {start:"2026-01-26", end:"2026-01-26", name:"Republic Day 2026", type:"holiday"},
+        {start:"2026-03-02", end:"2026-03-07", name:"Holi Holidays 2026", type:"holiday"},
+        {start:"2026-03-21", end:"2026-03-21", name:"Id-ul-Fitr 2026", type:"holiday"},
+        {start:"2026-03-26", end:"2026-03-26", name:"Ram Navami 2026", type:"holiday"},
+        {start:"2026-03-27", end:"2026-03-27", name:"Local Holiday 2026", type:"holiday"},
+        {start:"2026-03-30", end:"2026-03-30", name:"Local Holiday 2026", type:"holiday"},
+        {start:"2026-03-31", end:"2026-03-31", name:"Mahavir Jayanti 2026", type:"holiday"},
+        {start:"2026-04-03", end:"2026-04-03", name:"Good Friday 2026", type:"holiday"},
+        {start:"2026-05-01", end:"2026-05-01", name:"Budha Purnima 2026", type:"holiday"},
+        {start:"2026-05-27", end:"2026-05-27", name:"Id-ul-Zuha (Bakrid) 2026", type:"holiday"},
+        {start:"2026-06-01", end:"2026-07-12", name:"Partial Court Working Days", type:"partial"},
+        {start:"2026-06-26", end:"2026-06-26", name:"Muharram 2026", type:"holiday"},
+        {start:"2026-08-15", end:"2026-08-15", name:"Independence Day 2026", type:"holiday"},
+        {start:"2026-08-26", end:"2026-08-26", name:"Milad-un-Nabi or Id-e-Milad 2026", type:"holiday"},
+        {start:"2026-08-28", end:"2026-08-28", name:"Raksha Bandhan 2026", type:"holiday"},
+        {start:"2026-09-04", end:"2026-09-04", name:"Janmashtami 2026", type:"holiday"},
+        {start:"2026-09-14", end:"2026-09-14", name:"Ganesh Chaturthi 2026", type:"holiday"},
+        {start:"2026-10-02", end:"2026-10-02", name:"Mahatma Gandhi's Birthday", type:"holiday"},
+        {start:"2026-10-19", end:"2026-10-24", name:"Dussehra Holidays 2026", type:"holiday"},
+        {start:"2026-11-09", end:"2026-11-14", name:"Diwali Holidays 2026", type:"holiday"},
+        {start:"2026-11-24", end:"2026-11-24", name:"Guru Nanak's Birthday 2026", type:"holiday"},
+        {start:"2026-12-21", end:"2027-01-01", name:"Christmas and New Year Holidays 2026", type:"holiday"}
+    ];
+
+    function pad(n){ return String(n).padStart(2,"0"); }
+
+    function getDateInfo(year, month, day){
+        const dateKey = `${year}-${pad(month + 1)}-${pad(day)}`;
+        return holidayRanges.find(range => dateKey >= range.start && dateKey <= range.end);
+    }
+
+    function renderCalendar() {
+        const year = viewDate.getFullYear();
+        const month = viewDate.getMonth();
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        monthTitle.textContent = viewDate.toLocaleString("en-IN", {
+            month: "long",
+            year: "numeric"
+        });
+
+        daysContainer.innerHTML = "";
+
+        for (let i = 0; i < firstDay; i++) {
+            const empty = document.createElement("div");
+            empty.className = "calendar-day empty";
+            daysContainer.appendChild(empty);
+        }
+
+        const today = new Date();
+        today.setHours(0,0,0,0);
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            const cell = document.createElement("div");
+            cell.className = "calendar-day";
+
+            const cellDate = new Date(year, month, day);
+            cellDate.setHours(0,0,0,0);
+
+            if (cellDate.getTime() === today.getTime()) {
+                cell.classList.add("today");
+            }
+
+            const info = getDateInfo(year, month, day);
+            const isSunday = cellDate.getDay() === 0;
+
+            if (info) {
+                cell.classList.add(info.type);
+            }
+
+            if (isSunday) {
+                cell.classList.add("sunday");
+                if (!info) {
+                    cell.classList.add("holiday");
+                }
+            }
+
+            const number = document.createElement("span");
+            number.className = "calendar-day-number";
+            number.textContent = day;
+            cell.appendChild(number);
+
+            const key = `${month + 1}-${day}`;
+            if (events[key]) {
+                const event = document.createElement("span");
+                event.className = "calendar-event";
+                event.textContent = events[key];
+                cell.appendChild(event);
+            }
+
+            if (info) {
+                const holidayEvent = document.createElement("span");
+                holidayEvent.className = "calendar-event";
+                holidayEvent.textContent = info.name;
+                cell.appendChild(holidayEvent);
+            } else if (isSunday) {
+                const sundayEvent = document.createElement("span");
+                sundayEvent.className = "calendar-event";
+                sundayEvent.textContent = "Sunday — Holiday";
+                cell.appendChild(sundayEvent);
+            }
+
+            cell.addEventListener("click", () => {
+                if (info) {
+                    selected.textContent =
+                        `${day} ${monthTitle.textContent}: ${info.name}` +
+                        (info.type === "partial"
+                            ? " — Partial Court Working Day"
+                            : " — Holiday");
+                } else if (isSunday) {
+                    selected.textContent = `${day} ${monthTitle.textContent}: Sunday — Holiday`;
+                } else if (events[key]) {
+                    selected.textContent = `${day} ${monthTitle.textContent}: ${events[key]}`;
+                } else {
+                    selected.textContent =
+                        `${day} ${monthTitle.textContent}: No holiday or historical event added for this date.`;
+                }
+            });
+
+            daysContainer.appendChild(cell);
+        }
+    }
+
+    prev.addEventListener("click", () => {
+        viewDate.setMonth(viewDate.getMonth() - 1);
+        renderCalendar();
+    });
+
+    next.addEventListener("click", () => {
+        viewDate.setMonth(viewDate.getMonth() + 1);
+        renderCalendar();
+    });
+
+    renderCalendar();
+})();
+</script>
+
 </section>
 
 <footer>
@@ -667,246 +1357,104 @@ footer{
 </div>
 
 <script>
-/* =====================================================
-   HOLIDAYS
-===================================================== */
-
-const holidays = new Set([
-    // ================= SUNDAYS =================
-    "2026-01-04","2026-01-11","2026-01-18","2026-01-25",
-    "2026-02-01","2026-02-08","2026-02-15","2026-02-22",
-    "2026-03-01","2026-03-08","2026-03-15","2026-03-22","2026-03-29",
-    "2026-04-05","2026-04-12","2026-04-19","2026-04-26",
-    "2026-05-03","2026-05-10","2026-05-17","2026-05-24","2026-05-31",
-    "2026-06-07","2026-06-14","2026-06-21","2026-06-28",
-    "2026-07-05","2026-07-12","2026-07-19","2026-07-26",
-    "2026-08-02","2026-08-09","2026-08-16","2026-08-23","2026-08-30",
-    "2026-09-06","2026-09-13","2026-09-20","2026-09-27",
-    "2026-10-04","2026-10-11","2026-10-18","2026-10-25",
-    "2026-11-01","2026-11-08","2026-11-15","2026-11-22","2026-11-29",
-    "2026-12-06","2026-12-13","2026-12-20","2026-12-27",
-
-    // ================= SPECIAL HOLIDAYS =================
-    "2026-01-01","2026-01-02","2026-01-14","2026-01-26",
-
-    // 2 March to 7 March
-    "2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-07",
-
-    "2026-03-21","2026-03-26","2026-03-27","2026-03-30","2026-03-31",
-    "2026-04-03",
-    "2026-05-01","2026-05-27",
-    "2026-08-15","2026-08-26","2026-08-28",
-    "2026-09-04","2026-09-14",
-    "2026-10-02",
-
-    // 19 October to 24 October
-    "2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23","2026-10-24",
-
-    // 9 November to 14 November
-    "2026-11-09","2026-11-10","2026-11-11","2026-11-12","2026-11-13","2026-11-14",
-
-    "2026-11-24",
-
-    // 21 December to 31 December
-    "2026-12-21","2026-12-22","2026-12-23","2026-12-24","2026-12-25",
-    "2026-12-26","2026-12-27","2026-12-28","2026-12-29","2026-12-30","2026-12-31",
-
-    // 2027
-    "2027-01-01"
-]);
-
-/* =====================================================
-   PARTIAL COURT WORKING DAYS
-===================================================== */
-
-const partialWorkingDays = new Set([
-    // ================= JUNE 2026 =================
-    "2026-06-01","2026-06-02","2026-06-03","2026-06-04","2026-06-05","2026-06-06",
-    "2026-06-07","2026-06-08","2026-06-09","2026-06-10","2026-06-11","2026-06-12",
-    "2026-06-13","2026-06-14","2026-06-15","2026-06-16","2026-06-17","2026-06-18",
-    "2026-06-19","2026-06-20","2026-06-21","2026-06-22","2026-06-23","2026-06-24",
-    "2026-06-25","2026-06-26","2026-06-27","2026-06-28","2026-06-29","2026-06-30",
-
-    // ================= JULY 1–12 =================
-    "2026-07-01","2026-07-02","2026-07-03","2026-07-04","2026-07-05","2026-07-06",
-    "2026-07-07","2026-07-08","2026-07-09","2026-07-10","2026-07-11","2026-07-12"
-]);
-
-/* =====================================================
-   CALENDAR
-===================================================== */
-
-const calendarGrid = document.getElementById("calendarGrid");
-const monthTitle = document.getElementById("monthTitle");
-
-const weekdays = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-let currentDate = new Date();
-
-/* Always open on today's actual date every time the page loads. */
-const today = new Date();
-currentDate = new Date(today.getFullYear(), today.getMonth(), 1);
-
-function pad(n){
-    return String(n).padStart(2, "0");
-}
-
-function dateKey(year, month, day){
-    return `${year}-${pad(month + 1)}-${pad(day)}`;
-}
-
-function renderCalendar(){
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-
-    monthTitle.textContent = new Intl.DateTimeFormat("en-IN", {
-        month:"long",
-        year:"numeric"
-    }).format(currentDate);
-
-    calendarGrid.innerHTML = "";
-
-    weekdays.forEach(dayName => {
-        const header = document.createElement("div");
-        header.className = "weekday";
-        header.textContent = dayName;
-        calendarGrid.appendChild(header);
+function showSection(sectionId, clickedButton){
+    document.querySelectorAll(".tab-section").forEach(section=>{
+        section.classList.remove("active");
     });
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    for(let i = 0; i < firstDay; i++){
-        const empty = document.createElement("div");
-        empty.className = "day empty";
-        calendarGrid.appendChild(empty);
-    }
-
-    for(let day = 1; day <= daysInMonth; day++){
-        const key = dateKey(year, month, day);
-        const cell = document.createElement("div");
-        cell.className = "day";
-
-        const isHoliday = holidays.has(key);
-        const isPartial = partialWorkingDays.has(key);
-
-        /* Holiday always wins if a date exists in both lists. */
-        if(isHoliday){
-            cell.classList.add("holiday");
-        }else if(isPartial){
-            cell.classList.add("partial");
-        }
-
-        const isToday =
-            year === today.getFullYear() &&
-            month === today.getMonth() &&
-            day === today.getDate();
-
-        if(isToday) cell.classList.add("today");
-
-        const number = document.createElement("div");
-        number.className = "day-number";
-        number.textContent = day;
-        cell.appendChild(number);
-
-        if(isHoliday || isPartial){
-            const status = document.createElement("span");
-            status.className = "day-status";
-            status.textContent = isHoliday ? "Holiday" : "Partial Working";
-            cell.appendChild(status);
-        }
-
-        calendarGrid.appendChild(cell);
-    }
-}
-
-document.getElementById("prevMonth").addEventListener("click", () => {
-    currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
-    renderCalendar();
-});
-
-document.getElementById("nextMonth").addEventListener("click", () => {
-    currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
-    renderCalendar();
-});
-
-document.getElementById("todayBtn").addEventListener("click", () => {
-    currentDate = new Date(today.getFullYear(), today.getMonth(), 1);
-    renderCalendar();
-});
-
-/* ============================= */
-/* NAV POPUP MENUS */
-/* ============================= */
-
-function buildNavPopupMenus(){
-    document.querySelectorAll(".nav-dropdown[data-popup]").forEach(function(navItem){
-        const popupId=navItem.getAttribute("data-popup");
-        const sourcePopup=document.getElementById(popupId);
-        if(!sourcePopup)return;
-        const sourceGrid=sourcePopup.querySelector(".popup-grid");
-        if(!sourceGrid)return;
-
-        const menu=document.createElement("div");
-        menu.className="nav-popup-menu";
-        menu.setAttribute("role","menu");
-
-        sourceGrid.querySelectorAll("a").forEach(function(sourceLink){
-            const link=sourceLink.cloneNode(true);
-            link.setAttribute("role","menuitem");
-            menu.appendChild(link);
-        });
-
-        navItem.appendChild(menu);
+    document.querySelectorAll(".asrp-buttons button").forEach(button=>{
+        button.classList.remove("active");
     });
+
+    document.getElementById(sectionId).classList.add("active");
+    clickedButton.classList.add("active");
 }
 
-function openPopup(popupId){
-    const popup=document.getElementById(popupId);
-    if(popup){
-        popup.classList.add("active");
-        document.body.style.overflow="hidden";
-    }
-}
 
-function closePopup(popupId){
-    const popup=document.getElementById(popupId);
-    if(popup){
-        popup.classList.remove("active");
-        document.body.style.overflow="";
-    }
-}
-
-buildNavPopupMenus();
+/* =========================================
+   NAVBAR CLICK → CENTER POPUP
+========================================= */
 
 document.querySelectorAll(".nav-dropdown .nav-trigger").forEach(function(trigger){
-    trigger.addEventListener("click",function(event){
-        if(window.matchMedia("(max-width:600px)").matches){
-            event.preventDefault();
-            const navItem=trigger.closest(".nav-dropdown");
-            openPopup(navItem.getAttribute("data-popup"));
-        }
-    });
-});
 
-document.querySelectorAll(".popup-overlay").forEach(function(popup){
-    popup.addEventListener("click",function(event){
-        if(event.target===popup){
-            popup.classList.remove("active");
-            document.body.style.overflow="";
-        }
-    });
-});
+    trigger.addEventListener("click", function(event){
 
-document.addEventListener("keydown",function(event){
-    if(event.key==="Escape"){
+        event.preventDefault();
+        event.stopPropagation();
+
+        const navItem = trigger.closest(".nav-dropdown");
+        const popupId = navItem.getAttribute("data-popup");
+
+        /* Close any other popup first */
         document.querySelectorAll(".popup-overlay").forEach(function(popup){
             popup.classList.remove("active");
         });
-        document.body.style.overflow="";
-    }
+
+        /* Open selected popup in center */
+        openPopup(popupId);
+    });
+
 });
 
-renderCalendar();
+
+function openPopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
+
+}
+
+
+function closePopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+}
+
+
+/* =========================================
+   CLICK OUTSIDE → CLOSE
+========================================= */
+
+document.querySelectorAll(".popup-overlay").forEach(function(popup){
+
+    popup.addEventListener("click", function(event){
+
+        if(event.target === popup){
+            popup.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   ESC → CLOSE
+========================================= */
+
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Escape"){
+
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        document.body.style.overflow = "";
+    }
+
+});
 </script>
 
 </body>
