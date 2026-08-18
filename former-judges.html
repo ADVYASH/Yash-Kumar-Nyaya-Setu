@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORMER JUDGES | NYAYA SETU</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<style id="theme-vars">
+:root{
+    --theme-primary:var(--theme-primary);
+    --theme-primary-soft:var(--theme-primary-glow);
+    --theme-primary-glow:var(--theme-primary-glow);
+    --theme-primary-border:var(--theme-primary-glow);
+}
+
+/* NAVBAR BUTTON BOX */
+.navbar a,
+.navbar button,
+nav a,
+nav button {
+    border: 1px solid rgba(33,150,255,.55);
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: rgba(33,150,255,.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar a:hover,
+.navbar button:hover,
+nav a:hover,
+nav button:hover {
+    background: rgba(33,150,255,.16);
+}
+
+
+/* POPUP BUTTON TEXT SIZE */
+.popup button,
+.popup .btn,
+.modal button,
+.modal .btn,
+.popup-buttons button,
+.popup-buttons .btn {
+    font-size: 20px;
+}
+
+</style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+html{scroll-behavior:smooth}
+body{background:#0b0b0b;color:#fff;overflow-x:hidden}
+
+/* ============================= */
+/* SAME NAVBAR + NAV POPUPS */
+/* ============================= */
+
+nav{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    padding:16px 22px;
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(12px);
+    position:sticky;
+    top:0;
+    z-index:10000;
+}
+
+.main-nav{
+    isolation:isolate;
+}
+
+.nav-dropdown{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+.nav-trigger,
+.nav-home{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    position:relative;
+    padding:13px 18px;
+    min-height:46px;
+    border-radius:12px;
+    transition:.25s ease;
+    white-space:nowrap;
+    font-size:15px;
+    letter-spacing:.2px;
+}
+
+.nav-trigger:hover,
+.nav-home:hover{
+    color:#fff;
+    background:rgba(20,20,25,.96);
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 0 18px rgba(0,149,255,.20);
+}
+
+.nav-trigger::after,
+.nav-home::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-1px;
+    width:100%;
+    height:3px;
+    background:#0095ff;
+    border-radius:3px 3px 0 0;
+    transform:scaleX(0);
+    transform-origin:center;
+    transition:.22s ease;
+}
+
+.nav-trigger:hover::after,
+.nav-home:hover::after{
+    transform:scaleX(1);
+}
+
+/* ============================= */
+/* ABOUT PAGE */
+/* ============================= */
+
+.about{
+    min-height:100vh;
+    background:transparent;
+    position:relative;
+    z-index:0;
+    padding:100px 10% 100px;
+    text-align:center;
+}
+.about h1{
+    font-family:"Permanent Marker", cursive;
+    font-size:42px;
+    font-weight:700;
+    letter-spacing:3px;
+    color:#0095ff;
+    display:inline-block;
+    position:relative;
+    padding-bottom:12px;
+    text-shadow:0 0 8px rgba(0,149,255,.45);
+    animation:committeePulse 3s ease-in-out infinite;
+}
+
+/* Text animation */
+@keyframes committeePulse{
+    0%,100%{
+        transform:scale(1);
+        letter-spacing:3px;
+    }
+
+    50%{
+        transform:scale(1.03);
+        letter-spacing:5px;
+    }
+}
+
+/* Animated underline */
+.about h1::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width:0;
+    height:3px;
+    background:#0095ff;
+    border-radius:10px;
+    box-shadow:
+        0 0 8px #0095ff,
+        0 0 18px #0095ff;
+    transform:translateX(-50%);
+    animation:lineExpand 2s ease-in-out infinite;
+}
+
+@keyframes lineExpand{
+    0%,100%{
+        width:0;
+        opacity:.3;
+    }
+
+    40%{
+        width:100%;
+        opacity:1;
+    }
+
+    70%{
+        width:100%;
+        opacity:1;
+    }
+
+    90%{
+        width:0;
+        opacity:.3;
+    }
+}
+.intro{max-width:1100px;margin:0 auto;font-size:24px;line-height:1.7;opacity:.9}
+.container{max-width:950px;margin:0 auto}
+.asrp-buttons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin:55px auto 30px;
+    max-width:1000px;
+}
+.asrp-buttons button{
+    background:rgba(0,0,0,.78);
+    color:#fff;
+    border:1px solid rgba(33,150,255,.5);
+    padding:15px 25px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s ease;
+    box-shadow:0 0 8px rgba(33,150,255,.15);
+}
+.asrp-buttons button:hover,
+.asrp-buttons button.active{
+    background:#2196ff;
+    color:#000;
+    transform:translateY(-4px);
+    box-shadow:0 0 10px #2196ff,0 0 25px rgba(33,150,255,.6);
+}
+.section{
+    margin-top:25px;
+    background:rgba(0,0,0,.68);
+    padding:40px;
+    border-radius:14px;
+    border:1px solid rgba(33,150,255,.25);
+    box-shadow:0 0 25px rgba(33,150,255,.06),inset 0 0 20px rgba(33,150,255,.02);
+}
+.tab-section{display:none}
+.tab-section.active{display:block;animation:sectionFade .45s ease}
+@keyframes sectionFade{
+    from{opacity:0;transform:translateY(20px) scale(.98)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+.section h2{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    color:#2196ff;
+    margin-bottom:25px;
+    font-size:30px;
+    text-shadow:0 0 12px rgba(33,150,255,.5);
+}
+.emoji-text{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    text-align:left;
+    margin-bottom:22px;
+    line-height:1.7;
+    font-size:16px;
+    opacity:.9;
+}
+.emoji-text:last-child{margin-bottom:0}
+.emoji-text img{height:45px;width:45px;object-fit:contain;flex-shrink:0}
+
+/* ============================= */
+/* SAME FULL POPUPS */
+/* ============================= */
+
+.popup-overlay{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(10px);
+    z-index:99999;
+}
+.popup-overlay.active{display:flex;animation:popupFade .25s ease}
+.popup-box{
+    position:relative;
+    width:min(900px,95vw);
+    max-height:85vh;
+    overflow-y:auto;
+    padding:35px;
+    background:rgba(20,20,25,.92);
+    backdrop-filter:blur(25px);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:22px;
+    box-shadow:0 0 40px rgba(0,0,0,.5),0 0 80px rgba(33,150,255,.12);
+    animation:popupScale .3s ease;
+}
+.popup-box h2{text-align:center;font-size:25px;letter-spacing:2px;margin-bottom:5px}
+.popup-box>p{text-align:center;font-size:13px;opacity:.6;margin-bottom:25px}
+.popup-close{
+    position:absolute;
+    top:15px;right:18px;
+    width:40px;height:40px;
+    border:none;border-radius:50%;
+    background:rgba(255,255,255,.08);
+    color:#fff;font-size:28px;line-height:40px;
+    cursor:pointer;transition:.3s;
+}
+.popup-close:hover{background:#2196ff;transform:rotate(90deg);box-shadow:0 0 20px rgba(33,150,255,.5)}
+.popup-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.popup-grid a{
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:15px;
+    border-radius:14px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    color:#fff;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:700;
+    transition:.3s ease;
+}
+.popup-grid a:hover{
+    transform:translateY(-5px);
+    background:rgba(33,150,255,.18);
+    border-color:#2196ff;
+    box-shadow:0 0 15px rgba(33,150,255,.35);
+}
+@keyframes popupFade{from{opacity:0}to{opacity:1}}
+@keyframes popupScale{
+    from{opacity:0;transform:scale(.9) translateY(20px)}
+    to{opacity:1;transform:scale(1) translateY(0)}
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+footer{
+    background:#050505;
+    padding:35px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:25px;
+    flex-wrap:wrap;
+    border-top:1px solid rgba(33,150,255,.12);
+}
+
+.footer-logo{
+    display:flex;
+    flex-direction:column;
+    min-width:170px;
+}
+
+.footer-logo img{
+    width:150px;
+    margin-bottom:8px;
+}
+
+.footer-logo p{
+    opacity:.7;
+    font-size:15px;
+    margin:3px 0;
+}
+
+.footer-links{
+    min-width:130px;
+}
+
+.footer-links h4{
+    color:#2196ff;
+    margin-bottom:9px;
+    font-size:14px;
+}
+
+.footer-links a{
+    display:block;
+    color:#fff;
+    opacity:.7;
+    text-decoration:none;
+    margin:5px 0;
+    font-size:15px;
+    transition:.3s ease;
+}
+
+.footer-links a:hover{
+    color:#2196ff;
+    opacity:1;
+    transform:translateX(4px);
+}
+
+.bottom{
+    text-align:center;
+    padding:12px;
+    background:#030303;
+    opacity:.75;
+    font-size:16px;
+    border-top:1px solid rgba(255,255,255,.05);
+}
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media(max-width:900px){
+    .nav-popup-menu{
+        width:min(650px,94vw);
+        grid-template-columns:repeat(2,minmax(140px,1fr));
+    }
+}
+@media(max-width:800px){
+    .about{padding:90px 20px 70px;background-attachment:scroll}
+    .about h1{font-size:44px}
+    .intro{font-size:18px;line-height:1.6}
+    .asrp-buttons{gap:10px;margin-top:35px}
+    .asrp-buttons button{width:100%;max-width:350px;padding:14px 18px}
+    .section{padding:25px 20px}
+    .section h2{font-size:23px}
+    .emoji-text{font-size:15px;gap:10px}
+    .emoji-text img{height:38px;width:38px}
+footer{
+    padding:30px 20px;
+    flex-direction:column;
+    gap:20px;
+}
+}
+@media(max-width:600px){
+    .main-nav{
+        justify-content:flex-start;
+        overflow:visible;
+        flex-wrap:nowrap;
+        scrollbar-width:thin;
+    }
+.nav-trigger,.nav-home{
+    font-size:13px;
+    padding:10px 13px;
+    min-height:42px;
+}
+    .nav-popup-menu{
+        position:fixed;
+        top:64px;
+        left:50%;
+        width:94vw;
+        max-height:78vh;
+        grid-template-columns:repeat(2,1fr);
+        transform:translateX(-50%) translateY(-8px);
+    }
+    .nav-dropdown:hover .nav-popup-menu,
+    .nav-dropdown:focus-within .nav-popup-menu{
+        transform:translateX(-50%) translateY(0);
+    }
+    .popup-overlay{padding:15px}
+    .popup-box{padding:25px 18px;max-height:90vh}
+    .popup-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+    .popup-grid a{min-height:65px;padding:10px;font-size:12px}
+}
+@media(max-width:450px){
+    .about h1{font-size:36px}
+    .intro{font-size:17px}
+    .section{padding:22px 16px}
+    .section h2{font-size:20px;gap:5px}
+    .emoji-text{font-size:14px}
+}
+@media(max-width:400px){
+    .nav-popup-menu,.popup-grid{grid-template-columns:1fr}
+}
+
+/* ============================= */
+/* FONT AWESOME BACK ICON */
+/* ============================= */
+.back-icon{margin-right:7px}
+
+/* ============================= */
+/* HISTORY PHOTO GALLERY */
+/* ============================= */
+
+.history-gallery{
+    margin-top:45px;
+    padding-top:35px;
+    border-top:1px solid rgba(33,150,255,.25);
+}
+
+.history-gallery h2{
+    color:#2196ff;
+    margin-bottom:25px;
+    font-size:30px;
+    text-shadow:0 0 12px rgba(33,150,255,.5);
+}
+
+.history-photo-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:22px;
+}
+
+.history-photo{
+    margin:0;
+    overflow:hidden;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(33,150,255,.25);
+    border-radius:14px;
+    box-shadow:0 0 20px rgba(33,150,255,.08);
+    transition:.3s ease;
+}
+
+.history-photo:hover{
+    transform:translateY(-5px);
+    border-color:#2196ff;
+    box-shadow:0 0 25px rgba(33,150,255,.2);
+}
+
+.history-photo img{
+    display:block;
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    background:#111;
+}
+
+.history-photo figcaption{
+    padding:18px;
+    text-align:left;
+}
+
+.history-photo h3{
+    color:#2196ff;
+    margin-bottom:8px;
+    font-size:18px;
+}
+
+.history-photo p{
+    font-size:14px;
+    line-height:1.6;
+    opacity:.85;
+}
+
+@media(max-width:800px){
+    .history-photo-grid{
+        grid-template-columns:1fr;
+    }
+    .history-photo img{
+        height:240px;
+    }
+}
+
+
+/* ============================= */
+/* FULL-PAGE VIDEO BACKGROUND */
+/* ============================= */
+#background-video{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+    pointer-events:none;
+}
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.42);
+    z-index:-1;
+    pointer-events:none;
+}
+
+
+.history-subheading{
+    color:#2196ff;
+    font-size:22px;
+    margin:35px 0 18px;
+    padding-bottom:10px;
+    border-bottom:1px solid rgba(33,150,255,.25);
+    text-align:left;
+    text-shadow:0 0 10px rgba(33,150,255,.35);
+}
+.history-subheading:first-of-type{margin-top:5px}
+
+
+
+.high-court-table-section{
+    margin-top:45px;
+    padding-top:35px;
+    border-top:1px solid rgba(33,150,255,.25);
+}
+.high-court-table-wrap{
+    width:100%;
+    overflow:visible;
+    margin-top:20px;
+    border-radius:12px;
+    border:1px solid rgba(33,150,255,.25);
+}
+.high-court-table{
+    width:100%;
+    min-width:1050px;
+    border-collapse:collapse;
+    background:rgba(0,0,0,.45);
+    text-align:left;
+}
+.high-court-table th,.high-court-table td{
+    padding:15px 14px;
+    border:1px solid rgba(255,255,255,.12);
+    vertical-align:top;
+    line-height:1.55;
+    font-size:14px;
+}
+.high-court-table th{
+    color:#2196ff;
+    background:rgba(33,150,255,.10);
+    font-weight:700;
+    text-align:center;
+}
+.high-court-table td:first-child{
+    text-align:center;
+    font-weight:700;
+    width:65px;
+}
+.high-court-table td:nth-child(2){font-weight:700;min-width:190px}
+.high-court-table td:nth-child(3){text-align:center;white-space:nowrap}
+.high-court-table strong{color:#2196ff}
+.high-court-table tbody tr:hover{background:rgba(33,150,255,.07)}
+@media(max-width:800px){
+    .high-court-table-section{margin-top:35px;padding-top:25px}
+    .high-court-table th,.high-court-table td{padding:12px 10px;font-size:13px}
+}
+
+/* FULL HIGH COURTS TABLE — KEEP ALL ROWS VISIBLE */
+.high-courts-table-wrap{width:100%;overflow:visible !important;}
+.high-courts-table{width:100% !important;min-width:0 !important;table-layout:fixed;border-collapse:collapse;}
+.high-courts-table th,.high-courts-table td{white-space:normal !important;word-break:normal;overflow-wrap:anywhere;vertical-align:top;}
+.high-courts-table th:nth-child(1),.high-courts-table td:nth-child(1){width:6%}
+.high-courts-table th:nth-child(2),.high-courts-table td:nth-child(2){width:20%}
+.high-courts-table th:nth-child(3),.high-courts-table td:nth-child(3){width:13%}
+.high-courts-table th:nth-child(4),.high-courts-table td:nth-child(4){width:22%}
+.high-courts-table th:nth-child(5),.high-courts-table td:nth-child(5){width:39%}
+@media(max-width:800px){.high-courts-table{font-size:11px}.high-courts-table th,.high-courts-table td{padding:8px 5px !important;}}
+
+/* HIGH COURTS TABLE — CENTERED + FULL BORDER */
+.high-courts-table-wrap{
+    width:100%;
+    max-width:1200px;
+    margin:35px auto 0 !important;
+    overflow:visible !important;
+}
+.high-courts-table{
+    width:100% !important;
+    margin:0 auto !important;
+    border:3px solid rgba(33,150,255,.75) !important;
+    border-collapse:collapse !important;
+    border-spacing:0;
+    table-layout:fixed;
+}
+.high-courts-table th,
+.high-courts-table td{
+    border:2px solid rgba(33,150,255,.55) !important;
+    white-space:normal !important;
+    word-break:normal;
+    overflow-wrap:anywhere;
+    vertical-align:top;
+}
+.high-courts-table th{
+    border:3px solid rgba(33,150,255,.75) !important;
+}
+
+
+/* FINAL: CENTER THE HIGH COURTS TABLE */
+.high-courts-table-wrap {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    overflow: visible !important;
+}
+.high-courts-table {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+/* ============================= */
+/* COMMITTEES INFORMATION + PHOTO GALLERY */
+/* ============================= */
+
+.committees-content {
+    width: 100%;
+    padding: 35px 0 55px;
+}
+
+.committees-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.committees-content h2 {
+    color: #2196ff;
+    font-size: 30px;
+    margin: 32px 0 14px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(33,150,255,.35);
+}
+
+.committees-content h2:first-child { margin-top: 0; }
+
+.committees-content p {
+    margin: 0 0 22px;
+    text-align: left;
+    font-size: 22px;
+    line-height: 1.8;
+    color: rgba(255,255,255,.92);
+}
+
+/* FEATURED PHOTO + 34 NAME-ONLY PHOTOS */
+.committee-photo-gallery {
+    margin-top: 45px;
+    padding-top: 35px;
+    border-top: 1px solid rgba(33,150,255,.25);
+}
+
+.committee-featured {
+    max-width: 850px;
+    margin: 0 auto 35px;
+    overflow: hidden;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(33,150,255,.35);
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(33,150,255,.12);
+}
+
+.committee-featured .committee-photo-frame {
+    width: 100%;
+    height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+    padding: 10px;
+}
+
+.committee-featured img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.committee-featured figcaption {
+    padding: 22px 26px 26px;
+    text-align: left;
+}
+
+.committee-featured h3 {
+    color: #2196ff;
+    margin: 0 0 7px;
+    font-size: 28px;
+}
+
+.committee-featured .featured-title {
+    margin: 0 0 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.committee-featured p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.65;
+    opacity: .88;
+}
+
+.committee-photo-row {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.committee-photo-small {
+    margin: 0;
+    overflow: hidden;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(33,150,255,.25);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(33,150,255,.06);
+    transition: .25s ease;
+}
+
+.committee-photo-small:hover {
+    transform: translateY(-4px);
+    border-color: #2196ff;
+    box-shadow: 0 0 20px rgba(33,150,255,.18);
+}
+
+.committee-photo-small .photo-frame {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+    padding: 5px;
+}
+
+.committee-photo-small img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.committee-photo-small figcaption {
+    padding: 9px 6px 11px;
+    text-align: center;
+}
+
+.committee-photo-small h3 {
+    color: #2196ff;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.25;
+}
+
+.committee-pdf-download {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.pdf-download-button {
+    display: inline-block;
+    padding: 13px 28px;
+    border-radius: 8px;
+    background: #2196ff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(33,150,255,.25);
+    transition: .25s ease;
+}
+
+.pdf-download-button:hover {
+    background: #42a5ff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 22px rgba(33,150,255,.4);
+}
+
+@media (max-width: 1100px) {
+    .committee-photo-row { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+@media (max-width: 800px) {
+    .committees-container { padding: 0 20px; }
+    .committees-content h2 { font-size: 24px; }
+    .committees-content p { font-size: 20px; line-height: 1.7; }
+    .committee-featured .committee-photo-frame { height: 360px; }
+    .committee-photo-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 500px) {
+    .committee-photo-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .committee-featured .committee-photo-frame { height: 280px; }
+}
+</style>
+</head>
+
+<body>
+<video id="background-video" autoplay muted loop playsinline preload="auto">
+    <source src="background/tokyo.mp4" type="video/mp4">
+</video>
+
+<nav class="main-nav">
+    <a href="index.html" class="nav-home">Home</a>
+
+    <div class="nav-dropdown" data-popup="aboutPopup">
+        <a href="javascript:void(0)" class="nav-trigger">About</a>
+    </div>
+    <div class="nav-dropdown" data-popup="judgesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Judges</a>
+    </div>
+    <div class="nav-dropdown" data-popup="collegiumPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Publications</a>
+    </div>
+    <div class="nav-dropdown" data-popup="servicesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Services</a>
+    </div>
+    <div class="nav-dropdown" data-popup="eservicesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">e-Services</a>
+    </div>
+    <div class="nav-dropdown" data-popup="advocatesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Advocates</a>
+    </div>
+    <div class="nav-dropdown" data-popup="filingPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Court Filings</a>
+    </div>
+    <div class="nav-dropdown" data-popup="noticesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Notices</a>
+    </div>
+    <div class="nav-dropdown" data-popup="newsPopup">
+        <a href="javascript:void(0)" class="nav-trigger">News &amp; Events</a>
+    </div>
+</nav>
+
+<section class="about"> 
+    <h1>FORMER JUDGES</h1> 
+ 
+    <section class="committee-photo-gallery"> 
+ 
+        <div class="committee-photo-row"> 
+ 
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/1.jpg" alt="1"></div><figcaption><h3>Justice Saiyid Fazl Ali</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/2.jpg" alt="2"></div><figcaption><h3>Justice N. Chandrasekhara Aiyar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/3.jpg" alt="3"></div><figcaption><h3>Justice Ghulam Hasan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/4.jpg" alt="4"></div><figcaption><h3>Justice Vivian Bose</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/5.jpg" alt="5"></div><figcaption><h3>Justice P. Govinda Menon</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/6.jpg" alt="6"></div><figcaption><h3>Justice B. Jagannadhadas</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/7.jpg" alt="7"></div><figcaption><h3>Justice T.L Venkatarama Aiyyar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/8.jpg" alt="8"></div><figcaption><h3>Justice Natwarlal Harilal Bhagwati</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/9.jpg" alt="9"></div><figcaption><h3>Justice J.L. Kapur</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/10.jpg" alt="10"></div><figcaption><h3>Justice S.K Das</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/11.jpg" alt="11"></div><figcaption><h3>Justice Syed Jaffer Imam</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/12.jpg" alt="12"></div><figcaption><h3>Justice N. Rajagopala Ayyangar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/13.jpg" alt="13"></div><figcaption><h3>Justice K.C. Das Gupta</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/14.jpg" alt="14"></div><figcaption><h3>Justice Raghubar Dayal</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/15.jpg" alt="15"></div><figcaption><h3>Justice P. Satyanarayana Raju</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/16.jpg" alt="16"></div><figcaption><h3>Justice J.R. Mudholkar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/17.jpg" alt="17"></div><figcaption><h3>Justice R.S. Bachawat</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/18.jpg" alt="18"></div><figcaption><h3>Justice V. Ramaswami</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/19.jpg" alt="19"></div><figcaption><h3>Justice Vishishtha Bhargava</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/20.jpg" alt="20"></div><figcaption><h3>Justice G.K. Mitter</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/21.jpg" alt="21"></div><figcaption><h3>Justice Subimal Chandra Roy</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/22.jpg" alt="22"></div><figcaption><h3>Justice C.A. Vaidyialingam</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/23.jpg" alt="23"></div><figcaption><h3>Justice I.D. Dua</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/24.jpg" alt="24"></div><figcaption><h3>Justice K.S. Hegde</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/25.jpg" alt="25"></div><figcaption><h3>Justice J.M. Shelat</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/26.jpg" alt="26"></div><figcaption><h3>Justice A.N. Grover</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/27.jpg" alt="27"></div><figcaption><h3>Justice A.K. Mukherjea</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/28.jpg" alt="28"></div><figcaption><h3>Justice D.G. Palekar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/29.jpg" alt="29"></div><figcaption><h3>Justice S.N. Dwivedi</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/30.jpg" alt="30"></div><figcaption><h3>Justice P. Jaganmohan Reddy</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/31.jpg" alt="31"></div><figcaption><h3>Justice A Alagiriswami</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/32.jpg" alt="32"></div><figcaption><h3>Justice Kuttyil Kurien Mathew</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/33.jpg" alt="33"></div><figcaption><h3>Justice Hans Raj Khanna</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/34.jpg" alt="34"></div><figcaption><h3>Justice P.K. Goswami</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/35.jpg" alt="35"></div><figcaption><h3>Justice Jaswant Singh</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/36.jpg" alt="36"></div><figcaption><h3>Justice N.L. Untwalia</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/37.jpg" alt="37"></div><figcaption><h3>Justice P.S. Kailasam</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/38.jpg" alt="38"></div><figcaption><h3>Justice P.N. Shingal</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/39.jpg" alt="39"></div><figcaption><h3>Justice V.R. Krishna Iyer</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/40.jpg" alt="40"></div><figcaption><h3>Justice R.S. Sarkaria</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/41.jpg" alt="41"></div><figcaption><h3>Justice A.C. Gupta</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/42.jpg" alt="42"></div><figcaption><h3>Justice A.D. Koshal</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/43.jpg" alt="43"></div><figcaption><h3>Justice Baharul Islam</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/44.jpg" alt="44"></div><figcaption><h3>Justice D.A. Desai</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/45.jpg" alt="45"></div><figcaption><h3>Justice A. Varadarajan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/46.jpg" alt="46"></div><figcaption><h3>Justice S. Murtaza Fazal Ali</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/47.jpg" alt="47"></div><figcaption><h3>Justice Amrendra Nath Sen</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/48.jpg" alt="48"></div><figcaption><h3>Justice V.D. Tulzapurkar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/49.jpg" alt="49"></div><figcaption><h3>Justice D.P. Madon</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-a/50.jpg" alt="50"></div><figcaption><h3>Justice R.B. Misra</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/51.jpg" alt="51"></div><figcaption><h3>Justice V. Balakrishna Eradi</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/52.jpg" alt="52"></div><figcaption><h3>Justice V. Khalid</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/53.jpg" alt="53"></div><figcaption><h3>Justice O. Chinnappa Reddy</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/54.jpg" alt="54"></div><figcaption><h3>Justice A.P. Sen</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/55.jpg" alt="55"></div><figcaption><h3>Justice M.P. Thakkar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/56.jpg" alt="56"></div><figcaption><h3>Justice S. Natarajan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/57.jpg" alt="57"></div><figcaption><h3>Justice M.M. Dutt</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/58.jpg" alt="58"></div><figcaption><h3>Justice G.L. Oza</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/59.jpg" alt="59"></div><figcaption><h3>Justice D.N. Ojha</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/60.jpg" alt="60"></div><figcaption><h3>Justice K.N. Saikia</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/61.jpg" alt="61"></div><figcaption><h3>Justice B.C. Ray</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/62.jpg" alt="62"></div><figcaption><h3>Justice K. Jagannatha Shetty</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/63.jpg" alt="63"></div><figcaption><h3>Justice M. Fathima Beevi</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/64.jpg" alt="64"></div><figcaption><h3>Justice R.C. Patnaik</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/65.jpg" alt="65"></div><figcaption><h3>Justice S. Ranganathan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/66.jpg" alt="66"></div><figcaption><h3>Justice N.M. Kasliwal</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/67.jpg" alt="67"></div><figcaption><h3>Dr. Justice T.K. Thommen</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/68.jpg" alt="68"></div><figcaption><h3>Justice V. Ramaswami</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/69.jpg" alt="69"></div><figcaption><h3>Justice S. Ratnavel Pandian</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/70.jpg" alt="70"></div><figcaption><h3>Justice K. Jayachandra Reddy</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/71.jpg" alt="71"></div><figcaption><h3>Justice Yogeshwar Dayal</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/72.jpg" alt="72"></div><figcaption><h3>Justice S. Mohan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/73.jpg" alt="73"></div><figcaption><h3>Justice R.M. Sahai</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/74.jpg" alt="74"></div><figcaption><h3>Justice P.B. Sawant</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/75.jpg" alt="75"></div><figcaption><h3>Justice V.N. Venkatachala</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/76.jpg" alt="76"></div><figcaption><h3>Justice B.L. Hansaria</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/77.jpg" alt="77"></div><figcaption><h3>Justice N.P. Singh</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/78.jpg" alt="78"></div><figcaption><h3>Justice Kuldeep Singh</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/79.jpg" alt="79"></div><figcaption><h3>Justice Faizan Uddin</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/80.jpg" alt="80"></div><figcaption><h3>Justice B.P. Jeevan Reddy</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/81.jpg" alt="81"></div><figcaption><h3>Justice K.S. Pandeepan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/82.jpg" alt="82"></div><figcaption><h3>Justice K. Ramaswamy</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/83.jpg" alt="83"></div><figcaption><h3>Justice S.C. Sen</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/84.jpg" alt="84"></div><figcaption><h3>Justice G.N. Ray</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/85.jpg" alt="85"></div><figcaption><h3>Justice S.C. Agarwal</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/86.jpg" alt="86"></div><figcaption><h3>Justice M.K. Mukherjee</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/87.jpg" alt="87"></div><figcaption><h3>Justice Sujata V. Manohar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/88.jpg" alt="88"></div><figcaption><h3>Justice K. Venkataswami</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/89.jpg" alt="89"></div><figcaption><h3>Justice S.P. Kurdukar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/90.jpg" alt="90"></div><figcaption><h3>Justice G.T. Nanavati</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/91.jpg" alt="91"></div><figcaption><h3>Justice M. Srinivasan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/92.jpg" alt="92"></div><figcaption><h3>Justice D.P. Wadhwa</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/93.jpg" alt="93"></div><figcaption><h3>Justice S. Saghir Ahmad</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/94.jpg" alt="94"></div><figcaption><h3>Justice S.B. Majmudar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/95.jpg" alt="95"></div><figcaption><h3>Justice M. Jagannadha Rao</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/96.jpg" alt="96"></div><figcaption><h3>Justice Ajay Prakash Misra</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/97.jpg" alt="97"></div><figcaption><h3>Justice K.T. Thomas</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/98.jpg" alt="98"></div><figcaption><h3>Justice S.N. Phukan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/99.jpg" alt="99"></div><figcaption><h3>Justice B.B. Sethi</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-b/100.jpg" alt="100"></div><figcaption><h3>Justice D.P. Mohapatra</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/1.jpg" alt="Justice U.C. Banerjee"></div><figcaption><h3>Justice U.C. Banerjee</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/2.jpg" alt="Justice S.S.M. Quadri"></div><figcaption><h3>Justice S.S.M. Quadri</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/3.jpg" alt="Justice M.B. Shah"></div><figcaption><h3>Justice M.B. Shah</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/4.jpg" alt="Justice Brijesh Kumar"></div><figcaption><h3>Justice Brijesh Kumar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/5.jpg" alt="Justice Doraiswamy Raju"></div><figcaption><h3>Justice Doraiswamy Raju</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/6.jpg" alt="Justice Shivraj V. Patil"></div><figcaption><h3>Justice Shivraj V. Patil</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/7.jpg" alt="Justice N. Santosh Hegde"></div><figcaption><h3>Justice N. Santosh Hegde</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/8.jpg" alt="Justice P. Venkatarama Reddi"></div><figcaption><h3>Justice P. Venkatarama Reddi</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/9.jpg" alt="Justice D.M. Dharmadhikari"></div><figcaption><h3>Justice D.M. Dharmadhikari</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/10.jpg" alt="Justice S.N. Variava"></div><figcaption><h3>Justice S.N. Variava</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/11.jpg" alt="Justice Arun Kumar"></div><figcaption><h3>Justice Arun Kumar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/12.jpg" alt="Justice B.N. Srikrishna"></div><figcaption><h3>Justice B.N. Srikrishna</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/13.jpg" alt="Justice Ruma Pal"></div><figcaption><h3>Justice Ruma Pal</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/14.jpg" alt="Dr. Justice A.R. Lakshmanan"></div><figcaption><h3>Dr. Justice A.R. Lakshmanan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/15.jpg" alt="Justice B.P. Singh"></div><figcaption><h3>Justice B.P. Singh</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/16.jpg" alt="Justice P.K. Balasubramanyan"></div><figcaption><h3>Justice P.K. Balasubramanyan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/17.jpg" alt="Justice G.P. Mathur"></div><figcaption><h3>Justice G.P. Mathur</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/18.jpg" alt="Justice H.K. Sema"></div><figcaption><h3>Justice H.K. Sema</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/19.jpg" alt="Justice P.P. Naolekar"></div><figcaption><h3>Justice P.P. Naolekar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/20.jpg" alt="Justice A.K. Mathur"></div><figcaption><h3>Justice A.K. Mathur</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/21.jpg" alt="Justice Ashok Bhan"></div><figcaption><h3>Justice Ashok Bhan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/22.jpg" alt="Justice C.K. Thakker"></div><figcaption><h3>Justice C.K. Thakker</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/23.jpg" alt="Justice Lokeshwar Singh Panta"></div><figcaption><h3>Justice Lokeshwar Singh Panta</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/24.jpg" alt="Dr. Justice Arijit Pasayat"></div><figcaption><h3>Dr. Justice Arijit Pasayat</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/25.jpg" alt="Justice S.B. Sinha"></div><figcaption><h3>Justice S.B. Sinha</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/26.jpg" alt="Justice B.N. Agarwal"></div><figcaption><h3>Justice B.N. Agarwal</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/27.jpg" alt="Justice Tarun Chatterjee"></div><figcaption><h3>Justice Tarun Chatterjee</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/28.jpg" alt="Justice B. Sudershan Reddy"></div><figcaption><h3>Justice B. Sudershan Reddy</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/29.jpg" alt="Justice V.S. Sirpurkar"></div><figcaption><h3>Justice V.S. Sirpurkar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/30.jpg" alt="Justice H.S. Bedi"></div><figcaption><h3>Justice H.S. Bedi</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/31.jpg" alt="Justice Mukundakam Sharma"></div><figcaption><h3>Justice Mukundakam Sharma</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/32.jpg" alt="Justice Markandey Katju"></div><figcaption><h3>Justice Markandey Katju</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/33.jpg" alt="Justice J.M. Panchal"></div><figcaption><h3>Justice J.M. Panchal</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/34.jpg" alt="Justice R.V. Raveendran"></div><figcaption><h3>Justice R.V. Raveendran</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/35.jpg" alt="Justice Cyriac Joseph"></div><figcaption><h3>Justice Cyriac Joseph</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/36.jpg" alt="Justice A.K. Ganguly"></div><figcaption><h3>Justice A.K. Ganguly</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/37.jpg" alt="Justice Dalveer Bhandari"></div><figcaption><h3>Justice Dalveer Bhandari</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/38.jpg" alt="Justice Deepak Verma"></div><figcaption><h3>Justice Deepak Verma</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/39.jpg" alt="Justice Swatanter Kumar"></div><figcaption><h3>Justice Swatanter Kumar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/40.jpg" alt="Justice D.K. Jain"></div><figcaption><h3>Justice D.K. Jain</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/41.jpg" alt="Justice Aftab Alam"></div><figcaption><h3>Justice Aftab Alam</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/42.jpg" alt="Justice G.S. Singhvi"></div><figcaption><h3>Justice G.S. Singhvi</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/43.jpg" alt="Justice H.L. Gokhale"></div><figcaption><h3>Justice H.L. Gokhale</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/44.jpg" alt="Justice Gyan Sudha Misra"></div><figcaption><h3>Justice Gyan Sudha Misra</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/45.jpg" alt="Justice K.S. Radhakrishnan"></div><figcaption><h3>Justice K.S. Radhakrishnan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/46.jpg" alt="Justice A.K. Patnaik"></div><figcaption><h3>Justice A.K. Patnaik</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/47.jpg" alt="Justice S.S. Nijjar"></div><figcaption><h3>Justice S.S. Nijjar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/48.jpg" alt="Dr. Justice B.S. Chauhan"></div><figcaption><h3>Dr. Justice B.S. Chauhan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/49.jpg" alt="Justice C.K. Prasad"></div><figcaption><h3>Justice C.K. Prasad</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/50.jpg" alt="Justice Ranjana Prakash Desai"></div><figcaption><h3>Justice Ranjana Prakash Desai</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/51.jpg" alt="Justice S.J. Mukhopadhaya"></div><figcaption><h3>Justice S.J. Mukhopadhaya</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/52.jpg" alt="Justice Vikramajit Sen"></div><figcaption><h3>Justice Vikramajit Sen</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/53.jpg" alt="Justice M.Y. Eqbal"></div><figcaption><h3>Justice M.Y. Eqbal</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/54.jpg" alt="Justice Fakir Mohamed Ibrahim Kalifulla"></div><figcaption><h3>Justice Fakir Mohamed Ibrahim Kalifulla</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/55.jpg" alt="Justice Chockalingam Nagappan"></div><figcaption><h3>Justice Chockalingam Nagappan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/56.jpg" alt="Justice V. Gopala Gowda"></div><figcaption><h3>Justice V. Gopala Gowda</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/57.jpg" alt="Justice Shiva Kirti Singh"></div><figcaption><h3>Justice Shiva Kirti Singh</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/58.jpg" alt="Justice Anil R. Dave"></div><figcaption><h3>Justice Anil R. Dave</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/59.jpg" alt="Justice Pinaki Chandra Ghose"></div><figcaption><h3>Justice Pinaki Chandra Ghose</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-c/60.jpg" alt="Justice Prafullla Chandra Pant"></div><figcaption><h3>Justice Prafullla Chandra Pant</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/2.jpg" alt="Justice R.K. Agrawal"></div><figcaption><h3>Justice R.K. Agrawal</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/3.jpg" alt="Justice Jasti Chelameswar"></div><figcaption><h3>Justice Jasti Chelameswar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/4.jpg" alt="Justice Adarsh Kumar Goel"></div><figcaption><h3>Justice Adarsh Kumar Goel</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/5.jpg" alt="Justice Kurian Joseph"></div><figcaption><h3>Justice Kurian Joseph</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/6.jpg" alt="Justice Madan B. Lokur"></div><figcaption><h3>Justice Madan B. Lokur</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/7.jpg" alt="Justice Arjan Kumar Sikri"></div><figcaption><h3>Justice Arjan Kumar Sikri</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/8.jpg" alt="Justice Abhay Manohar Sapre"></div><figcaption><h3>Justice Abhay Manohar Sapre</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/9.jpg" alt="Justice Deepak Gupta"></div><figcaption><h3>Justice Deepak Gupta</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/10.jpg" alt="Justice R. Banumathi"></div><figcaption><h3>Justice R. Banumathi</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/11.jpg" alt="Justice Arun Mishra"></div><figcaption><h3>Justice Arun Mishra</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/12.jpg" alt="Justice Indu Malhotra"></div><figcaption><h3>Justice Indu Malhotra</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/13.jpg" alt="Justice Mohan M. Shantanagoudar"></div><figcaption><h3>Justice Mohan M. Shantanagoudar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/14.jpg" alt="Justice Ashok Bhushan"></div><figcaption><h3>Justice Ashok Bhushan</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/15.jpg" alt="Justice R.F. Nariman"></div><figcaption><h3>Justice R.F. Nariman</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/16.jpg" alt="Justice Navin Sinha"></div><figcaption><h3>Justice Navin Sinha</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/17.jpg" alt="Justice R. Subhash Reddy"></div><figcaption><h3>Justice R. Subhash Reddy</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/18.jpg" alt="Justice Vineet Saran"></div><figcaption><h3>Justice Vineet Saran</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/19.jpg" alt="Justice L. Nageswara Rao"></div><figcaption><h3>Justice L. Nageswara Rao</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/20.jpg" alt="Justice A.M. Khanwilkar"></div><figcaption><h3>Justice A.M. Khanwilkar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/21.jpg" alt="Justice Indira Banerjee"></div><figcaption><h3>Justice Indira Banerjee</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/22.jpg" alt="Justice Hemant Gupta"></div><figcaption><h3>Justice Hemant Gupta</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/23.jpg" alt="Justice S. Abdul Nazeer"></div><figcaption><h3>Justice S. Abdul Nazeer</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/24.jpg" alt="Justice Dinesh Maheshwari"></div><figcaption><h3>Justice Dinesh Maheshwari</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/25.jpg" alt="Justice Mukeshkumar Rasikbhai Shah"></div><figcaption><h3>Justice Mukeshkumar Rasikbhai Shah</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/26.jpg" alt="Justice K.M. Joseph"></div><figcaption><h3>Justice K.M. Joseph</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/27.jpg" alt="Justice Ajay Rastogi"></div><figcaption><h3>Justice Ajay Rastogi</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/28.jpg" alt="Justice V. Ramasubramanian"></div><figcaption><h3>Justice V. Ramasubramanian</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/29.jpg" alt="Justice Krishna Murari"></div><figcaption><h3>Justice Krishna Murari</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/30.jpg" alt="Justice S. Ravindra Bhat"></div><figcaption><h3>Justice S. Ravindra Bhat</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/31.jpg" alt="Justice Sanjay Kishan Kaul"></div><figcaption><h3>Justice Sanjay Kishan Kaul</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/32.jpeg" alt="Justice Aniruddha Bose"></div><figcaption><h3>Justice Aniruddha Bose</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/33.jpeg" alt="Justice Ajjukkutira Somiah Bopanna"></div><figcaption><h3>Justice Ajjukkutira Somiah Bopanna</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/34.jpg" alt="Justice Hima Kohli"></div><figcaption><h3>Justice Hima Kohli</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/35.jpg" alt="Justice C.T. Ravikumar"></div><figcaption><h3>Justice C.T. Ravikumar</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/36.jpg" alt="Justice Hrishikesh Roy"></div><figcaption><h3>Justice Hrishikesh Roy</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/37.jpg" alt="Justice Abhay S. Oka"></div><figcaption><h3>Justice Abhay S. Oka</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/38.jpg" alt="Justice Bela M. Trivedi"></div><figcaption><h3>Justice Bela M. Trivedi</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/39.jpg" alt="Justice Sudhanshu Dhulia"></div><figcaption><h3>Justice Sudhanshu Dhulia</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/40.jpg" alt="Justice Rajesh Bindal"></div><figcaption><h3>Justice Rajesh Bindal</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/41.jpg" alt="Justice Pankaj Mithal"></div><figcaption><h3>Justice Pankaj Mithal</h3></figcaption></figure>
+            <figure class="committee-photo-small"><div class="photo-frame"><img src="former-judges-images-d/42.jpg" alt="Justice J.K. Maheshwari"></div><figcaption><h3>Justice J.K. Maheshwari</h3></figcaption></figure>       
+        </div> 
+ 
+    </section> 
+</section>
+
+<footer>
+    <div class="footer-logo">
+        <img src="images/emblem.png" alt="EMBLEM">
+        <p>भारत का सर्वोच्च न्यायालय</p>
+        <p>Supreme Court of India</p>
+        <p>॥ यतो धर्मस्ततो जयः ॥</p>
+    </div>
+
+<div class="footer-links">
+    <h4>Quick Links</h4>
+
+    <a href="accessibility.html">Accessibility</a>
+    <a href="faqs.html">FAQs</a>
+    <a href="pay-scales.html">Pay Scales</a>
+    <a href="accounts.html">Accounts</a>
+    <a href="important-links.html">Important Links</a>
+    <a href="citizens-charter.html">Citizen's Charter</a>
+    <a href="webcast.html">Webcast</a>
+</div>
+
+<div class="footer-links">
+    <a href="telephone-directory.html">Telephone Directory</a>
+    <a href="steps-taken-during-covid-19.html">Steps taken during Covid-19</a>
+    <a href="officers-officials.html">Officers / Officials</a>
+    <a href="guided-tour.html">Guided Tour</a>
+    <a href="india-code.html">India Code</a>
+    <a href="argument-transcripts.html">Argument Transcripts</a>
+    <a href="employee-corner.html">Employee Corner</a>
+    <a href="officers-servant-rules.html">Officers Servant Rules</a>
+</div>
+
+<div class="bottom">© Designed by Mr Yash Kumar. Email - mradvocate2326@gmail.com</div>
+
+<!-- ============================= -->
+<!-- SAME POPUP CONTENT -->
+<!-- ============================= -->
+
+<div class="popup-overlay" id="aboutPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('aboutPopup')">×</button>
+        <h2>ABOUT US</h2>
+        <p>Select an option</p>
+
+        <div class="popup-grid">
+            <a href="history.html">History</a>
+            <a href="constitution.html">Constitution</a>
+            <a href="jurisdiction.html">Jurisdiction</a>
+            <a href="calendar.html">Calendar</a>
+            <a href="committees.html">Committees</a>
+            <a href="organization-chart.html">Organization Chart</a>
+            <a href="registry-officers.html">Registry Officers</a>
+            <a href="contact-us.html">Contact Us</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="judgesPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('judgesPopup')">×</button>
+        <h2>JUDGES</h2>
+        <p>Select an option</p>
+
+        <div class="popup-grid">
+            <a href="chief-justice-and-judges.html">Chief Justice &amp; Judges</a>
+            <a href="former-chief-justice.html">Former Chief Justice</a>
+            <a href="former-judges.html">Former Judges</a>
+            <a href="judges-roster.html">Judges Roster</a>
+            <a href="judges-library.html">Judges Library</a>
+            <a href="assets-of-judges.html">Assets of Judges</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="collegiumPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('collegiumPopup')">×</button>
+        <h2>Publications</h2>
+        <p>Select a publication</p>
+
+        <div class="popup-grid">
+            <a href="collegium-resolutions.html">Collegium Resolutions</a>
+            <a href="supreme-court-chronicle.html">Supreme Court Chronicle</a>
+            <a href="dr-br-ambedkar.html">Dr. B.R. Ambedkar</a>
+            <a href="courts-of-india.html">Courts of India</a>
+            <a href="court-news.html">Court News</a>
+            <a href="annual-reports.html">Annual Reports</a>
+            <a href="reports.html">Reports</a>
+            <a href="supreme-court-rules.html">Supreme Court Rules</a>
+            <a href="practice-and-procedure.html">Practice &amp; Procedure</a>
+            <a href="national-court-management-systems.html">National Court Management System</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="servicesPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('servicesPopup')">×</button>
+        <h2>SERVICES</h2>
+        <p>Select a service</p>
+        <div class="popup-grid">
+            <a href="https://www.sci.gov.in/cause-list/" target="_blank">Cause List</a>
+            <a href="https://www.sci.gov.in/case-status-case-no/" target="_blank">Case Status</a>
+            <a href="https://www.sci.gov.in/daily-order-case-no/" target="_blank">Daily Orders</a>
+            <a href="https://www.sci.gov.in/judgements-case-no/" target="_blank">Judgements</a>
+            <a href="https://www.sci.gov.in/office-report-case-no/" target="_blank">Office Report</a>
+            <a href="https://www.sci.gov.in/caveat-case-no/" target="_blank">Caveat</a>
+            <a href="https://www.sci.gov.in/display-boards/" target="_blank">Display Boards</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="eservicesPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('eservicesPopup')">×</button>
+        <h2>E-SERVICES</h2>
+        <p>Select an e-Service</p>
+        <div class="popup-grid">
+            <a href="https://efiling.sci.gov.in/" target="_blank">e-filing (SC-eFM 2.0) (Existing)</a>
+            <a href="https://efiling3.sci.gov.in/" target="_blank">e-filing (SC-eFM 3.0) (New)</a>
+            <a href="https://appearance.sci.gov.in/" target="_blank">Online Appearance Slips</a>
+            <a href="https://suswagatam.sci.gov.in/public/Index.aspx" target="_blank">SuSwagatam (e-Pass)</a>
+            <a href="http://guidedtour.sci.nic.in/" target="_blank">Guided Tour</a>
+            <a href="https://rti.sci.gov.in/" target="_blank">Online RTI Portal</a>
+            <a href="https://physical-hearing.sci.gov.in/" target="_blank">Physical Hearing (Hybrid Option)</a>
+            <a href="https://registry.sci.gov.in/api/callback/bharat_kosh/online_copying/mobile.php" target="_blank">Certified Copy</a>
+            <a href="https://scdg.sci.gov.in/scnjdg/" target="_blank">National Judicial Data Grid</a>
+            <a href="https://scr.sci.gov.in/scrsearch/" target="_blank">SCR</a>
+            <a href="https://www.sci.gov.in/neutral-citation/" target="_blank">Neutral Citation</a>
+            <a href="https://verdictfinder.sci.gov.in/elk_frontend/" target="_blank">Verdict Finder</a>
+            <a href="https://vjc.sci.gov.in/public/index.php" target="_blank">Virtual Justice Clock</a>
+            <a href="https://sciproximitycard.in/sciservices/" target="_blank">Proximity Card Registration</a>
+            <a href="https://scippms.bankofmaharashtra.bank.in/ppms/#/user-login" target="_blank">Premise Payment Management System (PPMS)</a>
+            <a href="https://park.sci.gov.in/request/login/" target="_blank">Parking Authorization Record Keeper</a>
+            <a href="https://www.sci.gov.in/iops/" target="_blank">Integrated Online Payment System</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="advocatesPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('advocatesPopup')">×</button>
+        <h2>ADVOCATES</h2>
+        <p>Select an option</p>
+
+        <div class="popup-grid">
+            <a href="https://www.sci.gov.in/advocate-on-record/" target="_blank">Advocates-on-Record</a>
+            <a href="aor-examination.html">AOR Examination</a>
+            <a href="guidelines-and-orders.html">Guidelines &amp; Orders</a>
+            <a href="senior-advocates-designation.html">Senior Advocates Designation</a>
+            <a href="forms.html">Forms</a>
+            <a href="law-officers.html">Law Officers</a>
+            <a href="nodal-officers-bail-petitions.html">Nodal Officers for Bail Petitions</a>
+            <a href="lawyers-chamber-allotment.html">Lawyers' Chamber Allotment</a>
+            <a href="legal-aid.html">Legal Aid</a>
+            <a href="https://www.scaoraindia.com/" target="_blank">SCAORA</a>
+            <a href="https://scbaindia.org/" target="_blank">SCBA</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="filingPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('filingPopup')">×</button>
+        <h2>COURT FILINGS</h2>
+        <p>Select a filing service</p>
+
+        <div class="popup-grid">
+            <a href="https://www.sci.gov.in/court-fees-calculator/" target="_blank">Court Fees Calculator</a>
+            <a href="https://www.sci.gov.in/limitation-calculator/" target="_blank">Limitation Calculator</a>
+            <a href="interlocutory-applications.html">Interlocutory Applications</a>
+            <a href="case-category.html">Case Category</a>
+            <a href="default-list.html">Default List</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="noticesPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('noticesPopup')">×</button>
+        <h2>NOTICES</h2>
+        <p>Select a notice category</p>
+
+        <div class="popup-grid">
+            <a href="https://www.sci.gov.in/notices-and-circulars/">Notices and Circulars</a>
+            <a href="https://www.sci.gov.in/fdrs-deposits/">FDRs & Depsits</a>
+            <a href="tenders.html" target="_blank">Tenders</a>
+            <a href="judicial-clerkship.html" target="_blank">Judicial Clerkship</a>
+            <a href="recruitments.html" target="_blank">Recruitments</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="newsPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('newsPopup')">×</button>
+        <h2>NEWS &amp; EVENTS</h2>
+        <p>Select a category</p>
+
+        <div class="popup-grid">
+            <a href="https://www.sci.gov.in/press-release/">Press Release</a>
+            <a href="https://www.sci.gov.in/live-streaming/">Live Streaming</a>
+            <a href="basic-structure-judgment.html" target="_blank">Basic Structure Judgment</a>
+            <a href="https://webcast.gov.in/scindia">Webcast</a>
+            <a href="multimedia.html" target="_blank">Multimedia</a>
+            <a href="https://www.sci.gov.in/photo-gallery/">Photo Gallery</a>
+            <a href="full-court-reference.html" target="_blank">Full Court Reference</a>
+            <a href="ceremonial-bench.html" target="_blank">Ceremonial Bench</a>
+            <a href="hackathon.html" target="_blank">Hackathon</a>
+        </div>
+    </div>
+</div>
+
+<script>
+function showSection(sectionId, clickedButton){
+    document.querySelectorAll(".tab-section").forEach(section=>{
+        section.classList.remove("active");
+    });
+
+    document.querySelectorAll(".asrp-buttons button").forEach(button=>{
+        button.classList.remove("active");
+    });
+
+    document.getElementById(sectionId).classList.add("active");
+    clickedButton.classList.add("active");
+}
+
+
+/* =========================================
+   NAVBAR CLICK → CENTER POPUP
+========================================= */
+
+document.querySelectorAll(".nav-dropdown .nav-trigger").forEach(function(trigger){
+
+    trigger.addEventListener("click", function(event){
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const navItem = trigger.closest(".nav-dropdown");
+        const popupId = navItem.getAttribute("data-popup");
+
+        /* Close any other popup first */
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        /* Open selected popup in center */
+        openPopup(popupId);
+    });
+
+});
+
+
+function openPopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
+
+}
+
+
+function closePopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+}
+
+
+/* =========================================
+   CLICK OUTSIDE → CLOSE
+========================================= */
+
+document.querySelectorAll(".popup-overlay").forEach(function(popup){
+
+    popup.addEventListener("click", function(event){
+
+        if(event.target === popup){
+            popup.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   ESC → CLOSE
+========================================= */
+
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Escape"){
+
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        document.body.style.overflow = "";
+    }
+
+});
+</script>
+
+</body>
+</html>
