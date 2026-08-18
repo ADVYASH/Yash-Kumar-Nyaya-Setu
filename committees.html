@@ -14,6 +14,38 @@
     --theme-primary-glow:var(--theme-primary-glow);
     --theme-primary-border:var(--theme-primary-glow);
 }
+
+/* NAVBAR BUTTON BOX */
+.navbar a,
+.navbar button,
+nav a,
+nav button {
+    border: 1px solid rgba(33,150,255,.55);
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: rgba(33,150,255,.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar a:hover,
+.navbar button:hover,
+nav a:hover,
+nav button:hover {
+    background: rgba(33,150,255,.16);
+}
+
+
+/* POPUP BUTTON TEXT SIZE */
+.popup button,
+.popup .btn,
+.modal button,
+.modal .btn,
+.popup-buttons button,
+.popup-buttons .btn {
+    font-size: 20px;
+}
+
 </style>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
@@ -703,7 +735,7 @@ body::before{
     white-space: normal;
     overflow-wrap: anywhere;
     line-height: 1.45;
-    font-size: 22px;
+    font-size: 26px;
 }
 
 .committees-table th {
@@ -740,7 +772,7 @@ body::before{
 
     .committees-table {
         width: 100%;
-        font-size: 14px;
+        font-size: 26px;
     }
 
     .committees-table th,
