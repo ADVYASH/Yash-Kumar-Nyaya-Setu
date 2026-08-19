@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COLLEGIUM RESOLUTIONS | NYAYA SETU</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<style id="theme-vars">
+:root{
+    --theme-primary:var(--theme-primary);
+    --theme-primary-soft:var(--theme-primary-glow);
+    --theme-primary-glow:var(--theme-primary-glow);
+    --theme-primary-border:var(--theme-primary-glow);
+}
+
+/* NAVBAR BUTTON BOX */
+.navbar a,
+.navbar button,
+nav a,
+nav button {
+    border: 1px solid rgba(33,150,255,.55);
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: rgba(33,150,255,.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar a:hover,
+.navbar button:hover,
+nav a:hover,
+nav button:hover {
+    background: rgba(33,150,255,.16);
+}
+
+
+/* POPUP BUTTON TEXT SIZE */
+.popup button,
+.popup .btn,
+.modal button,
+.modal .btn,
+.popup-buttons button,
+.popup-buttons .btn {
+    font-size: 20px;
+}
+
+</style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+html{scroll-behavior:smooth}
+body{background:#0b0b0b;color:#fff;overflow-x:hidden}
+
+/* ============================= */
+/* SAME NAVBAR + NAV POPUPS */
+/* ============================= */
+
+nav{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    padding:16px 22px;
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(12px);
+    position:sticky;
+    top:0;
+    z-index:10000;
+}
+
+.main-nav{
+    isolation:isolate;
+}
+
+.nav-dropdown{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+.nav-trigger,
+.nav-home{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    position:relative;
+    padding:13px 18px;
+    min-height:46px;
+    border-radius:12px;
+    transition:.25s ease;
+    white-space:nowrap;
+    font-size:15px;
+    letter-spacing:.2px;
+}
+
+.nav-trigger:hover,
+.nav-home:hover{
+    color:#fff;
+    background:rgba(20,20,25,.96);
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 0 18px rgba(0,149,255,.20);
+}
+
+.nav-trigger::after,
+.nav-home::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-1px;
+    width:100%;
+    height:3px;
+    background:#0095ff;
+    border-radius:3px 3px 0 0;
+    transform:scaleX(0);
+    transform-origin:center;
+    transition:.22s ease;
+}
+
+.nav-trigger:hover::after,
+.nav-home:hover::after{
+    transform:scaleX(1);
+}
+
+/* ============================= */
+/* ABOUT PAGE */
+/* ============================= */
+
+.about{
+    min-height:100vh;
+    background:transparent;
+    position:relative;
+    z-index:0;
+    padding:100px 10% 100px;
+    text-align:center;
+}
+.about h1{
+    font-family:"Permanent Marker", cursive;
+    font-size:42px;
+    font-weight:700;
+    letter-spacing:3px;
+    color:#0095ff;
+    display:inline-block;
+    position:relative;
+    padding-bottom:12px;
+    text-shadow:0 0 8px rgba(0,149,255,.45);
+    animation:committeePulse 3s ease-in-out infinite;
+}
+
+/* Text animation */
+@keyframes committeePulse{
+    0%,100%{
+        transform:scale(1);
+        letter-spacing:3px;
+    }
+
+    50%{
+        transform:scale(1.03);
+        letter-spacing:5px;
+    }
+}
+
+/* Animated underline */
+.about h1::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width:0;
+    height:3px;
+    background:#0095ff;
+    border-radius:10px;
+    box-shadow:
+        0 0 8px #0095ff,
+        0 0 18px #0095ff;
+    transform:translateX(-50%);
+    animation:lineExpand 2s ease-in-out infinite;
+}
+
+@keyframes lineExpand{
+    0%,100%{
+        width:0;
+        opacity:.3;
+    }
+
+    40%{
+        width:100%;
+        opacity:1;
+    }
+
+    70%{
+        width:100%;
+        opacity:1;
+    }
+
+    90%{
+        width:0;
+        opacity:.3;
+    }
+}
+.intro{max-width:1100px;margin:0 auto;font-size:24px;line-height:1.7;opacity:.9}
+.container{max-width:950px;margin:0 auto}
+.asrp-buttons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin:55px auto 30px;
+    max-width:1000px;
+}
+.asrp-buttons button{
+    background:rgba(0,0,0,.78);
+    color:#fff;
+    border:1px solid rgba(33,150,255,.5);
+    padding:15px 25px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s ease;
+    box-shadow:0 0 8px rgba(33,150,255,.15);
+}
+.asrp-buttons button:hover,
+.asrp-buttons button.active{
+    background:#2196ff;
+    color:#000;
+    transform:translateY(-4px);
+    box-shadow:0 0 10px #2196ff,0 0 25px rgba(33,150,255,.6);
+}
+.section{
+    margin-top:25px;
+    background:rgba(0,0,0,.68);
+    padding:40px;
+    border-radius:14px;
+    border:1px solid rgba(33,150,255,.25);
+    box-shadow:0 0 25px rgba(33,150,255,.06),inset 0 0 20px rgba(33,150,255,.02);
+}
+.tab-section{display:none}
+.tab-section.active{display:block;animation:sectionFade .45s ease}
+@keyframes sectionFade{
+    from{opacity:0;transform:translateY(20px) scale(.98)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+.section h2{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    color:#2196ff;
+    margin-bottom:25px;
+    font-size:30px;
+    text-shadow:0 0 12px rgba(33,150,255,.5);
+}
+.emoji-text{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    text-align:left;
+    margin-bottom:22px;
+    line-height:1.7;
+    font-size:16px;
+    opacity:.9;
+}
+.emoji-text:last-child{margin-bottom:0}
+.emoji-text img{height:45px;width:45px;object-fit:contain;flex-shrink:0}
+
+/* ============================= */
+/* SAME FULL POPUPS */
+/* ============================= */
+
+.popup-overlay{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(10px);
+    z-index:99999;
+}
+.popup-overlay.active{display:flex;animation:popupFade .25s ease}
+.popup-box{
+    position:relative;
+    width:min(900px,95vw);
+    max-height:85vh;
+    overflow-y:auto;
+    padding:35px;
+    background:rgba(20,20,25,.92);
+    backdrop-filter:blur(25px);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:22px;
+    box-shadow:0 0 40px rgba(0,0,0,.5),0 0 80px rgba(33,150,255,.12);
+    animation:popupScale .3s ease;
+}
+.popup-box h2{text-align:center;font-size:25px;letter-spacing:2px;margin-bottom:5px}
+.popup-box>p{text-align:center;font-size:13px;opacity:.6;margin-bottom:25px}
+.popup-close{
+    position:absolute;
+    top:15px;right:18px;
+    width:40px;height:40px;
+    border:none;border-radius:50%;
+    background:rgba(255,255,255,.08);
+    color:#fff;font-size:28px;line-height:40px;
+    cursor:pointer;transition:.3s;
+}
+.popup-close:hover{background:#2196ff;transform:rotate(90deg);box-shadow:0 0 20px rgba(33,150,255,.5)}
+.popup-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.popup-grid a{
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:15px;
+    border-radius:14px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    color:#fff;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:700;
+    transition:.3s ease;
+}
+.popup-grid a:hover{
+    transform:translateY(-5px);
+    background:rgba(33,150,255,.18);
+    border-color:#2196ff;
+    box-shadow:0 0 15px rgba(33,150,255,.35);
+}
+@keyframes popupFade{from{opacity:0}to{opacity:1}}
+@keyframes popupScale{
+    from{opacity:0;transform:scale(.9) translateY(20px)}
+    to{opacity:1;transform:scale(1) translateY(0)}
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+footer{
+    background:#050505;
+    padding:35px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:25px;
+    flex-wrap:wrap;
+    border-top:1px solid rgba(33,150,255,.12);
+}
+
+.footer-logo{
+    display:flex;
+    flex-direction:column;
+    min-width:170px;
+}
+
+.footer-logo img{
+    width:150px;
+    margin-bottom:8px;
+}
+
+.footer-logo p{
+    opacity:.7;
+    font-size:15px;
+    margin:3px 0;
+}
+
+.footer-links{
+    min-width:130px;
+}
+
+.footer-links h4{
+    color:#2196ff;
+    margin-bottom:9px;
+    font-size:14px;
+}
+
+.footer-links a{
+    display:block;
+    color:#fff;
+    opacity:.7;
+    text-decoration:none;
+    margin:5px 0;
+    font-size:15px;
+    transition:.3s ease;
+}
+
+.footer-links a:hover{
+    color:#2196ff;
+    opacity:1;
+    transform:translateX(4px);
+}
+
+.bottom{
+    text-align:center;
+    padding:12px;
+    background:#030303;
+    opacity:.75;
+    font-size:15px;
+    border-top:1px solid rgba(255,255,255,.05);
+}
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media(max-width:900px){
+    .nav-popup-menu{
+        width:min(650px,94vw);
+        grid-template-columns:repeat(2,minmax(140px,1fr));
+    }
+}
+@media(max-width:800px){
+    .about{padding:90px 20px 70px;background-attachment:scroll}
+    .about h1{font-size:44px}
+    .intro{font-size:18px;line-height:1.6}
+    .asrp-buttons{gap:10px;margin-top:35px}
+    .asrp-buttons button{width:100%;max-width:350px;padding:14px 18px}
+    .section{padding:25px 20px}
+    .section h2{font-size:23px}
+    .emoji-text{font-size:15px;gap:10px}
+    .emoji-text img{height:38px;width:38px}
+footer{
+    padding:30px 20px;
+    flex-direction:column;
+    gap:20px;
+}
+}
+@media(max-width:600px){
+    .main-nav{
+        justify-content:flex-start;
+        overflow:visible;
+        flex-wrap:nowrap;
+        scrollbar-width:thin;
+    }
+.nav-trigger,.nav-home{
+    font-size:13px;
+    padding:10px 13px;
+    min-height:42px;
+}
+    .nav-popup-menu{
+        position:fixed;
+        top:64px;
+        left:50%;
+        width:94vw;
+        max-height:78vh;
+        grid-template-columns:repeat(2,1fr);
+        transform:translateX(-50%) translateY(-8px);
+    }
+    .nav-dropdown:hover .nav-popup-menu,
+    .nav-dropdown:focus-within .nav-popup-menu{
+        transform:translateX(-50%) translateY(0);
+    }
+    .popup-overlay{padding:15px}
+    .popup-box{padding:25px 18px;max-height:90vh}
+    .popup-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+    .popup-grid a{min-height:65px;padding:10px;font-size:12px}
+}
+@media(max-width:450px){
+    .about h1{font-size:36px}
+    .intro{font-size:17px}
+    .section{padding:22px 16px}
+    .section h2{font-size:20px;gap:5px}
+    .emoji-text{font-size:14px}
+}
+@media(max-width:400px){
+    .nav-popup-menu,.popup-grid{grid-template-columns:1fr}
+}
+
+/* ============================= */
+/* FONT AWESOME BACK ICON */
+/* ============================= */
+.back-icon{margin-right:7px}
+
+/* ============================= */
+/* HISTORY PHOTO GALLERY */
+/* ============================= */
+
+.history-gallery{
+    margin-top:45px;
+    padding-top:35px;
+    border-top:1px solid rgba(33,150,255,.25);
+}
+
+.history-gallery h2{
+    color:#2196ff;
+    margin-bottom:25px;
+    font-size:30px;
+    text-shadow:0 0 12px rgba(33,150,255,.5);
+}
+
+.history-photo-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:22px;
+}
+
+.history-photo{
+    margin:0;
+    overflow:hidden;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(33,150,255,.25);
+    border-radius:14px;
+    box-shadow:0 0 20px rgba(33,150,255,.08);
+    transition:.3s ease;
+}
+
+.history-photo:hover{
+    transform:translateY(-5px);
+    border-color:#2196ff;
+    box-shadow:0 0 25px rgba(33,150,255,.2);
+}
+
+.history-photo img{
+    display:block;
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    background:#111;
+}
+
+.history-photo figcaption{
+    padding:18px;
+    text-align:left;
+}
+
+.history-photo h3{
+    color:#2196ff;
+    margin-bottom:8px;
+    font-size:18px;
+}
+
+.history-photo p{
+    font-size:14px;
+    line-height:1.6;
+    opacity:.85;
+}
+
+@media(max-width:800px){
+    .history-photo-grid{
+        grid-template-columns:1fr;
+    }
+    .history-photo img{
+        height:240px;
+    }
+}
+
+
+/* ============================= */
+/* FULL-PAGE VIDEO BACKGROUND */
+/* ============================= */
+#background-video{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+    pointer-events:none;
+}
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.42);
+    z-index:-1;
+    pointer-events:none;
+}
+
+
+.history-subheading{
+    color:#2196ff;
+    font-size:22px;
+    margin:35px 0 18px;
+    padding-bottom:10px;
+    border-bottom:1px solid rgba(33,150,255,.25);
+    text-align:left;
+    text-shadow:0 0 10px rgba(33,150,255,.35);
+}
+.history-subheading:first-of-type{margin-top:5px}
+
+
+
+.high-court-table-section{
+    margin-top:45px;
+    padding-top:35px;
+    border-top:1px solid rgba(33,150,255,.25);
+}
+.high-court-table-wrap{
+    width:100%;
+    overflow:visible;
+    margin-top:20px;
+    border-radius:12px;
+    border:1px solid rgba(33,150,255,.25);
+}
+.high-court-table{
+    width:100%;
+    min-width:1050px;
+    border-collapse:collapse;
+    background:rgba(0,0,0,.45);
+    text-align:left;
+}
+.high-court-table th,.high-court-table td{
+    padding:15px 14px;
+    border:1px solid rgba(255,255,255,.12);
+    vertical-align:top;
+    line-height:1.55;
+    font-size:14px;
+}
+.high-court-table th{
+    color:#2196ff;
+    background:rgba(33,150,255,.10);
+    font-weight:700;
+    text-align:center;
+}
+.high-court-table td:first-child{
+    text-align:center;
+    font-weight:700;
+    width:65px;
+}
+.high-court-table td:nth-child(2){font-weight:700;min-width:190px}
+.high-court-table td:nth-child(3){text-align:center;white-space:nowrap}
+.high-court-table strong{color:#2196ff}
+.high-court-table tbody tr:hover{background:rgba(33,150,255,.07)}
+@media(max-width:800px){
+    .high-court-table-section{margin-top:35px;padding-top:25px}
+    .high-court-table th,.high-court-table td{padding:12px 10px;font-size:13px}
+}
+
+/* FULL HIGH COURTS TABLE — KEEP ALL ROWS VISIBLE */
+.high-courts-table-wrap{width:100%;overflow:visible !important;}
+.high-courts-table{width:100% !important;min-width:0 !important;table-layout:fixed;border-collapse:collapse;}
+.high-courts-table th,.high-courts-table td{white-space:normal !important;word-break:normal;overflow-wrap:anywhere;vertical-align:top;}
+.high-courts-table th:nth-child(1),.high-courts-table td:nth-child(1){width:6%}
+.high-courts-table th:nth-child(2),.high-courts-table td:nth-child(2){width:20%}
+.high-courts-table th:nth-child(3),.high-courts-table td:nth-child(3){width:13%}
+.high-courts-table th:nth-child(4),.high-courts-table td:nth-child(4){width:22%}
+.high-courts-table th:nth-child(5),.high-courts-table td:nth-child(5){width:39%}
+@media(max-width:800px){.high-courts-table{font-size:11px}.high-courts-table th,.high-courts-table td{padding:8px 5px !important;}}
+
+/* HIGH COURTS TABLE — CENTERED + FULL BORDER */
+.high-courts-table-wrap{
+    width:100%;
+    max-width:1200px;
+    margin:35px auto 0 !important;
+    overflow:visible !important;
+}
+.high-courts-table{
+    width:100% !important;
+    margin:0 auto !important;
+    border:3px solid rgba(33,150,255,.75) !important;
+    border-collapse:collapse !important;
+    border-spacing:0;
+    table-layout:fixed;
+}
+.high-courts-table th,
+.high-courts-table td{
+    border:2px solid rgba(33,150,255,.55) !important;
+    white-space:normal !important;
+    word-break:normal;
+    overflow-wrap:anywhere;
+    vertical-align:top;
+}
+.high-courts-table th{
+    border:3px solid rgba(33,150,255,.75) !important;
+}
+
+
+/* FINAL: CENTER THE HIGH COURTS TABLE */
+.high-courts-table-wrap {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    overflow: visible !important;
+}
+.high-courts-table {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+/* ============================= */
+/* SUPREME COURT COMMITTEES TABLE */
+/* ============================= */
+
+.committees-section {
+    width: 100%;
+    padding: 35px 0 45px;
+}
+
+.committees-container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+.committees-title {
+    text-align: center;
+    margin: 0 0 22px;
+    font-weight: 800;
+}
+
+.committees-table-wrap {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    padding: 0;
+}
+
+.committees-table {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border: 3px solid rgba(33,150,255,.75);
+    border-collapse: collapse;
+    table-layout: fixed;
+    counter-reset: committee-row;
+}
+
+.committees-table tbody tr {
+    counter-increment: committee-row;
+}
+
+.committees-table th,
+.committees-table td {
+    border: 2px solid rgba(33,150,255,.55);
+    padding: 14px 16px;
+    vertical-align: middle;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.45;
+    font-size: 20px;
+}
+
+.committees-table th {
+    border: 3px solid rgba(33,150,255,.75);
+    text-align: center;
+    font-weight: 800;
+}
+
+/* Column widths: 5% / 85% / 10% */
+.committees-table th:nth-child(1),
+.committees-table td:nth-child(1) {
+    width: 10%;
+    text-align: center;
+}
+
+.committees-table th:nth-child(2),
+.committees-table td:nth-child(2) {
+    width: 80%;
+    text-align: left;
+}
+
+.committees-table th:nth-child(3),
+.committees-table td:nth-child(3) {
+    width: 10%;
+    text-align: center;
+}
+
+/* Automatic numbering: follows row order.
+   If a new row is inserted at the top, it automatically becomes No. 1. */
+.committees-table td.committee-number::before {
+    content: counter(committee-row);
+    font-weight: 800;
+}
+
+.committees-table td:nth-child(3) a {
+    color: #2196ff;
+    text-decoration: none;
+    margin-left: 0;
+    font-weight: 800;
+}
+
+.committees-table td:nth-child(3) a:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 10px #2196ff;
+}
+
+@media (max-width: 800px) {
+    .committees-table th,
+    .committees-table td {
+        padding: 10px 8px;
+        font-size: 15px;
+    }
+
+    .committees-table th:nth-child(1),
+    .committees-table td:nth-child(1) {
+        width: 5%;
+    }
+
+    .committees-table th:nth-child(2),
+    .committees-table td:nth-child(2) {
+        width: 85%;
+    }
+
+    .committees-table th:nth-child(3),
+    .committees-table td:nth-child(3) {
+        width: 10%;
+    }
+}
+
+/* ============================= */
+/* COMMITTEE PAGINATION */
+/* ============================= */
+
+.committee-pagination{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:7px;
+    margin:22px auto 0;
+    flex-wrap:wrap;
+}
+
+.committee-pagination a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:34px;
+    height:34px;
+    padding:0 10px;
+    border:1px solid rgba(33,150,255,.55);
+    border-radius:7px;
+    background:rgba(0,0,0,.65);
+    color:#fff;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+    transition:.25s ease;
+}
+
+.committee-pagination a:hover,
+.committee-pagination a.active{
+    background:#2196ff;
+    color:#000;
+    border-color:#2196ff;
+    box-shadow:0 0 10px rgba(33,150,255,.45);
+}
+
+@media(max-width:600px){
+    .committee-pagination{gap:5px;margin-top:18px}
+    .committee-pagination a{
+        min-width:31px;
+        height:31px;
+        padding:0 8px;
+        font-size:12px;
+    }
+}
+
+/* ============================= */
+/* COMMITTEE PDF BUTTON */
+/* ============================= */
+
+.pdf-button-wrap{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-top:25px;
+}
+
+.pdf-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:12px 28px;
+    background:#0095ff;
+    color:#fff;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:700;
+    border-radius:10px;
+    border:1px solid #0095ff;
+    box-shadow:0 0 12px rgba(0,149,255,.35);
+    transition:.3s ease;
+}
+
+.pdf-button:hover{
+    background:#007dcc;
+    transform:translateY(-2px);
+    box-shadow:
+        0 0 15px #0095ff,
+        0 0 30px rgba(0,149,255,.45);
+}
+</style>
+</head>
+
+<body>
+<video id="background-video" autoplay muted loop playsinline preload="auto">
+    <source src="background/tokyo.mp4" type="video/mp4">
+</video>
+
+<nav class="main-nav">
+    <a href="index.html" class="nav-home">Home</a>
+
+    <div class="nav-dropdown" data-popup="aboutPopup">
+        <a href="javascript:void(0)" class="nav-trigger">About</a>
+    </div>
+    <div class="nav-dropdown" data-popup="judgesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Judges</a>
+    </div>
+    <div class="nav-dropdown" data-popup="collegiumPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Publications</a>
+    </div>
+    <div class="nav-dropdown" data-popup="servicesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Services</a>
+    </div>
+    <div class="nav-dropdown" data-popup="eservicesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">e-Services</a>
+    </div>
+    <div class="nav-dropdown" data-popup="advocatesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Advocates</a>
+    </div>
+    <div class="nav-dropdown" data-popup="filingPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Court Filings</a>
+    </div>
+    <div class="nav-dropdown" data-popup="noticesPopup">
+        <a href="javascript:void(0)" class="nav-trigger">Notices</a>
+    </div>
+    <div class="nav-dropdown" data-popup="newsPopup">
+        <a href="javascript:void(0)" class="nav-trigger">News &amp; Events</a>
+    </div>
+</nav>
+
+<section class="about">
+    <h1>COLLEGIUM RESOLUTIONS</h1>
+
+<!-- ============================= -->
+<!-- SUPREME COURT COMMITTEES TABLE -->
+<!-- ============================= -->
+<section class="committees-section">
+    <div class="committees-container">
+        <div class="committees-table-wrap">
+            <table class="committees-table">
+                <tbody>
+<tr><td class="committee-number"></td><td class="committee-composition">Statement dated 15th January, 2020 reg. extension of term of an Additional Judge in Calcutta High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/1.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Statement dated 15th January, 2020 reg. appointment of Additional Judges as Permanent Judges in Calcutta High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/2.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Statement Dated 17th December, 2019 reg. appointment of Additional Judges as Permanent Judges in Karnataka High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/3.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Statement Dated 20th November, 2019 reg. appointment of Additional Judges as Permanent Judges in Jharkhand High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/4.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Statement dated 15th October, 2019 reg. appointment of Chief Justices in High Courts of Meghalaya and Jharkhand.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/5.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Statement dated 15th October, 2019 reg. transfer of Chief Justices of High Courts of Patna, Meghalaya, and Tripura.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/6.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Statement dated 15th October, 2019 reg. transfer of Mr. Justice Rakesh Kumar, Judge, Patna High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/7.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Statement dated 15th October, 2019 reg. elevation of a Judicial Officer as Judge of the Meghalaya High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/8.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Statement dated 15th October, 2019 reg. elevation of Advocates as Judges of the Jammu and Kashmir High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/9.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Statement dated 15th October, 2019 reg. elevation of an Advocate and Judicial Officers as Judges of the Gauhati High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/10.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Statement dated 15th October, 2019 reg. elevation of a Judicial Officer as Judge of the Karnataka High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/11.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 3rd October, 2019 reg. elevation of Advocates as Judges in Karnataka High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/12.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 3rd October, 2019 reg. elevation of Advocates as Judges in Karnataka High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/13.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 3rd October, 2019 reg. elevation of Advocates as Judges in Orissa High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/14.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 3rd October, 2019 reg. elevation of Judicial Officers as Judges in Orissa High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/15.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 26th September, 2019 reg. elevation of Judicial Officers as Judges in Punjab and Haryana High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/16.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 26th September, 2019 reg. elevation of an Advocate and Judicial Officers as Judges in Bombay High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/17.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 5th September, 2019 reg. appointment of Chief Justice in Tripura High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/18.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Statement</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/19.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 5th September, 2019 reg. appointment of three Additional Judges as Permanent Judges in Allahabad High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/20.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 5th September, 2019 reg. appointment of one Additional Judge as Permanent Judge in Allahabad High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/21.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. transfer of Mrs. Justice V.K. Tahilramani, Chief Justice, Madras High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/22.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 31st September, 2019 reg. reconsideration of transfer of Mrs. Justice V.K. Tahilramani, Chief Justice, Madras High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/23.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. transfer of Mr. Justice Vivek Agarwal, Judge, M.P. High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/24.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 3rd September, 2019 reg. reconsideration of transfer of Mr. Justice Vivek Agarwal, Judge, M.P. High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/25.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. transfer of Mr. Justice Amit Rawal, Judge, Punjab and Haryana High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/26.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 3rd September, 2019 reg. reconsideration of transfer of Mr. Justice Amit Rawal, Judge, Punjab and Haryana High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/27.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. transfer of Mr. Justice A.K. Mittal, Chief Justice, Meghalaya High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/28.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. transfer of Mr. Justice Sanjay Karol, Chief Justice, Tripura High Court</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/29.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. transfer of Mr. Justice P.V. Sanjay Kumar, Judge, Telangana High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/30.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. transfer of Mr. Justice Ujjal Bhuyan, Judge, Gauhati High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/31.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. elevation of Judges in the Supreme Court</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/32.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 22nd August, 2019 reg. appointment of Chief Justice in Gujarat High Court</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/33.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 22nd August, 2019 reg. appointment of Chief Justice in Andhra Pradesh High Court</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/34.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 22nd August, 2019 reg. appointment of Chief Justice in Gauhati High Court</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/35.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. appointment of Chief Justice in Punjab and Haryana High Court</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/36.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. appointment of Chief Justice in Himachal Pradesh High Court</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/37.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. appointment of Chief Justice in Kerala High Court</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/38.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. appointment of Chief Justice in Rajasthan High Court</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/39.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. appointment of Chief Justice in Sikkim High Court</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/40.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 28th August, 2019 reg. transfer of Mr. Justice Biswanath Somadder, Judge, Calcutta High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/41.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 31st July, 2019 reg. appointment of Additional Judges as Permanent Judges in Kerala High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/42.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 31st July, 2019 reg. appointment of Additional Judges as Permanent Judges in Madras High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/43.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 31st July, 2019 reg. appointment of Additional Judges as Permanent Judges in Chhattisgarh High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/44.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 31st July, 2019 reg. appointment of Additional Judges as Permanent Judges in Calcutta High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/45.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 30th July, 2019 reg. appointment of 1 Additional Judge as Permanent Judge in Allahabad High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/46.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 30th July, 2019 reg. appointment of 19 Additional Judges as Permanent Judges in Allahabad High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/47.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 24th July, 2019 reg. elevation of Advocates as Judges in Calcutta High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/48.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 24th July, 2019 reg. elevation of Advocates as Judges in Calcutta High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/49.pdf" target="_blank">⬇️View</a></td></tr>
+<tr><td class="committee-number"></td><td class="committee-composition">Dated 24th July, 2019 reg. elevation of Advocates as Judges in Rajasthan High Court.</td><td class="committee-subject"><a href="collegium-resolutions-pdf-11/50.pdf" target="_blank">⬇️View</a></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Committee pagination -->
+        <div class="committee-pagination" aria-label="Committee pages">
+            <a href="collegium-resolutions.html">1</a>
+            <a href="collegium-resolutions-page-2.html">2</a>
+            <a href="collegium-resolutions-page-3.html">3</a>
+            <a href="collegium-resolutions-page-4.html">4</a>
+            <a href="collegium-resolutions-page-5.html">5</a>
+            <a href="collegium-resolutions-page-6.html">6</a>
+            <a href="collegium-resolutions-page-7.html">7</a>
+            <a href="collegium-resolutions-page-8.html">8</a>
+            <a href="collegium-resolutions-page-9.html">9</a>
+            <a href="collegium-resolutions-page-10.html">10</a>
+            <a href="collegium-resolutions-page-11.html" class="active">11</a>
+            <a href="collegium-resolutions-page-12.html">12</a>
+            <a href="collegium-resolutions-page-13.html">13</a>
+            <a href="collegium-resolutions-page-14.html">14</a>
+            <a href="collegium-resolutions-page-15.html">15</a>
+            <a href="collegium-resolutions-page-16.html">16</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-logo">
+        <img src="images/emblem.png" alt="EMBLEM">
+        <p>भारत का सर्वोच्च न्यायालय</p>
+        <p>Supreme Court of India</p>
+        <p>॥ यतो धर्मस्ततो जयः ॥</p>
+    </div>
+
+<div class="footer-links">
+    <h4>Quick Links</h4>
+
+    <a href="accessibility.html">Accessibility</a>
+    <a href="faqs.html">FAQs</a>
+    <a href="pay-scales.html">Pay Scales</a>
+    <a href="accounts.html">Accounts</a>
+    <a href="important-links.html">Important Links</a>
+    <a href="citizens-charter.html">Citizen's Charter</a>
+    <a href="webcast.html">Webcast</a>
+</div>
+
+<div class="footer-links">
+    <a href="telephone-directory.html">Telephone Directory</a>
+    <a href="steps-taken-during-covid-19.html">Steps taken during Covid-19</a>
+    <a href="officers-officials.html">Officers / Officials</a>
+    <a href="guided-tour.html">Guided Tour</a>
+    <a href="india-code.html">India Code</a>
+    <a href="argument-transcripts.html">Argument Transcripts</a>
+    <a href="employee-corner.html">Employee Corner</a>
+    <a href="officers-servant-rules.html">Officers Servant Rules</a>
+</div>
+
+<div class="bottom">© Designed by Mr Yash Kumar. Email - mradvocate2326@gmail.com</div>
+
+<!-- ============================= -->
+<!-- SAME POPUP CONTENT -->
+<!-- ============================= -->
+
+<div class="popup-overlay" id="aboutPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('aboutPopup')">×</button>
+        <h2>ABOUT US</h2>
+        <p>Select an option</p>
+
+        <div class="popup-grid">
+            <a href="history.html">History</a>
+            <a href="constitution.html">Constitution</a>
+            <a href="jurisdiction.html">Jurisdiction</a>
+            <a href="calendar.html">Calendar</a>
+            <a href="committees.html">Committees</a>
+            <a href="organization-chart.html">Organization Chart</a>
+            <a href="registry-officers.html">Registry Officers</a>
+            <a href="contact-us.html">Contact Us</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="judgesPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('judgesPopup')">×</button>
+        <h2>JUDGES</h2>
+        <p>Select an option</p>
+
+        <div class="popup-grid">
+            <a href="chief-justice-and-judges.html">Chief Justice &amp; Judges</a>
+            <a href="former-chief-justice.html">Former Chief Justice</a>
+            <a href="former-judges.html">Former Judges</a>
+            <a href="judges-roster.html">Judges Roster</a>
+            <a href="judges-library.html">Judges Library</a>
+            <a href="assets-of-judges.html">Assets of Judges</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="collegiumPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('collegiumPopup')">×</button>
+        <h2>Publications</h2>
+        <p>Select a publication</p>
+
+        <div class="popup-grid">
+            <a href="collegium-resolutions.html">Collegium Resolutions</a>
+            <a href="supreme-court-chronicle.html">Supreme Court Chronicle</a>
+            <a href="dr-br-ambedkar.html">Dr. B.R. Ambedkar</a>
+            <a href="courts-of-india.html">Courts of India</a>
+            <a href="court-news.html">Court News</a>
+            <a href="annual-reports.html">Annual Reports</a>
+            <a href="reports.html">Reports</a>
+            <a href="supreme-court-rules.html">Supreme Court Rules</a>
+            <a href="practice-and-procedure.html">Practice &amp; Procedure</a>
+            <a href="national-court-management-systems.html">National Court Management System</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="servicesPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('servicesPopup')">×</button>
+        <h2>SERVICES</h2>
+        <p>Select a service</p>
+        <div class="popup-grid">
+            <a href="https://www.sci.gov.in/cause-list/" target="_blank">Cause List</a>
+            <a href="https://www.sci.gov.in/case-status-case-no/" target="_blank">Case Status</a>
+            <a href="https://www.sci.gov.in/daily-order-case-no/" target="_blank">Daily Orders</a>
+            <a href="https://www.sci.gov.in/judgements-case-no/" target="_blank">Judgements</a>
+            <a href="https://www.sci.gov.in/office-report-case-no/" target="_blank">Office Report</a>
+            <a href="https://www.sci.gov.in/caveat-case-no/" target="_blank">Caveat</a>
+            <a href="https://www.sci.gov.in/display-boards/" target="_blank">Display Boards</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="eservicesPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('eservicesPopup')">×</button>
+        <h2>E-SERVICES</h2>
+        <p>Select an e-Service</p>
+        <div class="popup-grid">
+            <a href="https://efiling.sci.gov.in/" target="_blank">e-filing (SC-eFM 2.0) (Existing)</a>
+            <a href="https://efiling3.sci.gov.in/" target="_blank">e-filing (SC-eFM 3.0) (New)</a>
+            <a href="https://appearance.sci.gov.in/" target="_blank">Online Appearance Slips</a>
+            <a href="https://suswagatam.sci.gov.in/public/Index.aspx" target="_blank">SuSwagatam (e-Pass)</a>
+            <a href="http://guidedtour.sci.nic.in/" target="_blank">Guided Tour</a>
+            <a href="https://rti.sci.gov.in/" target="_blank">Online RTI Portal</a>
+            <a href="https://physical-hearing.sci.gov.in/" target="_blank">Physical Hearing (Hybrid Option)</a>
+            <a href="https://registry.sci.gov.in/api/callback/bharat_kosh/online_copying/mobile.php" target="_blank">Certified Copy</a>
+            <a href="https://scdg.sci.gov.in/scnjdg/" target="_blank">National Judicial Data Grid</a>
+            <a href="https://scr.sci.gov.in/scrsearch/" target="_blank">SCR</a>
+            <a href="https://www.sci.gov.in/neutral-citation/" target="_blank">Neutral Citation</a>
+            <a href="https://verdictfinder.sci.gov.in/elk_frontend/" target="_blank">Verdict Finder</a>
+            <a href="https://vjc.sci.gov.in/public/index.php" target="_blank">Virtual Justice Clock</a>
+            <a href="https://sciproximitycard.in/sciservices/" target="_blank">Proximity Card Registration</a>
+            <a href="https://scippms.bankofmaharashtra.bank.in/ppms/#/user-login" target="_blank">Premise Payment Management System (PPMS)</a>
+            <a href="https://park.sci.gov.in/request/login/" target="_blank">Parking Authorization Record Keeper</a>
+            <a href="https://www.sci.gov.in/iops/" target="_blank">Integrated Online Payment System</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="advocatesPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('advocatesPopup')">×</button>
+        <h2>ADVOCATES</h2>
+        <p>Select an option</p>
+
+        <div class="popup-grid">
+            <a href="https://www.sci.gov.in/advocate-on-record/" target="_blank">Advocates-on-Record</a>
+            <a href="aor-examination.html">AOR Examination</a>
+            <a href="guidelines-and-orders.html">Guidelines &amp; Orders</a>
+            <a href="senior-advocates-designation.html">Senior Advocates Designation</a>
+            <a href="forms.html">Forms</a>
+            <a href="law-officers.html">Law Officers</a>
+            <a href="nodal-officers-bail-petitions.html">Nodal Officers for Bail Petitions</a>
+            <a href="lawyers-chamber-allotment.html">Lawyers' Chamber Allotment</a>
+            <a href="legal-aid.html">Legal Aid</a>
+            <a href="https://www.scaoraindia.com/" target="_blank">SCAORA</a>
+            <a href="https://scbaindia.org/" target="_blank">SCBA</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="filingPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('filingPopup')">×</button>
+        <h2>COURT FILINGS</h2>
+        <p>Select a filing service</p>
+
+        <div class="popup-grid">
+            <a href="https://www.sci.gov.in/court-fees-calculator/" target="_blank">Court Fees Calculator</a>
+            <a href="https://www.sci.gov.in/limitation-calculator/" target="_blank">Limitation Calculator</a>
+            <a href="interlocutory-applications.html">Interlocutory Applications</a>
+            <a href="case-category.html">Case Category</a>
+            <a href="default-list.html">Default List</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="noticesPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('noticesPopup')">×</button>
+        <h2>NOTICES</h2>
+        <p>Select a notice category</p>
+
+        <div class="popup-grid">
+            <a href="https://www.sci.gov.in/notices-and-circulars/">Notices and Circulars</a>
+            <a href="https://www.sci.gov.in/fdrs-deposits/">FDRs & Depsits</a>
+            <a href="tenders.html" target="_blank">Tenders</a>
+            <a href="judicial-clerkship.html" target="_blank">Judicial Clerkship</a>
+            <a href="recruitments.html" target="_blank">Recruitments</a>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="newsPopup">
+    <div class="popup-box">
+        <button class="popup-close" onclick="closePopup('newsPopup')">×</button>
+        <h2>NEWS &amp; EVENTS</h2>
+        <p>Select a category</p>
+
+        <div class="popup-grid">
+            <a href="https://www.sci.gov.in/press-release/">Press Release</a>
+            <a href="https://www.sci.gov.in/live-streaming/">Live Streaming</a>
+            <a href="basic-structure-judgment.html" target="_blank">Basic Structure Judgment</a>
+            <a href="https://webcast.gov.in/scindia">Webcast</a>
+            <a href="multimedia.html" target="_blank">Multimedia</a>
+            <a href="https://www.sci.gov.in/photo-gallery/">Photo Gallery</a>
+            <a href="full-court-reference.html" target="_blank">Full Court Reference</a>
+            <a href="ceremonial-bench.html" target="_blank">Ceremonial Bench</a>
+            <a href="hackathon.html" target="_blank">Hackathon</a>
+        </div>
+    </div>
+</div>
+
+<script>
+function showSection(sectionId, clickedButton){
+    document.querySelectorAll(".tab-section").forEach(section=>{
+        section.classList.remove("active");
+    });
+
+    document.querySelectorAll(".asrp-buttons button").forEach(button=>{
+        button.classList.remove("active");
+    });
+
+    document.getElementById(sectionId).classList.add("active");
+    clickedButton.classList.add("active");
+}
+
+
+/* =========================================
+   NAVBAR CLICK → CENTER POPUP
+========================================= */
+
+document.querySelectorAll(".nav-dropdown .nav-trigger").forEach(function(trigger){
+
+    trigger.addEventListener("click", function(event){
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const navItem = trigger.closest(".nav-dropdown");
+        const popupId = navItem.getAttribute("data-popup");
+
+        /* Close any other popup first */
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        /* Open selected popup in center */
+        openPopup(popupId);
+    });
+
+});
+
+
+function openPopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
+
+}
+
+
+function closePopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+}
+
+
+/* =========================================
+   CLICK OUTSIDE → CLOSE
+========================================= */
+
+document.querySelectorAll(".popup-overlay").forEach(function(popup){
+
+    popup.addEventListener("click", function(event){
+
+        if(event.target === popup){
+            popup.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   COMMITTEE PAGINATION — PREV / NEXT
+========================================= */
+
+function goToCommitteePage(direction){
+    const currentFile = window.location.pathname.split("/").pop() || "1.html";
+    const match = currentFile.match(/^(\d+)\.html$/i);
+    let currentPage = match ? parseInt(match[1], 10) : 1;
+
+    if(direction === "prev"){
+        currentPage = Math.max(1, currentPage - 1);
+    }else if(direction === "next"){
+        currentPage = Math.min(5, currentPage + 1);
+    }
+
+    window.location.href = currentPage + ".html";
+}
+
+/* =========================================
+   ESC → CLOSE
+========================================= */
+
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Escape"){
+
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        document.body.style.overflow = "";
+    }
+
+});
+</script>
+
+</body>
+</html>
