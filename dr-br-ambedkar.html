@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dr. Bhimrao Ramji Ambedkar | NYAYA SETU</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&amp;display=swap" rel="stylesheet"/>
+<style id="theme-vars">
+:root{
+    --theme-primary:var(--theme-primary);
+    --theme-primary-soft:var(--theme-primary-glow);
+    --theme-primary-glow:var(--theme-primary-glow);
+    --theme-primary-border:var(--theme-primary-glow);
+}
+
+/* NAVBAR BUTTON BOX */
+.navbar a,
+.navbar button,
+nav a,
+nav button {
+    border: 1px solid rgba(33,150,255,.55);
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: rgba(33,150,255,.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar a:hover,
+.navbar button:hover,
+nav a:hover,
+nav button:hover {
+    background: rgba(33,150,255,.16);
+}
+
+
+/* POPUP BUTTON TEXT SIZE */
+.popup button,
+.popup .btn,
+.modal button,
+.modal .btn,
+.popup-buttons button,
+.popup-buttons .btn {
+    font-size: 20px;
+}
+
+
+/* ============================= */
+/* HIGH COURTS TABLE */
+/* ============================= */
+.high-court-table-section {
+    margin-top: 50px;
+    padding-top: 35px;
+    border-top: 1px solid rgba(33,150,255,.25);
+}
+
+.high-court-table-section h2 {
+    color: #2196ff;
+    margin-bottom: 25px;
+    font-size: 30px;
+    text-shadow: 0 0 12px rgba(33,150,255,.5);
+}
+
+.high-court-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 12px;
+}
+
+.high-court-table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+    background: rgba(255,255,255,.04);
+    color: rgba(255,255,255,.92);
+    font-size: 20px;
+}
+
+.high-court-table th,
+.high-court-table td {
+    border: 1px solid rgba(33,150,255,.25);
+    padding: 14px 12px;
+    vertical-align: top;
+    text-align: left;
+}
+
+.high-court-table th {
+    background: rgba(33,150,255,.15);
+    color: #2196ff;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.high-court-table tbody tr:nth-child(even) {
+    background: rgba(255,255,255,.025);
+}
+
+.high-court-table tbody tr:hover {
+    background: rgba(33,150,255,.07);
+}
+
+.high-court-table td:first-child,
+.high-court-table th:first-child {
+    text-align: center;
+    width: 65px;
+}
+
+.high-court-table td:nth-child(3) {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.high-court-table small {
+    font-size: 13px;
+    line-height: 1.5;
+    opacity: .8;
+}
+
+@media (max-width: 900px) {
+    .high-court-table-section {
+        margin-top: 35px;
+        padding-top: 25px;
+    }
+
+    .high-court-table-section h2 {
+        font-size: 26px;
+    }
+
+    .high-court-table {
+        font-size: 20px;
+    }
+
+    .high-court-table th {
+        font-size: 23px;
+    }
+}
+
+.chronicle-photo {
+    display: block;
+    width: min(900px, 90%);
+    max-height: 450px;
+    object-fit: cover;
+    margin: 30px auto 40px;
+    border-radius: 18px;
+    border: 2px solid rgba(33,150,255,.45);
+    box-shadow:
+        0 0 20px rgba(33,150,255,.25),
+        0 0 45px rgba(33,150,255,.10);
+}
+
+.music-player {
+    width: min(600px, 90%);
+    margin: 0 auto 45px;
+    padding: 18px 22px;
+    background: rgba(0, 0, 0, .65);
+    border: 1px solid rgba(33,150,255,.45);
+    border-radius: 16px;
+    box-shadow:
+        0 0 20px rgba(33,150,255,.18),
+        inset 0 0 15px rgba(33,150,255,.04);
+}
+
+.music-player p {
+    color: #2196ff;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-shadow: 0 0 8px rgba(33,150,255,.4);
+}
+
+.music-player audio {
+    width: 100%;
+    height: 45px;
+}
+</style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+html{scroll-behavior:smooth}
+body{background:#0b0b0b;color:#fff;overflow-x:hidden}
+
+/* ============================= */
+/* SAME NAVBAR + NAV POPUPS */
+/* ============================= */
+
+nav{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    padding:16px 22px;
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(12px);
+    position:sticky;
+    top:0;
+    z-index:10000;
+}
+
+.main-nav{
+    isolation:isolate;
+}
+
+.nav-dropdown{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+.nav-trigger,
+.nav-home{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    position:relative;
+    padding:13px 18px;
+    min-height:46px;
+    border-radius:12px;
+    transition:.25s ease;
+    white-space:nowrap;
+    font-size:15px;
+    letter-spacing:.2px;
+}
+
+.nav-trigger:hover,
+.nav-home:hover{
+    color:#fff;
+    background:rgba(20,20,25,.96);
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 0 18px rgba(0,149,255,.20);
+}
+
+.nav-trigger::after,
+.nav-home::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-1px;
+    width:100%;
+    height:3px;
+    background:#0095ff;
+    border-radius:3px 3px 0 0;
+    transform:scaleX(0);
+    transform-origin:center;
+    transition:.22s ease;
+}
+
+.nav-trigger:hover::after,
+.nav-home:hover::after{
+    transform:scaleX(1);
+}
+
+/* ============================= */
+/* ABOUT PAGE */
+/* ============================= */
+
+.about{
+    min-height:100vh;
+    background:transparent;
+    position:relative;
+    z-index:0;
+    padding:100px 10% 100px;
+    text-align:center;
+}
+.about h1{
+    font-family:"Permanent Marker", cursive;
+    font-size:42px;
+    font-weight:700;
+    letter-spacing:3px;
+    color:#0095ff;
+    display:inline-block;
+    position:relative;
+    padding-bottom:12px;
+    text-shadow:0 0 8px rgba(0,149,255,.45);
+    animation:committeePulse 3s ease-in-out infinite;
+}
+
+/* Text animation */
+@keyframes committeePulse{
+    0%,100%{
+        transform:scale(1);
+        letter-spacing:3px;
+    }
+
+    50%{
+        transform:scale(1.03);
+        letter-spacing:5px;
+    }
+}
+
+/* Animated underline */
+.about h1::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width:0;
+    height:3px;
+    background:#0095ff;
+    border-radius:10px;
+    box-shadow:
+        0 0 8px #0095ff,
+        0 0 18px #0095ff;
+    transform:translateX(-50%);
+    animation:lineExpand 2s ease-in-out infinite;
+}
+
+@keyframes lineExpand{
+    0%,100%{
+        width:0;
+        opacity:.3;
+    }
+
+    40%{
+        width:100%;
+        opacity:1;
+    }
+
+    70%{
+        width:100%;
+        opacity:1;
+    }
+
+    90%{
+        width:0;
+        opacity:.3;
+    }
+}
+.intro{max-width:1100px;margin:0 auto;font-size:24px;line-height:1.7;opacity:.9}
+.container{max-width:950px;margin:0 auto}
+.asrp-buttons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin:55px auto 30px;
+    max-width:1000px;
+}
+.asrp-buttons button{
+    background:rgba(0,0,0,.78);
+    color:#fff;
+    border:1px solid rgba(33,150,255,.5);
+    padding:15px 25px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s ease;
+    box-shadow:0 0 8px rgba(33,150,255,.15);
+}
+.asrp-buttons button:hover,
+.asrp-buttons button.active{
+    background:#2196ff;
+    color:#000;
+    transform:translateY(-4px);
+    box-shadow:0 0 10px #2196ff,0 0 25px rgba(33,150,255,.6);
+}
+.section{
+    margin-top:25px;
+    background:rgba(0,0,0,.68);
+    padding:40px;
+    border-radius:14px;
+    border:1px solid rgba(33,150,255,.25);
+    box-shadow:0 0 25px rgba(33,150,255,.06),inset 0 0 20px rgba(33,150,255,.02);
+}
+.tab-section{display:none}
+.tab-section.active{display:block;animation:sectionFade .45s ease}
+@keyframes sectionFade{
+    from{opacity:0;transform:translateY(20px) scale(.98)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+.section h2{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    color:#2196ff;
+    margin-bottom:25px;
+    font-size:30px;
+    text-shadow:0 0 12px rgba(33,150,255,.5);
+}
+.emoji-text{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    text-align:left;
+    margin-bottom:22px;
+    line-height:1.7;
+    font-size:16px;
+    opacity:.9;
+}
+.emoji-text:last-child{margin-bottom:0}
+.emoji-text img{height:45px;width:45px;object-fit:contain;flex-shrink:0}
+
+/* ============================= */
+/* SAME FULL POPUPS */
+/* ============================= */
+
+.popup-overlay{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(10px);
+    z-index:99999;
+}
+.popup-overlay.active{display:flex;animation:popupFade .25s ease}
+.popup-box{
+    position:relative;
+    width:min(900px,95vw);
+    max-height:85vh;
+    overflow-y:auto;
+    padding:35px;
+    background:rgba(20,20,25,.92);
+    backdrop-filter:blur(25px);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:22px;
+    box-shadow:0 0 40px rgba(0,0,0,.5),0 0 80px rgba(33,150,255,.12);
+    animation:popupScale .3s ease;
+}
+.popup-box h2{text-align:center;font-size:25px;letter-spacing:2px;margin-bottom:5px}
+.popup-box>p{text-align:center;font-size:13px;opacity:.6;margin-bottom:25px}
+.popup-close{
+    position:absolute;
+    top:15px;right:18px;
+    width:40px;height:40px;
+    border:none;border-radius:50%;
+    background:rgba(255,255,255,.08);
+    color:#fff;font-size:28px;line-height:40px;
+    cursor:pointer;transition:.3s;
+}
+.popup-close:hover{background:#2196ff;transform:rotate(90deg);box-shadow:0 0 20px rgba(33,150,255,.5)}
+.popup-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.popup-grid a{
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:15px;
+    border-radius:14px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    color:#fff;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:700;
+    transition:.3s ease;
+}
+.popup-grid a:hover{
+    transform:translateY(-5px);
+    background:rgba(33,150,255,.18);
+    border-color:#2196ff;
+    box-shadow:0 0 15px rgba(33,150,255,.35);
+}
+@keyframes popupFade{from{opacity:0}to{opacity:1}}
+@keyframes popupScale{
+    from{opacity:0;transform:scale(.9) translateY(20px)}
+    to{opacity:1;transform:scale(1) translateY(0)}
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+footer{
+    background:#050505;
+    padding:35px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:25px;
+    flex-wrap:wrap;
+    border-top:1px solid rgba(33,150,255,.12);
+}
+
+.footer-logo{
+    display:flex;
+    flex-direction:column;
+    min-width:170px;
+}
+
+.footer-logo img{
+    width:150px;
+    margin-bottom:8px;
+}
+
+.footer-logo p{
+    opacity:.7;
+    font-size:15px;
+    margin:3px 0;
+}
+
+.footer-links{
+    min-width:130px;
+}
+
+.footer-links h4{
+    color:#2196ff;
+    margin-bottom:9px;
+    font-size:14px;
+}
+
+.footer-links a{
+    display:block;
+    color:#fff;
+    opacity:.7;
+    text-decoration:none;
+    margin:5px 0;
+    font-size:15px;
+    transition:.3s ease;
+}
+
+.footer-links a:hover{
+    color:#2196ff;
+    opacity:1;
+    transform:translateX(4px);
+}
+
+.bottom{
+    text-align:center;
+    padding:12px;
+    background:#030303;
+    opacity:.75;
+    font-size:16px;
+    border-top:1px solid rgba(255,255,255,.05);
+}
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media(max-width:900px){
+    .nav-popup-menu{
+        width:min(650px,94vw);
+        grid-template-columns:repeat(2,minmax(140px,1fr));
+    }
+}
+@media(max-width:800px){
+    .about{padding:90px 20px 70px;background-attachment:scroll}
+    .about h1{font-size:44px}
+    .intro{font-size:18px;line-height:1.6}
+    .asrp-buttons{gap:10px;margin-top:35px}
+    .asrp-buttons button{width:100%;max-width:350px;padding:14px 18px}
+    .section{padding:25px 20px}
+    .section h2{font-size:23px}
+    .emoji-text{font-size:15px;gap:10px}
+    .emoji-text img{height:38px;width:38px}
+footer{
+    padding:30px 20px;
+    flex-direction:column;
+    gap:20px;
+}
+}
+@media(max-width:600px){
+    .main-nav{
+        justify-content:flex-start;
+        overflow:visible;
+        flex-wrap:nowrap;
+        scrollbar-width:thin;
+    }
+.nav-trigger,.nav-home{
+    font-size:13px;
+    padding:10px 13px;
+    min-height:42px;
+}
+    .nav-popup-menu{
+        position:fixed;
+        top:64px;
+        left:50%;
+        width:94vw;
+        max-height:78vh;
+        grid-template-columns:repeat(2,1fr);
+        transform:translateX(-50%) translateY(-8px);
+    }
+    .nav-dropdown:hover .nav-popup-menu,
+    .nav-dropdown:focus-within .nav-popup-menu{
+        transform:translateX(-50%) translateY(0);
+    }
+    .popup-overlay{padding:15px}
+    .popup-box{padding:25px 18px;max-height:90vh}
+    .popup-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+    .popup-grid a{min-height:65px;padding:10px;font-size:12px}
+}
+@media(max-width:450px){
+    .about h1{font-size:36px}
+    .intro{font-size:17px}
+    .section{padding:22px 16px}
+    .section h2{font-size:20px;gap:5px}
+    .emoji-text{font-size:14px}
+}
+@media(max-width:400px){
+    .nav-popup-menu,.popup-grid{grid-template-columns:1fr}
+}
+
+/* ============================= */
+/* FONT AWESOME BACK ICON */
+/* ============================= */
+.back-icon{margin-right:7px}
+
+
+/* ============================= */
+/* FULL-PAGE VIDEO BACKGROUND */
+/* ============================= */
+#background-video{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+    pointer-events:none;
+}
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.42);
+    z-index:-1;
+    pointer-events:none;
+}
+
+
+.history-subheading{
+    color:#2196ff;
+    font-size:22px;
+    margin:35px 0 18px;
+    padding-bottom:10px;
+    border-bottom:1px solid rgba(33,150,255,.25);
+    text-align:left;
+    text-shadow:0 0 10px rgba(33,150,255,.35);
+}
+.history-subheading:first-of-type{margin-top:5px}
+
+
+
+.high-court-table-section{
+    margin-top:45px;
+    padding-top:35px;
+    border-top:1px solid rgba(33,150,255,.25);
+}
+.high-court-table-wrap{
+    width:100%;
+    overflow:visible;
+    margin-top:20px;
+    border-radius:12px;
+    border:1px solid rgba(33,150,255,.25);
+}
+.high-court-table{
+    width:100%;
+    min-width:1050px;
+    border-collapse:collapse;
+    background:rgba(0,0,0,.45);
+    text-align:left;
+}
+.high-court-table th,.high-court-table td{
+    padding:15px 14px;
+    border:1px solid rgba(255,255,255,.12);
+    vertical-align:top;
+    line-height:1.55;
+    font-size:24px;
+}
+.high-court-table th{
+    color:#2196ff;
+    background:rgba(33,150,255,.10);
+    font-weight:700;
+    text-align:center;
+    
+}
+.high-court-table td:first-child{
+    text-align:center;
+    font-weight:700;
+    width:65px;
+}
+.high-court-table td:nth-child(2){font-weight:700;min-width:190px}
+.high-court-table td:nth-child(3){text-align:center;white-space:nowrap}
+.high-court-table strong{color:#2196ff}
+.high-court-table tbody tr:hover{background:rgba(33,150,255,.07)}
+@media(max-width:800px){
+    .high-court-table-section{margin-top:35px;padding-top:25px}
+    .high-court-table th,.high-court-table td{padding:12px 10px;font-size:13px}
+}
+
+/* FULL HIGH COURTS TABLE — KEEP ALL ROWS VISIBLE */
+.high-courts-table-wrap{width:100%;overflow:visible !important;}
+.high-courts-table{width:100% !important;min-width:0 !important;table-layout:fixed;border-collapse:collapse;}
+.high-courts-table th,.high-courts-table td{white-space:normal !important;word-break:normal;overflow-wrap:anywhere;vertical-align:top;}
+.high-courts-table th:nth-child(1),.high-courts-table td:nth-child(1){width:33%}
+.high-courts-table th:nth-child(2),.high-courts-table td:nth-child(2){width:34%}
+.high-courts-table th:nth-child(3),.high-courts-table td:nth-child(3){width:33%}
+@media(max-width:800px){.high-courts-table{font-size:11px}.high-courts-table th,.high-courts-table td{padding:8px 5px !important;}}
+
+/* HIGH COURTS TABLE — CENTERED + FULL BORDER */
+.high-courts-table-wrap{
+    width:100%;
+    max-width:1200px;
+    margin:35px auto 0 !important;
+    overflow:visible !important;
+}
+.high-courts-table{
+    width:100% !important;
+    margin:0 auto !important;
+    border:3px solid rgba(33,150,255,.75) !important;
+    border-collapse:collapse !important;
+    border-spacing:0;
+    table-layout:fixed;
+}
+.high-courts-table th,
+.high-courts-table td{
+    border:2px solid rgba(33,150,255,.55) !important;
+    white-space:normal !important;
+    word-break:normal;
+    overflow-wrap:anywhere;
+    vertical-align:top;
+}
+.high-courts-table th{
+    border:3px solid rgba(33,150,255,.75) !important;
+}
+
+
+/* FINAL: CENTER THE HIGH COURTS TABLE */
+.high-courts-table-wrap {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    overflow: visible !important;
+}
+.high-courts-table {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+/* ============================= */
+/* COMMITTEES INFORMATION */
+/* ============================= */
+
+.committees-content {
+    width: 100%;
+    padding: 35px 0 55px;
+}
+
+.committees-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.committees-content h2 {
+    color: #2196ff;
+    font-size: 30px;
+    margin: 32px 0 14px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(33,150,255,.35);
+}
+
+.committees-content h2:first-child {
+    margin-top: 0;
+}
+
+.committees-content p {
+    margin: 0 0 22px;
+    text-align: left;
+    font-size: 22px;
+    line-height: 1.8;
+    color: rgba(255,255,255,.92);
+}
+
+.committee-pdf-download {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.pdf-download-button {
+    display: inline-block;
+    padding: 13px 28px;
+    border-radius: 8px;
+    background: #2196ff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(33,150,255,.25);
+    transition: .25s ease;
+}
+
+.pdf-download-button:hover {
+    background: #42a5ff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 22px rgba(33,150,255,.4);
+}
+
+
+@media (max-width: 800px) {
+    .committees-container {
+        padding: 0 20px;
+    }
+
+    .committees-content h2 {
+        font-size: 24px;
+    }
+
+    .committees-content p {
+        font-size: 22px;
+        line-height: 1.7;
+    }
+}
+
+</style>
+<style>
+/* FINAL: MAKE ALL THREE ARCHIVE COLUMNS EXACTLY EQUAL */
+.high-court-table{
+    width:100% !important;
+    min-width:0 !important;
+    table-layout:fixed !important;
+}
+
+.high-court-table th,
+.high-court-table td{
+    width:33.3333% !important;
+    min-width:0 !important;
+    white-space:normal !important;
+    word-break:normal;
+    overflow-wrap:anywhere;
+}
+
+/* Override the older special sizing rules */
+.high-court-table td:first-child,
+.high-court-table th:first-child{
+    width:33.3333% !important;
+}
+
+.high-court-table td:nth-child(2),
+.high-court-table th:nth-child(2){
+    width:33.3333% !important;
+    min-width:0 !important;
+}
+
+.high-court-table td:nth-child(3),
+.high-court-table th:nth-child(3){
+    width:33.3333% !important;
+    white-space:normal !important;
+}
+</style>
+<style>
+/* CENTER TEXT IN MIDDLE ARCHIVE COLUMN */
+.high-court-table td:nth-child(2),
+.high-court-table th:nth-child(2){
+    text-align:center !important;
+}
+</style>
+
+<style>
+.ambedkar-buttons{
+    margin-top:40px;
+    margin-bottom:35px;
+}
+.ambedkar-tabs{
+    max-width:1200px;
+}
+.tab-placeholder{
+    text-align:center;
+    font-size:20px;
+    line-height:1.7;
+    opacity:.8;
+    padding:25px 10px;
+}
+.ambedkar-tabs .section{
+    width:100%;
+}
+</style>
+</head>
+<body>
+<video autoplay="" id="background-video" loop="" muted="" playsinline="" preload="auto">
+<source src="background/tokyo.mp4" type="video/mp4"/>
+</video>
+<nav class="main-nav">
+<a class="nav-home" href="index.html">Home</a>
+<div class="nav-dropdown" data-popup="aboutPopup">
+<a class="nav-trigger" href="javascript:void(0)">About</a>
+</div>
+<div class="nav-dropdown" data-popup="judgesPopup">
+<a class="nav-trigger" href="javascript:void(0)">Judges</a>
+</div>
+<div class="nav-dropdown" data-popup="collegiumPopup">
+<a class="nav-trigger" href="javascript:void(0)">Publications</a>
+</div>
+<div class="nav-dropdown" data-popup="servicesPopup">
+<a class="nav-trigger" href="javascript:void(0)">Services</a>
+</div>
+<div class="nav-dropdown" data-popup="eservicesPopup">
+<a class="nav-trigger" href="javascript:void(0)">e-Services</a>
+</div>
+<div class="nav-dropdown" data-popup="advocatesPopup">
+<a class="nav-trigger" href="javascript:void(0)">Advocates</a>
+</div>
+<div class="nav-dropdown" data-popup="filingPopup">
+<a class="nav-trigger" href="javascript:void(0)">Court Filings</a>
+</div>
+<div class="nav-dropdown" data-popup="noticesPopup">
+<a class="nav-trigger" href="javascript:void(0)">Notices</a>
+</div>
+<div class="nav-dropdown" data-popup="newsPopup">
+<a class="nav-trigger" href="javascript:void(0)">News &amp; Events</a>
+</div>
+</nav>
+<section class="about">
+    <h1>Dr. Bhimrao Ramji Ambedkar</h1>
+
+    <!-- Ambedkar section buttons -->
+    <div class="asrp-buttons ambedkar-buttons" role="tablist" aria-label="Dr. B.R. Ambedkar sections">
+        <button type="button" class="active" onclick="showSection('aboutSection', this)">About</button>
+        <button type="button" onclick="showSection('certificateSection', this)">Certificate</button>
+        <button type="button" onclick="showSection('applicationsSection', this)">Applications</button>
+        <button type="button" onclick="showSection('casesSection', this)">Cases</button>
+        <button type="button" onclick="showSection('mahadSection', this)">Mahad Satyagraha</button>
+        <button type="button" onclick="showSection('speechesSection', this)">Speeches</button>
+    </div>
+
+    <!-- ONLY the selected tab-section is displayed -->
+    <div class="container ambedkar-tabs">
+
+        <!-- ABOUT -->
+        <section id="aboutSection" class="section tab-section active">
+            <img
+                src="images/bhimraoramjiambedkar.jpg"
+                alt="Dr. Bhimrao Ramji Ambedkar"
+                class="chronicle-photo"
+            >
+
+            <div class="music-player">
+                <p>CA Speech – 17 Dec 1946</p>
+                <audio controls>
+                    <source src="audio/bhimraoramjiambedkar.m4a" type="audio/mp4">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <div class="committees-content">
+                <h2>Centenary of Dr. B.R. Ambedkar’s enrolment as an advocate</h2>
+                <p>Dr. Bhimrao Ramji Ambedkar (1891-1956) was born on 14 April 1891 in Mhow Cantonment, Madhya Pradesh. He completed his primary schooling in Satara, Maharashtra and completed his secondary education from Elphinstone High School in Bombay. His education was achieved in the face of significant discrimination, for he belonged to the Scheduled Caste (then considered as ‘untouchables’). In his autobiographical note ‘Waiting for a Visa’, he recalled how he was not allowed to drink water from the common water tap at his school, writing, “no peon, no water”.</p>
+                <p>Dr Ambedkar graduated from Bombay University in 1912 with a B.A. in Economics and Political Science. On account of his excellent performance at college, in 1913 he was awarded a scholarship by Sayajirao Gaikwad, then Maharaja (King) of Baroda state to pursue his M.A. and Ph.D. at Columbia University in New York, USA. His Master’s thesis in 1916 was titled “The Administration and Finance of the East India Company”. He submitted his Ph.D. thesis on “The Evolution of Provincial Finance in India: A Study in the Provincial Decentralization of Imperial Finance”.</p>
+                <p>After Columbia, Dr. Ambedkar moved to London, where he registered at the London School of Economics and Political Science (LSE) to study economics, and enrolled in Grey’s Inn to study law. However, due to lack of funds, he had to return to India in 1917. In 1918, he became a Professor of Political Economy at Sydenham College, Mumbai (erstwhile Bombay). During this time, he submitted a statement to the Southborough Committee demanding universal adult franchise.</p>
+                <p>In 1920, with the financial assistance from Chatrapati Shahuji Maharaj of Kolhapur, a personal loan from a friend and his savings from his time in India, Dr. Ambedkar returned to London to complete his education. In 1922, he was called to the bar and became a barrister-at-law. He also completed his M.S.c. and D.S.c. from the LSE. His doctoral thesis was later published as “The Problem of the Rupee”.</p>
+                <p>After his return to India, Dr Ambedkar founded Bahishkrit Hitkarini Sabha (Society for Welfare of the Ostracized) and led social movements such as Mahad Satyagraha in 1927 to demand justice and equal access to public resources for the historically oppressed castes of the Indian society. In the same year, he entered the Bombay Legislative Council as a nominated member.</p>
+                <p>Subsequently, Dr. Ambedkar made his submissions before the Indian Statutory Commission also known as the ‘Simon Commission’ on constitutional reforms in 1928. The reports of the Simon Commission resulted in the three roundtable conferences between 1930-32, where Dr. Ambedkar was invited to make his submissions.</p>
+                <p>In 1935, Dr. Ambedkar was appointed as the Principal of Government Law College, Mumbai, where he was teaching as a Professor since 1928. Thereafter, he was appointed as the Labour Member (1942-46) in the Viceroy’s Executive Council.</p>
+                <p>In 1946, he was elected to the Constituent Assembly of India. On 15 August 1947, he took oath as the first Law Minister of independent India. Subsequently, he was elected Chairperson of the Drafting Committee of the Constituent Assembly, and steered the process of drafting of India’s Constitution.</p>
+                <p>After the first General Election in 1952, he became a member of the Rajya Sabha. He was also awarded an honorary doctorate degree from Columbia University in the same year. In 1953, he was also awarded another honorary doctorate from Osmania University, Hyderabad.</p>
+                <p>Dr. Ambedkar’s health worsened in 1955 due to prolonged illness. He passed away in his sleep on 6 December 1956 in Delhi.</p>
+
+                <h2>References</h2>
+                <p><strong>1</strong> Vasant Moon (eds.), Dr. Babasaheb Ambedkar Writings And Speeches, (Dr. Ambedkar Foundation, Ministry of Social Justice &amp; Empowerment, Govt. of India, 2019) (Re-print)</p>
+                <p><strong>2</strong> Dhananjay Keer, Dr. Ambedkar Life and Mission, (Popular Prakashan, 2019 Re-print)</p>
+                <p><strong>3</strong> Ashok Gopal, A Part Apart: Life and Thought of B.R. Ambedkar, (Navayana Publishing Pvt. Ltd., 2023)</p>
+                <p><strong>4</strong> Narendra Jadhav, Ambedkar: Awakening India’s Social Conscience, (Konark Publishers Pvt. Ltd., 2014).</p>
+                <p><strong>5</strong> William Gould, Santosh Dass and Christophe Jaffrelot (eds.), Ambedkar In London, (C. Hurst and Co. Publishers Ltd., 2022).</p>
+                <p><strong>6</strong> Sukhadeo Thorat and Narender Kumar, B.R. Ambedkar: Perspectives on Social Exclusion and Inclusive Policies (Oxford University Press, 2009).</p>
+                <p><strong>7</strong> Constituent Assembly Debates</p>
+            </div>
+        </section>
+
+        <!-- CERTIFICATE -->
+        <section id="certificateSection" class="section tab-section">
+            <div class="committees-content">
+                <h2>Gray’s Inn Barrister Certificate</h2>
+                <h3>Legal Education</h3>
+                <p>When Dr. Ambedkar began his legal education in the United Kingdom in 1916, it was necessary to join an Inn of the Courts to begin one’s legal training. There were four Inns at that time: Inner Temple, Middle Temple, Lincoln’s Inn, and Gray’s Inn. Dr. Ambedkar was admitted to the Gray’s Inn in 1916. To this day, Gray’s Inn retains the following entry in its Index of Admission:</p>
+                <p>“Nov. 1916, Ambedkar, Bhimrao Ramji, B.A. Bombay, M.A. Columbia; of Baroda State, India; the youngest son of Ramji Ambedkar of Bombay, deceased” (Gasztowicz, 2022)</p>
+                <p>The details of the courses that he studied as part of his law degree are documented in an edited book ‘Ambedkar in London’ (2022). In 1922, he was called to the bar by Gray’s Inn and became a barrister-at-law.</p>
+                <p>Later in 1934-35, he delivered lectures on English Constitutional Law at the Government Law College, Bombay. These lectures are available in Volume 12 of his collected writing and speeches, published by the Government of India.</p>
+            </div>
+            <img
+                src="images/front.png"
+                alt="Dr. Bhimrao Ramji Ambedkar"
+                class="chronicle-photo"
+            >
+
+            <img
+                src="images/back.png"
+                alt="Dr. Bhimrao Ramji Ambedkar"
+                class="chronicle-photo"
+            >
+
+            <div class="committees-content">
+                <h2>References</h2>
+                <p><strong>1</strong> Vasant Moon (eds.), Dr. Babasaheb Ambedkar Writings and Speeches. Dr. Ambedkar Foundation, Ministry of Social Justice & Empowerment, Govt. of India, 2019 Re-print</p>
+                <p><strong>2</strong> Steven Gasztowicz KC, ‘Ambedkar as Lawyer: From London to India in the 1920s’, in William Gould Santosh Dass and Christophe Jaffrelot (eds.), Ambedkar In London. C. Hurst and Co. Publishers Ltd., 2022</p>
+                <p><strong>3</strong> Savita Ambedkar, Babasaheb: My Life with Dr. Ambedkar; translated by Nadeem Khan. Penguin, 2022</p>
+            </div>
+        </section>
+        <!-- APPLICATIONS -->
+        <section id="applicationsSection" class="section tab-section">
+            <div class="committees-content">
+                <h2>Application for Admission as Advocate in Bombay High Court</h2>
+                <p>After his arrival in India in 1923, he applied for a licence (Sanad) to practice law. After his enrolment at the bar, he set up his legal practice at the Social Service League in Bombay. Unlike other notable lawyers of that time, Dr. Ambedkar began his practice with few connections and even fewer resources. Despite this, his skills as a lawyer were reflected in several leading cases.</p>
+                <p>Dr. Ambedkar appeared as a Junior Counsel in 1927 in the defence of Phillip Spratt (one of the founders of the Communist Party of India), who was accused of sedition for his publication of the pamphlet titled ‘India and China’. The defence successfully argued that the pamphlet was a general commentary on imperialism and did not specifically attack the Government of India, thus the offence of sedition was not attracted.</p>
+                <p>In the Chavadar tank case, Dr. Ambedkar led a group of individuals from oppressed castes to drink water from a tank in Mahad. The plaintiffs (caste Hindus) alleged that the tank was their private property. Dr. Ambedkar, strategizing for the defence, successfully contended that the tank was public property and ought to be equally accessible to all sections of the society. The court held that the plaintiffs cannot rely on the long-standing exclusion of a certain group from using the tank to claim ownership, and that as the tank was managed by the Government, the community at large has a right to use it.</p>
+                <p>In 1934, Dr. Ambedkar successfully defended the All India Textile Workers Conference by demonstrating the loopholes present in the Trade Disputes Act, 1929. He also defended Prof. R.D. Karve for his work Samaj Swastya. Prof. Karve was accused of obscenity due to his publication on sexual hygiene.</p>
+                <p>Apart from these high profile cases, he also worked on other cases such as workmen compensation and pro bono cases for individuals from oppressed sections of society.</p>
+                <p>Through his practice, Dr. Ambedkar rose to become one of the leading lawyers of his day. He was offered an appointment as a District Judge, and the Nizam of Hyderabad also offered to make Dr. Ambedkar the Chief Justice of the State. However, he ultimately turned these offers down. In his 1951 speech, he explained how such roles would hinder his activities as a social and political reformer. He said, “When I returned home after completion of my education in America and Europe. I was offered the post of a District Judge. I was promised to be elevated to the High Court within three subsequent years. I declined the offer saying that I did not want those alluring ties. I feared that after getting into government service I would not be able to serve my people.”</p>
+            </div>
+            <img
+                src="images/br1.png"
+                alt="Dr. Bhimrao Ramji Ambedkar"
+                class="chronicle-photo"
+            >
+
+            <img
+                src="images/br2.png"
+                alt="Dr. Bhimrao Ramji Ambedkar"
+                class="chronicle-photo"
+            >
+
+            <div class="committees-content">
+                <h2>References</h2>
+                <p><strong>1</strong>    Vijay B. Gaikwad, Court Cases Argued by Dr. Babasaheb Ambedkar. Vaibhav Prakashan, 2012.</p>
+                <p><strong>2</strong>    Steven Gasztowicz KC, Ambedkar as Lawyer: From London to India in the 1920s, in William Gould and ors. (eds.), Ambedkar In London. C. Hurst and Co. Publishers Ltd. 2022.</p>
+                <p><strong>3</strong>    Rohit De, Lawyering as Politics: The Legal Practice of Dr. Ambedkar, Bar at Law. 2018.</p>
+                <p><strong>4</strong>    Nanak Chand Rattu, Reminiscences and Remembrance of Dr. B.R. Ambedkar. Samyak Prakashan, 2017.</p>
+                <p><strong>5</strong>    Dhananjay Keer, Dr. Ambedkar Life and Mission. Popular Prakashan, 2019 Re-print.</p>
+                
+            </div>
+        </section>
+
+        <!-- CASES -->
+        <section id="casesSection" class="section tab-section">
+            <h2>Court Cases Argued by Dr. B.R. Ambedkar</h2>
+            <p class="tab-placeholder">Cases information are as follow:</p>
+        <div class="committees-content"> 
+<a href="brcase/1.pdf" target="_blank" rel="noopener">
+    <h2>1. Yashwant Satva Chaugule Vs Emperor </h2>
+</a>
+<p>Criminal Procedure Code, Section 225 – Omission to state common object of unlawful assembly in a charge is not fatal – Where the common object of an unlawful assembly is specified in the complaint and found by the Court, its Omission in the charge does not vitiate trial: 21 Cal 827, Appl. and 22 Cal. 276 Dist.</p>
+<p>[Ambedkar and B.G. Modak – for Applicant]</p>
+<p>Citation : AIR 1926 Bombay 314</p>
+
+<a href="brcase/2.pdf" target="_blank" rel="noopener">
+    <h2>2. Ahmedabad Cotton & Co. Vs Bai Budhian Rajaram (Original Judgment) </h2>
+</a>
+<p>Workmen’s Compensation Act (1923), Section 3 – Death of workman caused through his act which was incidental to his work – His act was held to arise out of and in the course of his employment.</p>
+<p>Held: that the act of the deceased workman in removing the hession cloth was incidential to his work and was done in the performance of his duty, and arose out of and in the course of his employment within S. 3.(P.224, C. 2)</p>
+<p>[H.V. Divatia – for Appellant. Ambedkar B.G. Modak – for Respondent.]</p>
+<p>Citation : AIR 1927 Bombay 223</p>
+
+<a href="brcase/3.pdf" target="_blank" rel="noopener">
+    <h2>3. Emperor Vs Shantaram S. Mirajkar </h2>
+</a>
+<p>Criminal Procedure Code (Act V of 1898), Sec. 239 – Criminal trial – Joint trial – Printer and publisher of an alleged seditious pamphlet – Indian Penal Code (Act XLV of 1860), Sec. 124A. The printer and the publisher of a pamphlet alleged to be seditious can properly be tried jointly for an offence pubnishable under Sec. 124A of the Indian Penal Code, 1860.</p>
+<p>[Kanga, Advocate General, with O’Gorman for the Crown, Dalvi, with Ambedkar, for accused No. 1 and Sir Chimanlal Setalvad, with F.J. Patel and Ratanlal Ranchhoddas, for accused No. 2]</p>
+<p>Citation : 1928 (30) Bom.L.R. 320</p>
+
+<a href="brcase/4.pdf" target="_blank" rel="noopener">
+    <h2>4. Emperor Vs Philip Spratt (No. 2) </h2>
+</a>
+<p>Evidence Act, Ss.9 and 14 – Admissibility of copy of letter written by accused as evidence when the original one was not forthcoming.</p>
+<p>Held: that (1) the copy of the letter was relevant to show the accused’s intention and could be admitted as evidence; and (2) it is not necessary for the prosecution to prove that such a letter was sent before the copy could be admitted as evidence [P77 c 2 P. 78 C1].</p>
+<p>[Kanga – for the Crown, F. S. Talyarkhan – Gupte, Ambedkar and Ratanlal Ranchhoddas – for Accused.]</p>
+<p>Citation : AIR 1928 Bombay 77</p>
+
+<a href="brcase/5.pdf" target="_blank" rel="noopener">
+    <h2>5. Emperor Vs Philip Spratt (No. 3) </h2>
+</a>
+<p>Evidence Act, Sec. 14 – Intention of accused charged under S. 124-A, I.P.C. – Writing made, by him and found with him is relevant on the question of intention.</p>
+<p>[Kanga, O’Ogrman – for the Crown, F.S. Talyarkhan, Gupte, Ambedkar and Ratanlal Ranchhoddas – for Accused.]</p>
+<p>Citation : AIR 1928 Bombay 78</p>
+
+<a href="brcase/6.pdf" target="_blank" rel="noopener">
+    <h2>6. Nana Khandera Ghadge Vs Emperor (Original Judgment) </h2>
+</a>
+<p>Code of Criminal Procedure, Sec. 195 – Court has power to sanction prosecution for an offence before Commissioner appointed by it – The commissioner is Subodinate to the Court appointing him and the offence to refuse to take the oath and answer the question put by the commissioner is an offence against the Court itself.</p>
+<p>[Ambedkar K.A. Padhye – for Applicant, P.B. Shingne – for the Crown.]</p>
+<p>Citation : AIR 1927 Bombay 647</p>
+
+<a href="brcase/7.pdf" target="_blank" rel="noopener">
+    <h2>7. Emperor Vs Vithabai Sukha & Others </h2>
+</a>
+<p>Penal Code, Sec. 373 must be read with S. 372 – Object of the possession is the test – Possession for two or three hours by the brothel-keeper in the night is sufficient possession – Bombay Prevention of Prostitution Act, 1923, Sec. 6 – Brothel-keeper availing hereself of the supply of the procuress is guilty of abetment.</p>
+<p>[Brown – for the Crown, Daruwalla and Ambedkar – for Accused.]</p>
+<p>Citation : AIR 1928 Bombay 336</p>
+
+<a href="brcase/8.pdf" target="_blank" rel="noopener">
+    <h2>8. Khandesh Laksmi Vilas Mills Co. Ltd. Vs Graduate Coal Concern, Jalgaon (Original Judgment) </h2>
+</a>
+<p>Civil P.C. (1908) Sec. 152-Decree drawn up in terms of interlocutary application instead of according to final order owing to mistake on part of ministerial servant Court has inherent power to amend decree – Under Sec. 125 the Court has inherent power to vary or amend its own decrees or orders so as to carry out its own meaning. Hence where a decree was apparently drawn up in the terms of the interlocutory application for a final decree by a mistake on the part of a ministerial servant, but it ought to have been drawn up according to the final order of the Judge himself:</p>
+<p>Held: that the Court had inherent power to amend it.</p>
+<p>[Ambedkar, W.B. Pradhan and G.S. Gupte – for applicant, A.G. Desai and P.B. Gajendragadkar – for Opponent.]</p>
+<p>Citation : AIR 1935 Bombay 75</p>
+
+<a href="brcase/9.pdf" target="_blank" rel="noopener">
+    <h2>9. Gulabrao Laxmanrao Chandgude Vs Emperor (Original Judgment) </h2>
+</a>
+<p>Jurisdiction – Mere definition of areas cannot exclude jurisdiction of Magistrate in rest of district – Sec. 12(2), Criminal P.C. requires express or necessarily implied provisions to exclude jurisdiction – The mere definition of areas of jurisdiction cannot be taken as a provision excluding jurisdiction of the Magistrate in the rest of the district. Sub-Sec. 2, Sec. 12 Criminal P.C. clearly requires some provision excluding jurisdiction in the rest of the district, which is either express or must be inferred by necessary implication. 1921 All 123, Diss from (P. 410 C1).</p>
+<p>[B.R. Ambedkar and V.D. Limaye for Accused. P.B. Shingne – for the Crown.]</p>
+<p>Citation : AIR 1935 Bombay 409</p>
+
+<a href="brcase/10.pdf" target="_blank" rel="noopener">
+    <h2>10. Emperor Vs A. A. Alwe (Original Judgment) </h2>
+</a>
+<p>Trade Disputes Act (VII of 1929), Secs. 16, 17 – Illegal strike – Furtherance of trade dispute within the trade – Association of other disputes renders strike illegal -“Government” – “Community” – “Designed or calculated” – Interpretation – severe, general and prolonged hardship upon the community – Compulsion on Government – General strike in textile industry of India.</p>
+<p>[K.Mcl. Kemp, Advocate General, with P.B. Shingne, Government Pleader – for the Crown., B.R. Ambedkar, S.C. Joshi and N.B. Samarth, with A.S. Asyekar and A.G. Kotwal, for accused.]</p>
+<p>Citation : 1935 (37) Bom 892</p>
+
+<a href="brcase/11.pdf" target="_blank" rel="noopener">
+    <h2>11. Vithabai Dattu Pattar and Others vs Malhar Shankar Kulkarni </h2>
+</a>
+<p>Evidence Act (1872), Sec. 108 Person not heard of for more than seven years cannot be presumed to have died at particular date. Transfer of Property Act (1882), Ss. 43 and 6 – Erroneous representation by transferor that he is full owner though in fact entitled merely to spes successionis – S. 43 operates</p>
+<p>[P.V. Kane – for Appellants, Dr. B.R. Ambedkar , S.A. Desai and S.A. Kher – for Appellant No. 6, G.N. Thakore and B.D. Belvi – for Respondent No. 1]</p>
+<p>Citation : AIR 1938 Bombay 228</p>
+
+<a href="brcase/12.pdf" target="_blank" rel="noopener">
+    <h2>12. Ramchandra Ganpatrao Dalvi Vs Laxmibai Shamrao Kalkundri </h2>
+</a>
+<p>Saranjam – Saranjamdar has no right to create saranjam – A saranjam which is a political inam, appears by its very nature to be incapable of being created except by Government or the sovereign power alone. Hence it is not possible for a saranjamdar to create a saranjam in favour of a stranger : AIR 1929 Bom 14, Expl. Inam – Alienation of sarva inam – Suit to set aside.</p>
+<p>[Dr. B.R. Ambedkar B.D. Belvi – for Appellant., G.N. Thakor and S.B. Jathar – for Respondent 1.]</p>
+<p>Citation : AIR 1938 Bombay 331</p>
+
+<a href="brcase/13.pdf" target="_blank" rel="noopener">
+    <h2>13. Asman Vaman Yadav and Others. vs Ganpat Tukaram and Others </h2>
+</a>
+<p>Hindu Law – Alienation – Father – Mortgage not for antecedent debt does not bind son’s interest even if debt is not proved to be for immoral purpose.</p>
+<p>[P.B. Gajendragadkar (in No. 303), Dr. B.R. Ambedkar Ramnath Shivlal for A.S. Asyekar (in No. 69), for Appellants., Dr. B.R. Ambedkar and Ramnath Shivlal for A.S. Asyekar (in No. 303), for Respondent 1; P.B. Gajendragadkar (in No. 69), for Respondents 1 to 3.]</p>
+<p>Citation : AIR 1938 Bom 443</p>
+
+<a href="brcase/14.pdf" target="_blank" rel="noopener">
+    <h2>14. Govind Gurunath Naik Vs Deekappa Mallappa Hubballi </h2>
+</a>
+<p>Hindu Law – Alienation – Manager – Creditor making inquiry and satisfying himself that manager is acting for benefit of estate or family – Real existence of alleged necessity is not condition precedent to validity of charge – What is legal necessity and what is for benefit of estate depends upon circumstances of each case – No duty is cast on creditor to inquire as to what happened to money subsequently. Hindu Law – Alienation – Father – Ancestral property – Alienation is not void but only voidable by son – He can also ratify it. Hindu Law – Alienation – Legal necessity – Second mortgagee of joint family property taking his mortgage with notice of fact that first mortgage was for legal necessity – He cannot raise question of want of legal necessity.</p>
+<p>[G. N. Thakor and K.G. Datar – for Appellant. Dr. B.R. Ambedkar G.R. Madbhavi – for Respondent.]</p>
+<p>Citation : AIR 1938 Bom 388.</p>
+
+<a href="brcase/15.pdf" target="_blank" rel="noopener">
+    <h2>15. Muktawandas Ajabdas and Others vs Emperor </h2>
+</a>
+<p>Criminal Trial – Duty of prosecution to call witnesses – Eye witnesses when not numerous must all be examined. Evidence Act (1 of 1872), S. 155(3), S. 145 – Oral statements made to witnesses by others – Questions to witnesses about those statements are legally admissible.</p>
+<p>[ Dr. B.R. Ambedkar and T. G. Chobles – for Accused No. 1. T.J. Kedar, R.K. Rau, R.G. Rau, S W.A. Rizwi and W.C. Dutt – for Appellants Nos. 2 to 14.]</p>
+<p>Citation : AIR 1939 Nagpur 13</p>
+
+<a href="brcase/16.pdf" target="_blank" rel="noopener">
+    <h2>16. Shanmukhappa Gurulingappa and Others vs Rudrappa Golappa Malli </h2>
+</a>
+<p>Hindu Law – Alienation – Father – Subsequently born son – Alienation by sole surviving coparcener cannot be objected to by son born to or adopted by him subsequently. Hindu Law – Debts – Coparcener – Debts incurred by sole surviving coparcener are not binding on son adopted in the coparcenary subsequently, unless contracted for necessary purposes or benefit of the family.</p>
+<p>[S.R. Purulekar (in No. 149), Dr. B.R. Ambedkar, G.R. Madbhavi and K.R. Bengeri (in No. 222) – for Applellants]</p>
+<p>Citation : AIR 1939 Bombay 266</p>
+
+<a href="brcase/17.pdf" target="_blank" rel="noopener">
+    <h2>17. T. L. Wilson and Co. Solicitors vs Hari Ganesh Joshi and Others. </h2>
+</a>
+<p>Contract Act (1872), S.2(h) – Nudum pactum – Solicitor’s costs – Solicitor agreeing to accept full taxed costs only in event of success so as to lighten burden of client in event of failure – Agreement is valid and enforcible. Civil P.C.(1908), O.45,R.7 – Object of security – Solicitor can recover his taxed costs by summary proceeding from amount deposited under O.45,R.7.</p>
+<p>[ H.C. Coyajee and P.B. Gajandragadkar – for Applicants. Dr. B.R. Ambedkar, and L.G. Khare, and Y.V. Dixit and B.N. Gokhale – for Respondents]</p>
+<p>Citation : AIR 1939 Bombay 250</p>
+
+<a href="brcase/18.pdf" target="_blank" rel="noopener">
+    <h2>18. Jivanrao Anandrao Deshpande Vs Vishnu Rangnath Kalawade </h2>
+</a>
+<p>Hindu Law – Religious endowment – Right of worship – Private family devasthan – Worship and management given to members by annual turns but without right to alienate – Descendants through females cannot inherit right of worship and management.</p>
+<p>[ Dr. B.R. Ambedkar,and P.S. Bakhale – for appellant. G.K. Chitale and C.H. Patwardhan – for Respondent.0]</p>
+<p>Citation : AIR 1939 Bombay 207</p>
+
+<a href="brcase/19.pdf" target="_blank" rel="noopener">
+    <h2>19. Janardan Govind Gore and Others vs Advocate General of Bombay </h2>
+</a>
+<p>Will – Construction – “My community” – Interpretation – The Chitpavan sub-section of the Maharashtra community is a community by itself having peculiar characteristics which distinguish it from other communities forming part of the larger Maharashtra community: 7 Bom 333, Ref – A testator, a Chitpavan Brahmin (Hindu), by his will directed his executors to pay certain legacies and bequests. One of them read as: ” A sum of Rupees… towards medical relief of persons of my community or any other charitable purpose of utility of my community, such object to be named after me:” – Held that the words “my community” referred to Chitpavan Brahmin (Hindu) community and not to the Dakshini community as a whole.</p>
+<p>[S.R. Tendulkar – for Plaintiff, Dr. B.R. Ambedkar , M.H. Gandhi and D.B. Desai, and K.A. Somjee – for Defendants 2 &3, and 4 Respectively.]</p>
+<p>Citation : AIR 1939 Bombay 202</p>
+
+<a href="brcase/20.pdf" target="_blank" rel="noopener">
+    <h2>20. Putlaji Vishram Desai Others Vs Damodar Vishnu Vaidya (Original Judgment) </h2>
+</a>
+<p>Grant – Grant of soil in alienated village by Peshwa in 1778 – Inamdar is owner of trees standing on lands already in occupation of khots, dharekaris and permanent tenants. Adverse Possession – Right to trees – Khots, dharekaris and permanent tenants in alienated village openly cutting trees on their lands for more then 35 years to knowledge of inamdar and without his permission – Inamdar’s claim to trees is barred.</p>
+<p>[Dr. B.R. Ambedkar and A. A. Adarkar – for Appellants. H.C. Coyajee and Y. V. Dixit – for Respondent (Plaintiff)]/p>
+<p>Citation : AIR 1939 Bombay 405</p>
+
+<a href="brcase/21.pdf" target="_blank" rel="noopener">
+    <h2>21. Krishna Vitnak Mahar and another vs Shankar Krishna Gandhi Others. (Original Judgment) </h2>
+</a>
+<p>Dekkhan Agriculturists Relief Act (17 of 1879), S.15-D – Suit for account is not maintainable if it requires setting aside sale of equity of redemption – A suit for account of a mortgage which requires the setting aside of the sale of equity of redemption is not maintainable under S. 15-D.</p>
+<p>[Dr .B.R. Ambedkar and B.G. Modak – for Appellants.,M.G. Chitale – for Respondent]</p>
+<p>Citation : AIR 1939 Bombay 419</p>
+
+<a href="brcase/22.pdf" target="_blank" rel="noopener">
+    <h2>22. Narbheramji Gyaniramji Ramsnehi Vs Vivekramji Bhagatramji Ramsnehi </h2>
+</a>
+<p>Limitation – Limitation can be pleaded even in appeal. Bombay Land Revenue Code (5 of 1879), S. 133 – Sanad granted under S. 133 is not document of title – Person suing for possession need not set aside sanad before obtaining possession – Art. 14, Limitation Act, is not bar to such suit.</p>
+<p>[H.C. Coyajee, M.R. Vidyarthi, R.A. Desai, B. Moropanth and R.P. Cholia – for Appellant. B.R. Ambedkar, M.H. Vakeel and P.N. Shende – for Respondent.]</p>
+<p>Citation : AIR 1939 Bombay 425</p>
+
+<a href="brcase/23.pdf" target="_blank" rel="noopener">
+    <h2>23. Mahadeo Sundar Mehta Vs Khanderao Sitaram Tipnis (Original Judgment) </h2>
+</a>
+<p>Civil P.C. (1908), S.68 – Date on which status of judgment – debtor is to be considered is date when order for sale is passed. Civil P.C. (1908) O.21, R.64 – Order under O.21, R.64 may be modified if judgment – debtors appear under O.21, R.66 and prove that they are agriculturists. Civil P.C. (1908), S.47 and O.21, R.66 – Administrative directions relating to proclamation of sale do not fall under S. 47 – But order as to whether sale is to be held by Court itself or by Collector falls under S 47.</p>
+<p>[K.N. Dharap – for Appellants., Dr. B.R. Ambedkar V.B. Virkar – for Respondents.]</p>
+<p>Citation : AIR 1939 Bombay 526</p>
+
+<a href="brcase/24.pdf" target="_blank" rel="noopener">
+    <h2>24. Jagannath Ganeshram Agarwala vs Shivnarayan Bhagirath and Others </h2>
+</a>
+<p>Surety – Managing agent of company standing surety for debt due by company to its creditor – Company would up – Scheme under S. 153, Companies Act – Creditor receiving half sum in cash and other half in shape of preferential shares – This held did not discharge surety. Surety – His liability is co-extensive but not in the alternative. Hindu Law – Joint family business – To justify manager’s standing surety on ground of legal necessity requires strong evidence. Hindu Law – Joint family business – Question whether passing of letter of guarantee by manager is ordinary incident of business is question of fact.</p>
+<p>[G.N. Thakor and S.G. Patwardhan – for Appellant. Sir Jamshedji Kanga, B.R. Ambedkar, Ramnath Shivalal and A.S. Asyekar – for Respondents.]</p>
+<p>Citation : AIR 1940 Bombay 247</p>
+
+<a href="brcase/25.pdf" target="_blank" rel="noopener">
+    <h2>25. Emperor Vs Saver Manuel Dantes (Original Judgment) </h2>
+</a>
+<p>Bombay Abkari Amendment Act (6 of 1940), S. 6 – S. 6 deleting proviso to S. 14-B(1) of Abkari Act – Object of deletion stated. Bombay Abkari Amendment Act ( 6 of 1940), S. 7 – Construction – S. 7 is not retrospective – Notifications effective at date of passing of amending Act alone fall under S. 7 – S. 7 does not affect notifications already rescinded or declared invalid – Notification declared ultra vires by High Court falling within S. 7 – S. 7 cannot revive notification. Bombay Abkari Act (5 of 1878), S. 14-B – Notification under S. 14-B(2) declared ultra vires and invalid by High Court is invalid according to law – Every one can act on that view of law. Government of India Act (1935), S. 100 and Sch. 7, List II, item 31 – Effect of, stated – Provincial Legislature has right to prohibit possession of intoxicants – Its right to legislate as to possession of intoxicants must be exercised subject to right of Central Legislature to legislate in respect of import and export across custom frontiers (Obiter).</p>
+<p>[M.C. Setalved (Advocate-General) V.F. Taraporewala, G.N. Joshi and R.A. Jahagirdar (Government Pleader) – for the Crown. Sir Jamshedji Kanga, S.G. Velinker, R.J. Kolah and Dr. B.R. Ambedkar – for Accused.]</p>
+<p>Citation : AIR 1940 Bombay 307</p>
+
+<a href="brcase/26.pdf" target="_blank" rel="noopener">
+    <h2>26. Alla Datta Vs Emperor (Original Judgment) </h2>
+</a>
+<p>Bombay City Police Act (4 of 1912, as amended by Act 14 of 1938), S. 27 – Order under S. 27 by Commissioner is not revisable under S. 439, Criminal P.C.</p>
+<p>[B.R. Amebedkar and G.J. Mane – for Applicant M.C. Setalvad, (Advocate-General) and R.A. Jahagirdar (Government Pleader) – for the Crown.]</p>
+<p>Citation : AIR 1941 Bombay 334</p>
+
+<a href="brcase/27.pdf" target="_blank" rel="noopener">
+    <h2>27. Emperor Vs Karsandas Govindaji Ved (Original Judgment) </h2>
+</a>
+<p>Bombay City Municipal Corporation Act (3 of 1888), S. 390(1) – Offence under – Summons to accused – Accused should be charged in words of section – Accused instead of being charged with having worked factory in which mechanical power was used charged with working fifty – five electric motors for conducting textile mill without permission u/S. 390(1) – No objection to form of summons held could be taken as it sufficiently informed accused of act complained of. Bombay City Municipal Corporation Act (3 of 1888), S. 390(1) – (as amended by Act 1 of 1916) – Construction – S. 390(1) constitutes two independent offences of establishing new factory in which mechanical powers intended to be employed without permission and working factory in which mechanical power is intended to be employed without permission. Bombay City Police Act (3 of 1888), S. 390, S. 514 – Meaning of ‘continuing offence’ explained – Establishing of factory without permission is offence committed once for all when factory is established – But working of factory without permission is an offence which arises on every day on which factory is so worked. Bombay Municipal Corporation Act (3 of 1888), S. 390 – Offence of working factory without permission – Previous acquittal cannot u/S. 403, Criminal P.C., bar subsequent charge of working factory without permission.</p>
+<p>[R. A. Jahagirdas, Government Pleader – for the Government of Bombay. B.R. Amebedkar and H.D. Thakor – for Accused.]</p>
+<p>Citation : AIR 1942 Bombay 326</p>
+<p></p>
+
+<a href="brcase/28.pdf" target="_blank" rel="noopener">
+    <h2>28. Narayan Ramchandra Jarag and Others vs Emperor (Original Judgment) </h2>
+</a>
+<p>Criminal P.C. (5 of 1898), S. 375, S. 423, S. 418 – Death sentence passed by Sessions Judge at jury trial on majority opinion – Appeal by accused and confirmation case before High Court – It is not necessary to dispose of appeal before dealing with confirmation case – Powers of High Court mentioned in S. 376 are not affected by S. 418(1), S. 423(2) – High Court is bound to consider all questions of law and fact.</p>
+<p>[B.R. Ambedkar and V.R. Gadkari – for Accused., S.G. Patwardhan, Government Pleader – for the Crown.]</p>
+<p>Citation : AIR 1948 Bombay 244</p>
+<p></p>
+
+<a href="brcase/29.pdf" target="_blank" rel="noopener">
+    <h2>29. Mahadev Dhanappa Gunaki and another vs The State of Bombay </h2>
+</a>
+<p>Penal Code (1860) , Sec. 161 – Delay in trapping accused – The fact that nothing is done for a long time (here, two months) between the alleged offer to bribe and the actual trapping of the accused does not suggest that the story is false. The police authorities have per force to wait until the accused make a further move in the matter. It is not reasonable to suggest that the police authorities should go out of their way and actively invite bribes in order to trap the accused.</p>
+<p>[Dr. B.R. Ambedkar Shri H.F.M. Reddy, Advocate, instructed by Shri M.S.K. Sastri, Agent – for Appellants; Shri M. C. Setalvad, Attorney – General for India and Shri C. K. Daphtary, Solicitor – General for India (Shri G. N. Joshi, Advocate, with them), instructed by Shri G. H. Rajadhyaksha, Agent – for the State]</p>
+<p>Citation : AIR 1953 SC 179</p>
+        </div>   
+        </section>
+
+        <!-- MAHAD SATYAGRAHA -->
+        <section id="mahadSection" class="section tab-section">
+            <div class="committees-content">
+<p>The Mahad Satyagraha, which took place in 1927 in the town of Mahad in Maharashtra, India, stands as a seminal moment in the history. Led by Dr. B.R. Ambedkar, this nonviolent protest marked a significant step towards achieving social justice, equality, and civil rights for the Dalit community in India.</p>
+<h2>The Social Battle</h2>
+            </div>
+            <img
+                src="images/1927.png"
+                alt="Dr. Bhimrao Ramji Ambedkar"
+                class="chronicle-photo"
+            >
+            <div class="committees-content">
+              <p>The oppressed castes (called as Depressed Classes in colonial regime or ex- untouchables) have faced severe discrimination, segregation, and social ostracism in Indian society for centuries. Access to public resources such as water bodies, temples, and schools was often denied to them, perpetuating their social, political and economic marginalization.</p>
+              <p>The Mahad Satyagraha was a response to these injustices and aimed to challenge the deeply ingrained caste-based discrimination. As a leader of the Depressed Classes, Dr. Ambedkar was at the forefront of opposing the ideology of the caste system. He believed that India not only requires political reform, but also social reform. An effective strategy to fight social inequality while the struggle for freedom was ongoing was important for him. As he summarized in Annihilation of Caste (1936): “That political reform cannot with impunity take precedence over social reform in the sense of the reconstruction of society, is a thesis which I am sure cannot be controverted.”</p>
+
+              <h2>The Legal Background</h2>
+              <p>On 4 August 1923, SK Bole, a social reformer, moved a resolution in the Bombay Legislative Council, which provided that “the council recommends that the untouchable classes be allowed to use all public watering places, in dharamshala which are built and maintained out of public funds administered by parties appointed by government or created by statute, as well as public schools, courts, offices and dispensaries.” Following the resolution, a direction was issued by the Bombay government to the heads of all the departments on 11 September 1923 to give effect to the resolution so far as it relates to the public places and editions, belonging to and maintained by the government. Thereafter, the Mahad Municipality passed a resolution to open the Chavdar tank for the Depressed Classes. However, the municipality’s resolution could not be implemented, as the Depressed Classes were unable to access water from the Chavdar tank due to opposition from the oppressor castes of that area.</p>
+              <p>To overcome the denial of rights, the Kolaba District Depressed Classes in coordination with Dr Ambedkar and Bahiskrit Hitkarini Sabha decided to hold a conference in Mahad on 19-20 March 1927. Consequently, thousands of members of the Depressed Classes gathered in Mahad to participate in the Satyagraha. On March 20, 1927, Dr. Ambedkar and his followers marched to the Chavdar Lake, where he drank water from it, asserting their right of equality and equal access to public resources. This act sent shockwaves through the conservative society. The oppressor castes even performed a purification ritual of the tank, which according to them had been defiled by the touch of the Untouchables. Under pressure from the oppressor castes, the Mahad Municipality on 4 August 1927 revoked its resolution of 1924 under which it had declared the Chavdar Tank open to the Depressed Classes.</p>
+              <p>Dr Ambedkar then decided to launch another Satyagraha in December 1927 in Mahad to assert the rights of the Depressed Classes. However, the oppressor castes initiated a legal action against Dr. Ambedkar and his colleagues on 12 December 1927 in the Mahad civil court, seeking issuance of a temporary injunction. On 14 December, the court granted a temporary injunction, which prohibited Dr. Ambedkar, his colleagues, and members of the Depressed Classes or those acting on their behalf, from accessing the Chavdar Tank until further orders were issued. Dr. Ambedkar however decided to continue his proposed Satyagraha during 25-27 December, even though he decided to not go to the Tank till the pendency of the civil suit. On 25 December 1927, Dr. Ambedkar, while addressing the people of the Depressed Classes, stated:</p>
+              <p>“It is not as if drinking the water of the Chavdar Lake will make us immortal. We have survived well enough all these days without drinking it. We are not going to the Chavdar Lake merely to drink its water. We are going to the Lake to assert that we too are human beings like others. It must be clear that this meeting has been called to set up the norm of equality.”</p>
+              <p>Dr Ambedkar and his supporters also burnt a copy of ‘Manusmriti’ to symbolically reject the foundations of the caste system. The gathering also passed certain resolutions towards equality, non-discrimination, and equal access to resources.</p>
+
+              <h2>The Legal Verdict</h2>
+              <p>In the civil suit, the defendants including Dr Ambedkar argued that the tank belonged to the Mahad Municipality and should be open to all. The trial court ruled against the plaintiffs, stating that they failed to prove a longstanding custom excluding untouchables from using the tank, and that this custom did not qualify as a legal right. The case was dismissed in 1937.</p>
+              <p>An appeal was filed against the decision, but the Assistant Judge, Thana affirmed the lower court’s ruling. The judge held that there was no evidence or legal basis to support the exclusion of untouchables from using the tank. Subsequently, the plaintiffs appealed to the Bombay High Court. The High Court also dismissed the appeal in 1937.</p>
+              <p>Thus, after almost 10 years of struggle, Dr. Ambedkar was able to secure legal victory for his people.</p>
+
+              <h2>Court Documents (Credit – Bombay High Court)</h2>
+              <p class="tab-placeholder">Narhari Damodar Vaidya Vs. Dr. Bhimrao Ramji Ambedkar.</p>
+              <a href="satyagraha/1.pdf" target="_blank" rel="noopener"> <p>Judgment of Mahad Court </p> </a>
+              <a href="satyagraha/2.pdf" target="_blank" rel="noopener"> <p>Judgment of Thana Court </p> </a>
+              <a href="satyagraha/3.pdf" target="_blank" rel="noopener"> <p>Original Judgment of high court of bombay : Bombay Law Reporter 1937. </p> </a>
+              <a href="satyagraha/4.pdf" target="_blank" rel="noopener"> <p>Other Related Documents </p> </a>
+            </div>
+
+            <div class="committees-content">
+                <h2>Sources:</h2>
+                <p><strong>1</strong>    Vasant Moon (eds.), Dr. Babasaheb Ambedkar Writings And Speeches, (Dr. Ambedkar Foundation, Ministry of Social Justice & Empowerment, Govt. of India, 2019) (Re-print)</p>
+                <p><strong>2</strong>    Dhananjay Keer, Dr. Ambedkar Life and Mission, (Popular Prakashan, 2019 Re-print)</p>
+                <p><strong>3</strong>    Narendra Jadhav, Ambedkar: Awakening India’s Social Conscience, (Konark Publishers Pvt. Ltd., 2014).</p>
+                <p><strong>4</strong>    Anurag Bhaskar, Foresighted Ambedkar: Ideas That Shaped Indian Constitutional Discourse, Penguin (Forthcoming in 2024)</p>
+                <p><strong>5</strong>    Ashok Gopal, A Part Apart: Life and Thought of B.R. Ambedkar, (Navayana Publishing Pvt. Ltd., 2023)</p>
+                
+            </div>
+        </section>
+
+        <!-- SPEECHES -->
+        <section id="speechesSection" class="section tab-section">
+            <div class="committees-content">
+              <h2>Role in Constituent Assembly</h2>
+              <p>Even before joining the Constituent Assembly, Dr. Ambedkar was developing ideas of constitutional theory and democracy. For instance, in one of his famous works titled Annihilation of Caste (1936) he writes, “my ideal would be a society based on Liberty, Equality and fraternity, which is only another name for democracy. Democracy is not merely a form of Government. It is primarily a mode of associated living, of conjoint communicated experience. It is essentially an attitude of respect and reverence towards fellowmen.”</p>
+              <p>As Chairman of the Drafting Committee, Dr Ambedkar highlighted several important constitutional ideas in the Constituent Assembly. Some of the excerpts from his speeches in the Constituent Assembly are as follows:</p>
+
+              <h2>On Article 32 of the Constitution</h2>
+              <p>“If I was asked to name any particular article in this Constitution as the most important–an article without which this Constitution would be a nullity–I could not refer to any other article except this one. It is the very soul of the Constitution and the very heart of it.” (9 December 1948)</p>
+
+              <h2>On Working of the Constitution</h2>
+              <p>“However good a Constitution may be, it is sure to turn out bad because those who are called to work it, happen to be a bad lot. However bad a Constitution may be, it may turn out to be good if those who are called to work it, happen to be a good lot. The working of a Constitution does not depend wholly upon the nature of the Constitution.” (25 November 1949)</p>
+
+              <h2>On Social Democracy</h2>
+              <p>“The third thing we must do is not to be content with mere political democracy. We must make our political democracy a social democracy as well. Political democracy cannot last unless there lies at the base of it social democracy. What does social democracy mean? It means a way of life which recognizes liberty, equality and fraternity as the principles of life. These principles of liberty, equality and fraternity are not to be treated as separate items in a trinity. They form a union of trinity in the sense that to divorce one from the other is to defeat the very purpose of democracy. Liberty cannot be divorced from equality, equality cannot be divorced from liberty. Nor can liberty and equality be divorced from fraternity. Without equality, liberty would produce the supremacy of the few over the many. Equality without liberty would kill individual initiative. Without fraternity, liberty equality could not become a natural course of things. It would require a constable to enforce them… For fraternity can be a fact only when there is a nation. Without fraternity equality and liberty will be no deeper than coats of paint.” (25 November 1949</p>
+
+              <h2>Future of the Constitution</h2>
+              <p>“If we wish to preserve the Constitution in which we have sought to enshrine the principle of Government of the people, for the people and by the people, let us resolve not to be tardy in the recognition of the evils that lie across our path and which induce people to prefer Government for the people to Government by the people, nor to be weak in our initiative to remove them. That is the only way to serve the country. I know of no better.” (25 November 1949)</p>
+
+              <h2>Dr. B. R. Ambedkar's Speeches in the Constituent Assembly</h2>
+              <a href="speech/17.pdf" target="_blank" rel="noopener"> <p class="tab-placeholder">17 December, 1946</p> </a>
+              <a href="speech/4.pdf" target="_blank" rel="noopener"> <p class="tab-placeholder">04 November, 1948</p> </a>
+              <a href="speech/9.pdf" target="_blank" rel="noopener"> <p class="tab-placeholder">09 December, 1948</p> </a>
+              <a href="speech/25.pdf" target="_blank" rel="noopener"> <p class="tab-placeholder">25 November, 1949</p> </a>
+            </div>
+
+            <div class="committees-content">
+                <h2>References:</h2>
+                <p>Vasant Moon (eds.), Dr. Babasaheb Ambedkar Writings And Speeches, (Dr. Ambedkar Foundation, Ministry of Social Justice & Empowerment, Govt. of India, 2019 Re-print)</p>
+            </div>
+        </section>
+    </div>
+</section>
+<footer>
+<div class="footer-logo">
+<img alt="EMBLEM" src="images/emblem.png"/>
+<p>भारत का सर्वोच्च न्यायालय</p>
+<p>Supreme Court of India</p>
+<p>॥ यतो धर्मस्ततो जयः ॥</p>
+</div>
+<div class="footer-links">
+<h4>Quick Links</h4>
+<a href="accessibility.html">Accessibility</a>
+<a href="faqs.html">FAQs</a>
+<a href="pay-scales.html">Pay Scales</a>
+<a href="accounts.html">Accounts</a>
+<a href="important-links.html">Important Links</a>
+<a href="citizens-charter.html">Citizen's Charter</a>
+<a href="webcast.html">Webcast</a>
+</div>
+<div class="footer-links">
+<a href="telephone-directory.html">Telephone Directory</a>
+<a href="steps-taken-during-covid-19.html">Steps taken during Covid-19</a>
+<a href="officers-officials.html">Officers / Officials</a>
+<a href="guided-tour.html">Guided Tour</a>
+<a href="india-code.html">India Code</a>
+<a href="argument-transcripts.html">Argument Transcripts</a>
+<a href="employee-corner.html">Employee Corner</a>
+<a href="officers-servant-rules.html">Officers Servant Rules</a>
+</div>
+<div class="bottom">© Designed by Mr Yash Kumar. Email - mradvocate2326@gmail.com</div>
+<!-- ============================= -->
+<!-- SAME POPUP CONTENT -->
+<!-- ============================= -->
+<div class="popup-overlay" id="aboutPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('aboutPopup')">×</button>
+<h2>ABOUT US</h2>
+<p>Select an option</p>
+<div class="popup-grid">
+<a href="history.html">History</a>
+<a href="constitution.html">Constitution</a>
+<a href="jurisdiction.html">Jurisdiction</a>
+<a href="calendar.html">Calendar</a>
+<a href="committees.html">Committees</a>
+<a href="organization-chart.html">Organization Chart</a>
+<a href="registry-officers.html">Registry Officers</a>
+<a href="contact-us.html">Contact Us</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="judgesPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('judgesPopup')">×</button>
+<h2>JUDGES</h2>
+<p>Select an option</p>
+<div class="popup-grid">
+<a href="chief-justice-and-judges.html">Chief Justice &amp; Judges</a>
+<a href="former-chief-justice.html">Former Chief Justice</a>
+<a href="former-judges.html">Former Judges</a>
+<a href="judges-roster.html">Judges Roster</a>
+<a href="judges-library.html">Judges Library</a>
+<a href="assets-of-judges.html">Assets of Judges</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="collegiumPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('collegiumPopup')">×</button>
+<h2>Publications</h2>
+<p>Select a publication</p>
+<div class="popup-grid">
+<a href="collegium-resolutions.html">Collegium Resolutions</a>
+<a href="supreme-court-chronicle.html">Supreme Court Chronicle</a>
+<a href="dr-br-ambedkar.html">Dr. B.R. Ambedkar</a>
+<a href="courts-of-india.html">Courts of India</a>
+<a href="court-news.html">Court News</a>
+<a href="annual-reports.html">Annual Reports</a>
+<a href="reports.html">Reports</a>
+<a href="supreme-court-rules.html">Supreme Court Rules</a>
+<a href="practice-and-procedure.html">Practice &amp; Procedure</a>
+<a href="national-court-management-systems.html">National Court Management System</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="servicesPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('servicesPopup')">×</button>
+<h2>SERVICES</h2>
+<p>Select a service</p>
+<div class="popup-grid">
+<a href="https://www.sci.gov.in/cause-list/" target="_blank">Cause List</a>
+<a href="https://www.sci.gov.in/case-status-case-no/" target="_blank">Case Status</a>
+<a href="https://www.sci.gov.in/daily-order-case-no/" target="_blank">Daily Orders</a>
+<a href="https://www.sci.gov.in/judgements-case-no/" target="_blank">Judgements</a>
+<a href="https://www.sci.gov.in/office-report-case-no/" target="_blank">Office Report</a>
+<a href="https://www.sci.gov.in/caveat-case-no/" target="_blank">Caveat</a>
+<a href="https://www.sci.gov.in/display-boards/" target="_blank">Display Boards</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="eservicesPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('eservicesPopup')">×</button>
+<h2>E-SERVICES</h2>
+<p>Select an e-Service</p>
+<div class="popup-grid">
+<a href="https://efiling.sci.gov.in/" target="_blank">e-filing (SC-eFM 2.0) (Existing)</a>
+<a href="https://efiling3.sci.gov.in/" target="_blank">e-filing (SC-eFM 3.0) (New)</a>
+<a href="https://appearance.sci.gov.in/" target="_blank">Online Appearance Slips</a>
+<a href="https://suswagatam.sci.gov.in/public/Index.aspx" target="_blank">SuSwagatam (e-Pass)</a>
+<a href="http://guidedtour.sci.nic.in/" target="_blank">Guided Tour</a>
+<a href="https://rti.sci.gov.in/" target="_blank">Online RTI Portal</a>
+<a href="https://physical-hearing.sci.gov.in/" target="_blank">Physical Hearing (Hybrid Option)</a>
+<a href="https://registry.sci.gov.in/api/callback/bharat_kosh/online_copying/mobile.php" target="_blank">Certified Copy</a>
+<a href="https://scdg.sci.gov.in/scnjdg/" target="_blank">National Judicial Data Grid</a>
+<a href="https://scr.sci.gov.in/scrsearch/" target="_blank">SCR</a>
+<a href="https://www.sci.gov.in/neutral-citation/" target="_blank">Neutral Citation</a>
+<a href="https://verdictfinder.sci.gov.in/elk_frontend/" target="_blank">Verdict Finder</a>
+<a href="https://vjc.sci.gov.in/public/index.php" target="_blank">Virtual Justice Clock</a>
+<a href="https://sciproximitycard.in/sciservices/" target="_blank">Proximity Card Registration</a>
+<a href="https://scippms.bankofmaharashtra.bank.in/ppms/#/user-login" target="_blank">Premise Payment Management System (PPMS)</a>
+<a href="https://park.sci.gov.in/request/login/" target="_blank">Parking Authorization Record Keeper</a>
+<a href="https://www.sci.gov.in/iops/" target="_blank">Integrated Online Payment System</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="advocatesPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('advocatesPopup')">×</button>
+<h2>ADVOCATES</h2>
+<p>Select an option</p>
+<div class="popup-grid">
+<a href="https://www.sci.gov.in/advocate-on-record/" target="_blank">Advocates-on-Record</a>
+<a href="aor-examination.html">AOR Examination</a>
+<a href="guidelines-and-orders.html">Guidelines &amp; Orders</a>
+<a href="senior-advocates-designation.html">Senior Advocates Designation</a>
+<a href="forms.html">Forms</a>
+<a href="law-officers.html">Law Officers</a>
+<a href="nodal-officers-bail-petitions.html">Nodal Officers for Bail Petitions</a>
+<a href="lawyers-chamber-allotment.html">Lawyers' Chamber Allotment</a>
+<a href="legal-aid.html">Legal Aid</a>
+<a href="https://www.scaoraindia.com/" target="_blank">SCAORA</a>
+<a href="https://scbaindia.org/" target="_blank">SCBA</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="filingPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('filingPopup')">×</button>
+<h2>COURT FILINGS</h2>
+<p>Select a filing service</p>
+<div class="popup-grid">
+<a href="https://www.sci.gov.in/court-fees-calculator/" target="_blank">Court Fees Calculator</a>
+<a href="https://www.sci.gov.in/limitation-calculator/" target="_blank">Limitation Calculator</a>
+<a href="interlocutory-applications.html">Interlocutory Applications</a>
+<a href="case-category.html">Case Category</a>
+<a href="default-list.html">Default List</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="noticesPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('noticesPopup')">×</button>
+<h2>NOTICES</h2>
+<p>Select a notice category</p>
+<div class="popup-grid">
+<a href="https://www.sci.gov.in/notices-and-circulars/">Notices and Circulars</a>
+<a href="https://www.sci.gov.in/fdrs-deposits/">FDRs &amp; Depsits</a>
+<a href="tenders.html" target="_blank">Tenders</a>
+<a href="judicial-clerkship.html" target="_blank">Judicial Clerkship</a>
+<a href="recruitments.html" target="_blank">Recruitments</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="newsPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('newsPopup')">×</button>
+<h2>NEWS &amp; EVENTS</h2>
+<p>Select a category</p>
+<div class="popup-grid">
+<a href="https://www.sci.gov.in/press-release/">Press Release</a>
+<a href="https://www.sci.gov.in/live-streaming/">Live Streaming</a>
+<a href="basic-structure-judgment.html" target="_blank">Basic Structure Judgment</a>
+<a href="https://webcast.gov.in/scindia">Webcast</a>
+<a href="multimedia.html" target="_blank">Multimedia</a>
+<a href="https://www.sci.gov.in/photo-gallery/">Photo Gallery</a>
+<a href="full-court-reference.html" target="_blank">Full Court Reference</a>
+<a href="ceremonial-bench.html" target="_blank">Ceremonial Bench</a>
+<a href="hackathon.html" target="_blank">Hackathon</a>
+</div>
+</div>
+</div>
+<script>
+function showSection(sectionId, clickedButton){
+    const tabs = document.querySelectorAll(".ambedkar-tabs .tab-section");
+    const buttons = document.querySelectorAll(".ambedkar-buttons button");
+
+    tabs.forEach(section => section.classList.remove("active"));
+    buttons.forEach(button => button.classList.remove("active"));
+
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+        selectedSection.classList.add("active");
+        selectedSection.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    if (clickedButton) {
+        clickedButton.classList.add("active");
+    }
+}
+
+
+/* =========================================
+   NAVBAR CLICK → CENTER POPUP
+========================================= */
+
+document.querySelectorAll(".nav-dropdown .nav-trigger").forEach(function(trigger){
+
+    trigger.addEventListener("click", function(event){
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const navItem = trigger.closest(".nav-dropdown");
+        const popupId = navItem.getAttribute("data-popup");
+
+        /* Close any other popup first */
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        /* Open selected popup in center */
+        openPopup(popupId);
+    });
+
+});
+
+
+function openPopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
+
+}
+
+
+function closePopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+}
+
+
+/* =========================================
+   CLICK OUTSIDE → CLOSE
+========================================= */
+
+document.querySelectorAll(".popup-overlay").forEach(function(popup){
+
+    popup.addEventListener("click", function(event){
+
+        if(event.target === popup){
+            popup.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   ESC → CLOSE
+========================================= */
+
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Escape"){
+
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        document.body.style.overflow = "";
+    }
+
+});
+</script>
+</footer></section></body>
+</html>
