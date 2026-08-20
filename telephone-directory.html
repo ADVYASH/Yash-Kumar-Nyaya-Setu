@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Telephone Directory | NYAYA SETU</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&amp;display=swap" rel="stylesheet"/>
+<style id="theme-vars">
+:root{
+    --theme-primary:var(--theme-primary);
+    --theme-primary-soft:var(--theme-primary-glow);
+    --theme-primary-glow:var(--theme-primary-glow);
+    --theme-primary-border:var(--theme-primary-glow);
+}
+
+/* NAVBAR BUTTON BOX */
+.navbar a,
+.navbar button,
+nav a,
+nav button {
+    border: 1px solid rgba(33,150,255,.55);
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: rgba(33,150,255,.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar a:hover,
+.navbar button:hover,
+nav a:hover,
+nav button:hover {
+    background: rgba(33,150,255,.16);
+}
+
+
+/* POPUP BUTTON TEXT SIZE */
+.popup button,
+.popup .btn,
+.modal button,
+.modal .btn,
+.popup-buttons button,
+.popup-buttons .btn {
+    font-size: 20px;
+}
+
+
+/* ============================= */
+/* HIGH COURTS TABLE */
+/* ============================= */
+.high-court-table-section {
+    margin-top: 50px;
+    padding-top: 35px;
+    border-top: 1px solid rgba(33,150,255,.25);
+}
+
+.high-court-table-section h2 {
+    color: #2196ff;
+    margin-bottom: 25px;
+    font-size: 30px;
+    text-shadow: 0 0 12px rgba(33,150,255,.5);
+}
+
+.high-court-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 12px;
+}
+
+.high-court-table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+    background: rgba(255,255,255,.04);
+    color: rgba(255,255,255,.92);
+    font-size: 20px;
+}
+
+.high-court-table th,
+.high-court-table td {
+    border: 1px solid rgba(33,150,255,.25);
+    padding: 14px 12px;
+    vertical-align: top;
+    text-align: left;
+}
+
+.high-court-table th {
+    background: rgba(33,150,255,.15);
+    color: #2196ff;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.high-court-table tbody tr:nth-child(even) {
+    background: rgba(255,255,255,.025);
+}
+
+.high-court-table tbody tr:hover {
+    background: rgba(33,150,255,.07);
+}
+
+.high-court-table td:first-child,
+.high-court-table th:first-child {
+    text-align: center;
+    width: 65px;
+}
+
+.high-court-table td:nth-child(3) {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.high-court-table small {
+    font-size: 13px;
+    line-height: 1.5;
+    opacity: .8;
+}
+
+@media (max-width: 900px) {
+    .high-court-table-section {
+        margin-top: 35px;
+        padding-top: 25px;
+    }
+
+    .high-court-table-section h2 {
+        font-size: 26px;
+    }
+
+    .high-court-table {
+        font-size: 20px;
+    }
+
+    .high-court-table th {
+        font-size: 23px;
+    }
+}
+
+</style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+html{scroll-behavior:smooth}
+body{background:#0b0b0b;color:#fff;overflow-x:hidden}
+
+/* ============================= */
+/* SAME NAVBAR + NAV POPUPS */
+/* ============================= */
+
+nav{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    padding:16px 22px;
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(12px);
+    position:sticky;
+    top:0;
+    z-index:10000;
+}
+
+.main-nav{
+    isolation:isolate;
+}
+
+.nav-dropdown{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+.nav-trigger,
+.nav-home{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    position:relative;
+    padding:13px 18px;
+    min-height:46px;
+    border-radius:12px;
+    transition:.25s ease;
+    white-space:nowrap;
+    font-size:15px;
+    letter-spacing:.2px;
+}
+
+.nav-trigger:hover,
+.nav-home:hover{
+    color:#fff;
+    background:rgba(20,20,25,.96);
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 0 18px rgba(0,149,255,.20);
+}
+
+.nav-trigger::after,
+.nav-home::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-1px;
+    width:100%;
+    height:3px;
+    background:#0095ff;
+    border-radius:3px 3px 0 0;
+    transform:scaleX(0);
+    transform-origin:center;
+    transition:.22s ease;
+}
+
+.nav-trigger:hover::after,
+.nav-home:hover::after{
+    transform:scaleX(1);
+}
+
+/* ============================= */
+/* ABOUT PAGE */
+/* ============================= */
+
+.about{
+    min-height:100vh;
+    background:transparent;
+    position:relative;
+    z-index:0;
+    padding:100px 10% 100px;
+    text-align:center;
+}
+.about h1{
+    font-family:"Permanent Marker", cursive;
+    font-size:42px;
+    font-weight:700;
+    letter-spacing:3px;
+    color:#0095ff;
+    display:inline-block;
+    position:relative;
+    padding-bottom:12px;
+    text-shadow:0 0 8px rgba(0,149,255,.45);
+    animation:committeePulse 3s ease-in-out infinite;
+}
+
+/* Text animation */
+@keyframes committeePulse{
+    0%,100%{
+        transform:scale(1);
+        letter-spacing:3px;
+    }
+
+    50%{
+        transform:scale(1.03);
+        letter-spacing:5px;
+    }
+}
+
+/* Animated underline */
+.about h1::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width:0;
+    height:3px;
+    background:#0095ff;
+    border-radius:10px;
+    box-shadow:
+        0 0 8px #0095ff,
+        0 0 18px #0095ff;
+    transform:translateX(-50%);
+    animation:lineExpand 2s ease-in-out infinite;
+}
+
+@keyframes lineExpand{
+    0%,100%{
+        width:0;
+        opacity:.3;
+    }
+
+    40%{
+        width:100%;
+        opacity:1;
+    }
+
+    70%{
+        width:100%;
+        opacity:1;
+    }
+
+    90%{
+        width:0;
+        opacity:.3;
+    }
+}
+.intro{max-width:1100px;margin:0 auto;font-size:24px;line-height:1.7;opacity:.9}
+.container{max-width:950px;margin:0 auto}
+.asrp-buttons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin:55px auto 30px;
+    max-width:1000px;
+}
+.asrp-buttons button{
+    background:rgba(0,0,0,.78);
+    color:#fff;
+    border:1px solid rgba(33,150,255,.5);
+    padding:15px 25px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s ease;
+    box-shadow:0 0 8px rgba(33,150,255,.15);
+}
+.asrp-buttons button:hover,
+.asrp-buttons button.active{
+    background:#2196ff;
+    color:#000;
+    transform:translateY(-4px);
+    box-shadow:0 0 10px #2196ff,0 0 25px rgba(33,150,255,.6);
+}
+.section{
+    margin-top:25px;
+    background:rgba(0,0,0,.68);
+    padding:40px;
+    border-radius:14px;
+    border:1px solid rgba(33,150,255,.25);
+    box-shadow:0 0 25px rgba(33,150,255,.06),inset 0 0 20px rgba(33,150,255,.02);
+}
+.tab-section{display:none}
+.tab-section.active{display:block;animation:sectionFade .45s ease}
+@keyframes sectionFade{
+    from{opacity:0;transform:translateY(20px) scale(.98)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+.section h2{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    color:#2196ff;
+    margin-bottom:25px;
+    font-size:30px;
+    text-shadow:0 0 12px rgba(33,150,255,.5);
+}
+.emoji-text{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    text-align:left;
+    margin-bottom:22px;
+    line-height:1.7;
+    font-size:16px;
+    opacity:.9;
+}
+.emoji-text:last-child{margin-bottom:0}
+.emoji-text img{height:45px;width:45px;object-fit:contain;flex-shrink:0}
+
+/* ============================= */
+/* SAME FULL POPUPS */
+/* ============================= */
+
+.popup-overlay{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(10px);
+    z-index:99999;
+}
+.popup-overlay.active{display:flex;animation:popupFade .25s ease}
+.popup-box{
+    position:relative;
+    width:min(900px,95vw);
+    max-height:85vh;
+    overflow-y:auto;
+    padding:35px;
+    background:rgba(20,20,25,.92);
+    backdrop-filter:blur(25px);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:22px;
+    box-shadow:0 0 40px rgba(0,0,0,.5),0 0 80px rgba(33,150,255,.12);
+    animation:popupScale .3s ease;
+}
+.popup-box h2{text-align:center;font-size:25px;letter-spacing:2px;margin-bottom:5px}
+.popup-box>p{text-align:center;font-size:13px;opacity:.6;margin-bottom:25px}
+.popup-close{
+    position:absolute;
+    top:15px;right:18px;
+    width:40px;height:40px;
+    border:none;border-radius:50%;
+    background:rgba(255,255,255,.08);
+    color:#fff;font-size:28px;line-height:40px;
+    cursor:pointer;transition:.3s;
+}
+.popup-close:hover{background:#2196ff;transform:rotate(90deg);box-shadow:0 0 20px rgba(33,150,255,.5)}
+.popup-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.popup-grid a{
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:15px;
+    border-radius:14px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    color:#fff;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:700;
+    transition:.3s ease;
+}
+.popup-grid a:hover{
+    transform:translateY(-5px);
+    background:rgba(33,150,255,.18);
+    border-color:#2196ff;
+    box-shadow:0 0 15px rgba(33,150,255,.35);
+}
+@keyframes popupFade{from{opacity:0}to{opacity:1}}
+@keyframes popupScale{
+    from{opacity:0;transform:scale(.9) translateY(20px)}
+    to{opacity:1;transform:scale(1) translateY(0)}
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+footer{
+    background:#050505;
+    padding:35px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:25px;
+    flex-wrap:wrap;
+    border-top:1px solid rgba(33,150,255,.12);
+}
+
+.footer-logo{
+    display:flex;
+    flex-direction:column;
+    min-width:170px;
+}
+
+.footer-logo img{
+    width:150px;
+    margin-bottom:8px;
+}
+
+.footer-logo p{
+    opacity:.7;
+    font-size:15px;
+    margin:3px 0;
+}
+
+.footer-links{
+    min-width:130px;
+}
+
+.footer-links h4{
+    color:#2196ff;
+    margin-bottom:9px;
+    font-size:14px;
+}
+
+.footer-links a{
+    display:block;
+    color:#fff;
+    opacity:.7;
+    text-decoration:none;
+    margin:5px 0;
+    font-size:15px;
+    transition:.3s ease;
+}
+
+.footer-links a:hover{
+    color:#2196ff;
+    opacity:1;
+    transform:translateX(4px);
+}
+
+.bottom{
+    text-align:center;
+    padding:12px;
+    background:#030303;
+    opacity:.75;
+    font-size:16px;
+    border-top:1px solid rgba(255,255,255,.05);
+}
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media(max-width:900px){
+    .nav-popup-menu{
+        width:min(650px,94vw);
+        grid-template-columns:repeat(2,minmax(140px,1fr));
+    }
+}
+@media(max-width:800px){
+    .about{padding:90px 20px 70px;background-attachment:scroll}
+    .about h1{font-size:44px}
+    .intro{font-size:18px;line-height:1.6}
+    .asrp-buttons{gap:10px;margin-top:35px}
+    .asrp-buttons button{width:100%;max-width:350px;padding:14px 18px}
+    .section{padding:25px 20px}
+    .section h2{font-size:23px}
+    .emoji-text{font-size:15px;gap:10px}
+    .emoji-text img{height:38px;width:38px}
+footer{
+    padding:30px 20px;
+    flex-direction:column;
+    gap:20px;
+}
+}
+@media(max-width:600px){
+    .main-nav{
+        justify-content:flex-start;
+        overflow:visible;
+        flex-wrap:nowrap;
+        scrollbar-width:thin;
+    }
+.nav-trigger,.nav-home{
+    font-size:13px;
+    padding:10px 13px;
+    min-height:42px;
+}
+    .nav-popup-menu{
+        position:fixed;
+        top:64px;
+        left:50%;
+        width:94vw;
+        max-height:78vh;
+        grid-template-columns:repeat(2,1fr);
+        transform:translateX(-50%) translateY(-8px);
+    }
+    .nav-dropdown:hover .nav-popup-menu,
+    .nav-dropdown:focus-within .nav-popup-menu{
+        transform:translateX(-50%) translateY(0);
+    }
+    .popup-overlay{padding:15px}
+    .popup-box{padding:25px 18px;max-height:90vh}
+    .popup-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+    .popup-grid a{min-height:65px;padding:10px;font-size:12px}
+}
+@media(max-width:450px){
+    .about h1{font-size:36px}
+    .intro{font-size:17px}
+    .section{padding:22px 16px}
+    .section h2{font-size:20px;gap:5px}
+    .emoji-text{font-size:14px}
+}
+@media(max-width:400px){
+    .nav-popup-menu,.popup-grid{grid-template-columns:1fr}
+}
+
+/* ============================= */
+/* FONT AWESOME BACK ICON */
+/* ============================= */
+.back-icon{margin-right:7px}
+
+
+/* ============================= */
+/* FULL-PAGE VIDEO BACKGROUND */
+/* ============================= */
+#background-video{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+    pointer-events:none;
+}
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.42);
+    z-index:-1;
+    pointer-events:none;
+}
+
+
+.history-subheading{
+    color:#2196ff;
+    font-size:22px;
+    margin:35px 0 18px;
+    padding-bottom:10px;
+    border-bottom:1px solid rgba(33,150,255,.25);
+    text-align:left;
+    text-shadow:0 0 10px rgba(33,150,255,.35);
+}
+.history-subheading:first-of-type{margin-top:5px}
+
+
+
+.high-court-table-section{
+    margin-top:45px;
+    padding-top:35px;
+    border-top:1px solid rgba(33,150,255,.25);
+}
+.high-court-table-wrap{
+    width:100%;
+    overflow:visible;
+    margin-top:20px;
+    border-radius:12px;
+    border:1px solid rgba(33,150,255,.25);
+}
+.high-court-table{
+    width:100%;
+    min-width:1050px;
+    border-collapse:collapse;
+    background:rgba(0,0,0,.45);
+    text-align:left;
+}
+.high-court-table th,.high-court-table td{
+    padding:15px 14px;
+    border:1px solid rgba(255,255,255,.12);
+    vertical-align:top;
+    line-height:1.55;
+    font-size:24px;
+}
+.high-court-table th{
+    color:#2196ff;
+    background:rgba(33,150,255,.10);
+    font-weight:700;
+    text-align:center;
+    
+}
+.high-court-table td:first-child{
+    text-align:center;
+    font-weight:700;
+    width:65px;
+}
+.high-court-table td:nth-child(2){font-weight:700;min-width:190px}
+.high-court-table td:nth-child(3){text-align:center;white-space:nowrap}
+.high-court-table strong{color:#2196ff}
+.high-court-table tbody tr:hover{background:rgba(33,150,255,.07)}
+@media(max-width:800px){
+    .high-court-table-section{margin-top:35px;padding-top:25px}
+    .high-court-table th,.high-court-table td{padding:12px 10px;font-size:13px}
+}
+
+/* FULL HIGH COURTS TABLE — KEEP ALL ROWS VISIBLE */
+.high-courts-table-wrap{width:100%;overflow:visible !important;}
+.high-courts-table{width:100% !important;min-width:0 !important;table-layout:fixed;border-collapse:collapse;}
+.high-courts-table th,.high-courts-table td{white-space:normal !important;word-break:normal;overflow-wrap:anywhere;vertical-align:top;}
+.high-courts-table th:nth-child(1),.high-courts-table td:nth-child(1){width:33%}
+.high-courts-table th:nth-child(2),.high-courts-table td:nth-child(2){width:34%}
+.high-courts-table th:nth-child(3),.high-courts-table td:nth-child(3){width:33%}
+@media(max-width:800px){.high-courts-table{font-size:11px}.high-courts-table th,.high-courts-table td{padding:8px 5px !important;}}
+
+/* HIGH COURTS TABLE — CENTERED + FULL BORDER */
+.high-courts-table-wrap{
+    width:100%;
+    max-width:1200px;
+    margin:35px auto 0 !important;
+    overflow:visible !important;
+}
+.high-courts-table{
+    width:100% !important;
+    margin:0 auto !important;
+    border:3px solid rgba(33,150,255,.75) !important;
+    border-collapse:collapse !important;
+    border-spacing:0;
+    table-layout:fixed;
+}
+.high-courts-table th,
+.high-courts-table td{
+    border:2px solid rgba(33,150,255,.55) !important;
+    white-space:normal !important;
+    word-break:normal;
+    overflow-wrap:anywhere;
+    vertical-align:top;
+}
+.high-courts-table th{
+    border:3px solid rgba(33,150,255,.75) !important;
+}
+
+
+/* FINAL: CENTER THE HIGH COURTS TABLE */
+.high-courts-table-wrap {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    overflow: visible !important;
+}
+.high-courts-table {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+/* ============================= */
+/* COMMITTEES INFORMATION */
+/* ============================= */
+
+.committees-content {
+    width: 100%;
+    padding: 35px 0 55px;
+}
+
+.committees-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.committees-content h2 {
+    color: #2196ff;
+    font-size: 30px;
+    margin: 32px 0 14px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(33,150,255,.35);
+}
+
+.committees-content h2:first-child {
+    margin-top: 0;
+}
+
+.committees-content p {
+    margin: 0 0 22px;
+    text-align: left;
+    font-size: 22px;
+    line-height: 1.8;
+    color: rgba(255,255,255,.92);
+}
+
+.committee-pdf-download {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.pdf-download-button {
+    display: inline-block;
+    padding: 13px 28px;
+    border-radius: 8px;
+    background: #2196ff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(33,150,255,.25);
+    transition: .25s ease;
+}
+
+.pdf-download-button:hover {
+    background: #42a5ff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 22px rgba(33,150,255,.4);
+}
+
+
+@media (max-width: 800px) {
+    .committees-container {
+        padding: 0 20px;
+    }
+
+    .committees-content h2 {
+        font-size: 24px;
+    }
+
+    .committees-content p {
+        font-size: 22px;
+        line-height: 1.7;
+    }
+}
+
+</style>
+<style>
+/* FINAL: MAKE ALL THREE ARCHIVE COLUMNS EXACTLY EQUAL */
+.high-court-table{
+    width:100% !important;
+    min-width:0 !important;
+    table-layout:fixed !important;
+}
+
+.high-court-table th,
+.high-court-table td{
+    width:33.3333% !important;
+    min-width:0 !important;
+    white-space:normal !important;
+    word-break:normal;
+    overflow-wrap:anywhere;
+}
+
+/* Override the older special sizing rules */
+.high-court-table td:first-child,
+.high-court-table th:first-child{
+    width:33.3333% !important;
+}
+
+.high-court-table td:nth-child(2),
+.high-court-table th:nth-child(2){
+    width:33.3333% !important;
+    min-width:0 !important;
+}
+
+.high-court-table td:nth-child(3),
+.high-court-table th:nth-child(3){
+    width:33.3333% !important;
+    white-space:normal !important;
+}
+</style>
+<style>
+/* CENTER TEXT IN MIDDLE ARCHIVE COLUMN */
+.high-court-table td:nth-child(2),
+.high-court-table th:nth-child(2){
+    text-align:center !important;
+}
+</style>
+</head>
+<body>
+<video autoplay="" id="background-video" loop="" muted="" playsinline="" preload="auto">
+<source src="background/tokyo.mp4" type="video/mp4"/>
+</video>
+<nav class="main-nav">
+<a class="nav-home" href="index.html">Home</a>
+<div class="nav-dropdown" data-popup="aboutPopup">
+<a class="nav-trigger" href="javascript:void(0)">About</a>
+</div>
+<div class="nav-dropdown" data-popup="judgesPopup">
+<a class="nav-trigger" href="javascript:void(0)">Judges</a>
+</div>
+<div class="nav-dropdown" data-popup="collegiumPopup">
+<a class="nav-trigger" href="javascript:void(0)">Publications</a>
+</div>
+<div class="nav-dropdown" data-popup="servicesPopup">
+<a class="nav-trigger" href="javascript:void(0)">Services</a>
+</div>
+<div class="nav-dropdown" data-popup="eservicesPopup">
+<a class="nav-trigger" href="javascript:void(0)">e-Services</a>
+</div>
+<div class="nav-dropdown" data-popup="advocatesPopup">
+<a class="nav-trigger" href="javascript:void(0)">Advocates</a>
+</div>
+<div class="nav-dropdown" data-popup="filingPopup">
+<a class="nav-trigger" href="javascript:void(0)">Court Filings</a>
+</div>
+<div class="nav-dropdown" data-popup="noticesPopup">
+<a class="nav-trigger" href="javascript:void(0)">Notices</a>
+</div>
+<div class="nav-dropdown" data-popup="newsPopup">
+<a class="nav-trigger" href="javascript:void(0)">News &amp; Events</a>
+</div>
+</nav>
+<section class="about">
+<h1>Telephone Directory</h1>
+<!-- ============================= -->
+<!-- ============================= -->
+<!-- COMMITTEES INFORMATION -->
+<!-- ============================= -->
+<section class="high-court-table-section">
+<h2>TELEPHONE LIST OF OFFICERS, BRANCHES ETC.</h2>
+<div class="high-court-table-wrapper">
+<table class="high-court-table">
+<tbody>
+<tr><td>Sh. Bharat Parashar</td><td>Secretary General</td><td>23384661</td></tr>
+<tr><td>SG Secretariat</td><td>SG Secretariat Office</td><td>23112501<br>23115759<br>23112601<br>23385046 (Fax)</td></tr>
+<tr><td>Sh. Rakesh Kumar</td><td>Registrar (Judges' Admn & International Relations)</td><td>23070444<br>23112516</td></tr>
+<tr><td>Sh. Devender Pal Walia</td><td>Registrar (Confidential Cell)</td><td>23112515</td></tr>
+<tr><td>Dr. Ajit Atri</td><td>Registrar(J) (Judicial Listing)</td><td>23112502</td></tr>
+<tr><td>Ms. Aparna Ajitsaria</td><td>Registrar(J) Admn. (I & III) (Human Resources)</td><td>23112523</td></tr>
+<tr><td>Sh. Santosh Kumar</td><td>Registrar(J) SCLSC, Mediation and Conciliation Project Committee(MCPC) and Supreme Court Mediation Centre(SCMC)</td><td>23112528</td></tr>
+<tr><td>Sh. Tauzeeh-Ul-Islam Rajput</td><td>Registrar (Admn. II) (Human Resources)</td><td>23112550</td></tr>
+<tr><td>Sh. Satish Kumar Arora</td><td>Registrar(J) (Protocol Services)</td><td>23112529</td></tr>
+<tr><td>Sh. Kuntal Sharma Pathak</td><td>Registrar(J) (Court & Building)</td><td>23112536</td></tr>
+<tr><td>Ms Gracy L. Bawitlung</td><td>Registrar(J) (Library, Editorial, Translation Cell)</td><td>23112510</td></tr>
+<tr><td>Ms Kaveri</td><td>Registrar(J) & Member (Human Resources), eCommittee, Supreme Court of India, Supervision of Training Cell & Member-Secretary(GSICC)</td><td>23112514</td></tr>
+<tr><td>Sh. Rajesh Sharma</td><td>Registrar(J) (Judicial Administration - I)</td><td>23112521</td></tr>
+<tr><td>Sh. Vishal</td><td>Registrar(J) (Judicial Administration-II) (Technology) & FASTER Cell</td><td>23112513</td></tr>
+<tr><td>Sh. Apoorv Singh</td><td>Registrar(J) (Procurement & Stores)</td><td>23112531</td></tr>
+<tr><td>Sh. Pushpender Singh</td><td>Member(Processes) eCommittee</td><td>23112537</td></tr>
+<tr><td>Ms. Aarti Singh</td><td>Registrar(J)</td><td>23112530</td></tr>
+<tr><td>Ms. Shivani Handique</td><td>Registrar(J)(Screening Unit)</td><td>23112532</td></tr>
+<tr><td>Dr. Saleena V. G. Nair</td><td>Registrar(J), e-Committee</td><td>23112538</td></tr>
+
+<tr><td>Sh. Bibhuti Bhushan Bose</td><td>Supervision of work relating to Editorial, Translation Cell & Section V & VI</td><td>23116294</td></tr>
+<tr><td>Sh. Satish Kumar Yadav</td><td>Courts</td><td>23115665</td></tr>
+<tr><td>Sh. Sanjay Kumar-I</td><td>Confidential Cell & Secretary, Committee for Designation of Senior Advocate</td><td>23115676</td></tr>
+<tr><td>Sh. Parveen Kumar</td><td>Admn I, Vigilance and eHRMS</td><td>23115675</td></tr>
+<tr><td>Ms. Surabhi Parashar</td><td>Additional Registrar (J) cum Director, Centre for Research and Planning</td><td>23115652<br>23112552</td></tr>
+<tr><td>Mr. Rajan Singh</td><td>i) Court Masters' Wing ii) Conduct of AOR Examination and Section XII-A</td><td>23115605</td></tr>
+<tr><td>Ms. Nalini Rangam</td><td>Supervision of work relating to Admn. II, Admn. III & XII</td><td>23115876</td></tr>
+<tr><td>Sh. Jagmohan Singh</td><td>Sections XI-B, PIL(Writ), XVI-A, XIII & XIII-B</td><td>23115775</td></tr>
+<tr><td>Sh. Srikant G. Pai</td><td>Supervision of work relating to Admn. General, Caretaking & X</td><td>23115777</td></tr>
+<tr><td>Col. Apurve Warrior</td><td>Admn. (Security)</td><td>23115616</td></tr>
+<tr><td>Sh. Anand Prakash</td><td>Admn. J Section (including International Relations) and Nodal Cell(Admn. J)</td><td>23115673</td></tr>
+<tr><td>Dr. Shweta Misra</td><td>Additional Registrar(Housekeeping)</td><td>23115635</td></tr>
+<tr><td>Sh. Om Parkash Sharma</td><td>Supervision of work relating to Sections IV-D, XVII-A, XI-A and XVII-B</td><td>23115664</td></tr>
+<tr><td>Sh. Vipin Kumar Mittal</td><td>Sec. II, II-D, III-A, IV-C</td><td>23115898</td></tr>
+<tr><td>Sh. Avadhesh Kumar</td><td>Computer Cell & Scanning Cell</td><td>23115909</td></tr>
+<tr><td>Sh. Kamesh Nookala</td><td>i) Litigation Cell (Independent Charge)<br>ii) CPIO for Supreme Court of India under Section 5(1) of the Right to Information Act, 2005;<br>ii) Information and Statistics Secretariat</td><td>23115632</td></tr>
+<tr><td>Sh. Shubham Vashisth</td><td>Member(Project Management), eCommittee</td><td>23115642</td></tr>
+<tr><td>Sh. Raj Karan</td><td>Additional Registrar(J) - Screening Unit of Section IB</td><td>23115634</td></tr>
+<tr><td>Dr. Deepak Kumar</td><td>Additional Registrar(Computer Cell)</td><td>23112570</td></tr>
+<tr><td>Sh. Vinod Lakhina</td><td>Sec. II-E, IV-A, XV & XVII</td><td>23115636</td></tr>
+<tr><td>Ms. Neetu Verma</td><td>Sec. II-C, III, IV-B, XII-B</td><td>23115766</td></tr>
+<tr><td>Sh. Pankaj Kumar</td><td>Listing(Misc)</td><td>23115646</td></tr>
+
+<tr><td>Dr. Jyotsna Eveline Reuben</td><td>Director, Judges Library</td><td>23116283<br>23116423</td></tr>
+<tr><td>Ms. Devika Gujral</td><td>I-B</td><td>23115629</td></tr>
+<tr><td>Ms. Vandana Sharma</td><td>Extension Counter</td><td>23115797</td></tr>
+<tr><td>Ms. Kalyani Gupta</td><td>Supervision of work relating to Sections II-D, X and XVI-A</td><td>23115799</td></tr>
+<tr><td>Ms. Padma Sundar</td><td>(i) Supervision of work relating to Admn. Materials(including CIAW)<br>(ii) To function as Secretary, Creche.</td><td>23115866</td></tr>
+<tr><td>Sh. Sanjay Kumar Gupta</td><td>Protocol & Transport</td><td>23115780</td></tr>
+<tr><td>Sh. Pramod Chandra Joshi</td><td>Protocol & Transport</td><td>23115762</td></tr>
+<tr><td>Sh. Vinod Kumar Barthwal</td><td>Paperbook Sections [I, IA, IA(Annexe)] including Paperbooks Godown-II</td><td>23115794</td></tr>
+<tr><td>Sh. Ravi Shanti Bhushan</td><td>Supervision of work relating to Info & Statistics Secretariat, Parliament Questions, NCMS Committee and Section XIV-A</td><td>23115921</td></tr>
+<tr><td>Ms. Mamta Manocha</td><td>Supervision of work relating to Sections XII, XII-A & XV</td><td>23115758</td></tr>
+
+<tr><td>Sh. Pradeep Kumar</td><td>Supervision of work relating to Sections II, II-C & III-B</td><td>23115795</td></tr>
+<tr><td>Sh. Manish Sethi</td><td>Recruitment Cell & Training Cell</td><td>23115669</td></tr>
+<tr><td>Sh. Kamal Kumar</td><td>II-E, XVII and III-A</td><td>23115788</td></tr>
+<tr><td>Sh. Tapan Kishore Sharma</td><td>Medical and Protocol</td><td>23115760</td></tr>
+<tr><td>Sh. Chetan Kumar</td><td>Admn. II & Cash & A/cs Sections</td><td>23115672</td></tr>
+<tr><td>Ms. Seema Sethi</td><td>Supervision of work relating to Section XVI, IX-A & PIL(English)</td><td>23115871</td></tr>
+<tr><td>Ms. Sarita Purohit</td><td>Supervision of work relating to Section II-A & II-B</td><td>23115674</td></tr>
+<tr><td>Sh. Pavan Prathapa</td><td>Computer Cell & Scanning Cell</td><td>23115959</td></tr>
+<tr><td>Ms. Sonal Saroha</td><td>Deputy Registrar(J), Centre for Research and Planning</td><td>23115781</td></tr>
+<tr><td>Sh. Anand Sagar</td><td>Listing(Miscellaneous)</td><td>23115811</td></tr>
+<tr><td>Sh. Krishan Singh Gosain</td><td>Listing(Regular)</td><td>23115774</td></tr>
+<tr><td>Sh. Deepak Sharma</td><td>Admn. Material (Purchase & Stores) and Admn. Material (Maintenance) & Centralized Inventory and Article Wing(CIAW)</td><td>23115755</td></tr>
+<tr><td>Sh. Animesh Gahlout</td><td>Faster Cell and XVII-B</td><td>23115890<br>23116420</td></tr>
+<tr><td>Sh. Virender Mohan Bhatnagar</td><td>XII-B</td><td>23115873</td></tr>
+<tr><td>Sh. Kapil Sharma</td><td>I-B(Tagging of matters)</td><td>23115895</td></tr>
+<tr><td>Ms. Kamlesh Rawat</td><td>III-A</td><td>23116387</td></tr>
+<tr><td>Sh. Satish Chandra</td><td>I-B</td><td>23115845</td></tr>
+<tr><td>Ms. Renu Kalia</td><td>IV-C</td><td>23115791</td></tr>
+<tr><td>Ms. Madhu Bala</td><td>PIL(W) & IV-A</td><td>23115678</td></tr>
+<tr><td>Sh. Subhash Negi</td><td>Admn General and Admn Security</td><td>23115848</td></tr>
+<tr><td>Ms. Geeta Devi</td><td>XII-A</td><td>23115768</td></tr>
+<tr><td>Ms. Nidhi Ahuja</td><td>IV-C & XII-B</td><td>23115655</td></tr>
+<tr><td>Sh. Gulshan Kumar Arora</td><td>Sec. IV & IV-B</td><td>23115660</td></tr>
+
+<tr><td>Ms. Veena Rani Nagpal</td><td>I-B</td><td>23115830</td></tr>
+<tr><td>Ms. Kiran Bhandari</td><td>I-B</td><td>23115865</td></tr>
+<tr><td>Ms. Anju Kapoor</td><td>I-B</td><td>23116385</td></tr>
+<tr><td>Sh. Puneet Chopra</td><td>I-B</td><td>23115960</td></tr>
+<tr><td>Sh. Virender Singh</td><td>I-B</td><td>23115765</td></tr>
+<tr><td>Sh. Madhu Sudan Sati</td><td>I-B</td><td>23115849</td></tr>
+<tr><td>Sh. Ram Subhag</td><td>I-B</td><td>23115951</td></tr>
+<tr><td>Mr. Rajeev Kumar</td><td>III-B</td><td>23115961</td></tr>
+<tr><td>Sh. Manoj Kumar</td><td>Protocol Section, AOR Examination, work relating to maintenance & upkeep of Sectt. of Hon'ble CJI and SC Guest House at Administrative Building Complex</td><td>23115761</td></tr>
+<tr><td>Sh. Animesh Gahlout</td><td>Faster Cell and XVII-B</td><td>23115890<br>23116420</td></tr>
+<tr><td>Ms. Sonika Khurana</td><td>IX</td><td>23115844</td></tr>
+<tr><td>Ms. Amita Pandey</td><td>IX-A</td><td>23115806</td></tr>
+<tr><td>Ms. Yojana Bhatia</td><td>X</td><td>23115792</td></tr>
+<tr><td>Ms. Nidhi Bhardwaj</td><td>XVII-A</td><td>23115840</td></tr>
+<tr><td>Sh. Krishan Kumar</td><td>II-D</td><td>23115807</td></tr>
+<tr><td>Ms Deepa Mahajan</td><td>IV-A</td><td>23115769</td></tr>
+<tr><td>Ms. Rajni Kumar</td><td>IV-B</td><td>23115770</td></tr>
+<tr><td>Ms. Archana Sharma</td><td>IV-D</td><td>23115826</td></tr>
+<tr><td>Sh. Masoom Hasan</td><td>Admn. J & Nodal Cell</td><td>23115847</td></tr>
+
+<tr><td>Sh. Kailash Chandra</td><td>Admn. Material (P&S) & (Maintenance) Sections & Centralized Inventory and Article Wing(CIAW)</td><td>23115841</td></tr>
+<tr><td>Sh. Mohinder Pal Singh</td><td>Consultant(Purchase & Stores)</td><td>23115647</td></tr>
+<tr><td>Ms. Madhu Gupta</td><td>XIV-A & XII-B</td><td>23115790</td></tr>
+<tr><td>Ms. Rajni Sharma</td><td>XVII</td><td>23115813</td></tr>
+<tr><td>Ms Shama Saini</td><td>XV & XVII-B</td><td>23115771</td></tr>
+<tr><td>Ms. Jyoti Kalra</td><td>XVI</td><td>23115818</td></tr>
+<tr><td>Ms. Sharda Gogia</td><td>XVI-A</td><td>23115944</td></tr>
+<tr><td>Sh. Arun Kumar Kathuria</td><td>XI-A</td><td>23115899</td></tr>
+<tr><td>Sh. Chander Singh</td><td>II</td><td>23115798</td></tr>
+<tr><td>Sh. Gajindra Singh Rawat</td><td>II-A</td><td>23115835</td></tr>
+<tr><td>Sh. Amit Sachdeva</td><td>II-B</td><td>23115750</td></tr>
+<tr><td>Ms. Renu Bala Gambhir</td><td>II-C</td><td>-</td></tr>
+<tr><td>Ms. Mamta Rawat</td><td>II-E</td><td>23116347</td></tr>
+<tr><td>Sh. Nand Kishore</td><td>II-D</td><td>23115779</td></tr>
+<tr><td>Sh. Surender Kumar Jain</td><td>XI</td><td>23115829</td></tr>
+<tr><td>Ms. Bhawna Sehgal</td><td>III</td><td>23115803</td></tr>
+<tr><td>Sh. Jai Dev Joshi</td><td>PIL(Writ)</td><td>23115809</td></tr>
+<tr><td>Sh. Krishan Singh Gosain</td><td>Listing(Regular)</td><td>23115774</td></tr>
+<tr><td>Sh. Vijay Kumar</td><td>Listing(Misc.)</td><td>23115885</td></tr>
+<tr><td>Sh. Gajinder Singh</td><td>Listing(Misc.)</td><td>23115831</td></tr>
+<tr><td>Sh. Ravinder Sharma</td><td>Listing (Regular)</td><td>23115857</td></tr>
+<tr><td>Sh. Vinod Kumar Barthwal</td><td>Admn II</td><td>23115794</td></tr>
+<tr><td>Sh. Rajiv Khurana</td><td>Admn. III</td><td>23115843</td></tr>
+<tr><td>Sh. Ashutosh Kalia</td><td>Recruitment Cell</td><td>-</td></tr>
+<tr><td>Sh. Vinod Kumar</td><td>Chief Librarian, Judges Library</td><td>23116329</td></tr>
+<tr><td>Sh. Mazhar Khan</td><td>Chief Librarian, Judges Library</td><td>23116279</td></tr>
+<tr><td>Sh. Brij Bhooshan Khare</td><td>Chief Librarian, Judges Library</td><td>23116428</td></tr>
+<tr><td>Sh. Vijay Kumar</td><td>Chief Librarian, Judges Library</td><td>23116282</td></tr>
+<tr><td>Sh. Burada Atchuta Rao</td><td>Chief Librarian, Judges Library</td><td>23116280</td></tr>
+<tr><td>Ms Pooja Sharma</td><td>Court Master Wing</td><td>23116379</td></tr>
+<tr><td>Ms. Neetu Khajuria</td><td>Court Master Wing</td><td>23115821</td></tr>
+<tr><td>Sh. Vishal Anand</td><td>Court Master Wing</td><td>23116393</td></tr>
+<tr><td>Ms. Poonam Vaid</td><td>Court Master Wing</td><td>23116386</td></tr>
+<tr><td>Ms. Preethi Dileep Kumar</td><td>Court Master Wing</td><td>23116395</td></tr>
+<tr><td>Ms. Nidhi Wason</td><td>Court Master Wing</td><td>23116357</td></tr>
+<tr><td>Sh. Mukteshwar Jha</td><td>Mentioning</td><td>23115884</td></tr>
+<tr><td>Sh. Hari Singh</td><td>Supervision of work relating to Caretaking Branch</td><td>23115782</td></tr>
+<tr><td>Sh. Khima Nand</td><td>Supervision of work relating to Record Room</td><td>23115793</td></tr>
+<tr><td>Sh. Bal Krishan Dubey</td><td>Supervision of work relating to Admn I Section & Vigilance Cell</td><td>23115974</td></tr>
+<tr><td>Sh. Ajay Sharma</td><td>Medical Branch</td><td>23115846</td></tr>
+<tr><td>Sh. Jitender Pandey</td><td>Protocol</td><td>23115836</td></tr>
+<tr><td>Sh. Hans Raj Narula</td><td>AR cum DDO, Cash & Accounts I & II</td><td>23115801</td></tr>
+<tr><td>Ms Manju Kumar</td><td>PIL(English)</td><td>23115827</td></tr>
+<tr><td>Sh. Bhupinder Singh Yadav</td><td>Section I-A</td><td>23115802</td></tr>
+<tr><td>Sh. Alok Kumar Mishra</td><td>eCommittee</td><td>23115804</td></tr>
+<tr><td>Sh. Shyam Kumar Sharma</td><td>XII</td><td>23115805</td></tr>
+<tr><td>Sh. Sanjeev Kumar</td><td>Section – I</td><td>23115763</td></tr>
+<tr><td>Sh. Dinesh Kumar Verma</td><td>Extension Counter</td><td>23115904</td></tr>
+<tr><td>Ms. Sharda Gogia</td><td>I-B</td><td>23381241<br>23115935</td></tr>
+
+<tr><td>Ms. Ragini Chauhan</td><td>I-B</td><td>23115877</td></tr>
+<tr><td>Ms. Kavita Kwatra</td><td>I-B</td><td>23115812</td></tr>
+<tr><td>Mr. Rana Lakshman Singh</td><td>I-B</td><td>23115815</td></tr>
+<tr><td>Sh. Gaurav Kapoor</td><td>I-B</td><td>23115816</td></tr>
+<tr><td>Sh. Sanjay Kumar Bhatt</td><td>I-B</td><td>23115817</td></tr>
+<tr><td>Ms. Sonia Gola</td><td>I-B</td><td>23115822</td></tr>
+<tr><td>Ms Geeta</td><td>I-B</td><td>23115823</td></tr>
+<tr><td>Sh. Ravinder</td><td>I-B</td><td>23115824</td></tr>
+<tr><td>Sh. Harsh Kumar</td><td>II</td><td>23115855</td></tr>
+<tr><td>Sh. Rajesh Kumar</td><td>II-A</td><td>23115854</td></tr>
+<tr><td>Sh. Rakesh Kumar</td><td>II-B</td><td>23115892</td></tr>
+<tr><td>Sh. Bibhuti Bhushan Vidyarthi</td><td>II-C</td><td>23115912<br>23115925</td></tr>
+<tr><td>Sh. Anshul Tanwar</td><td>II-D</td><td>23115701</td></tr>
+<tr><td>Sh. Rakesh Sharma</td><td>II-E</td><td>23115917</td></tr>
+<tr><td>Sh. Ravinder Kumar</td><td>III</td><td>23115853</td></tr>
+<tr><td>Sh. Anuj Kumar</td><td>III-A</td><td>23115886</td></tr>
+<tr><td>Sh. Manoj Kumar</td><td>III-B</td><td>23115850</td></tr>
+<tr><td>Ms. Mamta Rani</td><td>IV</td><td>23115905</td></tr>
+<tr><td>Sh. Anil Kumar Rathee</td><td>IV-A</td><td>23115878</td></tr>
+<tr><td>Sh. Chander Parkash</td><td>IV-B</td><td>23115915</td></tr>
+<tr><td>Sh. Ravi Kumar Hipparagi</td><td>IV-C</td><td>23115842</td></tr>
+<tr><td>Sh. Vishal Pant</td><td>IV-D</td><td>23115863</td></tr>
+<tr><td>Sh. Charanjeet Sachdeva</td><td>IX</td><td>23115942</td></tr>
+<tr><td>Sh. Sanjeev Kumar Sinha</td><td>IX-A</td><td>23115947</td></tr>
+<tr><td>Sh. Praveen Kumar</td><td>X</td><td>23115923</td></tr>
+<tr><td>Ms. Aarti Gupta</td><td>PIL (W)</td><td>23115860</td></tr>
+<tr><td>Ms. Shikha Sharma</td><td>XI</td><td>23115887</td></tr>
+<tr><td>Ms. Manisha Kwatra</td><td>XI-A</td><td>23115920</td></tr>
+<tr><td>Mr. Pravesh Dev</td><td>XI-B</td><td>23115926</td></tr>
+<tr><td>Sh. Sunil Kumar</td><td>XII</td><td>23115930</td></tr>
+<tr><td>Sh. Gurinder Singh</td><td>XII-A</td><td>23115939</td></tr>
+<tr><td>Ms. Vatsala Dubey</td><td>XII-B</td><td>23115934</td></tr>
+<tr><td>Ms. Taruna Madan</td><td>XIII & XIII-B</td><td>23115924</td></tr>
+<tr><td>Ms. Ruchika Grover</td><td>XIV</td><td>23115916</td></tr>
+<tr><td>Sh. Gaurav Kumar Satija</td><td>XIV-A</td><td>23115907</td></tr>
+<tr><td>Sh. Banwari Lal</td><td>XV</td><td>23115937</td></tr>
+<tr><td>Sh. Meher Chand Rana</td><td>XVI</td><td>23115893</td></tr>
+<tr><td>Sh. Harish Kumar</td><td>XVI-A</td><td>23115839</td></tr>
+<tr><td>Ms. Madhulika Kotnala</td><td>XVII</td><td>23115891</td></tr>
+<tr><td>Ms. Geeta</td><td>XVII-A</td><td>23115936</td></tr>
+<tr><td>Sh. Laishram Premkant Singh</td><td>XVII-B</td><td>23115938</td></tr>
+<tr><td>Ms. Gargi Thomas</td><td>Recruitment Cell</td><td>23115883</td></tr>
+<tr><td>Sh. Pankaj Kumar</td><td>Admn. I</td><td>23115834</td></tr>
+<tr><td>Ms. Shalini Negi</td><td>Admn. I (2nd BO)</td><td>23115838</td></tr>
+<tr><td>Ms. Sakshi Thakkar</td><td>Admn. II</td><td>23115901</td></tr>
+<tr><td>BO(A-III)</td><td>Admn. III</td><td>23115929</td></tr>
+<tr><td>Sh. Chandaka Surya Prakash Rao</td><td>Vigilance Cell</td><td>23115880</td></tr>
+<tr><td>Sh. Baljeet Yadav<br>Sh. Manoj Bhatt<br>Sh. Parminder Singh</td><td>Admn. J & Nodal Cell</td><td>23115897<br>23116421</td></tr>
+<tr><td>Sh. Sandeep Saini</td><td>Admn. General</td><td>23115943</td></tr>
+<tr><td>Sh. Puran Chand Sharma</td><td>Admn. General</td><td>23115875</td></tr>
+<tr><td></td><td>Admn. General (Civil & Electricals complaints)</td><td>23115922</td></tr>
+<tr><td>Sh. Rohit Kheterpal</td><td>Admn. Security</td><td>23115828</td></tr>
+
+<tr><td>Sh. Kapil Arora</td><td>Admn. Materials (Maintenance)</td><td>23115864</td></tr>
+<tr><td>Sh. Ravish Kumar</td><td>Admn. Materials (P & S)</td><td>23115941</td></tr>
+<tr><td>Sh. Bhaskar Bhardwaj</td><td>Supervision of work relating to CDSA & AOR Examination</td><td>23115879</td></tr>
+<tr><td></td><td>Training Cell</td><td>23115919</td></tr>
+<tr><td>Ms. Geetika Grover</td><td>Centralized Inventory and Articles Wing (CIAW)</td><td>23115832</td></tr>
+<tr><td>Sh. Rohit Garg</td><td>Caretaking (Administrative Building Complex)</td><td>23115928</td></tr>
+<tr><td>Sh. Pradeep Bhatt</td><td>Caretaking (Main Campus)</td><td>23115903<br>23388745</td></tr>
+<tr><td>Sh. Rajinder Kumar</td><td>Transport</td><td>23115910<br>23116345</td></tr>
+<tr><td>Sh. Deepak Lal Rana</td><td>Medical</td><td>23115896</td></tr>
+<tr><td>Sh. Dinesh Joshi</td><td>Protocol</td><td>23115870</td></tr>
+<tr><td>Sh. Vinod Kumar</td><td>Protocol</td><td>23115900</td></tr>
+<tr><td>Sh. Deepak Verma</td><td>Protocol</td><td>23115800</td></tr>
+<tr><td>Mr. Arvind Verma</td><td>Elimination Cell</td><td>23115851</td></tr>
+<tr><td>Sh. Nitin Saxena</td><td>Listing (Misc.)</td><td>23115945</td></tr>
+<tr><td>Sh. Anil Bisht</td><td>Listing (Misc.)</td><td>23115948</td></tr>
+<tr><td>Sh. Vipul Kumar</td><td>Listing (Misc.)</td><td>23115952</td></tr>
+<tr><td>Sh. Kailash Chandra</td><td>Listing (Chambers)</td><td>23115931</td></tr>
+<tr><td>Sh. Sachin Rathi</td><td>Data Monitoring Team</td><td>23115869</td></tr>
+<tr><td>Sh. Harish Kumar</td><td>Mentioning</td><td>23115833</td></tr>
+<tr><td></td><td>Mentioning Counter</td><td>23115778</td></tr>
+<tr><td>Faster Cell</td><td>Faster Cell</td><td>23116419</td></tr>
+<tr><td>Ms. Divya Babbar</td><td>Court Master Wing</td><td>23116369</td></tr>
+<tr><td>Sh. AVGV Ramu</td><td>Court Master Wing</td><td>23116371</td></tr>
+<tr><td>Ms. Preeti Saxena</td><td>Court Master Wing</td><td>23116372</td></tr>
+<tr><td>Ms. Sapna Bansal</td><td>Court Master Wing</td><td>23116374</td></tr>
+<tr><td>Sh. Dharmender Kumar</td><td>Section I-A</td><td>23115940<br>23115949</td></tr>
+<tr><td>Sh. Dinesh Kumar Tiwari</td><td>IA (Annexe)</td><td>23115858</td></tr>
+<tr><td>Sh. Sachin Singh</td><td></td><td>23115837</td></tr>
+<tr><td>Ms. Deepti T. V.</td><td>Scanning Cell</td><td>23115862</td></tr>
+<tr><td>Ms. Seema Manchanda</td><td>Editorial</td><td>23115867</td></tr>
+<tr><td>Ms. Preeti Pal</td><td>Copying</td><td>23115881</td></tr>
+<tr><td>Ms. Poonam Bisht</td><td>Litigation Section</td><td>23115889</td></tr>
+<tr><td></td><td>Reception office and Accessibility & Inclusion Section, Main Campus</td><td>23115894</td></tr>
+<tr><td>Sh. Ajay Kumar Karwal</td><td>Paperbook Godown II</td><td>23115908</td></tr>
+<tr><td>Sh. Vinod Kumar</td><td>Record Room</td><td>23116337</td></tr>
+<tr><td>Ms. Sucheta Chhabra</td><td>Cash and Accounts II</td><td>23115914</td></tr>
+<tr><td>Sh. Jagmohan Singh</td><td>Cash & Accounts-I</td><td>23115946</td></tr>
+<tr><td>Ms. Vineeta Rawat Negi</td><td>Information & Statistics Secretariat</td><td>23115932</td></tr>
+<tr><td>Sh. Narendra Pal Kera</td><td>Section – VII (R&I)</td><td>23115933</td></tr>
+<tr><td>Sh. Gajendra Singh</td><td>Translation Cell & NJMA</td><td>23115950<br>23116363</td></tr>
+<tr><td>Ms. Soma Roy</td><td>V & VI</td><td>23115859</td></tr>
+<tr><td>Sh. Ravindra Kumar</td><td>Appeal Godown</td><td>23116311</td></tr>
+<tr><td>Mr. Dheeraj Karar</td><td>PIL(English)</td><td>23115882</td></tr>
+<tr><td>Mr. Ganesh Kumar</td><td>eCommittee & Translation Cell</td><td>23115902</td></tr>
+<tr><td>E-Sewa Kendra</td><td>E-Sewa Kendra, Main Campus</td><td>23116200</td></tr>
+<tr><td>Mr. Mohit Jain</td><td>Branch Officer (Web Server Administrator)</td><td>23115962</td></tr>
+<tr><td>Ms. Preeti Agrawal</td><td>Branch Officer (Database Administrator)</td><td>23115963</td></tr>
+<tr><td>Mr. Amit Kumar Tripathi</td><td>Branch Officer (System Administrator)</td><td>23115953</td></tr>
+
+<tr><td>Mr. Khashti Ballabh Pujari</td><td>Branch Officer (Network Administrator)</td><td>23115964</td></tr>
+<tr><td>Mr. Garvit</td><td>Branch Officer (Database Administrator)</td><td>23115965</td></tr>
+<tr><td>Dr. Manoj Kumar Dhirania</td><td>Branch Officer(Computer Cell)(Hardware Maintenance)</td><td>23115966</td></tr>
+<tr><td>Mr. Ashok Kumar Naugain</td><td>Judges Library</td><td>23116284</td></tr>
+<tr><td>Ms. Versha Shah</td><td>Judges Library</td><td>23116286</td></tr>
+<tr><td>Ms. Shakti Mishra</td><td>Judges Library</td><td>23116289</td></tr>
+<tr><td>Mr. Dipendra Singh Sajwan</td><td>Judges Library</td><td>23116448</td></tr>
+<tr><td>Ms. Amandeep Kaur Bharara</td><td>Judges Library</td><td>23116426</td></tr>
+<tr><td>Mr. Rajshree Jalal</td><td>Judges Library</td><td>23116442</td></tr>
+<tr><td>Mr. Nitin Chhibbar</td><td>Judges Library</td><td>23116456</td></tr>
+<tr><td>Helpline numbers</td><td>Helpline numbers</td><td>011-23116400, 23116401, 23116402, 23116403</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<footer>
+<div class="footer-logo">
+<img alt="EMBLEM" src="images/emblem.png"/>
+<p>भारत का सर्वोच्च न्यायालय</p>
+<p>Supreme Court of India</p>
+<p>॥ यतो धर्मस्ततो जयः ॥</p>
+</div>
+<div class="footer-links">
+<h4>Quick Links</h4>
+<a href="accessibility.html">Accessibility</a>
+<a href="faqs.html">FAQs</a>
+<a href="pay-scales.html">Pay Scales</a>
+<a href="accounts.html">Accounts</a>
+<a href="important-links.html">Important Links</a>
+<a href="citizens-charter.html">Citizen's Charter</a>
+<a href="webcast.html">Webcast</a>
+</div>
+<div class="footer-links">
+<a href="telephone-directory.html">Telephone Directory</a>
+<a href="steps-taken-during-covid-19.html">Steps taken during Covid-19</a>
+<a href="officers-officials.html">Officers / Officials</a>
+<a href="guided-tour.html">Guided Tour</a>
+<a href="india-code.html">India Code</a>
+<a href="argument-transcripts.html">Argument Transcripts</a>
+<a href="employee-corner.html">Employee Corner</a>
+<a href="officers-servant-rules.html">Officers Servant Rules</a>
+</div>
+<div class="bottom">© Designed by Mr Yash Kumar. Email - mradvocate2326@gmail.com</div>
+<!-- ============================= -->
+<!-- SAME POPUP CONTENT -->
+<!-- ============================= -->
+<div class="popup-overlay" id="aboutPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('aboutPopup')">×</button>
+<h2>ABOUT US</h2>
+<p>Select an option</p>
+<div class="popup-grid">
+<a href="history.html">History</a>
+<a href="constitution.html">Constitution</a>
+<a href="jurisdiction.html">Jurisdiction</a>
+<a href="calendar.html">Calendar</a>
+<a href="committees.html">Committees</a>
+<a href="organization-chart.html">Organization Chart</a>
+<a href="registry-officers.html">Registry Officers</a>
+<a href="contact-us.html">Contact Us</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="judgesPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('judgesPopup')">×</button>
+<h2>JUDGES</h2>
+<p>Select an option</p>
+<div class="popup-grid">
+<a href="chief-justice-and-judges.html">Chief Justice &amp; Judges</a>
+<a href="former-chief-justice.html">Former Chief Justice</a>
+<a href="former-judges.html">Former Judges</a>
+<a href="judges-roster.html">Judges Roster</a>
+<a href="judges-library.html">Judges Library</a>
+<a href="assets-of-judges.html">Assets of Judges</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="collegiumPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('collegiumPopup')">×</button>
+<h2>Publications</h2>
+<p>Select a publication</p>
+<div class="popup-grid">
+<a href="https://www.sci.gov.in/collegium-resolutions/" target="_blank">Collegium Resolutions</a>
+<a href="supreme-court-chronicle.html">Supreme Court Chronicle</a>
+<a href="dr-br-ambedkar.html">Dr. B.R. Ambedkar</a>
+<a href="courts-of-india.html">Courts of India</a>
+<a href="court-news.html">Court News</a>
+<a href="annual-reports.html">Annual Reports</a>
+<a href="reports.html">Reports</a>
+<a href="supreme-court-rules.html">Supreme Court Rules</a>
+<a href="practice-and-procedure.html">Practice &amp; Procedure</a>
+<a href="national-court-management-systems.html">National Court Management System</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="servicesPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('servicesPopup')">×</button>
+<h2>SERVICES</h2>
+<p>Select a service</p>
+<div class="popup-grid">
+<a href="https://www.sci.gov.in/cause-list/" target="_blank">Cause List</a>
+<a href="https://www.sci.gov.in/case-status-case-no/" target="_blank">Case Status</a>
+<a href="https://www.sci.gov.in/daily-order-case-no/" target="_blank">Daily Orders</a>
+<a href="https://www.sci.gov.in/judgements-case-no/" target="_blank">Judgements</a>
+<a href="https://www.sci.gov.in/office-report-case-no/" target="_blank">Office Report</a>
+<a href="https://www.sci.gov.in/caveat-case-no/" target="_blank">Caveat</a>
+<a href="https://www.sci.gov.in/display-boards/" target="_blank">Display Boards</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="eservicesPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('eservicesPopup')">×</button>
+<h2>E-SERVICES</h2>
+<p>Select an e-Service</p>
+<div class="popup-grid">
+<a href="https://efiling.sci.gov.in/" target="_blank">e-filing (SC-eFM 2.0) (Existing)</a>
+<a href="https://efiling3.sci.gov.in/" target="_blank">e-filing (SC-eFM 3.0) (New)</a>
+<a href="https://appearance.sci.gov.in/" target="_blank">Online Appearance Slips</a>
+<a href="https://suswagatam.sci.gov.in/public/Index.aspx" target="_blank">SuSwagatam (e-Pass)</a>
+<a href="http://guidedtour.sci.nic.in/" target="_blank">Guided Tour</a>
+<a href="https://rti.sci.gov.in/" target="_blank">Online RTI Portal</a>
+<a href="https://physical-hearing.sci.gov.in/" target="_blank">Physical Hearing (Hybrid Option)</a>
+<a href="https://registry.sci.gov.in/api/callback/bharat_kosh/online_copying/mobile.php" target="_blank">Certified Copy</a>
+<a href="https://scdg.sci.gov.in/scnjdg/" target="_blank">National Judicial Data Grid</a>
+<a href="https://scr.sci.gov.in/scrsearch/" target="_blank">SCR</a>
+<a href="https://www.sci.gov.in/neutral-citation/" target="_blank">Neutral Citation</a>
+<a href="https://verdictfinder.sci.gov.in/elk_frontend/" target="_blank">Verdict Finder</a>
+<a href="https://vjc.sci.gov.in/public/index.php" target="_blank">Virtual Justice Clock</a>
+<a href="https://sciproximitycard.in/sciservices/" target="_blank">Proximity Card Registration</a>
+<a href="https://scippms.bankofmaharashtra.bank.in/ppms/#/user-login" target="_blank">Premise Payment Management System (PPMS)</a>
+<a href="https://park.sci.gov.in/request/login/" target="_blank">Parking Authorization Record Keeper</a>
+<a href="https://www.sci.gov.in/iops/" target="_blank">Integrated Online Payment System</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="advocatesPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('advocatesPopup')">×</button>
+<h2>ADVOCATES</h2>
+<p>Select an option</p>
+<div class="popup-grid">
+<a href="https://www.sci.gov.in/advocate-on-record/" target="_blank">Advocates-on-Record</a>
+<a href="aor-examination.html">AOR Examination</a>
+<a href="guidelines-and-orders.html">Guidelines &amp; Orders</a>
+<a href="senior-advocates-designation.html">Senior Advocates Designation</a>
+<a href="forms.html">Forms</a>
+<a href="law-officers.html">Law Officers</a>
+<a href="nodal-officers-bail-petitions.html">Nodal Officers for Bail Petitions</a>
+<a href="lawyers-chamber-allotment.html">Lawyers' Chamber Allotment</a>
+<a href="legal-aid.html">Legal Aid</a>
+<a href="https://www.scaoraindia.com/" target="_blank">SCAORA</a>
+<a href="https://scbaindia.org/" target="_blank">SCBA</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="filingPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('filingPopup')">×</button>
+<h2>COURT FILINGS</h2>
+<p>Select a filing service</p>
+<div class="popup-grid">
+<a href="https://www.sci.gov.in/court-fees-calculator/" target="_blank">Court Fees Calculator</a>
+<a href="https://www.sci.gov.in/limitation-calculator/" target="_blank">Limitation Calculator</a>
+<a href="interlocutory-applications.html">Interlocutory Applications</a>
+<a href="case-category.html">Case Category</a>
+<a href="default-list.html">Default List</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="noticesPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('noticesPopup')">×</button>
+<h2>NOTICES</h2>
+<p>Select a notice category</p>
+<div class="popup-grid">
+<a href="https://www.sci.gov.in/notices-and-circulars/" target="_blank">Notices and Circulars</a>
+<a href="https://www.sci.gov.in/fdrs-deposits/" target="_blank">FDRs &amp; Depsits</a>
+<a href="https://www.sci.gov.in/notice-category/tenders/" target="_blank">Tenders</a>
+<a href="https://www.sci.gov.in/judicial-clerkship/" target="_blank">Judicial Clerkship</a>
+<a href="https://www.sci.gov.in/recruitments/" target="_blank">Recruitments</a>
+</div>
+</div>
+</div>
+<div class="popup-overlay" id="newsPopup">
+<div class="popup-box">
+<button class="popup-close" onclick="closePopup('newsPopup')">×</button>
+<h2>NEWS &amp; EVENTS</h2>
+<p>Select a category</p>
+<div class="popup-grid">
+<a href="https://www.sci.gov.in/press-release/" target="_blank">Press Release</a>
+<a href="https://www.sci.gov.in/live-streaming/" target="_blank">Live Streaming</a>
+<a href="https://judgments.ecourts.gov.in/KBJ/" target="_blank">Basic Structure Judgment</a>
+<a href="https://webcast.gov.in/scindia" target="_blank">Webcast</a>
+<a href="multimedia.html">Multimedia</a>
+<a href="https://www.sci.gov.in/photo-gallery/" target="_blank">Photo Gallery</a>
+<a href="https://www.sci.gov.in/full-court-reference/" target="_blank">Full Court Reference</a>
+<a href="ceremonial-bench.html">Ceremonial Bench</a>
+<a href="hackathon.html">Hackathon</a>
+</div>
+</div>
+</div>
+<script>
+function showSection(sectionId, clickedButton){
+    document.querySelectorAll(".tab-section").forEach(section=>{
+        section.classList.remove("active");
+    });
+
+    document.querySelectorAll(".asrp-buttons button").forEach(button=>{
+        button.classList.remove("active");
+    });
+
+    document.getElementById(sectionId).classList.add("active");
+    clickedButton.classList.add("active");
+}
+
+
+/* =========================================
+   NAVBAR CLICK → CENTER POPUP
+========================================= */
+
+document.querySelectorAll(".nav-dropdown .nav-trigger").forEach(function(trigger){
+
+    trigger.addEventListener("click", function(event){
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const navItem = trigger.closest(".nav-dropdown");
+        const popupId = navItem.getAttribute("data-popup");
+
+        /* Close any other popup first */
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        /* Open selected popup in center */
+        openPopup(popupId);
+    });
+
+});
+
+
+function openPopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
+
+}
+
+
+function closePopup(popupId){
+
+    const popup = document.getElementById(popupId);
+
+    if(popup){
+        popup.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+}
+
+
+/* =========================================
+   CLICK OUTSIDE → CLOSE
+========================================= */
+
+document.querySelectorAll(".popup-overlay").forEach(function(popup){
+
+    popup.addEventListener("click", function(event){
+
+        if(event.target === popup){
+            popup.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   ESC → CLOSE
+========================================= */
+
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Escape"){
+
+        document.querySelectorAll(".popup-overlay").forEach(function(popup){
+            popup.classList.remove("active");
+        });
+
+        document.body.style.overflow = "";
+    }
+
+});
+</script>
+</footer></section></body>
+</html>
