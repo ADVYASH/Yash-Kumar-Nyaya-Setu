@@ -1,0 +1,4187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Case Document Generator</title>
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    background:#f1f5f9;
+    color:#111827;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:15px 25px;
+
+    color:white;
+    background:#111827;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+.header h1{
+    margin:0;
+    font-size:21px;
+}
+
+.header-right{
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.status{
+    color:#cbd5e1;
+    font-size:12px;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.container{
+    max-width:1450px;
+    margin:auto;
+    padding:25px;
+}
+
+.intro{
+    margin-bottom:20px;
+    padding:20px;
+
+    background:#fff;
+
+    border-left:5px solid #1d4ed8;
+    border-radius:10px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.intro h2{
+    margin:0 0 8px;
+}
+
+.intro p{
+    margin:0;
+    color:#64748b;
+    line-height:1.5;
+}
+
+.counter{
+    margin:10px 0 25px;
+
+    text-align:center;
+
+    color:#64748b;
+}
+
+
+/* =========================================================
+   FORM SECTION
+========================================================= */
+
+.section{
+    margin-bottom:20px;
+
+    background:white;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:15px 20px;
+
+    background:#f8fafc;
+
+    border-bottom:1px solid #e5e7eb;
+}
+
+.section-header h2{
+    margin:0;
+    font-size:17px;
+}
+
+.section-number{
+    width:30px;
+    height:30px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+    background:#1d4ed8;
+
+    border-radius:50%;
+
+    font-weight:bold;
+}
+
+.section-body{
+    padding:20px;
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.grid{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:16px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+.field label{
+    margin-bottom:6px;
+
+    color:#374151;
+
+    font-size:13px;
+    font-weight:600;
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:10px 11px;
+
+    background:white;
+
+    border:1px solid #d1d5db;
+    border-radius:6px;
+
+    font-family:inherit;
+    font-size:14px;
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    outline:none;
+
+    border-color:#1d4ed8;
+
+    box-shadow:0 0 0 2px rgba(29,78,216,.12);
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.toolbar{
+
+    position:sticky;
+    bottom:0;
+    z-index:900;
+
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+
+    padding:14px 20px;
+
+    background:white;
+
+    border-top:1px solid #d1d5db;
+
+    box-shadow:0 -3px 15px rgba(0,0,0,.08);
+}
+
+button{
+
+    padding:11px 18px;
+
+    border:0;
+    border-radius:7px;
+
+    cursor:pointer;
+
+    font-size:14px;
+    font-weight:bold;
+}
+
+.btn-primary{
+    color:white;
+    background:#1d4ed8;
+}
+
+.btn-primary:hover{
+    background:#1e3a8a;
+}
+
+.btn-success{
+    color:white;
+    background:#059669;
+}
+
+.btn-secondary{
+    color:#111827;
+    background:#e5e7eb;
+}
+
+.btn-danger{
+    color:white;
+    background:#dc2626;
+}
+
+
+/* =========================================================
+   DOCUMENT AREA
+========================================================= */
+
+.documents{
+    display:none;
+}
+
+.documents.visible{
+    display:block;
+}
+
+.doc-label{
+
+    max-width:210mm;
+
+    margin:25px auto 8px;
+
+    font-size:16px;
+    font-weight:bold;
+}
+
+
+/* =========================================================
+   A4
+========================================================= */
+
+.a4{
+
+    position:relative;
+
+    width:210mm;
+    height:297mm;
+
+    margin:0 auto 30px;
+
+    padding:15mm;
+
+    background:white;
+
+    overflow:hidden;
+
+    box-shadow:0 3px 18px rgba(0,0,0,.15);
+}
+
+
+/* =========================================================
+   NORMAL DOCUMENT STYLING
+========================================================= */
+
+.doc-title{
+
+    margin-bottom:5px;
+
+    text-align:center;
+
+    font-size:19px;
+    font-weight:bold;
+
+    text-transform:uppercase;
+}
+
+.doc-subtitle{
+
+    margin-bottom:15px;
+
+    text-align:center;
+
+    font-size:12px;
+}
+
+.doc-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    font-size:11px;
+}
+
+.doc-table th,
+.doc-table td{
+
+    padding:5px 6px;
+
+    border:1px solid #222;
+
+    vertical-align:top;
+}
+
+.doc-table th{
+    background:#f1f1f1;
+}
+
+.doc-table .lbl{
+
+    width:34%;
+
+    font-weight:bold;
+}
+
+.doc-section{
+
+    margin:12px 0 5px;
+
+    padding-bottom:3px;
+
+    border-bottom:1px solid #222;
+
+    font-size:13px;
+    font-weight:bold;
+}
+
+.doc-paragraph{
+
+    font-size:12px;
+
+    line-height:1.55;
+
+    text-align:justify;
+}
+
+.stamp-area{
+
+    min-height:90px;
+
+    margin-top:10px;
+
+    padding:10px;
+
+    border:2px solid #222;
+}
+
+.signatures{
+
+    position:absolute;
+
+    left:15mm;
+    right:15mm;
+    bottom:18mm;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+}
+
+.signature{
+
+    width:30%;
+
+    padding-top:5px;
+
+    border-top:1px solid #222;
+
+    text-align:center;
+
+    font-size:10px;
+}
+
+
+/* =========================================================
+   PAGE 1 SPECIAL DESIGN
+========================================================= */
+
+.page-one{
+
+    padding:0;
+
+    position:relative;
+}
+
+.page-one-border{
+
+    position:absolute;
+
+    top:8mm;
+    left:8mm;
+    right:8mm;
+    bottom:8mm;
+
+    padding:12mm;
+
+    border:2px solid #000;
+
+    overflow:hidden;
+}
+
+
+/* =========================================================
+   PAGE 1 WATERMARK
+========================================================= */
+
+.page-one-watermark{
+
+    position:absolute;
+
+    left:50%;
+    top:52%;
+
+    width:125mm;
+    height:125mm;
+
+    object-fit:contain;
+
+    transform:translate(-50%,-50%);
+
+    opacity:.10;
+
+    z-index:0;
+
+    pointer-events:none;
+}
+
+
+/* =========================================================
+   PAGE 1 CONTENT ABOVE WATERMARK
+========================================================= */
+
+.page-one-border > *:not(.page-one-watermark){
+
+    position:relative;
+
+    z-index:1;
+}
+
+
+/* =========================================================
+   PAGE 1 STUDENT HEADER
+========================================================= */
+
+.student-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    width:100%;
+
+    min-height:65mm;
+}
+
+.student-details{
+
+    width:72%;
+
+    font-size:12px;
+
+    line-height:1.55;
+}
+
+.student-details > div{
+
+    display:flex;
+
+    margin-bottom:2px;
+}
+
+.student-details strong{
+
+    width:42mm;
+
+    min-width:42mm;
+
+    display:inline-block;
+}
+
+.student-details span{
+
+    flex:1;
+}
+
+
+/* =========================================================
+   PAGE 1 PHOTO
+========================================================= */
+
+.student-photo{
+
+    width:35mm;
+    height:45mm;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    margin-top:2mm;
+
+    border:1px solid #000;
+
+    background:#fff;
+}
+
+.student-photo img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+
+/* =========================================================
+   PAGE 1 PLEDGE
+========================================================= */
+
+.pledge{
+
+    margin-top:14mm;
+
+    font-size:12px;
+
+    line-height:1.65;
+
+    text-align:justify;
+}
+
+
+/* =========================================================
+   PAGE 1 CASE NAME
+========================================================= */
+
+.case-heading{
+
+    margin-top:25mm;
+
+    padding:0 8mm;
+
+    text-align:center;
+}
+
+.case-name{
+
+    font-size:27px;
+
+    font-weight:bold;
+
+    line-height:1.25;
+}
+
+.case-citation{
+
+    margin-top:8px;
+
+    font-size:13px;
+
+    font-style:italic;
+
+    line-height:1.4;
+}
+
+
+/* =========================================================
+   PAGE 1 STAMP
+========================================================= */
+
+.page-one-stamp{
+
+    position:absolute;
+
+    right:12mm;
+    bottom:12mm;
+
+    width:40mm;
+    height:40mm;
+
+    object-fit:contain;
+
+    transform:rotate(-12deg);
+
+    z-index:2;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .a4{
+        width:100%;
+        height:auto;
+        min-height:297mm;
+    }
+}
+
+@media(max-width:650px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        padding:10px;
+    }
+
+    .header{
+        padding:12px;
+    }
+
+    .header-right{
+        display:none;
+    }
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+    @page{
+        size:A4;
+        margin:0;
+    }
+
+    body{
+        background:white;
+    }
+
+    .header,
+    .form-area,
+    .toolbar,
+    .doc-label{
+        display:none!important;
+    }
+
+    .documents{
+        display:block!important;
+    }
+
+    .a4{
+
+        width:210mm;
+        height:297mm;
+
+        min-height:297mm;
+
+        margin:0;
+
+        box-shadow:none;
+
+        page-break-after:always;
+        break-after:page;
+    }
+
+    .a4:last-child{
+
+        page-break-after:auto;
+        break-after:auto;
+    }
+
+    .page-one{
+
+        width:210mm;
+        height:297mm;
+
+        padding:0;
+    }
+
+    .page-one-border{
+
+        position:absolute;
+
+        top:8mm;
+        left:8mm;
+        right:8mm;
+        bottom:8mm;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+HEADER
+========================================================= -->
+
+<header class="header">
+
+    <h1>
+        Case Document Generator
+    </h1>
+
+    <div class="header-right">
+
+        <span
+            class="status"
+            id="saveStatus"
+        >
+            Not saved
+        </span>
+
+        <span>
+            158 Fields • 6 A4 Pages
+        </span>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- =========================================================
+FORM AREA
+========================================================= -->
+
+<div class="form-area">
+
+    <div class="intro">
+
+        <h2>
+            Master Case Form
+        </h2>
+
+        <p>
+            Enter the case information below.
+            Any field left blank will automatically
+            appear as <strong>Not Stated</strong>
+            in the generated documents.
+        </p>
+
+    </div>
+
+
+    <div class="counter">
+        Total fields:
+        <strong>158</strong>
+    </div>
+
+
+<!-- =========================================================
+1 CASE DETAILS
+========================================================= -->
+
+<div class="section">
+
+<div class="section-header">
+
+    <h2>
+        1. Case Details
+    </h2>
+
+    <div class="section-number">
+        1
+    </div>
+
+</div>
+
+<div class="section-body">
+
+<div class="grid">
+
+
+<div class="field">
+<label>1. Case Name</label>
+<input id="caseName">
+</div>
+
+
+<div class="field">
+<label>2. Case Type</label>
+<input id="caseType">
+</div>
+
+
+<div class="field">
+<label>3. Case Number</label>
+<input id="caseNumber">
+</div>
+
+
+<div class="field">
+<label>4. FIR Number</label>
+<input id="firNumber">
+</div>
+
+
+<div class="field">
+<label>5. FIR Year</label>
+<input id="firYear" type="number">
+</div>
+
+
+<div class="field">
+<label>6. FIR Date</label>
+<input id="firDate" type="date">
+</div>
+
+
+<div class="field">
+<label>7. Complaint Number</label>
+<input id="complaintNumber">
+</div>
+
+
+<div class="field">
+<label>8. Complaint Date</label>
+<input id="complaintDate" type="date">
+</div>
+
+
+<div class="field">
+<label>9. Police Station (PS)</label>
+<input id="policeStation">
+</div>
+
+
+<div class="field">
+<label>10. Citation</label>
+<input id="citation">
+</div>
+
+
+<div class="field">
+<label>11. Petitioner</label>
+<input id="petitioner">
+</div>
+
+
+<div class="field">
+<label>12. Advocate Petitioner</label>
+<input id="advocatePetitioner">
+</div>
+
+
+<div class="field">
+<label>13. Respondent</label>
+<input id="respondent">
+</div>
+
+
+<div class="field">
+<label>14. Advocate Respondent</label>
+<input id="advocateRespondent">
+</div>
+
+
+<div class="field">
+<label>15. Police Station Code, if applicable</label>
+<input id="policeStationCode">
+</div>
+
+
+<div class="field">
+<label>16. District</label>
+<input id="district">
+</div>
+
+
+<div class="field">
+<label>17. State</label>
+<input id="state">
+</div>
+
+
+<div class="field">
+<label>18. Country</label>
+<input id="country" value="India">
+</div>
+
+
+<div class="field">
+<label>19. Date of Registration of FIR</label>
+<input id="firRegistrationDate" type="date">
+</div>
+
+
+<div class="field">
+<label>20. Crime Number, if different from FIR number</label>
+<input id="crimeNumber">
+</div>
+
+
+<div class="field">
+<label>21. Case Diary Number, if available</label>
+<input id="caseDiaryNumber">
+</div>
+
+
+<div class="field full">
+<label>22. Nature / Category of Case</label>
+<textarea id="caseNature"></textarea>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<!-- =========================================================
+2 COMPLAINANT
+========================================================= -->
+
+<div class="section">
+
+<div class="section-header">
+
+<h2>
+2. Complainant Details
+</h2>
+
+<div class="section-number">
+2
+</div>
+
+</div>
+
+<div class="section-body">
+
+<div class="grid">
+
+
+<div class="field">
+<label>23. Complainant Full Name</label>
+<input id="complainantName">
+</div>
+
+
+<div class="field">
+<label>24. Father's Name</label>
+<input id="complainantFather">
+</div>
+
+
+<div class="field">
+<label>25. Mother's Name</label>
+<input id="complainantMother">
+</div>
+
+
+<div class="field">
+<label>26. Husband/Wife Name, if applicable</label>
+<input id="complainantSpouse">
+</div>
+
+
+<div class="field">
+<label>27. Age</label>
+<input id="complainantAge" type="number">
+</div>
+
+
+<div class="field">
+<label>28. Date of Birth, if relevant</label>
+<input id="complainantDob" type="date">
+</div>
+
+
+<div class="field">
+<label>29. Occupation</label>
+<input id="complainantOccupation">
+</div>
+
+
+<div class="field full">
+<label>30. Address</label>
+<textarea id="complainantAddress"></textarea>
+</div>
+
+
+<div class="field">
+<label>31. City / Village</label>
+<input id="complainantCity">
+</div>
+
+
+<div class="field">
+<label>32. District</label>
+<input id="complainantDistrict">
+</div>
+
+
+<div class="field">
+<label>33. State</label>
+<input id="complainantState">
+</div>
+
+
+<div class="field">
+<label>34. Contact Details, if relevant</label>
+<input id="complainantContact">
+</div>
+
+
+<div class="field">
+<label>35. Complainant's Relationship to Victim</label>
+<input id="complainantVictimRelation">
+</div>
+
+
+<div class="field">
+<label>36. Complainant's Relationship to Accused</label>
+<input id="complainantAccusedRelation">
+</div>
+
+
+<div class="field">
+<label>37. Whether Complainant is an Eyewitness</label>
+
+<select id="complainantEyewitness">
+
+<option value="">
+Select
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+<label>38. Whether Complaint was Written or Oral</label>
+
+<select id="complaintType">
+
+<option value="">
+Select
+</option>
+
+<option>
+Written
+</option>
+
+<option>
+Oral
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+<label>39. Mode of Submission of Complaint</label>
+<input id="complaintMode">
+</div>
+
+
+<div class="field">
+<label>40. Authority to Which Complaint Was Submitted</label>
+<input id="complaintAuthority">
+</div>
+
+
+<div class="field">
+<label>41. Date On Which Complaint Was Submitted</label>
+<input id="complaintSubmittedDate" type="date">
+</div>
+
+
+<div class="field full">
+<label>42. Action Requested by Complainant</label>
+<textarea id="requestedAction"></textarea>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<!-- =========================================================
+3 VICTIM
+========================================================= -->
+
+<div class="section">
+
+<div class="section-header">
+
+<h2>
+3. Victim Details
+</h2>
+
+<div class="section-number">
+3
+</div>
+
+</div>
+
+<div class="section-body">
+
+<div class="grid">
+
+
+<div class="field">
+<label>43. Victim Full Name</label>
+<input id="victimName">
+</div>
+
+
+<div class="field">
+<label>44. Victim's Father's Name</label>
+<input id="victimFather">
+</div>
+
+
+<div class="field">
+<label>45. Victim's Mother's Name</label>
+<input id="victimMother">
+</div>
+
+
+<div class="field">
+<label>46. Victim's Age</label>
+<input id="victimAge" type="number">
+</div>
+
+
+<div class="field">
+<label>47. Victim's Occupation</label>
+<input id="victimOccupation">
+</div>
+
+
+<div class="field">
+<label>48. Victim's Address</label>
+<textarea id="victimAddress"></textarea>
+</div>
+
+
+<div class="field">
+<label>49. Victim's Relationship with Complainant</label>
+<input id="victimComplainantRelation">
+</div>
+
+
+<div class="field">
+<label>50. Victim's Relationship with Accused</label>
+<input id="victimAccusedRelation">
+</div>
+
+
+<div class="field">
+<label>51. Whether Victim Sustained Injury</label>
+
+<select id="victimInjury">
+
+<option value="">
+Select
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field full">
+<label>52. Details of Alleged Loss / Damage / Injury</label>
+<textarea id="victimLoss"></textarea>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<!-- =========================================================
+4 ACCUSED
+========================================================= -->
+
+<div class="section">
+
+<div class="section-header">
+
+<h2>
+4. Accused Details
+</h2>
+
+<div class="section-number">
+4
+</div>
+
+</div>
+
+<div class="section-body">
+
+<div class="grid">
+
+
+<div class="field">
+<label>53. Accused Name</label>
+<input id="accusedName">
+</div>
+
+
+<div class="field">
+<label>54. Accused Father's Name</label>
+<input id="accusedFather">
+</div>
+
+
+<div class="field full">
+<label>55. Accused Address</label>
+<textarea id="accusedAddress"></textarea>
+</div>
+
+
+<div class="field">
+<label>56. Accused Occupation</label>
+<input id="accusedOccupation">
+</div>
+
+
+<div class="field full">
+<label>57. Accused Alleged Role</label>
+<textarea id="accusedRole"></textarea>
+</div>
+
+
+<div class="field">
+<label>58. Number of Accused Persons</label>
+<input id="accusedCount" type="number">
+</div>
+
+
+<div class="field">
+<label>59. Whether Accused are Known to Complainant</label>
+
+<select id="accusedKnown">
+
+<option value="">
+Select
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+<label>60. Relationship Between Accused and Complainant</label>
+<input id="accusedComplainantRelation">
+</div>
+
+
+<div class="field full">
+<label>61. Previous Dispute Between Parties, if any</label>
+<textarea id="previousDispute"></textarea>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<!-- =========================================================
+5 INCIDENT
+========================================================= -->
+
+<div class="section">
+
+<div class="section-header">
+
+<h2>
+5. Incident Details
+</h2>
+
+<div class="section-number">
+5
+</div>
+
+</div>
+
+<div class="section-body">
+
+<div class="grid">
+
+
+<div class="field">
+<label>62. Date of Incident</label>
+<input id="incidentDate" type="date" onchange="calculateDay()">
+</div>
+
+
+<div class="field">
+<label>63. Day of Incident</label>
+<input id="incidentDay" readonly>
+</div>
+
+
+<div class="field">
+<label>64. Approximate Time of Incident</label>
+<input id="incidentTime" type="time">
+</div>
+
+
+<div class="field">
+<label>65. Place of Incident</label>
+<input id="incidentPlace">
+</div>
+
+
+<div class="field full">
+<label>66. Complete Address of Place</label>
+<textarea id="incidentAddress"></textarea>
+</div>
+
+
+<div class="field">
+<label>67. Nature of Place</label>
+<input id="placeNature">
+</div>
+
+
+<div class="field full">
+<label>68. Persons Present at the Place</label>
+<textarea id="personsPresent"></textarea>
+</div>
+
+
+<div class="field full">
+<label>69. Events Immediately Before the Incident</label>
+<textarea id="beforeIncident"></textarea>
+</div>
+
+
+<div class="field full">
+<label>70. Detailed Description of Incident</label>
+<textarea id="incidentDescription"></textarea>
+</div>
+
+
+<div class="field full">
+<label>71. Events Immediately After the Incident</label>
+<textarea id="afterIncident"></textarea>
+</div>
+
+
+<div class="field full">
+<label>72. Alleged Motive / Reason</label>
+<textarea id="motive"></textarea>
+</div>
+
+
+<div class="field full">
+<label>73. Alleged Threats, if any</label>
+<textarea id="threats"></textarea>
+</div>
+
+
+<div class="field full">
+<label>74. Alleged Injury, if any</label>
+<textarea id="allegedInjury"></textarea>
+</div>
+
+
+<div class="field full">
+<label>75. Alleged Property Damage, if any</label>
+<textarea id="propertyDamage"></textarea>
+</div>
+
+
+<div class="field full">
+<label>76. Alleged Financial Loss, if any</label>
+<textarea id="financialLoss"></textarea>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<!-- =========================================================
+6 LEGAL
+========================================================= -->
+
+<div class="section">
+
+<div class="section-header">
+
+<h2>
+6. Legal / Offence Details
+</h2>
+
+<div class="section-number">
+6
+</div>
+
+</div>
+
+<div class="section-body">
+
+<div class="grid">
+
+
+<div class="field">
+<label>77. Sections Mentioned in Complaint</label>
+<input id="sectionsComplaint">
+</div>
+
+
+<div class="field">
+<label>78. Sections Mentioned in FIR</label>
+<input id="sectionsFir">
+</div>
+
+
+<div class="field">
+<label>79. Applicable Act / Law</label>
+<input id="applicableLaw">
+</div>
+
+
+<div class="field">
+<label>80. Whether Sections Were Subsequently Added</label>
+
+<select id="sectionsAdded">
+
+<option value="">
+Select
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+<label>81. Date of Addition of Sections</label>
+<input id="additionDate" type="date">
+</div>
+
+
+<div class="field">
+<label>82. Whether Any Sections Were Deleted</label>
+
+<select id="sectionsDeleted">
+
+<option value="">
+Select
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+<label>83. Present Sections in the Case</label>
+<input id="presentSections">
+</div>
+
+
+<div class="field full">
+<label>84. Nature of Alleged Offences</label>
+<textarea id="offenceNature"></textarea>
+</div>
+
+
+<div class="field">
+<label>85. Whether Offences are Bailable / Non-Bailable</label>
+
+<select id="bailable">
+
+<option value="">
+Select
+</option>
+
+<option>
+Bailable
+</option>
+
+<option>
+Non-Bailable
+</option>
+
+<option>
+Partly Bailable
+</option>
+
+<option>
+Unknown
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+<label>86. Whether Offences are Cognizable / Non-Cognizable</label>
+
+<select id="cognizable">
+
+<option value="">
+Select
+</option>
+
+<option>
+Cognizable
+</option>
+
+<option>
+Non-Cognizable
+</option>
+
+<option>
+Unknown
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<!-- =========================================================
+7 INVESTIGATION
+========================================================= -->
+
+<div class="section">
+
+<div class="section-header">
+
+<h2>
+7. Investigation / Police Details
+</h2>
+
+<div class="section-number">
+7
+</div>
+
+</div>
+
+<div class="section-body">
+
+<div class="grid">
+
+
+<div class="field">
+<label>87. Name of Investigating Officer (IO)</label>
+<input id="ioName">
+</div>
+
+
+<div class="field">
+<label>88. Rank of Investigating Officer</label>
+<input id="ioRank">
+</div>
+
+
+<div class="field">
+<label>89. Date Investigation Started</label>
+<input id="investigationDate" type="date">
+</div>
+
+
+<div class="field">
+<label>90. Police Station Officer / SHO</label>
+<input id="sho">
+</div>
+
+
+<div class="field full">
+<label>91. Initial Police Action</label>
+<textarea id="initialPoliceAction"></textarea>
+</div>
+
+
+<div class="field full">
+<label>92. Site Inspection Details</label>
+<textarea id="siteInspection"></textarea>
+</div>
+
+
+<div class="field">
+<label>93. Site Plan Prepared</label>
+
+<select id="sitePlan">
+
+<option value="">
+Select
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+<label>94. Date of Site Inspection</label>
+<input id="siteInspectionDate" type="date">
+</div>
+
+
+<div class="field full">
+<label>95. Witnesses Examined by Police</label>
+<textarea id="witnessesExamined"></textarea>
+</div>
+
+
+<div class="field">
+<label>96. Number of Witnesses</label>
+<input id="witnessCount" type="number">
+</div>
+
+
+<div class="field full">
+<label>97. Witness Statement Details</label>
+<textarea id="witnessStatements"></textarea>
+</div>
+
+
+<div class="field full">
+<label>98. Documentary Evidence Collected</label>
+<textarea id="documentaryEvidence"></textarea>
+</div>
+
+
+<div class="field full">
+<label>99. Electronic Evidence Collected</label>
+<textarea id="electronicEvidence"></textarea>
+</div>
+
+
+<div class="field full">
+<label>100. CCTV Footage Details</label>
+<textarea id="cctv"></textarea>
+</div>
+
+
+<div class="field full">
+<label>101. Call Records / Communication Evidence</label>
+<textarea id="callRecords"></textarea>
+</div>
+
+
+<div class="field">
+<label>102. Photographs / Videos Available</label>
+
+<select id="photoVideo">
+
+<option value="">
+Select
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field full">
+<label>103. Medical Examination Details</label>
+<textarea id="medicalExam"></textarea>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<!-- =========================================================
+8 ARREST
+========================================================= -->
+
+<div class="section">
+
+<div class="section-header">
+
+<h2>
+8. Arrest / Custody / Bail
+</h2>
+
+<div class="section-number">
+8
+</div>
+
+</div>
+
+<div class="section-body">
+
+<div class="grid">
+
+
+<div class="field">
+<label>104. Whether Any Accused Was Arrested</label>
+
+<select id="arrested">
+
+<option value="">
+Select
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+<label>105. Date of Arrest</label>
+<input id="arrestDate" type="date">
+</div>
+
+
+<div class="field">
+<label>106. Place of Arrest</label>
+<input id="arrestPlace">
+</div>
+
+
+<div class="field">
+<label>107. Arresting Officer</label>
+<input id="arrestOfficer">
+</div>
+
+
+<div class="field full">
+<label>108. Police Custody Details</label>
+<textarea id="policeCustody"></textarea>
+</div>
+
+
+<div class="field full">
+<label>109. Judicial Custody Details</label>
+<textarea id="judicialCustody"></textarea>
+</div>
+
+
+<div class="field">
+<label>110. Bail Application Filed</label>
+
+<select id="bailFiled">
+
+<option value="">
+Select
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+<label>111. Anticipatory Bail Application Filed</label>
+
+<select id="anticipatoryBail">
+
+<option value="">
+Select
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+<label>112. Bail Application Number</label>
+<input id="bailNumber">
+</div>
+
+
+<div class="field">
+<label>113. Bail Court and Order Date</label>
+<input id="bailCourt">
+</div>
+
+
+<div class="field">
+<label>114. Bail Granted / Rejected</label>
+
+<select id="bailResult">
+
+<option value="">
+Select
+</option>
+
+<option>
+Granted
+</option>
+
+<option>
+Rejected
+</option>
+
+<option>
+Pending
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field full">
+<label>115. Bail Conditions, if any</label>
+<textarea id="bailConditions"></textarea>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<!-- =========================================================
+9 CHARGE SHEET
+========================================================= -->
+
+<div class="section">
+
+<div class="section-header">
+
+<h2>
+9. Charge-Sheet / Final Report
+</h2>
+
+<div class="section-number">
+9
+</div>
+
+</div>
+
+<div class="section-body">
+
+<div class="grid">
+
+
+<div class="field">
+<label>116. Charge-Sheet Filed</label>
+
+<select id="chargeSheetFiled">
+
+<option value="">
+Select
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+<label>117. Charge-Sheet Number</label>
+<input id="chargeSheetNumber">
+</div>
+
+
+<div class="field">
+<label>118. Charge-Sheet Filing Date</label>
+<input id="chargeSheetDate" type="date">
+</div>
+
+
+<div class="field">
+<label>119. Final Report Filed</label>
+
+<select id="finalReportFiled">
+
+<option value="">
+Select
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+<label>120. Court Taking Cognizance</label>
+<input id="cognizanceCourt">
+</div>
+
+
+<div class="field">
+<label>121. Cognizance Date</label>
+<input id="cognizanceDate" type="date">
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<!-- =========================================================
+10 COURT
+========================================================= -->
+
+<div class="section">
+
+<div class="section-header">
+
+<h2>
+10. Court / Trial Details
+</h2>
+
+<div class="section-number">
+10
+</div>
+
+</div>
+
+<div class="section-body">
+
+<div class="grid">
+
+
+<div class="field">
+<label>122. Court Name</label>
+<input id="courtName">
+</div>
+
+
+<div class="field">
+<label>123. Court Case Number</label>
+<input id="courtCaseNumber">
+</div>
+
+
+<div class="field">
+<label>124. Judge / Presiding Officer</label>
+<input id="judge">
+</div>
+
+
+<div class="field">
+<label>125. Date of First Court Appearance</label>
+<input id="firstAppearance" type="date">
+</div>
+
+
+<div class="field full">
+<label>126. Charges Framed</label>
+<textarea id="chargesFramed"></textarea>
+</div>
+
+
+<div class="field">
+<label>127. Date of Framing of Charges</label>
+<input id="chargesDate" type="date">
+</div>
+
+
+<div class="field full">
+<label>128. Prosecution Evidence Status</label>
+<textarea id="prosecutionEvidence"></textarea>
+</div>
+
+
+<div class="field full">
+<label>129. Defence Evidence Status</label>
+<textarea id="defenceEvidence"></textarea>
+</div>
+
+
+<div class="field full">
+<label>130. Important Witnesses Examined</label>
+<textarea id="importantWitnesses"></textarea>
+</div>
+
+
+<div class="field full">
+<label>131. Cross-Examination Status</label>
+<textarea id="crossExamination"></textarea>
+</div>
+
+
+<div class="field full">
+<label>132. Important Applications Filed</label>
+<textarea id="applications"></textarea>
+</div>
+
+
+<div class="field full">
+<label>133. Important Court Orders</label>
+<textarea id="courtOrders"></textarea>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<!-- =========================================================
+11 STATUS
+========================================================= -->
+
+<div class="section">
+
+<div class="section-header">
+
+<h2>
+11. Appeal / Current Status
+</h2>
+
+<div class="section-number">
+11
+</div>
+
+</div>
+
+<div class="section-body">
+
+<div class="grid">
+
+
+<div class="field">
+<label>134. Appeal / Revision / Petition Filed</label>
+
+<select id="appealFiled">
+
+<option value="">
+Select
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field full">
+<label>135. Higher Court Proceedings, if any</label>
+<textarea id="higherCourt"></textarea>
+</div>
+
+
+<div class="field">
+<label>136. Stay Order, if any</label>
+<input id="stayOrder">
+</div>
+
+
+<div class="field">
+<label>137. Current Stage of Case</label>
+<input id="currentStage">
+</div>
+
+
+<div class="field">
+<label>138. Next Hearing Date</label>
+<input id="nextHearing" type="date">
+</div>
+
+
+<div class="field full">
+<label>139. Present Status of Accused</label>
+<textarea id="accusedStatus"></textarea>
+</div>
+
+
+<div class="field full">
+<label>140. Present Status of Complainant / Victim</label>
+<textarea id="complainantStatus"></textarea>
+</div>
+
+
+<div class="field full">
+<label>141. Expected Next Procedural Step</label>
+<textarea id="nextStep"></textarea>
+</div>
+
+
+<div class="field full">
+<label>142. Final Outcome, if Case is Concluded</label>
+<textarea id="finalOutcome"></textarea>
+</div>
+
+
+<div class="field full">
+<label>143. Any Other Relevant Facts or Documents</label>
+<textarea id="otherFacts"></textarea>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<!-- =========================================================
+12 STAMP
+========================================================= -->
+
+<div class="section">
+
+<div class="section-header">
+
+<h2>
+12. E-Stamp / Stamp Paper Details
+</h2>
+
+<div class="section-number">
+12
+</div>
+
+</div>
+
+<div class="section-body">
+
+<div class="grid">
+
+
+<div class="field">
+<label>144. State</label>
+<input id="stampState">
+</div>
+
+
+<div class="field">
+<label>145. Stamp Description</label>
+<input id="stampDescription">
+</div>
+
+
+<div class="field">
+<label>146. Consideration Price</label>
+<input id="considerationPrice">
+</div>
+
+
+<div class="field">
+<label>147. Stamp Duty Amount</label>
+<input id="stampDuty">
+</div>
+
+
+<div class="field">
+<label>148. Court Name</label>
+<input id="stampCourtName">
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<!-- =========================================================
+13 JUDGEMENT
+========================================================= -->
+
+<div class="section">
+
+<div class="section-header">
+
+<h2>
+13. Judgement / FIR Additional Details
+</h2>
+
+<div class="section-number">
+13
+</div>
+
+</div>
+
+<div class="section-body">
+
+<div class="grid">
+
+
+<div class="field">
+<label>149. On Bench</label>
+<input id="onBench">
+</div>
+
+
+<div class="field">
+<label>150. Judgement By</label>
+<input id="judgementBy">
+</div>
+
+
+<div class="field">
+<label>151. FIR Number</label>
+<input id="judgementFirNumber">
+</div>
+
+
+<div class="field">
+<label>152. Police Station</label>
+<input id="judgementPoliceStation">
+</div>
+
+
+<div class="field">
+<label>153. FIR Date</label>
+<input id="judgementFirDate" type="date">
+</div>
+
+
+<div class="field full">
+<label>154. Police Station Address Full</label>
+<textarea id="policeStationAddressFull"></textarea>
+</div>
+
+
+<div class="field">
+<label>155. FIR Report Category</label>
+<input id="firReportCategory">
+</div>
+
+
+<div class="field full">
+<label>156. Complainant Details</label>
+<textarea id="firComplainantDetails"></textarea>
+</div>
+
+
+<div class="field full">
+<label>157. Occurrence Details</label>
+<textarea id="occurrenceDetails"></textarea>
+</div>
+
+
+<div class="field full">
+<label>158. Report Details</label>
+<textarea id="reportDetails"></textarea>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+</div>
+
+
+<!-- =========================================================
+BUTTONS
+========================================================= -->
+
+<div class="toolbar">
+
+<button
+    class="btn-primary"
+    onclick="generateDocuments()"
+>
+Generate 6 Documents
+</button>
+
+
+<button
+    class="btn-success"
+    onclick="printDocuments()"
+>
+Print All 6 Pages
+</button>
+
+
+<button
+    class="btn-secondary"
+    onclick="saveCase()"
+>
+Save Case
+</button>
+
+
+<button
+    class="btn-secondary"
+    onclick="loadCase()"
+>
+Load Saved Case
+</button>
+
+
+<button
+    class="btn-danger"
+    onclick="clearForm()"
+>
+Clear Form
+</button>
+
+</div>
+
+
+<!-- =========================================================
+GENERATED DOCUMENTS
+========================================================= -->
+
+<div
+    id="documents"
+    class="documents"
+>
+
+
+<!-- =========================================================
+PAGE 1
+========================================================= -->
+
+<div class="doc-label">
+PAGE 1 — ST. PORT. DETAILS
+</div>
+
+
+<div class="a4 page-one">
+
+
+<div class="page-one-border">
+
+
+<!-- WATERMARK -->
+
+<img
+    class="page-one-watermark"
+    src="passport/3.png"
+    alt="Watermark"
+    onerror="this.style.display='none';"
+>
+
+
+<!-- STUDENT DETAILS + PHOTO -->
+
+<div class="student-header">
+
+
+<div class="student-details">
+
+
+<div>
+<strong>Name</strong>
+<span>- Yash Kumar</span>
+</div>
+
+
+<div>
+<strong>College ID</strong>
+<span>- 23GSOL1030102</span>
+</div>
+
+
+<div>
+<strong>Course</strong>
+<span>- Bachelor of Business Administration + Bachelor of Law</span>
+</div>
+
+
+<div>
+<strong>Division</strong>
+<span>- 2</span>
+</div>
+
+
+<div>
+<strong>Year</strong>
+<span>- 4</span>
+</div>
+
+
+<div>
+<strong>Semester</strong>
+<span>- 7</span>
+</div>
+
+
+<div>
+<strong>Session</strong>
+<span>- 2023-2028</span>
+</div>
+
+
+<div>
+<strong>Cur. Session</strong>
+<span>- 2026-2027</span>
+</div>
+
+
+<div>
+<strong>Year of Graduation</strong>
+<span>- 2028</span>
+</div>
+
+
+<div>
+<strong>University</strong>
+<span>- Galgotias University</span>
+</div>
+
+
+</div>
+
+
+<div class="student-photo">
+
+<img
+    src="passport/1.png"
+    alt="Passport Size Photo"
+    onerror="this.style.display='none';"
+>
+
+</div>
+
+
+</div>
+
+
+<!-- PLEDGE -->
+
+<div class="pledge">
+
+With full awareness of the responsibility involved, I solemnly
+pledge that I will thoroughly examine, analyze, and comprehend
+all the facts and circumstances surrounding the case presented below.
+
+</div>
+
+
+<!-- CASE NAME -->
+
+<div class="case-heading">
+
+<div
+    class="case-name"
+    id="page1CaseName"
+>
+Not Stated
+</div>
+
+
+<div
+    class="case-citation"
+    id="page1Citation"
+>
+Not Stated
+</div>
+
+</div>
+
+
+<!-- STAMP -->
+
+<img
+    class="page-one-stamp"
+    src="passport/2.png"
+    alt="Stamp"
+    onerror="this.style.display='none';"
+>
+
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+PAGE 2 — AFFIDAVIT
+========================================================= -->
+
+<div class="doc-label">
+PAGE 2 — AFFIDAVIT
+</div>
+
+
+<div class="a4">
+
+
+<div class="doc-title">
+AFFIDAVIT
+</div>
+
+
+<p class="doc-paragraph">
+
+I, <strong id="d2_name"></strong>,
+son/daughter/wife of
+<strong id="d2_father"></strong>,
+aged <strong id="d2_age"></strong> years,
+resident of
+<strong id="d2_address"></strong>,
+do hereby solemnly affirm and state as follows:
+
+</p>
+
+
+<table class="doc-table">
+
+
+<tr>
+<td class="lbl">
+Case Name
+</td>
+<td id="d2_caseName"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Case Number
+</td>
+<td id="d2_caseNumber"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+FIR Number
+</td>
+<td id="d2_fir"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Police Station
+</td>
+<td id="d2_ps"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+District
+</td>
+<td id="d2_district"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+State
+</td>
+<td id="d2_state"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Complaint Submitted
+</td>
+<td id="d2_complaintDate"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Action Requested
+</td>
+<td id="d2_action"></td>
+</tr>
+
+
+</table>
+
+
+<div class="doc-section">
+Verification
+</div>
+
+
+<p class="doc-paragraph">
+
+I verify that the contents of this affidavit are true and correct
+to the best of my knowledge and belief.
+
+</p>
+
+
+<div class="signatures">
+
+<div class="signature">
+Deponent
+</div>
+
+<div class="signature">
+Verification
+</div>
+
+<div class="signature">
+Notary / Oath Commissioner
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================================================
+PAGE 3 — E-STAMP
+========================================================= -->
+
+<div class="doc-label">
+PAGE 3 — E-STAMP
+</div>
+
+
+<div class="a4">
+
+
+<div class="doc-title">
+E-STAMP
+</div>
+
+
+<div class="stamp-area">
+
+
+<table class="doc-table">
+
+
+<tr>
+<td class="lbl">
+State
+</td>
+<td id="d3_state"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Stamp Description
+</td>
+<td id="d3_description"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Consideration Price
+</td>
+<td id="d3_consideration"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Stamp Duty Amount
+</td>
+<td id="d3_duty"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Court Name
+</td>
+<td id="d3_court"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Case Number
+</td>
+<td id="d3_caseNumber"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+FIR Number
+</td>
+<td id="d3_fir"></td>
+</tr>
+
+
+</table>
+
+</div>
+
+
+<div class="signatures">
+
+<div class="signature">
+Applicant
+</div>
+
+<div class="signature">
+Authorized Person
+</div>
+
+<div class="signature">
+Date
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================================================
+PAGE 4 — STAMP PAPER
+========================================================= -->
+
+<div class="doc-label">
+PAGE 4 — STAMP PAPER
+</div>
+
+
+<div class="a4">
+
+
+<div class="doc-title">
+STAMP PAPER
+</div>
+
+
+<table class="doc-table">
+
+
+<tr>
+<td class="lbl">
+State
+</td>
+<td id="d4_state"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Stamp Description
+</td>
+<td id="d4_description"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Consideration Price
+</td>
+<td id="d4_consideration"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Stamp Duty Amount
+</td>
+<td id="d4_duty"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Court Name
+</td>
+<td id="d4_court"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Case Name
+</td>
+<td id="d4_caseName"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Case Number
+</td>
+<td id="d4_caseNumber"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Petitioner
+</td>
+<td id="d4_petitioner"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Respondent
+</td>
+<td id="d4_respondent"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+FIR Number
+</td>
+<td id="d4_fir"></td>
+</tr>
+
+
+</table>
+
+
+<div class="doc-section">
+Particulars
+</div>
+
+
+<p
+    class="doc-paragraph"
+    id="d4_particulars"
+>
+</p>
+
+
+<div class="signatures">
+
+<div class="signature">
+First Party
+</div>
+
+<div class="signature">
+Second Party
+</div>
+
+<div class="signature">
+Witness
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================================================
+PAGE 5 — FIR
+========================================================= -->
+
+<div class="doc-label">
+PAGE 5 — FIR
+</div>
+
+
+<div class="a4">
+
+
+<div class="doc-title">
+FIRST INFORMATION REPORT
+</div>
+
+
+<table class="doc-table">
+
+
+<tr>
+<td class="lbl">
+FIR Number
+</td>
+<td id="d5_fir"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+FIR Date
+</td>
+<td id="d5_firDate"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Police Station
+</td>
+<td id="d5_ps"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Police Station Address
+</td>
+<td id="d5_psAddress"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+FIR Report Category
+</td>
+<td id="d5_category"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Complainant
+</td>
+<td id="d5_complainant"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Victim
+</td>
+<td id="d5_victim"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Accused
+</td>
+<td id="d5_accused"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Date of Incident
+</td>
+<td id="d5_incidentDate"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Day of Incident
+</td>
+<td id="d5_day"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Approximate Time
+</td>
+<td id="d5_time"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Place of Incident
+</td>
+<td id="d5_place"></td>
+</tr>
+
+
+</table>
+
+
+<div class="doc-section">
+Occurrence Details
+</div>
+
+<p
+    class="doc-paragraph"
+    id="d5_occurrence"
+>
+</p>
+
+
+<div class="doc-section">
+Events Immediately Before Incident
+</div>
+
+<p
+    class="doc-paragraph"
+    id="d5_before"
+>
+</p>
+
+
+<div class="doc-section">
+Events Immediately After Incident
+</div>
+
+<p
+    class="doc-paragraph"
+    id="d5_after"
+>
+</p>
+
+
+<div class="doc-section">
+Report Details
+</div>
+
+<p
+    class="doc-paragraph"
+    id="d5_report"
+>
+</p>
+
+
+<div class="signatures">
+
+<div class="signature">
+Complainant
+</div>
+
+<div class="signature">
+Investigating Officer
+</div>
+
+<div class="signature">
+SHO
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================================================
+PAGE 6 — JUDGEMENT
+========================================================= -->
+
+<div class="doc-label">
+PAGE 6 — JUDGEMENT CONC.
+</div>
+
+
+<div class="a4">
+
+
+<div class="doc-title">
+JUDGEMENT CONCLUSION
+</div>
+
+
+<table class="doc-table">
+
+
+<tr>
+<td class="lbl">
+Court Name
+</td>
+<td id="d6_court"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Court Case Number
+</td>
+<td id="d6_courtCase"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Case Name
+</td>
+<td id="d6_caseName"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+FIR Number
+</td>
+<td id="d6_fir"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Police Station
+</td>
+<td id="d6_ps"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+FIR Date
+</td>
+<td id="d6_firDate"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Judge / Presiding Officer
+</td>
+<td id="d6_judge"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+On Bench
+</td>
+<td id="d6_bench"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Judgement By
+</td>
+<td id="d6_judgementBy"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Date of First Court Appearance
+</td>
+<td id="d6_firstAppearance"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Charges Framed
+</td>
+<td id="d6_charges"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Date of Framing Charges
+</td>
+<td id="d6_chargesDate"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Prosecution Evidence
+</td>
+<td id="d6_prosecution"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Defence Evidence
+</td>
+<td id="d6_defence"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Current Stage
+</td>
+<td id="d6_stage"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Next Hearing Date
+</td>
+<td id="d6_nextHearing"></td>
+</tr>
+
+
+<tr>
+<td class="lbl">
+Final Outcome
+</td>
+<td id="d6_outcome"></td>
+</tr>
+
+
+</table>
+
+
+<div class="doc-section">
+Important Court Orders
+</div>
+
+
+<p
+    class="doc-paragraph"
+    id="d6_orders"
+>
+</p>
+
+
+<div class="doc-section">
+Expected Next Procedural Step
+</div>
+
+
+<p
+    class="doc-paragraph"
+    id="d6_nextStep"
+>
+</p>
+
+
+<div class="doc-section">
+Other Relevant Facts
+</div>
+
+
+<p
+    class="doc-paragraph"
+    id="d6_other"
+>
+</p>
+
+
+<div class="signatures">
+
+<div class="signature">
+Prepared By
+</div>
+
+<div class="signature">
+Judge / Court
+</div>
+
+<div class="signature">
+Date
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+/* =========================================================
+   VALUE HELPERS
+========================================================= */
+
+function val(id){
+
+    const el = document.getElementById(id);
+
+    if(!el){
+        return "";
+    }
+
+    return el.value.trim();
+}
+
+
+function displayValue(value){
+
+    if(
+        value === null ||
+        value === undefined ||
+        String(value).trim() === ""
+    ){
+
+        return "Not Stated";
+
+    }
+
+    return String(value).trim();
+}
+
+
+function put(id,value){
+
+    const el = document.getElementById(id);
+
+    if(!el){
+        return;
+    }
+
+    el.textContent = displayValue(value);
+}
+
+
+function dateFormat(value){
+
+    if(!value || !value.trim()){
+        return "Not Stated";
+    }
+
+    const d =
+        new Date(
+            value + "T00:00:00"
+        );
+
+    if(isNaN(d.getTime())){
+        return "Not Stated";
+    }
+
+    return d.toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric"
+        }
+    );
+}
+
+
+/* =========================================================
+   INCIDENT DAY
+========================================================= */
+
+function calculateDay(){
+
+    const date =
+        val("incidentDate");
+
+    const field =
+        document.getElementById(
+            "incidentDay"
+        );
+
+    if(!date){
+
+        field.value = "";
+
+        return;
+    }
+
+    const d =
+        new Date(
+            date + "T00:00:00"
+        );
+
+    field.value =
+        d.toLocaleDateString(
+            "en-IN",
+            {
+                weekday:"long"
+            }
+        );
+}
+
+
+/* =========================================================
+   GENERATE DOCUMENTS
+========================================================= */
+
+function generateDocuments(){
+
+    calculateDay();
+
+
+    /* =====================================================
+       PAGE 1
+    ===================================================== */
+
+    put(
+        "page1CaseName",
+        val("caseName")
+    );
+
+    put(
+        "page1Citation",
+        val("citation")
+    );
+
+
+    /* =====================================================
+       PAGE 2
+    ===================================================== */
+
+    put(
+        "d2_name",
+        val("complainantName")
+    );
+
+    put(
+        "d2_father",
+        val("complainantFather")
+    );
+
+    put(
+        "d2_age",
+        val("complainantAge")
+    );
+
+    put(
+        "d2_address",
+        val("complainantAddress")
+    );
+
+    put(
+        "d2_caseName",
+        val("caseName")
+    );
+
+    put(
+        "d2_caseNumber",
+        val("caseNumber")
+    );
+
+    put(
+        "d2_fir",
+        val("firNumber")
+    );
+
+    put(
+        "d2_ps",
+        val("policeStation")
+    );
+
+    put(
+        "d2_district",
+        val("district")
+    );
+
+    put(
+        "d2_state",
+        val("state")
+    );
+
+    put(
+        "d2_complaintDate",
+        dateFormat(
+            val("complaintSubmittedDate")
+        )
+    );
+
+    put(
+        "d2_action",
+        val("requestedAction")
+    );
+
+
+    /* =====================================================
+       PAGE 3
+    ===================================================== */
+
+    put(
+        "d3_state",
+        val("stampState")
+    );
+
+    put(
+        "d3_description",
+        val("stampDescription")
+    );
+
+    put(
+        "d3_consideration",
+        val("considerationPrice")
+    );
+
+    put(
+        "d3_duty",
+        val("stampDuty")
+    );
+
+    put(
+        "d3_court",
+        val("stampCourtName")
+    );
+
+    put(
+        "d3_caseNumber",
+        val("caseNumber")
+    );
+
+    put(
+        "d3_fir",
+        val("firNumber")
+    );
+
+
+    /* =====================================================
+       PAGE 4
+    ===================================================== */
+
+    put(
+        "d4_state",
+        val("stampState")
+    );
+
+    put(
+        "d4_description",
+        val("stampDescription")
+    );
+
+    put(
+        "d4_consideration",
+        val("considerationPrice")
+    );
+
+    put(
+        "d4_duty",
+        val("stampDuty")
+    );
+
+    put(
+        "d4_court",
+        val("stampCourtName")
+    );
+
+    put(
+        "d4_caseName",
+        val("caseName")
+    );
+
+    put(
+        "d4_caseNumber",
+        val("caseNumber")
+    );
+
+    put(
+        "d4_petitioner",
+        val("petitioner")
+    );
+
+    put(
+        "d4_respondent",
+        val("respondent")
+    );
+
+    put(
+        "d4_fir",
+        val("firNumber")
+    );
+
+    put(
+        "d4_particulars",
+        val("stampDescription")
+    );
+
+
+    /* =====================================================
+       PAGE 5
+    ===================================================== */
+
+    put(
+        "d5_fir",
+        val("judgementFirNumber") ||
+        val("firNumber")
+    );
+
+    put(
+        "d5_firDate",
+        dateFormat(
+            val("judgementFirDate") ||
+            val("firDate")
+        )
+    );
+
+    put(
+        "d5_ps",
+        val("judgementPoliceStation") ||
+        val("policeStation")
+    );
+
+    put(
+        "d5_psAddress",
+        val("policeStationAddressFull")
+    );
+
+    put(
+        "d5_category",
+        val("firReportCategory") ||
+        val("caseNature")
+    );
+
+    put(
+        "d5_complainant",
+        val("complainantName")
+    );
+
+    put(
+        "d5_victim",
+        val("victimName")
+    );
+
+    put(
+        "d5_accused",
+        val("accusedName")
+    );
+
+    put(
+        "d5_incidentDate",
+        dateFormat(
+            val("incidentDate")
+        )
+    );
+
+    put(
+        "d5_day",
+        val("incidentDay")
+    );
+
+    put(
+        "d5_time",
+        val("incidentTime")
+    );
+
+    put(
+        "d5_place",
+        val("incidentPlace")
+    );
+
+    put(
+        "d5_occurrence",
+        val("occurrenceDetails") ||
+        val("incidentDescription")
+    );
+
+    put(
+        "d5_before",
+        val("beforeIncident")
+    );
+
+    put(
+        "d5_after",
+        val("afterIncident")
+    );
+
+    put(
+        "d5_report",
+        val("reportDetails") ||
+        val("requestedAction")
+    );
+
+
+    /* =====================================================
+       PAGE 6
+    ===================================================== */
+
+    put(
+        "d6_court",
+        val("courtName")
+    );
+
+    put(
+        "d6_courtCase",
+        val("courtCaseNumber")
+    );
+
+    put(
+        "d6_caseName",
+        val("caseName")
+    );
+
+    put(
+        "d6_fir",
+        val("firNumber")
+    );
+
+    put(
+        "d6_ps",
+        val("policeStation")
+    );
+
+    put(
+        "d6_firDate",
+        dateFormat(
+            val("firDate")
+        )
+    );
+
+    put(
+        "d6_judge",
+        val("judge")
+    );
+
+    put(
+        "d6_bench",
+        val("onBench")
+    );
+
+    put(
+        "d6_judgementBy",
+        val("judgementBy")
+    );
+
+    put(
+        "d6_firstAppearance",
+        dateFormat(
+            val("firstAppearance")
+        )
+    );
+
+    put(
+        "d6_charges",
+        val("chargesFramed")
+    );
+
+    put(
+        "d6_chargesDate",
+        dateFormat(
+            val("chargesDate")
+        )
+    );
+
+    put(
+        "d6_prosecution",
+        val("prosecutionEvidence")
+    );
+
+    put(
+        "d6_defence",
+        val("defenceEvidence")
+    );
+
+    put(
+        "d6_stage",
+        val("currentStage")
+    );
+
+    put(
+        "d6_nextHearing",
+        dateFormat(
+            val("nextHearing")
+        )
+    );
+
+    put(
+        "d6_outcome",
+        val("finalOutcome")
+    );
+
+    put(
+        "d6_orders",
+        val("courtOrders")
+    );
+
+    put(
+        "d6_nextStep",
+        val("nextStep")
+    );
+
+    put(
+        "d6_other",
+        val("otherFacts")
+    );
+
+
+    /* =====================================================
+       SHOW DOCUMENTS
+    ===================================================== */
+
+    document
+        .getElementById("documents")
+        .classList.add("visible");
+
+
+    document
+        .getElementById("documents")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+function printDocuments(){
+
+    generateDocuments();
+
+    setTimeout(
+        function(){
+
+            window.print();
+
+        },
+        300
+    );
+}
+
+
+/* =========================================================
+   SAVE
+========================================================= */
+
+function saveCase(){
+
+    const data = {};
+
+
+    document
+        .querySelectorAll(
+            ".form-area input, .form-area select, .form-area textarea"
+        )
+        .forEach(
+            function(el){
+
+                data[el.id] =
+                    el.value;
+
+            }
+        );
+
+
+    localStorage.setItem(
+        "caseDocumentGeneratorData",
+        JSON.stringify(data)
+    );
+
+
+    document
+        .getElementById(
+            "saveStatus"
+        )
+        .textContent =
+        "Saved " +
+        new Date()
+        .toLocaleTimeString();
+
+
+    alert(
+        "Case saved successfully in this browser."
+    );
+}
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+function loadCase(){
+
+    const raw =
+        localStorage.getItem(
+            "caseDocumentGeneratorData"
+        );
+
+
+    if(!raw){
+
+        alert(
+            "No saved case was found."
+        );
+
+        return;
+    }
+
+
+    const data =
+        JSON.parse(raw);
+
+
+    Object.keys(data)
+        .forEach(
+            function(id){
+
+                const el =
+                    document.getElementById(id);
+
+
+                if(el){
+
+                    el.value =
+                        data[id];
+
+                }
+
+            }
+        );
+
+
+    calculateDay();
+
+
+    document
+        .getElementById(
+            "saveStatus"
+        )
+        .textContent =
+        "Saved case loaded";
+
+
+    alert(
+        "Saved case loaded successfully."
+    );
+}
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+function clearForm(){
+
+    const ok =
+        confirm(
+            "Are you sure you want to clear all 158 fields?"
+        );
+
+
+    if(!ok){
+        return;
+    }
+
+
+    document
+        .querySelectorAll(
+            ".form-area input, .form-area select, .form-area textarea"
+        )
+        .forEach(
+            function(el){
+
+                if(el.id === "country"){
+
+                    el.value =
+                        "India";
+
+                }else{
+
+                    el.value =
+                        "";
+
+                }
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "documents"
+        )
+        .classList.remove(
+            "visible"
+        );
+
+
+    document
+        .getElementById(
+            "saveStatus"
+        )
+        .textContent =
+        "Not saved";
+}
+
+
+/* =========================================================
+   UNSAVED STATUS
+========================================================= */
+
+document.addEventListener(
+    "input",
+    function(){
+
+        document
+            .getElementById(
+                "saveStatus"
+            )
+            .textContent =
+            "Unsaved changes";
+
+    }
+);
+
+
+/* =========================================================
+   CTRL + S
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            e.ctrlKey &&
+            e.key.toLowerCase() === "s"
+        ){
+
+            e.preventDefault();
+
+            saveCase();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
