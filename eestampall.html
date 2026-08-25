@@ -1530,7 +1530,7 @@ Clear Form
             <div class="student-row">
                 <span class="student-label">Division</span>
                 <span class="student-colon">:</span>
-                <span>IInd / 2nd</span>
+                <span>IInd /</span>
             </div>
 
             <div class="student-row">
@@ -1616,17 +1616,17 @@ Clear Form
     <div class="page-one-bottom">
 
         <!-- DATE LEFT -->
-        <div class="document-date">
-
-            <strong>Date Seal Here Above</strong>
-            <br>
-            <strong>Date:</strong>
-
-            <span id="pageOneDate">
-                __________________
-            </span>
-
-        </div>
+<div class="document-date">
+    <strong>Time:</strong>
+    <span id="pageOneTime">__:__:__</span> 
+    <strong>| Day:</strong>
+    <span id="pageOneDay">____________</span>
+    <br>
+    <strong>Date:</strong>
+    <span id="pageOneDate">__________________</span>
+    <br>
+    Date Stamp/Seal Aboive or Below
+</div>
 
 
         <!-- TILTED SEAL RIGHT -->
@@ -1960,22 +1960,29 @@ function generateDocuments() {
 
     });
 
+const now = new Date();
 
-    /* =====================================
-       PAGE 1 DATE
-    ===================================== */
+/* Date */
+const dateText = now.toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+});
 
-    const pageOneDate =
-        document.getElementById("pageOneDate");
+/* Time - 24 hour HH:MM:SS */
+const timeText =
+    String(now.getHours()).padStart(2, "0") + ":" +
+    String(now.getMinutes()).padStart(2, "0") + ":" +
+    String(now.getSeconds()).padStart(2, "0");
 
-    const today = new Date();
+/* Day */
+const dayText = now.toLocaleDateString("en-IN", {
+    weekday: "long"
+});
 
-    pageOneDate.textContent =
-        today.toLocaleDateString("en-IN", {
-            day: "2-digit",
-            month: "long",
-            year: "numeric"
-        });
+document.getElementById("pageOneDate").textContent = dateText;
+document.getElementById("pageOneTime").textContent = timeText;
+document.getElementById("pageOneDay").textContent = dayText;
 
 
     /* =====================================
