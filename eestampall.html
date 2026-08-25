@@ -949,6 +949,22 @@ button:hover {
 }
 
 
+/* Q7 case-level seal shown above CV Seal on affidavit page */
+.case-level-seal {
+    display: none;
+    width: 30mm;
+    height: 30mm;
+    object-fit: contain;
+    margin: 0 auto 2mm;
+    transform: rotate(-15deg);
+    opacity: 0.92;
+}
+
+.case-level-seal.visible {
+    display: block;
+}
+
+
 .signature-name {
 
     margin-top: 2mm;
@@ -1429,8 +1445,14 @@ button:hover {
 </div>
 
 <div class="field">
-<label>7. Complaint Number</label>
-<input id="complaintNumber">
+  <label>7. Case level</label>
+  <select id="complaintNumber">
+    <option value="">Select an option</option>
+    <option value="Core Critical">Core Critical</option>
+    <option value="Crucial">Crucial</option>
+    <option value="Procedural">Procedural</option>
+    <option value="Specialized">Specialized</option>
+  </select>
 </div>
 
 <div class="field">
@@ -2537,6 +2559,13 @@ Clear Form
 
                 <div class="signature-line"></div>
 
+                <img
+                    id="caseLevelSeal"
+                    class="case-level-seal"
+                    src=""
+                    alt="Case Level Seal"
+                >
+
                 <strong>
                     CV Seal
                 </strong>
@@ -2821,6 +2850,29 @@ function generateDocuments() {
         element.textContent = value;
 
     });
+
+    /* Q7 CASE LEVEL -> AFFIDAVIT CV SEAL */
+    const caseLevel = document.getElementById("complaintNumber")?.value || "";
+    const caseLevelSeal = document.getElementById("caseLevelSeal");
+
+    const caseLevelSealMap = {
+        "Core Critical": "legalseal/100.png",
+        "Crucial": "legalseal/200.png",
+        "Specialized": "legalseal/500.png",
+        "Procedural": "legalseal/1000.png"
+    };
+
+    if (caseLevelSeal) {
+        const sealPath = caseLevelSealMap[caseLevel];
+
+        if (sealPath) {
+            caseLevelSeal.src = sealPath;
+            caseLevelSeal.classList.add("visible");
+        } else {
+            caseLevelSeal.removeAttribute("src");
+            caseLevelSeal.classList.remove("visible");
+        }
+    }
 
 const now = new Date();
 
