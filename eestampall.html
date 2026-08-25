@@ -607,6 +607,774 @@ button:hover {
         -webkit-print-color-adjust: exact;
     }
 }
+
+/* =========================================
+   PAGE 2 — AFFIDAVIT
+========================================= */
+
+.affidavit-page {
+    position: relative;
+    width: 210mm;
+    height: 297mm;
+    min-height: 297mm;
+
+    background: #fff;
+
+    font-family: "Times New Roman", Times, serif;
+
+    color: #000;
+
+    padding: 18mm 20mm;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   GOVERNMENT STYLE BORDER
+========================================= */
+
+.affidavit-border {
+    position: absolute;
+
+    top: 6mm;
+    left: 6mm;
+    right: 6mm;
+    bottom: 6mm;
+
+    border: 2px solid #111;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+
+/* INNER BORDER */
+
+.affidavit-border::after {
+    content: "";
+
+    position: absolute;
+
+    top: 3mm;
+    left: 3mm;
+    right: 3mm;
+    bottom: 3mm;
+
+    border: 1px solid #111;
+}
+
+
+/* =========================================
+   SATYAMEV JAYATE — TOP
+========================================= */
+
+.border-top {
+    position: absolute;
+
+    top: -7px;
+    left: 10mm;
+    right: 10mm;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    background: white;
+
+    padding: 0 5px;
+
+    z-index: 10;
+
+    font-size: 8px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   SATYAMEV JAYATE — BOTTOM
+========================================= */
+
+.border-bottom {
+    position: absolute;
+
+    bottom: -7px;
+    left: 10mm;
+    right: 10mm;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    background: white;
+
+    padding: 0 5px;
+
+    z-index: 10;
+
+    font-size: 8px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   SATYAMEV JAYATE — LEFT
+========================================= */
+
+.border-left {
+    position: absolute;
+
+    left: -18px;
+    top: 15mm;
+    bottom: 15mm;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-around;
+
+    background: white;
+
+    padding: 5px 0;
+
+    z-index: 10;
+
+    font-size: 8px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    writing-mode: vertical-rl;
+
+    transform: rotate(180deg);
+}
+
+
+/* =========================================
+   SATYAMEV JAYATE — RIGHT
+========================================= */
+
+.border-right {
+    position: absolute;
+
+    right: -18px;
+    top: 15mm;
+    bottom: 15mm;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-around;
+
+    background: white;
+
+    padding: 5px 0;
+
+    z-index: 10;
+
+    font-size: 8px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    writing-mode: vertical-rl;
+}
+
+
+/* =========================================
+   AFFIDAVIT CONTENT
+========================================= */
+
+.affidavit-content {
+    position: relative;
+
+    z-index: 6;
+
+    margin: 4mm 5mm 0 5mm;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.affidavit-title {
+    text-align: center;
+
+    font-size: 20pt;
+
+    font-weight: bold;
+
+    text-decoration: underline;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 4mm;
+}
+
+
+.affidavit-subtitle {
+    text-align: center;
+
+    font-size: 11pt;
+
+    font-weight: bold;
+
+    margin-bottom: 8mm;
+}
+
+
+/* =========================================
+   CASE DETAILS
+========================================= */
+
+.affidavit-case-details {
+    margin-bottom: 8mm;
+
+    font-size: 11.5pt;
+}
+
+
+.affidavit-case-details p {
+    margin: 2mm 0;
+}
+
+
+/* =========================================
+   AFFIDAVIT PARAGRAPHS
+========================================= */
+
+.affidavit-body {
+
+    font-size: 12pt;
+
+    line-height: 1.55;
+
+    text-align: justify;
+
+}
+
+
+.affidavit-body p {
+
+    margin-top: 0;
+
+    margin-bottom: 5mm;
+
+    text-indent: 12mm;
+
+}
+
+
+/* =========================================
+   VERIFICATION
+========================================= */
+
+.verification {
+
+    margin-top: 7mm;
+
+    font-size: 12pt;
+
+    line-height: 1.55;
+
+    text-align: justify;
+}
+
+
+.verification-title {
+
+    text-align: center;
+
+    font-size: 13pt;
+
+    font-weight: bold;
+
+    text-decoration: underline;
+
+    margin-bottom: 4mm;
+}
+
+
+.verification p {
+
+    margin-bottom: 4mm;
+
+    text-indent: 12mm;
+}
+
+
+/* =========================================
+   SIGNATURE
+========================================= */
+
+.affidavit-signature {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    margin-top: 10mm;
+
+    font-size: 11.5pt;
+}
+
+
+.signature-box {
+
+    text-align: center;
+
+    width: 45mm;
+}
+
+
+.signature-line {
+
+    border-top: 1px solid #000;
+
+    margin-bottom: 2mm;
+}
+
+
+.signature-name {
+
+    margin-top: 2mm;
+
+}
+
+
+/* =========================================
+   NOTARY
+========================================= */
+
+.attestation {
+
+    text-align: center;
+
+    font-size: 10.5pt;
+
+    margin-top: 13mm;
+}
+
+
+.attestation-space {
+
+    height: 15mm;
+
+}
+
+
+/* =========================================
+   PRINT
+========================================= */
+
+@media print {
+
+    .affidavit-page {
+
+        width: 210mm !important;
+
+        height: 297mm !important;
+
+        min-height: 297mm !important;
+
+        margin: 0 !important;
+
+        padding: 18mm 20mm !important;
+
+        page-break-after: always;
+
+        break-after: page;
+
+        box-shadow: none !important;
+    }
+
+    .affidavit-border {
+
+        display: block !important;
+    }
+
+    .border-top,
+    .border-bottom,
+    .border-left,
+    .border-right {
+
+        display: flex !important;
+
+        print-color-adjust: exact;
+
+        -webkit-print-color-adjust: exact;
+    }
+
+    @page {
+
+        size: A4 portrait;
+
+        margin: 0;
+    }
+}
+
+.affidavit-body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 1.55;
+    text-align: justify;
+}
+
+.affidavit-body p {
+    margin-top: 0;
+    margin-bottom: 5mm;
+    text-align: justify;
+    text-indent: 12mm;
+}
+
+/* =========================================
+   PAGE 2 — CORRECT GOVERNMENT STYLE BORDER
+========================================= */
+
+.affidavit-page {
+    position: relative;
+    width: 210mm;
+    height: 297mm;
+    min-height: 297mm;
+    box-sizing: border-box;
+
+    background: #fff;
+
+    font-family: "Times New Roman", Times, serif;
+
+    padding: 20mm 20mm;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   OUTER BORDER
+========================================= */
+
+.affidavit-border {
+    position: absolute;
+
+    top: 6mm;
+    left: 6mm;
+    right: 6mm;
+    bottom: 6mm;
+
+    border: 2px solid #000;
+
+    box-sizing: border-box;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   INNER BORDER
+========================================= */
+
+.affidavit-border::before {
+    content: "";
+
+    position: absolute;
+
+    top: 3mm;
+    left: 3mm;
+    right: 3mm;
+    bottom: 3mm;
+
+    border: 1px solid #000;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   SATYAMEV JAYATE — TOP
+========================================= */
+
+.border-top {
+    position: absolute;
+
+    top: -2.5mm;
+
+    left: 12mm;
+    right: 12mm;
+
+    height: 5mm;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    align-items: center;
+
+    background: #fff;
+
+    z-index: 20;
+
+    overflow: hidden;
+}
+
+.border-top span {
+    display: block;
+
+    padding: 0 3mm;
+
+    background: #fff;
+
+    font-family: "Times New Roman", Times, serif;
+
+    font-size: 7.5pt;
+
+    font-weight: bold;
+
+    letter-spacing: 0.4px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   SATYAMEV JAYATE — BOTTOM
+========================================= */
+
+.border-bottom {
+    position: absolute;
+
+    bottom: -2.5mm;
+
+    left: 12mm;
+    right: 12mm;
+
+    height: 5mm;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    align-items: center;
+
+    background: #fff;
+
+    z-index: 20;
+
+    overflow: hidden;
+}
+
+.border-bottom span {
+    display: block;
+
+    padding: 0 3mm;
+
+    background: #fff;
+
+    font-family: "Times New Roman", Times, serif;
+
+    font-size: 7.5pt;
+
+    font-weight: bold;
+
+    letter-spacing: 0.4px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   SATYAMEV JAYATE — LEFT
+========================================= */
+
+.border-left {
+    position: absolute;
+
+    left: -4mm;
+
+    top: 15mm;
+    bottom: 15mm;
+
+    width: 5mm;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-around;
+
+    align-items: center;
+
+    background: #fff;
+
+    z-index: 20;
+
+    overflow: hidden;
+}
+
+.border-left span {
+    display: block;
+
+    padding: 2mm 0;
+
+    background: #fff;
+
+    font-family: "Times New Roman", Times, serif;
+
+    font-size: 7pt;
+
+    font-weight: bold;
+
+    letter-spacing: 0.3px;
+
+    white-space: nowrap;
+
+    writing-mode: vertical-rl;
+
+    transform: rotate(180deg);
+}
+
+
+/* =========================================
+   SATYAMEV JAYATE — RIGHT
+========================================= */
+
+.border-right {
+    position: absolute;
+
+    right: -4mm;
+
+    top: 15mm;
+    bottom: 15mm;
+
+    width: 5mm;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-around;
+
+    align-items: center;
+
+    background: #fff;
+
+    z-index: 20;
+
+    overflow: hidden;
+}
+
+.border-right span {
+    display: block;
+
+    padding: 2mm 0;
+
+    background: #fff;
+
+    font-family: "Times New Roman", Times, serif;
+
+    font-size: 7pt;
+
+    font-weight: bold;
+
+    letter-spacing: 0.3px;
+
+    white-space: nowrap;
+
+    writing-mode: vertical-rl;
+}
+
+
+/* =========================================
+   CONTENT MUST STAY INSIDE BORDER
+========================================= */
+
+.affidavit-content {
+    position: relative;
+
+    z-index: 10;
+
+    margin: 2mm 6mm 0 6mm;
+}
+
+
+/* =========================================
+   PAGE 2 — AFFIDAVIT WATERMARK
+========================================= */
+
+.affidavit-watermark {
+    position: absolute;
+    width: 145mm;
+    height: 145mm;
+    object-fit: contain;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.075;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.affidavit-content {
+    position: relative;
+    z-index: 10;
+}
+
+/* =========================================
+   PRINT
+========================================= */
+
+@media print {
+
+    .affidavit-page {
+
+        width: 210mm !important;
+        height: 297mm !important;
+
+        min-height: 297mm !important;
+
+        margin: 0 !important;
+
+        padding: 20mm !important;
+
+        box-sizing: border-box !important;
+
+        page-break-after: always;
+
+        break-after: page;
+
+        box-shadow: none !important;
+    }
+
+    .affidavit-border {
+        display: block !important;
+    }
+
+    .border-top,
+    .border-bottom,
+    .border-left,
+    .border-right {
+        display: flex !important;
+    }
+
+    @page {
+        size: A4 portrait;
+        margin: 0;
+    }
+}
 </style>
 </head>
 
@@ -1645,50 +2413,144 @@ Clear Form
 </div>
 
 
-<!-- PAGE 2 -->
+<!-- =========================
+     PAGE 2 — AFFIDAVIT
+========================= -->
 
-<div class="a4-page">
-<h1>AFFIDAVIT</h1>
+<div class="a4-page affidavit-page">
 
-<p>
-I, <strong data-field="complainantName"></strong>,
-son/daughter of <strong data-field="complainantFather"></strong>,
-resident of <strong data-field="complainantAddress"></strong>,
-do hereby state as follows:
-</p>
+    <!-- PAGE 2 CENTER WATERMARK -->
+    <img
+        src="images/emblem.png"
+        class="affidavit-watermark"
+        alt="Emblem Watermark"
+    >
 
-<h2>Case Details</h2>
 
-<div class="doc-row">
-<div class="doc-label">Case Name</div>
-<div class="doc-value" data-field="caseName"></div>
+    <!-- GOVERNMENT STYLE BORDER -->
+<div class="affidavit-border">
+
+    <div class="border-top">
+        <span>SATYAMEV JAYATE</span>
+        <span>SATYAMEV JAYATE</span>
+        <span>SATYAMEV JAYATE</span>
+        <span>SATYAMEV JAYATE</span>
+        <span>SATYAMEV JAYATE</span>
+    </div>
+
+    <div class="border-bottom">
+        <span>SATYAMEV JAYATE</span>
+        <span>SATYAMEV JAYATE</span>
+        <span>SATYAMEV JAYATE</span>
+        <span>SATYAMEV JAYATE</span>
+        <span>SATYAMEV JAYATE</span>
+    </div>
+
 </div>
 
-<div class="doc-row">
-<div class="doc-label">FIR Number</div>
-<div class="doc-value" data-field="firNumber"></div>
+
+    <!-- AFFIDAVIT CONTENT -->
+
+    <div class="affidavit-content">
+
+        <div class="affidavit-title">
+            AFFIDAVIT
+        </div>
+
+<!-- =========================================
+     FULL AFFIDAVIT BODY
+========================================= -->
+
+<div class="affidavit-body">
+
+    <p>
+        I, Yash Kumar, aged about 21 years, resident of Delhi, do hereby solemnly affirm and state as follows:
+    </p>
+
+    <p>
+        That the present matter relates to the case titled
+        <strong data-field="caseName"></strong>, bearing Case Number
+        <strong data-field="caseNumber"></strong>, and, wherever applicable,
+        FIR Number <strong data-field="firNumber"></strong>, registered at
+        Police Station <strong data-field="policeStation"></strong>,
+        District <strong data-field="district"></strong>,
+        State <strong data-field="state"></strong>.
+    </p>
+
+    <p>
+        That the complaint in the present matter was submitted before the
+        concerned authority on
+        <strong data-field="complaintSubmittedDate"></strong>
+        and the matter was thereafter dealt with in accordance with the
+        applicable procedure. The complaint was submitted for the purpose of
+        bringing the relevant facts and circumstances to the notice of the
+        competent authority and for seeking appropriate action in accordance
+        with law.
+    </p>
+    <p>
+        That the sections mentioned in the complaint are
+        <strong data-field="sectionsComplaint"></strong> and the sections
+        mentioned in the FIR are
+        <strong data-field="sectionsFIR"></strong>. The applicable
+        Act or law is <strong data-field="applicableLaw"></strong>.
+        The present sections applicable to the case are
+        <strong data-field="presentSections"></strong>, and the nature of the
+        alleged offences is
+        <strong data-field="offenceNature"></strong>.
 </div>
 
-<div class="doc-row">
-<div class="doc-label">Police Station</div>
-<div class="doc-value" data-field="policeStation"></div>
-</div>
 
-<h2>Declaration</h2>
+        <!-- VERIFICATION -->
 
-<p>
-The above information is provided for preparation of the document.
-</p>
+        <div class="verification">
 
-<div class="signature">
-<div>
-Place: <span data-field="district"></span>
-</div>
+            <div class="verification-title">
+                VERIFICATION
+            </div>
 
-<div>
-Signature of Deponent
-</div>
-</div>
+            <p>
+                I, <strong >Yash Kumar</strong>,
+                do hereby verify that the contents
+                of the above affidavit are true and correct to the best of my
+                knowledge and belief. No material fact has been concealed
+                therefrom.
+            </p>
+
+            <p>
+                Verified on this date
+                <strong id="affidavitVerificationDate"></strong>.
+            </p>
+
+        </div>
+
+
+        <!-- SIGNATURE -->
+
+        <div class="affidavit-signature">
+
+            <div class="signature-place">
+                Place:
+                <strong data-field="district"></strong>
+            </div>
+
+            <div class="signature-box">
+
+                <div class="signature-line"></div>
+
+                <strong>
+                    CV Seal
+                </strong>
+
+                <div
+                    class="signature-name"
+                    data-field="complainantName">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
@@ -2003,6 +2865,20 @@ document.getElementById("pageOneDay").textContent = dayText;
 
 }
 
+const affidavitDate =
+    document.getElementById("affidavitVerificationDate");
+
+if (affidavitDate) {
+
+    const now = new Date();
+
+    affidavitDate.textContent =
+        now.toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric"
+        });
+}
 
 /* ============================================
    CONDITIONAL FIELDS
