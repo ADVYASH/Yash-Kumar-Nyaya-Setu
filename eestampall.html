@@ -1391,6 +1391,110 @@ button:hover {
         margin: 0;
     }
 }
+
+/* ============================================
+   PAGE 3 — MATCH REFERENCE E-STAMP STYLE
+   ============================================ */
+.estamp-reference-page {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    color: #111;
+    font-family: Arial, sans-serif;
+    padding: 15mm;
+    box-sizing: border-box;
+}
+.estamp-reference-page::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1.5px solid #000;
+    pointer-events: none;
+}
+.estamp-reference-watermark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 145mm;
+    height: 145mm;
+    transform: translate(-50%, -50%);
+    opacity: .055;
+    z-index: 0;
+    pointer-events: none;
+}
+.estamp-reference-watermark img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.estamp-reference-content {
+    position: relative;
+    z-index: 2;
+}
+.estamp-reference-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.estamp-reference-emblem {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-right: 20px;
+}
+.estamp-reference-heading {
+    text-align: center;
+    width: 100%;
+}
+.estamp-reference-heading h1 {
+    margin: 0;
+    font-size: 32px;
+}
+.estamp-reference-heading h2 {
+    margin: 5px 0;
+    font-size: 22px;
+}
+.estamp-reference-detail {
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.35;
+}
+.estamp-reference-label {
+    font-weight: bold;
+}
+.estamp-reference-qr-title {
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.estamp-reference-qr {
+    margin-top: 10px;
+    width: 180px;
+    min-height: 180px;
+}
+.estamp-reference-note {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .6px;
+}
+@media print {
+    .estamp-reference-page {
+        width: 210mm !important;
+        height: 297mm !important;
+        min-height: 297mm !important;
+        margin: 0 !important;
+        padding: 15mm !important;
+        box-sizing: border-box !important;
+        page-break-after: always;
+        break-after: page;
+        box-shadow: none !important;
+    }
+    .estamp-reference-watermark {
+        display: block !important;
+    }
+}
 </style>
 </head>
 
@@ -2584,34 +2688,68 @@ Clear Form
 
 <!-- PAGE 3 -->
 
-<div class="a4-page">
-<h1>E-STAMP</h1>
+<div class="a4-page estamp-reference-page">
+    <div class="estamp-reference-watermark">
+        <img src="images/emblem.png" alt="Emblem Watermark">
+    </div>
 
-<div class="doc-row">
-<div class="doc-label">State</div>
-<div class="doc-value" data-field="state"></div>
-</div>
+    <div class="estamp-reference-content">
+        <div class="estamp-reference-header">
+            <img src="images/emblem.png" class="estamp-reference-emblem" alt="Emblem">
+            <div class="estamp-reference-heading">
+                <h1>INDIA NON JUDICIAL</h1>
+                <h2 id="estampRefGovt">Government of [State Name]</h2>
+            </div>
+        </div>
 
-<div class="doc-row">
-<div class="doc-label">Stamp Description</div>
-<div class="doc-value" data-field="stampDescription"></div>
-</div>
+        <div class="estamp-reference-detail">
+            <span class="estamp-reference-label">Certificate Number :</span>
+            <span id="estampRefCertNo"></span>
+        </div>
+        <div class="estamp-reference-detail">
+            <span class="estamp-reference-label">Certificate Issue Date :</span>
+            <span id="estampRefIssueDate"></span>
+        </div>
+        <div class="estamp-reference-detail">
+            <span class="estamp-reference-label">Unique Doc. Reference :</span>
+            <span>DL-71-YASH-KUMAR-UDR-260608-9471</span>
+        </div>
+        <div class="estamp-reference-detail">
+            <span class="estamp-reference-label">Purchased By :</span>
+            <span id="estampRefPurchasedBy"></span>
+        </div>
+        <div class="estamp-reference-detail">
+            <span class="estamp-reference-label">Description of Document :</span>
+            <span id="estampRefDescription"></span>
+        </div>
+        <div class="estamp-reference-detail">
+            <span class="estamp-reference-label">Consideration Price (Rs.) :</span>
+            <span id="estampRefPrice"></span>
+        </div>
+        <div class="estamp-reference-detail">
+            <span class="estamp-reference-label">First Party :</span>
+            <span id="estampRefFirstParty"></span>
+        </div>
+        <div class="estamp-reference-detail">
+            <span class="estamp-reference-label">Second Party :</span>
+            <span id="estampRefSecondParty"></span>
+        </div>
+        <div class="estamp-reference-detail">
+            <span class="estamp-reference-label">Stamp Duty Paid By :</span>
+            <span id="estampRefPaidBy"></span>
+        </div>
+        <div class="estamp-reference-detail">
+            <span class="estamp-reference-label">Stamp Duty Amount (Rs.) :</span>
+            <span id="estampRefDuty"></span>
+        </div>
 
-<div class="doc-row">
-<div class="doc-label">Consideration Price</div>
-<div class="doc-value" data-field="considerationPrice"></div>
-</div>
+        <div class="estamp-reference-qr-title">Digital Verification QR Code</div>
+        <div id="estampRefQr" class="estamp-reference-qr"></div>
 
-<div class="doc-row">
-<div class="doc-label">Stamp Duty Amount</div>
-<div class="doc-value" data-field="stampDuty"></div>
-</div>
-
-<div class="doc-row">
-<div class="doc-label">Case Name</div>
-<div class="doc-value" data-field="caseName"></div>
-</div>
-
+        <div class="estamp-reference-note">
+            SAMPLE / DEMO — NOT A GOVERNMENT-ISSUED DOCUMENT
+        </div>
+    </div>
 </div>
 
 
