@@ -1566,9 +1566,10 @@ button:hover {
 .stamp-paper-header-image {
     display: block;
     width: 100%;
-    height: 48mm;
-    object-fit: cover;
-    object-position: top center;
+    height: 65mm;
+    object-fit: contain;
+    object-position: center top;
+    margin: 0;
 }
 
 .stamp-paper-content {
@@ -1658,6 +1659,26 @@ button:hover {
     }
 }
 
+.photo-upload-box {
+    margin-bottom: 15px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.photo-upload-box label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.fir-photo-preview {
+    display: none;
+    width: 35mm;
+    height: 45mm;
+    object-fit: cover;
+    margin-top: 10px;
+}
 </style>
 </head>
 
@@ -1667,6 +1688,8 @@ button:hover {
     <h1>Legal Document Generator</h1>
     <p>Enter information once and generate six A4 documents.</p>
 </header>
+
+
 
 <div class="container">
 
@@ -1881,6 +1904,24 @@ button:hover {
 <div class="field">
 <label>22. Nature / Category of Case</label>
 <input id="caseCategory">
+</div>
+
+<div class="photo-upload-box">
+    <label for="firPassportPhoto">
+        Add FIR PASSPORT PHOTO
+    </label>
+
+    <input
+        type="file"
+        id="firPassportPhoto"
+        accept="image/*"
+    >
+
+    <img
+        id="firPassportPhotoPreview"
+        class="fir-photo-preview"
+        alt="FIR Passport Photo Preview"
+    >
 </div>
 
 </div>
@@ -3742,6 +3783,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+document.getElementById("firPassportPhoto").addEventListener("change", function () {
+    const file = this.files[0];
+    const preview = document.getElementById("firPassportPhotoPreview");
+
+    if (!file) {
+        preview.style.display = "none";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        preview.src = e.target.result;
+        preview.style.display = "block";
+
+        const documentPhoto = document.querySelector(".passport-photo");
+
+        if (documentPhoto) {
+            documentPhoto.src = e.target.result;
+        }
+    };
+
+    reader.readAsDataURL(file);
+});
 </script>
 
 </body>
