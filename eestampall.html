@@ -1546,13 +1546,9 @@ button:hover {
 }
 
 .stamp-paper-header-image {
-    display: block;
-    width: 100%;
-    height: 48mm;
-    object-fit: cover;
-    object-position: top center;
-    position: relative;
-    z-index: 2;
+    width:100%;
+    text-align:center;
+    margin-bottom:20px;
 }
 
 .stamp-paper-content {
@@ -3647,10 +3643,15 @@ document.addEventListener("DOMContentLoaded", function () {
         // Indian number format
         considerationPrice.value =
             "₹" + roundedAmount.toLocaleString("en-IN");
+        document.getElementById("refConsiderationPrice").textContent =
+    considerationPrice.value;
     }
 
     // Generate when Stamp Duty option changes
-    stampDuty.addEventListener("change", generateConsiderationPrice);
+stampDuty.addEventListener("change", generateConsiderationPrice);
+
+// Generate once initially
+generateConsiderationPrice();
 
 });
 
@@ -3695,6 +3696,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Stamp duty → Stamp Duty Amount
     syncValue("stampDuty", "refStampDutyAmount");
+
+    document.getElementById("stampPaperConsiderationPrice").textContent =
+    document.getElementById("refConsiderationPrice").textContent;
 
 });
 
