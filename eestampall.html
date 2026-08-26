@@ -1793,6 +1793,21 @@ button:hover {
     border: 1px solid #000;
     pointer-events: none;
 }
+
+/* FIR automatic continuation */
+.fir-paragraphs {
+    overflow: hidden;
+}
+
+.fir-continuation-content {
+    text-align: justify;
+    font-size: 14pt;
+    line-height: 1.45;
+}
+
+.fir-continuation-content p {
+    margin: 0 0 5mm;
+}
 </style>
 </head>
 
@@ -3313,7 +3328,7 @@ Clear Form
     <hr class="fir-line">
 
     <!-- FIR PARAGRAPHS -->
-    <div class="fir-paragraphs">
+    <div class="fir-paragraphs" id="firParagraphs">
 
         <p id="firComplainantDetails"></p>
 
@@ -3330,7 +3345,38 @@ Clear Form
 
 </div>
 
+<!-- FIR CONTINUATION PAGE -->
+<div class="a4-page fir-page fir-continuation-page" id="firContinuationPage" style="display:none;">
 
+    <div class="fir-header">
+        <img id="firPoliceLogoContinuation"
+             class="fir-police-logo"
+             alt="Police Logo">
+
+        <div class="fir-motto">शांति सेवा न्याय</div>
+
+        <div class="fir-title">
+            <strong>FIRST</strong> INFORMATION REPORT
+        </div>
+
+        <div class="fir-subtitle">
+            Continuation of FIR
+        </div>
+    </div>
+
+    <hr class="fir-line">
+
+    <div class="fir-continuation-content"
+         id="firContinuationContent">
+    </div>
+
+    <div class="fir-seal-container">
+        <img id="firStateSealContinuation"
+             class="fir-state-seal"
+             alt="State Seal">
+    </div>
+
+</div>
 <!-- PAGE 6 -->
 
 <div class="a4-page">
@@ -3971,30 +4017,107 @@ document.addEventListener("DOMContentLoaded", function () {
         "West Bengal": "west-bengal"
     };
 
-    function updateFIRStateImages() {
+    ffunction updateFIRStateImages() {
 
-        const selectedState = state.value;
-        const slug = stateSlug[selectedState];
+    const stateField = document.getElementById("state");
 
-        if (!slug) return;
+    if (!stateField) return;
 
-        document.getElementById("firPoliceLogo").src =
-            "policelogo/" + slug + ".png";
+    const stateName = stateField.value.trim();
 
-        document.getElementById("firStateSeal").src =
-            "seal/" + slug + ".png";
+    const stateSlug = {
+        "Delhi": "delhi",
+        "Uttar Pradesh": "uttar-pradesh",
+        "Maharashtra": "maharashtra",
+        "Rajasthan": "rajasthan",
+        "Gujarat": "gujarat",
+        "Haryana": "haryana",
+        "Punjab": "punjab",
+        "Bihar": "bihar",
+        "Madhya Pradesh": "madhya-pradesh",
+        "West Bengal": "west-bengal",
+        "Karnataka": "karnataka",
+        "Kerala": "kerala",
+        "Tamil Nadu": "tamil-nadu",
+        "Telangana": "telangana",
+        "Andhra Pradesh": "andhra-pradesh",
+        "Odisha": "odisha",
+        "Jharkhand": "jharkhand",
+        "Chhattisgarh": "chhattisgarh",
+        "Goa": "goa",
+        "Assam": "assam",
+        "Arunachal Pradesh": "arunachal-pradesh",
+        "Manipur": "manipur",
+        "Meghalaya": "meghalaya",
+        "Mizoram": "mizoram",
+        "Nagaland": "nagaland",
+        "Sikkim": "sikkim",
+        "Tripura": "tripura",
+        "Uttarakhand": "uttarakhand",
+        "Himachal Pradesh": "himachal-pradesh",
+        "Jammu and Kashmir": "jammu-and-kashmir",
+        "Ladakh": "ladakh",
+        "Chandigarh": "chandigarh",
+        "Puducherry": "puducherry",
+        "Lakshadweep": "lakshadweep",
+        "Andaman and Nicobar Islands": "andaman-and-nicobar-islands",
+        "Dadra and Nagar Haveli and Daman and Diu":
+            "dadra-and-nagar-haveli-and-daman-and-diu"
+    };
 
-        document.getElementById("firPoliceState").textContent =
-            selectedState;
+    const slug = stateSlug[stateName];
 
-        document.getElementById("firStateDisplay").textContent =
-            selectedState;
+    if (!slug) return;
+
+    const logoPath = "policelogo/" + slug + ".png";
+    const sealPath = "seal/" + slug + ".png";
+
+    // PAGE 5
+    const logo = document.getElementById("firPoliceLogo");
+    const seal = document.getElementById("firStateSeal");
+
+    if (logo) {
+        logo.src = logoPath;
+        logo.style.display = "block";
     }
 
-    state.addEventListener("change", updateFIRStateImages);
+    if (seal) {
+        seal.src = sealPath;
+        seal.style.display = "block";
+    }
 
-    updateFIRStateImages();
-});
+    // FIR continuation page
+    const continuationLogo =
+        document.getElementById("firPoliceLogoContinuation");
+
+    const continuationSeal =
+        document.getElementById("firStateSealContinuation");
+
+    if (continuationLogo) {
+        continuationLogo.src = logoPath;
+        continuationLogo.style.display = "block";
+    }
+
+    if (continuationSeal) {
+        continuationSeal.src = sealPath;
+        continuationSeal.style.display = "block";
+    }
+
+    // State text
+    const stateDisplay =
+        document.getElementById("firStateDisplay");
+
+    const policeState =
+        document.getElementById("firPoliceState");
+
+    if (stateDisplay) {
+        stateDisplay.textContent = stateName;
+    }
+
+    if (policeState) {
+        policeState.textContent = stateName;
+    }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -4046,6 +4169,191 @@ document.getElementById("firPassportPhoto")?.addEventListener("change", function
 
     reader.readAsDataURL(file);
 });
+
+function paginateFIR() {
+
+    const firPage = document.getElementById("firPage");
+    const paragraphs = document.getElementById("firParagraphs");
+    const continuationPage =
+        document.getElementById("firContinuationPage");
+    const continuation =
+        document.getElementById("firContinuationContent");
+
+    if (!firPage || !paragraphs || !continuationPage || !continuation) {
+        return;
+    }
+
+    // Clear continuation page
+    continuation.innerHTML = "";
+    continuationPage.style.display = "none";
+
+    // Get all FIR paragraphs
+    const sourceParagraphs = [
+        document.getElementById("firComplainantDetails"),
+        document.getElementById("firOccurrenceReportDetails"),
+        document.getElementById("firIncidentDescription")
+    ];
+
+    // Save complete text
+    const fullText = sourceParagraphs.map(p => ({
+        element: p,
+        text: p.textContent.trim()
+    }));
+
+    // Reset page 5
+    sourceParagraphs.forEach(p => {
+        if (p) p.textContent = "";
+    });
+
+    // Calculate available height on Page 5
+    const pageRect = firPage.getBoundingClientRect();
+    const paragraphRect = paragraphs.getBoundingClientRect();
+
+    const seal = firPage.querySelector(".fir-seal-container");
+    const sealHeight = seal ? seal.offsetHeight + 30 : 100;
+
+    const availableHeight =
+        pageRect.bottom -
+        paragraphRect.top -
+        sealHeight -
+        20;
+
+    paragraphs.style.height = availableHeight + "px";
+
+    let overflowStarted = false;
+
+    fullText.forEach((item, index) => {
+
+        if (!item.element || !item.text) return;
+
+        const pageParagraph = item.element;
+
+        const words = item.text.split(/\s+/);
+
+        for (let i = 0; i < words.length; i++) {
+
+            pageParagraph.textContent +=
+                (pageParagraph.textContent ? " " : "") +
+                words[i];
+
+            // Check if Page 5 is full
+            if (paragraphs.scrollHeight > paragraphs.clientHeight) {
+
+                // Remove last word from Page 5
+                const currentWords =
+                    pageParagraph.textContent.trim().split(/\s+/);
+
+                currentWords.pop();
+
+                pageParagraph.textContent =
+                    currentWords.join(" ");
+
+                overflowStarted = true;
+
+                // Put remaining words on continuation page
+                const remaining = [
+                    ...currentWords.length < words.length
+                        ? words.slice(i)
+                        : []
+                ];
+
+                if (remaining.length) {
+
+                    const continuationParagraph =
+                        document.createElement("p");
+
+                    continuationParagraph.textContent =
+                        remaining.join(" ");
+
+                    continuation.appendChild(
+                        continuationParagraph
+                    );
+                }
+
+                break;
+            }
+        }
+
+        // If this paragraph overflowed, all later paragraphs go
+        // directly to the continuation page.
+        if (overflowStarted) {
+
+            for (let j = index + 1; j < fullText.length; j++) {
+
+                if (!fullText[j].text) continue;
+
+                const continuationParagraph =
+                    document.createElement("p");
+
+                continuationParagraph.textContent =
+                    fullText[j].text;
+
+                continuation.appendChild(
+                    continuationParagraph
+                );
+            }
+        }
+    });
+
+    // Show continuation page only when required
+    if (continuation.textContent.trim()) {
+
+        continuationPage.style.display = "block";
+
+        // Use same state-specific logo and seal
+        const logo =
+            document.getElementById("firPoliceLogo");
+
+        const sealImage =
+            document.getElementById("firStateSeal");
+
+        const continuationLogo =
+            document.getElementById(
+                "firPoliceLogoContinuation"
+            );
+
+        const continuationSeal =
+            document.getElementById(
+                "firStateSealContinuation"
+            );
+
+        if (logo && continuationLogo) {
+            continuationLogo.src = logo.src;
+        }
+
+        if (sealImage && continuationSeal) {
+            continuationSeal.src = sealImage.src;
+        }
+    }
+}
+
+[
+    "complainantDetails",
+    "occurrenceReportDetails",
+    "incidentDescription",
+    "firReportCategory",
+    "state"
+].forEach(function(id) {
+
+    const field = document.getElementById(id);
+
+    if (field) {
+        field.addEventListener("input", paginateFIR);
+        field.addEventListener("change", paginateFIR);
+    }
+});
+
+window.addEventListener("load", paginateFIR);
+window.addEventListener("resize", paginateFIR);
+
+const stateField = document.getElementById("state");
+
+if (stateField) {
+    stateField.addEventListener("change", updateFIRStateImages);
+    stateField.addEventListener("input", updateFIRStateImages);
+}
+
+window.addEventListener("load", updateFIRStateImages);
 </script>
 
 </body>
