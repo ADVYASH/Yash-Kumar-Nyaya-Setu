@@ -1539,22 +1539,44 @@ button:hover {
     }
 }
 
+/* =========================================
+   PAGE 4 — STAMP PAPER SAMPLE
+   ========================================= */
 .stamp-paper-page {
     position: relative;
     overflow: hidden;
     padding: 0 !important;
+    box-sizing: border-box;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.sample-notice {
+    position: absolute;
+    top: 3mm;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 8pt;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #555;
+    z-index: 10;
 }
 
 .stamp-paper-header-image {
-    width:100%;
-    text-align:center;
-    margin-bottom:20px;
+    display: block;
+    width: 100%;
+    height: 48mm;
+    object-fit: cover;
+    object-position: top center;
+    position: relative;
+    z-index: 2;
 }
 
 .stamp-paper-content {
     position: relative;
-    z-index: 3;
-    margin: 8mm 14mm;
+    z-index: 4;
+    margin: 8mm 14mm 0;
 }
 
 .stamp-row {
@@ -1562,16 +1584,20 @@ button:hover {
     grid-template-columns: 48% 52%;
     min-height: 11mm;
     align-items: center;
+    break-inside: avoid;
 }
 
 .stamp-row span {
     text-align: left;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 10.5pt;
 }
 
 .stamp-row strong {
     text-align: right;
-    font-weight: normal;
+    font-weight: 400;
+    font-size: 10.5pt;
+    line-height: 1.35;
     word-break: break-word;
 }
 
@@ -1582,8 +1608,9 @@ button:hover {
     right: 15mm;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15mm;
-    opacity: 0.05;
+    gap: 13mm 12mm;
+    justify-items: center;
+    opacity: .045;
     z-index: 1;
     pointer-events: none;
 }
@@ -1594,27 +1621,45 @@ button:hover {
     object-fit: contain;
 }
 
-.stamp-paper-seal {
-    position: absolute;
-    right: 10mm;
-    bottom: 10mm;
-    width: 42mm;
-    height: 42mm;
-    object-fit: contain;
-    transform: rotate(-15deg);
-    z-index: 5;
-}
-
 .stamp-paper-footer {
     position: absolute;
-    bottom: 8mm;
     left: 15mm;
     right: 55mm;
+    bottom: 8mm;
     text-align: center;
     font-size: 9pt;
     line-height: 1.6;
-    z-index: 4;
+    z-index: 6;
 }
+
+.sample-seal {
+    position: absolute;
+    right: 10mm;
+    bottom: 10mm;
+    width: 40mm;
+    height: 24mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #777;
+    font-size: 8pt;
+    transform: rotate(-15deg);
+    z-index: 6;
+    color: #555;
+}
+
+@media print {
+    .stamp-paper-page {
+        width: 210mm !important;
+        height: 297mm !important;
+        min-height: 297mm !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
 </style>
 </head>
 
@@ -1885,52 +1930,8 @@ button:hover {
 </div>
 
 <div class="field">
-  <label for="courtState">29. Court Location</label>
-  <select id="courtState" name="courtState">
-    <option value="">Select State / Union Territory</option>
-
-    <!-- States -->
-    <option value="Andhra Pradesh">Andhra Pradesh</option>
-    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-    <option value="Assam">Assam</option>
-    <option value="Bihar">Bihar</option>
-    <option value="Chhattisgarh">Chhattisgarh</option>
-    <option value="Goa">Goa</option>
-    <option value="Gujarat">Gujarat</option>
-    <option value="Haryana">Haryana</option>
-    <option value="Himachal Pradesh">Himachal Pradesh</option>
-    <option value="Jharkhand">Jharkhand</option>
-    <option value="Karnataka">Karnataka</option>
-    <option value="Kerala">Kerala</option>
-    <option value="Madhya Pradesh">Madhya Pradesh</option>
-    <option value="Maharashtra">Maharashtra</option>
-    <option value="Manipur">Manipur</option>
-    <option value="Meghalaya">Meghalaya</option>
-    <option value="Mizoram">Mizoram</option>
-    <option value="Nagaland">Nagaland</option>
-    <option value="Odisha">Odisha</option>
-    <option value="Punjab">Punjab</option>
-    <option value="Rajasthan">Rajasthan</option>
-    <option value="Sikkim">Sikkim</option>
-    <option value="Tamil Nadu">Tamil Nadu</option>
-    <option value="Telangana">Telangana</option>
-    <option value="Tripura">Tripura</option>
-    <option value="Uttar Pradesh">Uttar Pradesh</option>
-    <option value="Uttarakhand">Uttarakhand</option>
-    <option value="West Bengal">West Bengal</option>
-
-    <!-- Union Territories -->
-    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-    <option value="Chandigarh">Chandigarh</option>
-    <option value="Dadra and Nagar Haveli and Daman and Diu">
-      Dadra and Nagar Haveli and Daman and Diu
-    </option>
-    <option value="Delhi">Delhi</option>
-    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-    <option value="Ladakh">Ladakh</option>
-    <option value="Lakshadweep">Lakshadweep</option>
-    <option value="Puducherry">Puducherry</option>
-  </select>
+<label>29. State</label>
+<input id="courtState">
 </div>
 
 </div>
@@ -2942,7 +2943,7 @@ Clear Form
 
 <!-- Consideration Price -->
 <div class="estamp-reference-detail">
-    <span class="estamp-reference-label">Consideration Price (Rs.) :</span>
+    <span class="estamp-reference-label">CONSIDERATION PRICE:</span>
     <span id="refConsiderationPrice"></span>
 </div>
 
@@ -2983,48 +2984,31 @@ Clear Form
 </div>
 
 
-<!-- PAGE 4 -->
-<!-- PAGE 4 -->
-<div class="a4-page stamp-paper-page">
+<!-- PAGE 4 — STAMP PAPER SAMPLE -->
+<div class="a4-page stamp-paper-page" id="stampPaperPage">
 
+    <div class="sample-notice">SAMPLE — NOT VALID FOR OFFICIAL USE</div>
+
+    <!-- Dynamic denomination header; kept as a template image slot -->
     <img id="stampPaperHeaderImage"
          class="stamp-paper-header-image"
          src=""
-         alt="Stamp Paper">
+         alt="Stamp paper sample">
 
-    <div class="stamp-paper-watermark">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
-        <img src="images/emblem.png">
+    <!-- Repeated small watermark -->
+    <div class="stamp-paper-watermark" aria-hidden="true">
+        <img src="images/emblem.png" alt="">
+        <img src="images/emblem.png" alt="">
+        <img src="images/emblem.png" alt="">
+        <img src="images/emblem.png" alt="">
+        <img src="images/emblem.png" alt="">
+        <img src="images/emblem.png" alt="">
+        <img src="images/emblem.png" alt="">
+        <img src="images/emblem.png" alt="">
+        <img src="images/emblem.png" alt="">
+        <img src="images/emblem.png" alt="">
+        <img src="images/emblem.png" alt="">
+        <img src="images/emblem.png" alt="">
     </div>
 
     <div class="stamp-paper-content">
@@ -3041,7 +3025,7 @@ Clear Form
 
         <div class="stamp-row">
             <span>ACCOUNT REFERENCE:</span>
-            <strong id="stampPaperAccountReference"></strong>
+            <strong id="stampPaperAccountReference">SELFPRINT (PU)/ DL-SELF/GALGOTIA-GN-UP</strong>
         </div>
 
         <div class="stamp-row">
@@ -3091,13 +3075,14 @@ Clear Form
 
     </div>
 
-    <img src="stamppaperimage/seal.png"
-         class="stamp-paper-seal">
-<footer class="stamp-paper-footer">
-    <div>यह शपथपत्र प्रकरण के न्यायिक अभिलेख का अभिन्न भाग है।</div>
-    <div>This affidavit forms an integral part of the judicial record of the case.</div>
-</footer>
+    <div class="stamp-paper-footer">
+        <div>यह शपथपत्र प्रकरण के न्यायिक अभिलेख का अभिन्न भाग है।</div>
+        <div>This affidavit forms an integral part of the judicial record of the case.</div>
+    </div>
+
+    <div class="sample-seal">SAMPLE SEAL</div>
 </div>
+
 
 
 <!-- PAGE 5 -->
@@ -3353,6 +3338,62 @@ function generateDocuments() {
 
     });
 
+    /* Ensure the generated consideration price is reflected on Page 3. */
+    const considerationInput = document.getElementById("considerationPrice");
+    const considerationRef = document.getElementById("refConsiderationPrice");
+
+    if (considerationInput && considerationRef) {
+        considerationRef.textContent = considerationInput.value || "";
+    }
+
+    /* Page 4 — copy values from the existing reference spans. */
+    const stampPaperValue = (sourceId, targetId) => {
+        const source = document.getElementById(sourceId);
+        const target = document.getElementById(targetId);
+        if (source && target) {
+            target.textContent = source.textContent || source.value || "";
+        }
+    };
+
+    stampPaperValue("estampRefCertNo", "stampPaperCertNo");
+    stampPaperValue("estampRefIssueDate", "stampPaperIssueDate");
+    stampPaperValue("refStampDescription", "stampPaperDescription");
+    stampPaperValue("refPurchasedBy", "stampPaperPurchasedBy");
+    stampPaperValue("refConsiderationPrice", "stampPaperConsiderationPrice");
+    stampPaperValue("refFirstParty", "stampPaperFirstParty");
+    stampPaperValue("refSecondParty", "stampPaperSecondParty");
+    stampPaperValue("refStampDutyPaidBy", "stampPaperStampDutyPaidBy");
+    stampPaperValue("refStampDutyAmount", "stampPaperStampDutyAmount");
+
+    const applicableSections =
+        document.getElementById("presentSections") ||
+        document.getElementById("sectionsFIR") ||
+        document.getElementById("sectionsComplaint");
+
+    const applicableTarget =
+        document.getElementById("stampPaperApplicableSections");
+
+    if (applicableTarget) {
+        applicableTarget.textContent =
+            applicableSections ? (applicableSections.value || "") : "";
+    }
+
+    /* Sample denomination header. */
+    const stampPaperImages = {
+        "Core Critical": "stamppaperimages/1000estamp.png",
+        "Crucial": "stamppaperimages/500estamp.png",
+        "Specialized": "stamppaperimages/200estamp.png",
+        "Procedural": "stamppaperimages/100estamp.png"
+    };
+
+    const stampDutyLevel = document.getElementById("stampDuty")?.value || "";
+    const stampPaperHeader = document.getElementById("stampPaperHeaderImage");
+
+    if (stampPaperHeader) {
+        stampPaperHeader.src = stampPaperImages[stampDutyLevel] || "";
+    }
+
+
     /* Q7 CASE LEVEL -> AFFIDAVIT CV SEAL */
     const caseLevel = document.getElementById("complaintNumber")?.value || "";
     const caseLevelSeal = document.getElementById("caseLevelSeal");
@@ -3400,57 +3441,16 @@ document.getElementById("pageOneDate").textContent = dateText;
 document.getElementById("pageOneTime").textContent = timeText;
 document.getElementById("pageOneDay").textContent = dayText;
 
-const stampPaperImages = {
-    "Core Critical": "stamppaperimages/1000estamp.png",
-    "Crucial": "stamppaperimages/500estamp.png",
-    "Specialized": "stamppaperimages/200estamp.png",
-    "Procedural": "stamppaperimages/100estamp.png"
-};
-
-const level = document.getElementById("stampDuty").value;
-
-document.getElementById("stampPaperHeaderImage").src =
-    stampPaperImages[level] || "";
-
-document.getElementById("stampPaperCertNo").textContent =
-    document.getElementById("estampRefCertNo").textContent;
-
-document.getElementById("stampPaperIssueDate").textContent =
-    document.getElementById("estampRefIssueDate").textContent;
-
-document.getElementById("stampPaperAccountReference").textContent =
-    "SELFPRINT (PU)/ DL-SELF/GALGOTIA-GN-UP";
-
-document.getElementById("stampPaperApplicableSections").textContent =
-    document.getElementById("presentSections")?.value ||
-    document.getElementById("sectionsFIR")?.value ||
-    "";
-
-document.getElementById("stampPaperDescription").textContent =
-    document.getElementById("refStampDescription").textContent;
-
-document.getElementById("stampPaperPurchasedBy").textContent =
-    document.getElementById("refPurchasedBy").textContent;
-
-document.getElementById("stampPaperFirstParty").textContent =
-    document.getElementById("refFirstParty").textContent;
-
-document.getElementById("stampPaperSecondParty").textContent =
-    document.getElementById("refSecondParty").textContent;
-
-document.getElementById("stampPaperConsiderationPrice").textContent =
-    document.getElementById("refConsiderationPrice").textContent;
-
-document.getElementById("stampPaperStampDutyPaidBy").textContent =
-    document.getElementById("refStampDutyPaidBy").textContent;
-
-document.getElementById("stampPaperStampDutyAmount").textContent =
-    document.getElementById("refStampDutyAmount").textContent;
 
     /* =====================================
        SHOW GENERATED DOCUMENTS
     ===================================== */
-generateDemoPage3QR();
+try {
+        generateDemoPage3QR();
+    } catch (error) {
+        console.error("QR generation error:", error);
+    }
+
     document.getElementById("printArea").style.display = "block";
 
 
@@ -3643,15 +3643,12 @@ document.addEventListener("DOMContentLoaded", function () {
         // Indian number format
         considerationPrice.value =
             "₹" + roundedAmount.toLocaleString("en-IN");
-        document.getElementById("refConsiderationPrice").textContent =
-    considerationPrice.value;
     }
 
     // Generate when Stamp Duty option changes
-stampDuty.addEventListener("change", generateConsiderationPrice);
+    stampDuty.addEventListener("change", generateConsiderationPrice);
 
-// Generate once initially
-generateConsiderationPrice();
+    if (stampDuty.value) generateConsiderationPrice();
 
 });
 
@@ -3696,9 +3693,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Stamp duty → Stamp Duty Amount
     syncValue("stampDuty", "refStampDutyAmount");
-
-    document.getElementById("stampPaperConsiderationPrice").textContent =
-    document.getElementById("refConsiderationPrice").textContent;
 
 });
 
