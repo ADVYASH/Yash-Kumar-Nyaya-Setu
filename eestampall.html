@@ -1934,8 +1934,10 @@ button:hover {
     transform: rotate(-12deg);
 }
 
-.fir-auto-page .fir-auto-seal { display: none; }
-.fir-auto-page.fir-final-page .fir-auto-seal { display: block; }
+.fir-auto-page .fir-auto-seal {
+    display: block !important; display: block; display: none; }
+.fir-auto-page.fir-final-page .fir-auto-seal {
+    display: block !important; display: block; display: block; }
 
 @media print {
     .fir-page {
@@ -4349,3 +4351,93 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
+
+/* Keep logo + seal on every FIR page after pagination */
+document.addEventListener("DOMContentLoaded", function () {
+
+    const state = document.getElementById("state");
+
+    if (state) {
+        state.addEventListener("change", function () {
+            setTimeout(ensureFIRBrandingOnEveryPage, 50);
+        });
+
+        state.addEventListener("input", function () {
+            setTimeout(ensureFIRBrandingOnEveryPage, 50);
+        });
+    }
+
+    setTimeout(ensureFIRBrandingOnEveryPage, 100);
+});
+
+
+/* =========================================================
+   PUT STATE SEAL ON EVERY FIR A4 PAGE
+========================================================= */
+function applySealToEveryFIRPage() {
+    const stateField = document.getElementById("state");
+    if (!stateField) return;
+
+    const stateName = stateField.value.trim();
+    if (!stateName) return;
+
+    const slug =
+        typeof getFIRStateSlug === "function"
+            ? getFIRStateSlug(stateName)
+            : stateName.toLowerCase()
+                .replace(/&/g, "and")
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-|-$/g, "");
+
+    if (!slug) return;
+
+    const sealPath = "seal/" + slug + ".png";
+
+    const firPages = [
+        document.getElementById("firPage"),
+        ...document.querySelectorAll(".fir-auto-page")
+    ].filter(Boolean);
+
+    firPages.forEach(function(page) {
+        const seal = page.querySelector(".fir-state-seal");
+        const container = page.querySelector(".fir-seal-container");
+
+        if (seal) {
+            seal.src = sealPath;
+            seal.style.display = "block";
+        }
+
+        if (container) {
+            container.style.display = "block";
+        }
+    });
+}
+
+/* Re-apply after FIR pagination creates new A4 pages. */
+(function () {
+    const originalPaginateFIR =
+        window.paginateFIR;
+
+    if (typeof originalPaginateFIR === "function") {
+        window.paginateFIR = function () {
+            const result = originalPaginateFIR.apply(this, arguments);
+            setTimeout(applySealToEveryFIRPage, 0);
+            return result;
+        };
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(applySealToEveryFIRPage, 100);
+
+        const state = document.getElementById("state");
+        if (state) {
+            state.addEventListener("change", function () {
+                setTimeout(applySealToEveryFIRPage, 100);
+            });
+            state.addEventListener("input", function () {
+                setTimeout(applySealToEveryFIRPage, 100);
+            });
+        }
+    });
+})();
