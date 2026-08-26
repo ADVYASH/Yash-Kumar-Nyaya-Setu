@@ -1538,6 +1538,87 @@ button:hover {
         display: block !important;
     }
 }
+
+.stamp-paper-page {
+    position: relative;
+    overflow: hidden;
+    padding: 0 !important;
+}
+
+.stamp-paper-header-image {
+    display: block;
+    width: 100%;
+    height: 48mm;
+    object-fit: cover;
+    object-position: top center;
+    position: relative;
+    z-index: 2;
+}
+
+.stamp-paper-content {
+    position: relative;
+    z-index: 3;
+    margin: 8mm 14mm;
+}
+
+.stamp-row {
+    display: grid;
+    grid-template-columns: 48% 52%;
+    min-height: 11mm;
+    align-items: center;
+}
+
+.stamp-row span {
+    text-align: left;
+    font-weight: bold;
+}
+
+.stamp-row strong {
+    text-align: right;
+    font-weight: normal;
+    word-break: break-word;
+}
+
+.stamp-paper-watermark {
+    position: absolute;
+    top: 55mm;
+    left: 15mm;
+    right: 15mm;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15mm;
+    opacity: 0.05;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.stamp-paper-watermark img {
+    width: 22mm;
+    height: 22mm;
+    object-fit: contain;
+}
+
+.stamp-paper-seal {
+    position: absolute;
+    right: 10mm;
+    bottom: 10mm;
+    width: 42mm;
+    height: 42mm;
+    object-fit: contain;
+    transform: rotate(-15deg);
+    z-index: 5;
+}
+
+.stamp-paper-footer {
+    position: absolute;
+    bottom: 8mm;
+    left: 15mm;
+    right: 55mm;
+    text-align: center;
+    font-size: 9pt;
+    line-height: 1.6;
+    z-index: 4;
+}
 </style>
 </head>
 
@@ -1808,8 +1889,52 @@ button:hover {
 </div>
 
 <div class="field">
-<label>29. State</label>
-<input id="courtState">
+  <label for="courtState">29. Court Location</label>
+  <select id="courtState" name="courtState">
+    <option value="">Select State / Union Territory</option>
+
+    <!-- States -->
+    <option value="Andhra Pradesh">Andhra Pradesh</option>
+    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+    <option value="Assam">Assam</option>
+    <option value="Bihar">Bihar</option>
+    <option value="Chhattisgarh">Chhattisgarh</option>
+    <option value="Goa">Goa</option>
+    <option value="Gujarat">Gujarat</option>
+    <option value="Haryana">Haryana</option>
+    <option value="Himachal Pradesh">Himachal Pradesh</option>
+    <option value="Jharkhand">Jharkhand</option>
+    <option value="Karnataka">Karnataka</option>
+    <option value="Kerala">Kerala</option>
+    <option value="Madhya Pradesh">Madhya Pradesh</option>
+    <option value="Maharashtra">Maharashtra</option>
+    <option value="Manipur">Manipur</option>
+    <option value="Meghalaya">Meghalaya</option>
+    <option value="Mizoram">Mizoram</option>
+    <option value="Nagaland">Nagaland</option>
+    <option value="Odisha">Odisha</option>
+    <option value="Punjab">Punjab</option>
+    <option value="Rajasthan">Rajasthan</option>
+    <option value="Sikkim">Sikkim</option>
+    <option value="Tamil Nadu">Tamil Nadu</option>
+    <option value="Telangana">Telangana</option>
+    <option value="Tripura">Tripura</option>
+    <option value="Uttar Pradesh">Uttar Pradesh</option>
+    <option value="Uttarakhand">Uttarakhand</option>
+    <option value="West Bengal">West Bengal</option>
+
+    <!-- Union Territories -->
+    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+    <option value="Chandigarh">Chandigarh</option>
+    <option value="Dadra and Nagar Haveli and Daman and Diu">
+      Dadra and Nagar Haveli and Daman and Diu
+    </option>
+    <option value="Delhi">Delhi</option>
+    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+    <option value="Ladakh">Ladakh</option>
+    <option value="Lakshadweep">Lakshadweep</option>
+    <option value="Puducherry">Puducherry</option>
+  </select>
 </div>
 
 </div>
@@ -2863,37 +2988,95 @@ Clear Form
 
 
 <!-- PAGE 4 -->
+<!-- PAGE 4 -->
+<div class="a4-page stamp-paper-page">
 
-<div class="a4-page">
-<h1>STAMP PAPER</h1>
+    <img id="stampPaperHeaderImage"
+         class="stamp-paper-header-image"
+         src=""
+         alt="Stamp Paper">
 
-<div class="doc-row">
-<div class="doc-label">Stamp Description</div>
-<div class="doc-value" data-field="stampDescription"></div>
-</div>
+    <div class="stamp-paper-watermark">
+        <img src="images/emblem.png">
+        <img src="images/emblem.png">
+        <img src="images/emblem.png">
+        <img src="images/emblem.png">
+        <img src="images/emblem.png">
+        <img src="images/emblem.png">
+        <img src="images/emblem.png">
+        <img src="images/emblem.png">
+    </div>
 
-<div class="doc-row">
-<div class="doc-label">Consideration Price</div>
-<div class="doc-value" data-field="considerationPrice"></div>
-</div>
+    <div class="stamp-paper-content">
 
-<div class="doc-row">
-<div class="doc-label">Stamp Duty Amount</div>
-<div class="doc-value" data-field="stampDuty"></div>
-</div>
+        <div class="stamp-row">
+            <span>CERTIFICATE NUMBER:</span>
+            <strong id="stampPaperCertNo"></strong>
+        </div>
 
-<h2>Party Details</h2>
+        <div class="stamp-row">
+            <span>CERTIFICATE ISSUED DATE:</span>
+            <strong id="stampPaperIssueDate"></strong>
+        </div>
 
-<div class="doc-row">
-<div class="doc-label">Petitioner</div>
-<div class="doc-value" data-field="petitioner"></div>
-</div>
+        <div class="stamp-row">
+            <span>ACCOUNT REFERENCE:</span>
+            <strong id="stampPaperAccountReference"></strong>
+        </div>
 
-<div class="doc-row">
-<div class="doc-label">Respondent</div>
-<div class="doc-value" data-field="respondent"></div>
-</div>
+        <div class="stamp-row">
+            <span>UNIQUE DOC REFERENCE:</span>
+            <strong>DL-71-YASH-KUMAR-UDR-260608-9471</strong>
+        </div>
 
+        <div class="stamp-row">
+            <span>APPLICABLE SECTIONS:</span>
+            <strong id="stampPaperApplicableSections"></strong>
+        </div>
+
+        <div class="stamp-row">
+            <span>DESCRIPTION:</span>
+            <strong id="stampPaperDescription"></strong>
+        </div>
+
+        <div class="stamp-row">
+            <span>PURCHASED BY:</span>
+            <strong id="stampPaperPurchasedBy"></strong>
+        </div>
+
+        <div class="stamp-row">
+            <span>FIRST PARTY:</span>
+            <strong id="stampPaperFirstParty"></strong>
+        </div>
+
+        <div class="stamp-row">
+            <span>SECOND PARTY:</span>
+            <strong id="stampPaperSecondParty"></strong>
+        </div>
+
+        <div class="stamp-row">
+            <span>CONSIDERATION PRICE:</span>
+            <strong id="stampPaperConsiderationPrice"></strong>
+        </div>
+
+        <div class="stamp-row">
+            <span>STAMP DUTY PAID BY:</span>
+            <strong id="stampPaperStampDutyPaidBy"></strong>
+        </div>
+
+        <div class="stamp-row">
+            <span>STAMP DUTY AMOUNT:</span>
+            <strong id="stampPaperStampDutyAmount"></strong>
+        </div>
+
+    </div>
+
+    <img src="stamppaperimage/seal.png"
+         class="stamp-paper-seal">
+<footer class="stamp-paper-footer">
+    <div>यह शपथपत्र प्रकरण के न्यायिक अभिलेख का अभिन्न भाग है।</div>
+    <div>This affidavit forms an integral part of the judicial record of the case.</div>
+</footer>
 </div>
 
 
@@ -3197,6 +3380,52 @@ document.getElementById("pageOneDate").textContent = dateText;
 document.getElementById("pageOneTime").textContent = timeText;
 document.getElementById("pageOneDay").textContent = dayText;
 
+const stampPaperImages = {
+    "Core Critical": "stamppaperimages/1000.png",
+    "Crucial": "stamppaperimages/500.png",
+    "Specialized": "stamppaperimages/200.png",
+    "Procedural": "stamppaperimages/100.png"
+};
+
+const level = document.getElementById("stampDuty").value;
+
+document.getElementById("stampPaperHeaderImage").src =
+    stampPaperImages[level] || "";
+
+document.getElementById("stampPaperCertNo").textContent =
+    document.getElementById("estampRefCertNo").textContent;
+
+document.getElementById("stampPaperIssueDate").textContent =
+    document.getElementById("estampRefIssueDate").textContent;
+
+document.getElementById("stampPaperAccountReference").textContent =
+    "SELFPRINT (PU)/ DL-SELF/GALGOTIA-GN-UP";
+
+document.getElementById("stampPaperApplicableSections").textContent =
+    document.getElementById("presentSections")?.value ||
+    document.getElementById("sectionsFIR")?.value ||
+    "";
+
+document.getElementById("stampPaperDescription").textContent =
+    document.getElementById("refStampDescription").textContent;
+
+document.getElementById("stampPaperPurchasedBy").textContent =
+    document.getElementById("refPurchasedBy").textContent;
+
+document.getElementById("stampPaperFirstParty").textContent =
+    document.getElementById("refFirstParty").textContent;
+
+document.getElementById("stampPaperSecondParty").textContent =
+    document.getElementById("refSecondParty").textContent;
+
+document.getElementById("stampPaperConsiderationPrice").textContent =
+    document.getElementById("refConsiderationPrice").textContent;
+
+document.getElementById("stampPaperStampDutyPaidBy").textContent =
+    document.getElementById("refStampDutyPaidBy").textContent;
+
+document.getElementById("stampPaperStampDutyAmount").textContent =
+    document.getElementById("refStampDutyAmount").textContent;
 
     /* =====================================
        SHOW GENERATED DOCUMENTS
