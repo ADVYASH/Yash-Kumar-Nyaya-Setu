@@ -1809,50 +1809,147 @@ button:hover {
     margin: 0 0 5mm;
 }
 
-
-/* =========================================================
-   FIR FINAL LAYOUT OVERRIDES
-========================================================= */
+/* =========================================
+   FIR MULTI-A4 PAGE CONTINUATION
+========================================= */
 .fir-page {
-    position: relative;
+    width: 210mm;
+    height: 297mm;
+    min-height: 297mm;
+    max-height: 297mm;
     box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+    background: #fff;
+    color: #000;
+    font-family: "Times New Roman", Times, serif;
     border: 3px double #000;
     padding: 18mm;
-    overflow: hidden;
 }
 
 .fir-page::before {
     content: "";
     position: absolute;
-    top: 5mm;
-    left: 5mm;
-    right: 5mm;
-    bottom: 5mm;
+    top: 5mm; left: 5mm; right: 5mm; bottom: 5mm;
     border: 1px solid #000;
     pointer-events: none;
 }
 
-.fir-paragraphs {
+.fir-header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.fir-police-logo {
+    display: block;
+    width: 28mm;
+    height: 28mm;
+    object-fit: contain;
+    margin: 0 auto 3mm;
+}
+
+.fir-motto {
+    font-size: 18pt;
+    font-weight: bold;
+    margin-bottom: 3mm;
+}
+
+.fir-title {
+    font-size: 20pt;
+    margin-bottom: 3mm;
+}
+
+.fir-subtitle {
+    font-size: 13pt;
+}
+
+.fir-line {
+    border: 0;
+    border-top: 1px solid #000;
+    margin: 5mm 0;
+}
+
+.fir-info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12mm;
+}
+
+.fir-photo-box { width: 35mm; min-width: 35mm; }
+.fir-document-photo {
+    display: block;
+    width: 35mm;
+    height: 45mm;
+    object-fit: cover;
+    border: 1px solid #000;
+}
+
+.fir-details {
+    flex: 1;
+    font-size: 14pt;
+    line-height: 1.55;
+}
+
+.fir-paragraphs, .fir-auto-content {
+    position: relative;
+    z-index: 2;
     text-align: justify;
     font-size: 14pt;
     line-height: 1.45;
     overflow: hidden;
 }
 
-.fir-continuation-content {
-    text-align: justify;
-    font-size: 14pt;
-    line-height: 1.45;
+.fir-paragraphs {
+    height: 145mm;
 }
 
-.fir-state-seal,
-.fir-police-logo {
-    object-fit: contain;
+.fir-auto-content {
+    height: 225mm;
+}
+
+.fir-paragraphs p, .fir-auto-content p {
+    margin: 0 0 5mm;
+    text-align: justify;
+}
+
+.fir-seal-container {
+    position: absolute;
+    z-index: 2;
+    right: 18mm;
+    bottom: 15mm;
+    width: 48mm;
+    height: 48mm;
+    text-align: right;
 }
 
 .fir-state-seal {
+    display: block;
+    width: 42mm;
+    height: 42mm;
+    margin-left: auto;
+    object-fit: contain;
     transform: rotate(-12deg);
 }
+
+.fir-auto-page .fir-auto-seal { display: none; }
+.fir-auto-page.fir-final-page .fir-auto-seal { display: block; }
+
+@media print {
+    .fir-page {
+        width: 210mm !important;
+        height: 297mm !important;
+        min-height: 297mm !important;
+        max-height: 297mm !important;
+        margin: 0 !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        overflow: hidden !important;
+    }
+}
+
 </style>
 </head>
 
@@ -3390,38 +3487,6 @@ Clear Form
 
 </div>
 
-<!-- FIR CONTINUATION PAGE -->
-<div class="a4-page fir-page fir-continuation-page" id="firContinuationPage" style="display:none;">
-
-    <div class="fir-header">
-        <img id="firPoliceLogoContinuation"
-             class="fir-police-logo"
-             alt="Police Logo">
-
-        <div class="fir-motto">शांति सेवा न्याय</div>
-
-        <div class="fir-title">
-            <strong>FIRST</strong> INFORMATION REPORT
-        </div>
-
-        <div class="fir-subtitle">
-            Continuation of FIR
-        </div>
-    </div>
-
-    <hr class="fir-line">
-
-    <div class="fir-continuation-content"
-         id="firContinuationContent">
-    </div>
-
-    <div class="fir-seal-container">
-        <img id="firStateSealContinuation"
-             class="fir-state-seal"
-             alt="State Seal">
-    </div>
-
-</div>
 <!-- PAGE 6 -->
 
 <div class="a4-page">
@@ -3714,9 +3779,6 @@ document.getElementById("pageOneTime").textContent = timeText;
 document.getElementById("pageOneDay").textContent = dayText;
 
 
-    updateFIRFields();
-    setTimeout(paginateFIR, 0);
-
     /* =====================================
        SHOW GENERATED DOCUMENTS
     ===================================== */
@@ -3737,6 +3799,12 @@ try {
         behavior: "smooth",
         block: "start"
     });
+
+    /* FIR: build as many A4 continuation pages as required. */
+    setTimeout(function () {
+        if (typeof updateFIRFields === "function") updateFIRFields();
+        if (typeof paginateFIR === "function") paginateFIR();
+    }, 50);
 
 }
 
@@ -3993,13 +4061,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Update when state is selected
     stateElement.addEventListener("change", updateGovernmentName);
+
+    // Set initial value
     updateGovernmentName();
 
 });
 
-/* =========================================================
-   FIR PAGE — LOGO, SEAL, FIELDS, PHOTO & CONTINUATION
-========================================================= */
+
+/* ============================================
+   FIR — PHOTO, STATE LOGO/SEAL, MULTI-A4
+============================================ */
 
 const FIR_STATE_SLUGS = {
     "Andaman and Nicobar Islands": "andaman-and-nicobar-islands",
@@ -4040,41 +4111,37 @@ const FIR_STATE_SLUGS = {
     "West Bengal": "west-bengal"
 };
 
+function getFIRStateSlug() {
+    const state = document.getElementById("state");
+    if (!state) return "";
+    return FIR_STATE_SLUGS[state.value.trim()] || "";
+}
+
 function updateFIRStateImages() {
-    const stateField = document.getElementById("state");
-    if (!stateField) return;
-
-    const stateName = (stateField.value || "").trim();
-    if (!stateName) return;
-
-    const slug = FIR_STATE_SLUGS[stateName];
-    if (!slug) {
-        console.warn("No FIR logo/seal mapping for state:", stateName);
-        return;
-    }
+    const stateEl = document.getElementById("state");
+    const stateName = stateEl ? stateEl.value.trim() : "";
+    const slug = getFIRStateSlug();
+    if (!slug) return;
 
     const logoPath = "policelogo/" + slug + ".png";
     const sealPath = "seal/" + slug + ".png";
 
     const logo = document.getElementById("firPoliceLogo");
     const seal = document.getElementById("firStateSeal");
-    const continuationLogo = document.getElementById("firPoliceLogoContinuation");
-    const continuationSeal = document.getElementById("firStateSealContinuation");
-
     if (logo) logo.src = logoPath;
     if (seal) seal.src = sealPath;
-    if (continuationLogo) continuationLogo.src = logoPath;
-    if (continuationSeal) continuationSeal.src = sealPath;
 
     const stateDisplay = document.getElementById("firStateDisplay");
     const policeState = document.getElementById("firPoliceState");
-
     if (stateDisplay) stateDisplay.textContent = stateName;
     if (policeState) policeState.textContent = stateName;
+
+    document.querySelectorAll(".fir-auto-logo").forEach(img => img.src = logoPath);
+    document.querySelectorAll(".fir-auto-seal-image").forEach(img => img.src = sealPath);
 }
 
 function updateFIRFields() {
-    const pairs = {
+    const map = {
         firReportCategory: "firReportCategoryDisplay",
         firNumber: "firNumberDisplay",
         policeStation: "firPoliceStationDisplay",
@@ -4086,160 +4153,197 @@ function updateFIRFields() {
         incidentDescription: "firIncidentDescription"
     };
 
-    Object.entries(pairs).forEach(([inputId, outputId]) => {
-        const input = document.getElementById(inputId);
-        const output = document.getElementById(outputId);
-        if (!input || !output) return;
-
-        let value = input.value || "";
-        if (input.type === "date" && value) {
-            const date = new Date(value + "T00:00:00");
-            value = date.toLocaleDateString("en-IN", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric"
-            });
-        }
-        output.textContent = value;
+    Object.keys(map).forEach(id => {
+        const source = document.getElementById(id);
+        const target = document.getElementById(map[id]);
+        if (source && target) target.textContent = source.value || "";
     });
 
     updateFIRStateImages();
 }
 
-function setupFIRPhotoUpload() {
-    const input = document.getElementById("firPassportPhoto");
-    const preview = document.getElementById("firPassportPhotoPreview");
-    const firPhoto = document.getElementById("firDocumentPhoto");
+function createFIRContinuationPage() {
+    const page = document.createElement("div");
+    page.className = "a4-page fir-page fir-auto-page";
 
-    if (!input) return;
+    page.innerHTML = `
+        <div class="fir-header">
+            <img class="fir-police-logo fir-auto-logo" alt="Police Logo">
+            <div class="fir-motto">शांति सेवा न्याय</div>
+            <div class="fir-title"><strong>FIRST</strong> INFORMATION REPORT</div>
+            <div class="fir-subtitle">Continuation of FIR</div>
+        </div>
+        <hr class="fir-line">
+        <div class="fir-auto-content"></div>
+        <div class="fir-seal-container fir-auto-seal">
+            <img class="fir-state-seal fir-auto-seal-image" alt="State Seal">
+        </div>
+    `;
 
-    input.addEventListener("change", function () {
-        const file = this.files && this.files[0];
-        if (!file) return;
+    const firstPage = document.getElementById("firPage");
+    if (!firstPage) return null;
 
-        const reader = new FileReader();
-        reader.onload = function (event) {
-            const data = event.target.result;
-            if (preview) {
-                preview.src = data;
-                preview.style.display = "block";
-            }
-            if (firPhoto) {
-                firPhoto.src = data;
-                firPhoto.style.display = "block";
-            }
-        };
-        reader.readAsDataURL(file);
-    });
+    /* Always insert before the next document, so Judgement and later pages move down. */
+    const nextPage = firstPage.nextElementSibling;
+    if (nextPage) {
+        nextPage.parentNode.insertBefore(page, nextPage);
+    } else {
+        firstPage.parentNode.appendChild(page);
+    }
+
+    updateFIRStateImages();
+    return page;
+}
+
+function clearFIRContinuationPages() {
+    document.querySelectorAll(".fir-auto-page").forEach(page => page.remove());
 }
 
 function paginateFIR() {
-    const page = document.getElementById("firPage");
-    const content = document.getElementById("firParagraphs");
-    const continuationPage = document.getElementById("firContinuationPage");
-    const continuation = document.getElementById("firContinuationContent");
+    const firstPage = document.getElementById("firPage");
+    const firstContent = document.getElementById("firParagraphs");
+    if (!firstPage || !firstContent) return;
 
-    if (!page || !content || !continuationPage || !continuation) return;
+    clearFIRContinuationPages();
 
-    continuation.innerHTML = "";
-    continuationPage.style.display = "none";
+    /* Read the actual form values every time. */
+    const textValues = [
+        document.getElementById("complainantDetails")?.value || "",
+        document.getElementById("occurrenceReportDetails")?.value || "",
+        document.getElementById("incidentDescription")?.value || ""
+    ].map(v => v.trim()).filter(Boolean);
 
-    const paragraphs = [
-        document.getElementById("firComplainantDetails"),
-        document.getElementById("firOccurrenceReportDetails"),
-        document.getElementById("firIncidentDescription")
-    ].filter(Boolean);
+    firstContent.innerHTML = "";
 
-    const fullTexts = paragraphs.map(p => p.textContent.trim());
-    if (!fullTexts.some(Boolean)) return;
+    if (!textValues.length) {
+        document.getElementById("firStateSeal").style.display = "block";
+        return;
+    }
 
-    paragraphs.forEach(p => p.textContent = "");
+    let currentContent = firstContent;
+    let pages = [firstPage];
 
-    const pageHeight = page.clientHeight || page.offsetHeight;
-    const contentTop = content.offsetTop;
-    const reserve = 105;
-    const availableHeight = Math.max(200, pageHeight - contentTop - reserve);
-    content.style.maxHeight = availableHeight + "px";
+    function newPage() {
+        const page = createFIRContinuationPage();
+        if (!page) return null;
+        const content = page.querySelector(".fir-auto-content");
+        pages.push(page);
+        return content;
+    }
 
-    let overflow = false;
-    let continuationStarted = false;
-
-    fullTexts.forEach((text, index) => {
-        if (!text) return;
-
-        const target = paragraphs[index];
-        const words = text.split(/\s+/);
-        let remainingWords = [];
+    function addTextWithPagination(text) {
+        let words = text.split(/\s+/).filter(Boolean);
+        let paragraph = document.createElement("p");
+        currentContent.appendChild(paragraph);
 
         for (let i = 0; i < words.length; i++) {
-            target.textContent += (target.textContent ? " " : "") + words[i];
+            const previous = paragraph.textContent;
+            paragraph.textContent = previous ? previous + " " + words[i] : words[i];
 
-            if (content.scrollHeight > content.clientHeight) {
-                const current = target.textContent.trim().split(/\s+/);
-                current.pop();
-                target.textContent = current.join(" ");
-                remainingWords = words.slice(i);
-                overflow = true;
-                break;
+            if (currentContent.scrollHeight > currentContent.clientHeight) {
+                paragraph.textContent = previous;
+
+                /* If the current page has no usable word, prevent an infinite loop. */
+                if (!previous) paragraph.remove();
+
+                currentContent = newPage();
+                if (!currentContent) return;
+
+                paragraph = document.createElement("p");
+                paragraph.textContent = words[i];
+                currentContent.appendChild(paragraph);
             }
         }
+    }
 
-        if (overflow || continuationStarted) {
-            continuationStarted = true;
-            const remainingText = remainingWords.join(" ");
-            if (remainingText) {
-                const p = document.createElement("p");
-                p.textContent = remainingText;
-                continuation.appendChild(p);
-            }
-        }
+    textValues.forEach(addTextWithPagination);
 
-        if (continuationStarted) {
-            for (let j = index + 1; j < fullTexts.length; j++) {
-                if (!fullTexts[j]) continue;
-                const p = document.createElement("p");
-                p.textContent = fullTexts[j];
-                continuation.appendChild(p);
-            }
-        }
+    /* Seal belongs only on the final A4 FIR page. */
+    document.getElementById("firStateSeal").style.display = "none";
+    document.querySelectorAll(".fir-auto-page").forEach(page => {
+        page.classList.remove("fir-final-page");
+        const seal = page.querySelector(".fir-auto-seal");
+        if (seal) seal.style.display = "none";
     });
 
-    if (continuation.textContent.trim()) {
-        continuationPage.style.display = "block";
-        updateFIRStateImages();
+    const finalPage = pages[pages.length - 1];
+    if (finalPage === firstPage) {
+        document.getElementById("firStateSeal").style.display = "block";
+    } else {
+        finalPage.classList.add("fir-final-page");
+        const finalSeal = finalPage.querySelector(".fir-auto-seal");
+        if (finalSeal) finalSeal.style.display = "block";
     }
+
+    updateFIRStateImages();
 }
 
-function initializeFIR() {
-    const state = document.getElementById("state");
-    if (state) {
-        state.addEventListener("change", updateFIRFields);
-        state.addEventListener("input", updateFIRFields);
+/* FIR passport photo ONLY updates the FIR photo. */
+document.addEventListener("DOMContentLoaded", function () {
+    const photoInput = document.getElementById("firPassportPhoto");
+    const firPhoto = document.getElementById("firDocumentPhoto");
+
+    if (photoInput && firPhoto) {
+        photoInput.addEventListener("change", function () {
+            const file = this.files && this.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => { firPhoto.src = e.target.result; };
+            reader.readAsDataURL(file);
+        });
     }
 
-    [
-        "firReportCategory",
-        "firNumber",
-        "policeStation",
-        "firRegistrationDate",
-        "crimeNumber",
-        "caseDiaryNumber",
-        "complainantDetails",
-        "occurrenceReportDetails",
-        "incidentDescription"
-    ].forEach(id => {
+    const state = document.getElementById("state");
+    if (state) {
+        state.addEventListener("change", function () {
+            updateFIRFields();
+            paginateFIR();
+        });
+        state.addEventListener("input", function () {
+            updateFIRFields();
+            paginateFIR();
+        });
+    }
+
+    ["firReportCategory", "firNumber", "policeStation", "firRegistrationDate", "crimeNumber", "caseDiaryNumber",
+     "complainantDetails", "occurrenceReportDetails", "incidentDescription"].forEach(id => {
         const field = document.getElementById(id);
         if (!field) return;
         field.addEventListener("input", updateFIRFields);
         field.addEventListener("change", updateFIRFields);
     });
 
-    setupFIRPhotoUpload();
     updateFIRFields();
+    updateFIRStateImages();
+});
+
+/* Run pagination after the existing Generate Documents function has populated the form. */
+const originalGenerateDocuments = window.generateDocuments;
+if (typeof originalGenerateDocuments === "function") {
+    window.generateDocuments = function () {
+        originalGenerateDocuments.apply(this, arguments);
+        setTimeout(function () {
+            updateFIRFields();
+            paginateFIR();
+        }, 50);
+    };
 }
 
-document.addEventListener("DOMContentLoaded", initializeFIR);
-
+/* If the function is declared later in the same script, the wrapper above may not see it yet.
+   The Generate button is also handled by this delegated listener as a safety net. */
+document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("click", function (event) {
+        const button = event.target.closest("button");
+        if (!button) return;
+        const label = (button.textContent || "").trim().toLowerCase();
+        if (label.includes("generate")) {
+            setTimeout(function () {
+                updateFIRFields();
+                paginateFIR();
+            }, 100);
+        }
+    });
+});
 
 </script>
 
