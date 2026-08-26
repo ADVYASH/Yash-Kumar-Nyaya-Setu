@@ -1680,6 +1680,119 @@ button:hover {
     object-fit: cover;
     margin-top: 10px;
 }
+
+/* =========================
+   FIR PAGE ONLY
+========================= */
+
+.fir-page {
+    position: relative;
+    padding: 18mm;
+    font-family: "Times New Roman", serif;
+}
+
+.fir-header {
+    text-align: center;
+}
+
+.fir-police-logo {
+    width: 28mm;
+    height: 28mm;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 4mm;
+}
+
+.fir-motto {
+    font-size: 18pt;
+    font-weight: bold;
+    margin-bottom: 3mm;
+}
+
+.fir-title {
+    font-size: 20pt;
+    margin-bottom: 3mm;
+}
+
+.fir-title strong {
+    font-weight: 900;
+}
+
+.fir-subtitle {
+    font-size: 13pt;
+}
+
+.fir-line {
+    border: 0;
+    border-top: 1px solid #000;
+    margin: 5mm 0;
+}
+
+.fir-info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12mm;
+}
+
+.fir-photo-box {
+    width: 35mm;
+    min-width: 35mm;
+}
+
+.fir-document-photo {
+    width: 35mm;
+    height: 45mm;
+    object-fit: cover;
+    border: 1px solid #000;
+}
+
+.fir-details {
+    flex: 1;
+    font-size: 14pt;
+    line-height: 1.55;
+}
+
+.fir-paragraphs {
+    text-align: justify;
+    font-size: 14pt;
+    line-height: 1.45;
+}
+
+.fir-paragraphs p {
+    margin: 0 0 5mm;
+}
+
+.fir-seal-container {
+    text-align: right;
+    margin-top: 12mm;
+    padding-right: 8mm;
+}
+
+.fir-state-seal {
+    width: 42mm;
+    height: 42mm;
+    object-fit: contain;
+    transform: rotate(-12deg);
+}
+
+/* GOVERNMENT-STYLE BORDER — FIR PAGE ONLY */
+.fir-page {
+    position: relative;
+    border: 3px double #000;
+    box-sizing: border-box;
+    padding: 18mm;
+}
+
+.fir-page::before {
+    content: "";
+    position: absolute;
+    top: 5mm;
+    left: 5mm;
+    right: 5mm;
+    bottom: 5mm;
+    border: 1px solid #000;
+    pointer-events: none;
+}
 </style>
 </head>
 
@@ -3147,65 +3260,73 @@ Clear Form
 
 <!-- PAGE 5 -->
 
-<div class="a4-page">
-<h1>FIRST INFORMATION REPORT</h1>
+<!-- PAGE 5 — FIR -->
+<div class="a4-page fir-page" id="firPage">
 
-<div class="doc-row">
-<div class="doc-label">FIR Number</div>
-<div class="doc-value" data-field="firNumber"></div>
-</div>
+    <!-- STATE POLICE LOGO -->
+    <div class="fir-header">
+        <img id="firPoliceLogo" class="fir-police-logo" alt="Police Logo">
 
-<div class="doc-row">
-<div class="doc-label">FIR Date</div>
-<div class="doc-value" data-field="firDate"></div>
-</div>
+        <div class="fir-motto">शांति सेवा न्याय</div>
 
-<div class="doc-row">
-<div class="doc-label">Police Station</div>
-<div class="doc-value" data-field="policeStation"></div>
-</div>
+        <div class="fir-title">
+            <strong>FIRST</strong> INFORMATION REPORT
+        </div>
 
-<div class="doc-row">
-<div class="doc-label">District</div>
-<div class="doc-value" data-field="district"></div>
-</div>
+        <div class="fir-subtitle">
+            In respect of (<span id="firReportCategoryDisplay"></span>)
+            in (<span id="firStateDisplay"></span>)
+        </div>
+    </div>
 
-<div class="doc-row">
-<div class="doc-label">Complainant</div>
-<div class="doc-value" data-field="complainantName"></div>
-</div>
+    <hr class="fir-line">
 
-<div class="doc-row">
-<div class="doc-label">Victim</div>
-<div class="doc-value" data-field="victimName"></div>
-</div>
+    <!-- PHOTO + FIR DETAILS -->
+    <div class="fir-info-row">
 
-<div class="doc-row">
-<div class="doc-label">Accused</div>
-<div class="doc-value" data-field="accusedName"></div>
-</div>
+        <div class="fir-photo-box">
+            <img
+                id="firDocumentPhoto"
+                class="fir-document-photo"
+                alt="Passport Photo"
+            >
+        </div>
 
-<h2>Occurrence</h2>
+        <div class="fir-details">
 
-<div class="doc-row">
-<div class="doc-label">Date of Incident</div>
-<div class="doc-value" data-field="incidentDate"></div>
-</div>
+            <div><strong><span id="firPoliceState"></span>'s Police</strong></div>
 
-<div class="doc-row">
-<div class="doc-label">Time</div>
-<div class="doc-value" data-field="incidentTime"></div>
-</div>
+            <div>SO No. <span id="firNumberDisplay"></span></div>
 
-<div class="doc-row">
-<div class="doc-label">Place</div>
-<div class="doc-value" data-field="incidentPlace"></div>
-</div>
+            <div>PS : <span id="firPoliceStationDisplay"></span></div>
 
-<p>
-<strong>Description:</strong>
-<span data-field="incidentDescription"></span>
-</p>
+            <div>Date : <span id="firRegistrationDateDisplay"></span></div>
+
+            <div>Crime Number <span id="firCrimeNumberDisplay"></span></div>
+
+            <div>Case Diary No : <span id="firCaseDiaryNumberDisplay"></span></div>
+
+        </div>
+
+    </div>
+
+    <hr class="fir-line">
+
+    <!-- FIR PARAGRAPHS -->
+    <div class="fir-paragraphs">
+
+        <p id="firComplainantDetails"></p>
+
+        <p id="firOccurrenceReportDetails"></p>
+
+        <p id="firIncidentDescription"></p>
+
+    </div>
+
+    <!-- TILTED STATE SEAL -->
+    <div class="fir-seal-container">
+        <img id="firStateSeal" class="fir-state-seal" alt="State Seal">
+    </div>
 
 </div>
 
@@ -3799,10 +3920,127 @@ document.getElementById("firPassportPhoto").addEventListener("change", function 
         preview.src = e.target.result;
         preview.style.display = "block";
 
-        const documentPhoto = document.querySelector(".passport-photo");
+    };
 
-        if (documentPhoto) {
-            documentPhoto.src = e.target.result;
+    reader.readAsDataURL(file);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const state = document.getElementById("state");
+
+    if (!state) return;
+
+    const stateSlug = {
+        "Andaman and Nicobar Islands": "andaman-and-nicobar-islands",
+        "Andhra Pradesh": "andhra-pradesh",
+        "Arunachal Pradesh": "arunachal-pradesh",
+        "Assam": "assam",
+        "Bihar": "bihar",
+        "Chandigarh": "chandigarh",
+        "Chhattisgarh": "chhattisgarh",
+        "Dadra and Nagar Haveli and Daman and Diu":
+            "dadra-and-nagar-haveli-and-daman-and-diu",
+        "Delhi": "delhi",
+        "Goa": "goa",
+        "Gujarat": "gujarat",
+        "Haryana": "haryana",
+        "Himachal Pradesh": "himachal-pradesh",
+        "Jammu and Kashmir": "jammu-and-kashmir",
+        "Jharkhand": "jharkhand",
+        "Karnataka": "karnataka",
+        "Kerala": "kerala",
+        "Ladakh": "ladakh",
+        "Lakshadweep": "lakshadweep",
+        "Madhya Pradesh": "madhya-pradesh",
+        "Maharashtra": "maharashtra",
+        "Manipur": "manipur",
+        "Meghalaya": "meghalaya",
+        "Mizoram": "mizoram",
+        "Nagaland": "nagaland",
+        "Odisha": "odisha",
+        "Puducherry": "puducherry",
+        "Punjab": "punjab",
+        "Rajasthan": "rajasthan",
+        "Sikkim": "sikkim",
+        "Tamil Nadu": "tamil-nadu",
+        "Telangana": "telangana",
+        "Tripura": "tripura",
+        "Uttar Pradesh": "uttar-pradesh",
+        "Uttarakhand": "uttarakhand",
+        "West Bengal": "west-bengal"
+    };
+
+    function updateFIRStateImages() {
+
+        const selectedState = state.value;
+        const slug = stateSlug[selectedState];
+
+        if (!slug) return;
+
+        document.getElementById("firPoliceLogo").src =
+            "policelogo/" + slug + ".png";
+
+        document.getElementById("firStateSeal").src =
+            "seal/" + slug + ".png";
+
+        document.getElementById("firPoliceState").textContent =
+            selectedState;
+
+        document.getElementById("firStateDisplay").textContent =
+            selectedState;
+    }
+
+    state.addEventListener("change", updateFIRStateImages);
+
+    updateFIRStateImages();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    function sync(inputId, outputId) {
+        const input = document.getElementById(inputId);
+        const output = document.getElementById(outputId);
+
+        if (!input || !output) return;
+
+        function update() {
+            output.textContent = input.value || "";
+        }
+
+        input.addEventListener("input", update);
+        input.addEventListener("change", update);
+        update();
+    }
+
+    sync("firReportCategory", "firReportCategoryDisplay");
+    sync("state", "firStateDisplay");
+    sync("state", "firPoliceState");
+
+    sync("firNumber", "firNumberDisplay");
+    sync("policeStation", "firPoliceStationDisplay");
+    sync("firRegistrationDate", "firRegistrationDateDisplay");
+    sync("crimeNumber", "firCrimeNumberDisplay");
+    sync("caseDiaryNumber", "firCaseDiaryNumberDisplay");
+
+    sync("complainantDetails", "firComplainantDetails");
+    sync("occurrenceReportDetails", "firOccurrenceReportDetails");
+    sync("incidentDescription", "firIncidentDescription");
+
+});
+
+document.getElementById("firPassportPhoto")?.addEventListener("change", function () {
+
+    const file = this.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        const photo = document.getElementById("firDocumentPhoto");
+
+        if (photo) {
+            photo.src = e.target.result;
         }
     };
 
