@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Legal Document Generator</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <style>
 * {
     box-sizing: border-box;
@@ -1156,7 +1158,7 @@ button:hover {
 
     font-family: "Times New Roman", Times, serif;
 
-    font-size: 7.5pt;
+    font-size: 12pt;
 
     font-weight: bold;
 
@@ -1202,7 +1204,7 @@ button:hover {
 
     font-family: "Times New Roman", Times, serif;
 
-    font-size: 7.5pt;
+    font-size: 12pt;
 
     font-weight: bold;
 
@@ -1495,6 +1497,47 @@ button:hover {
         display: block !important;
     }
 }
+
+.estamp-reference-detail {
+    display: grid;
+    grid-template-columns: 48% 52%;
+    width: 100%;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.estamp-reference-label {
+    text-align: left;
+    font-weight: 600;
+}
+
+.estamp-reference-detail > span:last-child {
+    text-align: right;
+    word-break: break-word;
+}
+
+/* =========================================
+   PAGE 3 — FOOTER
+   ========================================= */
+.estamp-reference-footer {
+    position: absolute;
+    left: 15mm;
+    right: 15mm;
+    bottom: 8mm;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 8px;
+    color: #333;
+    border-top: 1px solid #777;
+    padding-top: 3mm;
+    z-index: 10;
+}
+
+@media print {
+    .estamp-reference-footer {
+        display: block !important;
+    }
+}
 </style>
 </head>
 
@@ -1633,8 +1676,52 @@ button:hover {
 </div>
 
 <div class="field">
-<label>17. State</label>
-<input id="state">
+  <label for="state">17. State / Union Territory</label>
+  <select id="state" name="state">
+    <option value="">Select State / Union Territory</option>
+
+    <!-- States -->
+    <option value="Andhra Pradesh">Andhra Pradesh</option>
+    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+    <option value="Assam">Assam</option>
+    <option value="Bihar">Bihar</option>
+    <option value="Chhattisgarh">Chhattisgarh</option>
+    <option value="Goa">Goa</option>
+    <option value="Gujarat">Gujarat</option>
+    <option value="Haryana">Haryana</option>
+    <option value="Himachal Pradesh">Himachal Pradesh</option>
+    <option value="Jharkhand">Jharkhand</option>
+    <option value="Karnataka">Karnataka</option>
+    <option value="Kerala">Kerala</option>
+    <option value="Madhya Pradesh">Madhya Pradesh</option>
+    <option value="Maharashtra">Maharashtra</option>
+    <option value="Manipur">Manipur</option>
+    <option value="Meghalaya">Meghalaya</option>
+    <option value="Mizoram">Mizoram</option>
+    <option value="Nagaland">Nagaland</option>
+    <option value="Odisha">Odisha</option>
+    <option value="Punjab">Punjab</option>
+    <option value="Rajasthan">Rajasthan</option>
+    <option value="Sikkim">Sikkim</option>
+    <option value="Tamil Nadu">Tamil Nadu</option>
+    <option value="Telangana">Telangana</option>
+    <option value="Tripura">Tripura</option>
+    <option value="Uttar Pradesh">Uttar Pradesh</option>
+    <option value="Uttarakhand">Uttarakhand</option>
+    <option value="West Bengal">West Bengal</option>
+
+    <!-- Union Territories -->
+    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+    <option value="Chandigarh">Chandigarh</option>
+    <option value="Dadra and Nagar Haveli and Daman and Diu">
+      Dadra and Nagar Haveli and Daman and Diu
+    </option>
+    <option value="Delhi">Delhi</option>
+    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+    <option value="Ladakh">Ladakh</option>
+    <option value="Lakshadweep">Lakshadweep</option>
+    <option value="Puducherry">Puducherry</option>
+  </select>
 </div>
 
 <div class="field">
@@ -1745,13 +1832,19 @@ button:hover {
 </div>
 
 <div class="field">
-<label>31. Consideration Price</label>
-<input id="considerationPrice">
+    <label>31. Consideration Price</label>
+    <input id="considerationPrice" readonly>
 </div>
 
 <div class="field">
-<label>32. Stamp Duty Amount</label>
-<input id="stampDuty">
+    <label>32. Stamp Duty Amount</label>
+    <select id="stampDuty">
+        <option value="">Select Option</option>
+        <option value="Core Critical">1. Core Critical</option>
+        <option value="Crucial">2. Crucial</option>
+        <option value="Specialized">3. Specialized</option>
+        <option value="Procedural">4. Procedural</option>
+    </select>
 </div>
 
 </div>
@@ -2557,19 +2650,19 @@ Clear Form
 <div class="affidavit-border">
 
     <div class="border-top">
-        <span>SATYAMEV JAYATE</span>
-        <span>SATYAMEV JAYATE</span>
-        <span>SATYAMEV JAYATE</span>
-        <span>SATYAMEV JAYATE</span>
-        <span>SATYAMEV JAYATE</span>
+        <span>सत्यमेव जयते</span>
+        <span>सत्यमेव जयते</span>
+        <span>सत्यमेव जयते</span>
+        <span>सत्यमेव जयते</span>
+        <span>सत्यमेव जयते</span>
     </div>
 
     <div class="border-bottom">
-        <span>SATYAMEV JAYATE</span>
-        <span>SATYAMEV JAYATE</span>
-        <span>SATYAMEV JAYATE</span>
-        <span>SATYAMEV JAYATE</span>
-        <span>SATYAMEV JAYATE</span>
+        <span>सत्यमेव जयते</span>
+        <span>सत्यमेव जयते</span>
+        <span>सत्यमेव जयते</span>
+        <span>सत्यमेव जयते</span>
+        <span>सत्यमेव जयते</span>
     </div>
 
 </div>
@@ -2714,42 +2807,58 @@ Clear Form
             <span class="estamp-reference-label">Unique Doc. Reference :</span>
             <span>DL-71-YASH-KUMAR-UDR-260608-9471</span>
         </div>
-        <div class="estamp-reference-detail">
-            <span class="estamp-reference-label">Purchased By :</span>
-            <span id="estampRefPurchasedBy"></span>
-        </div>
-        <div class="estamp-reference-detail">
-            <span class="estamp-reference-label">Description of Document :</span>
-            <span id="estampRefDescription"></span>
-        </div>
-        <div class="estamp-reference-detail">
-            <span class="estamp-reference-label">Consideration Price (Rs.) :</span>
-            <span id="estampRefPrice"></span>
-        </div>
-        <div class="estamp-reference-detail">
-            <span class="estamp-reference-label">First Party :</span>
-            <span id="estampRefFirstParty"></span>
-        </div>
-        <div class="estamp-reference-detail">
-            <span class="estamp-reference-label">Second Party :</span>
-            <span id="estampRefSecondParty"></span>
-        </div>
-        <div class="estamp-reference-detail">
-            <span class="estamp-reference-label">Stamp Duty Paid By :</span>
-            <span id="estampRefPaidBy"></span>
-        </div>
-        <div class="estamp-reference-detail">
-            <span class="estamp-reference-label">Stamp Duty Amount (Rs.) :</span>
-            <span id="estampRefDuty"></span>
-        </div>
+<!-- Purchased By -->
+<div class="estamp-reference-detail">
+    <span class="estamp-reference-label">Purchased By :</span>
+    <span id="refPurchasedBy"></span>
+</div>
+
+<!-- Description of Document -->
+<div class="estamp-reference-detail">
+    <span class="estamp-reference-label">Description of Document :</span>
+    <span id="refStampDescription"></span>
+</div>
+
+<!-- Consideration Price -->
+<div class="estamp-reference-detail">
+    <span class="estamp-reference-label">Consideration Price (Rs.) :</span>
+    <span id="refConsiderationPrice"></span>
+</div>
+
+<!-- First Party -->
+<div class="estamp-reference-detail">
+    <span class="estamp-reference-label">First Party :</span>
+    <span id="refFirstParty"></span>
+</div>
+
+<!-- Second Party -->
+<div class="estamp-reference-detail">
+    <span class="estamp-reference-label">Second Party :</span>
+    <span id="refSecondParty"></span>
+</div>
+
+<!-- Stamp Duty Paid By -->
+<div class="estamp-reference-detail">
+    <span class="estamp-reference-label">Stamp Duty Paid By :</span>
+    <span id="refStampDutyPaidBy"></span>
+</div>
+
+<!-- Stamp Duty Amount -->
+<div class="estamp-reference-detail">
+    <span class="estamp-reference-label">Stamp Duty Amount (Rs.) :</span>
+    <span id="refStampDutyAmount"></span>
+</div>
 
         <div class="estamp-reference-qr-title">Digital Verification QR Code</div>
         <div id="estampRefQr" class="estamp-reference-qr"></div>
-
-        <div class="estamp-reference-note">
-            SAMPLE / DEMO — NOT A GOVERNMENT-ISSUED DOCUMENT
-        </div>
     </div>
+<div class="estamp-reference-footer">
+    <div>This affidavit is filed before the Hon’ble Court of competent jurisdiction.</div>
+    <div>The matter pertains to the proceedings pending before the concerned Court.</div>
+    <div>This affidavit forms part of the official judicial record of the case.</div>
+    <div>The contents of this affidavit are affirmed and verified by the Deponent.</div>
+    <div>Filed in accordance with the applicable rules and procedures of the Hon’ble Court.</div>
+</div>
 </div>
 
 
@@ -2950,6 +3059,60 @@ function getValue(id) {
     return element.value || "";
 }
 
+function generateDemoPage3QR() {
+
+    const qrContainer = document.getElementById("estampRefQr");
+
+    if (!qrContainer) {
+        console.error("QR container #estampRefQr not found");
+        return;
+    }
+
+    if (typeof QRCode === "undefined") {
+        console.error("QRCode library is not loaded");
+        return;
+    }
+
+    // Remove previous QR
+    qrContainer.innerHTML = "";
+
+    const getText = (id) => {
+        const el = document.getElementById(id);
+        return el ? el.textContent.trim() : "";
+    };
+
+    const qrData = `
+DEMO DOCUMENT
+NOT VALID FOR GOVERNMENT VERIFICATION
+
+${getText("estampRefGovt")}
+
+Certificate Number: ${getText("estampRefCertNo")}
+Certificate Issue Date: ${getText("estampRefIssueDate")}
+
+Purchased By: ${getText("refPurchasedBy")}
+Description of Document: ${getText("refStampDescription")}
+Consideration Price: ${getText("refConsiderationPrice")}
+
+First Party: ${getText("refFirstParty")}
+Second Party: ${getText("refSecondParty")}
+
+Stamp Duty Paid By: ${getText("refStampDutyPaidBy")}
+Stamp Duty Amount: ${getText("refStampDutyAmount")}
+
+DEMO ONLY
+NOT A GOVERNMENT DOCUMENT
+`.trim();
+
+    new QRCode(qrContainer, {
+        text: qrData,
+        width: 180,
+        height: 180,
+        correctLevel: QRCode.CorrectLevel.M
+    });
+
+    console.log("Demo QR generated successfully");
+}
 
 /* ============================================
    GENERATE DOCUMENTS
@@ -3038,7 +3201,7 @@ document.getElementById("pageOneDay").textContent = dayText;
     /* =====================================
        SHOW GENERATED DOCUMENTS
     ===================================== */
-
+generateDemoPage3QR();
     document.getElementById("printArea").style.display = "block";
 
 
@@ -3087,6 +3250,228 @@ sectionsAdded.addEventListener("change", function() {
 
 sectionAdditionDate.parentElement.style.display = "none";
 
+const stateCodes = {
+    // States
+    "Andhra Pradesh": "AP",
+    "Arunachal Pradesh": "AR",
+    "Assam": "AS",
+    "Bihar": "BR",
+    "Chhattisgarh": "CG",
+    "Goa": "GA",
+    "Gujarat": "GJ",
+    "Haryana": "HR",
+    "Himachal Pradesh": "HP",
+    "Jharkhand": "JH",
+    "Karnataka": "KA",
+    "Kerala": "KL",
+    "Madhya Pradesh": "MP",
+    "Maharashtra": "MH",
+    "Manipur": "MN",
+    "Meghalaya": "ML",
+    "Mizoram": "MZ",
+    "Nagaland": "NL",
+    "Odisha": "OD",
+    "Punjab": "PB",
+    "Rajasthan": "RJ",
+    "Sikkim": "SK",
+    "Tamil Nadu": "TN",
+    "Telangana": "TS",
+    "Tripura": "TR",
+    "Uttar Pradesh": "UP",
+    "Uttarakhand": "UK",
+    "West Bengal": "WB",
+
+    // Union Territories
+    "Andaman and Nicobar Islands": "AN",
+    "Chandigarh": "CH",
+    "Dadra and Nagar Haveli and Daman and Diu": "DD",
+    "Delhi": "DL",
+    "Jammu and Kashmir": "JK",
+    "Ladakh": "LA",
+    "Lakshadweep": "LD",
+    "Puducherry": "PY"
+};
+
+function generateEstampNumber() {
+    const stateElement = document.getElementById("state");
+    const petitionerElement = document.getElementById("petitioner");
+    const certificateElement = document.getElementById("estampRefCertNo");
+
+    if (!stateElement || !petitionerElement || !certificateElement) return;
+
+    // Get selected state
+    const stateName = stateElement.value.trim();
+    const stateCode = stateCodes[stateName] || stateName.substring(0, 2).toUpperCase();
+
+    // Get first 2 letters of petitioner name
+    const petitionerName = petitionerElement.value.trim();
+    const petitionerCode = petitionerName
+        ? petitionerName.substring(0, 2).toUpperCase()
+        : "XX";
+
+    // Generate exactly 8 random digits
+    const randomNumber = Math.floor(10000000 + Math.random() * 90000000);
+
+    // Final format:
+    // IN-DL-54872196-YA
+    const certificateNumber =
+        `IN-${stateCode}-${randomNumber}-${petitionerCode}`;
+
+    certificateElement.textContent = certificateNumber;
+}
+
+// Generate when state changes
+document.getElementById("state").addEventListener("change", generateEstampNumber);
+
+// Generate when petitioner name changes
+document.getElementById("petitioner").addEventListener("input", generateEstampNumber);
+
+// Generate once on page load
+generateEstampNumber();
+
+(function () {
+    var now = new Date();
+
+    var day = String(now.getDate()).padStart(2, "0");
+    var month = String(now.getMonth() + 1).padStart(2, "0");
+    var year = now.getFullYear();
+
+    var hours = String(now.getHours()).padStart(2, "0");
+    var minutes = String(now.getMinutes()).padStart(2, "0");
+    var seconds = String(now.getSeconds()).padStart(2, "0");
+
+    document.getElementById("estampRefIssueDate").innerText =
+        day + "/" + month + "/" + year +
+        " | " +
+        hours + ":" + minutes + ":" + seconds;
+})();
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const stampDuty = document.getElementById("stampDuty");
+    const considerationPrice = document.getElementById("considerationPrice");
+
+    function generateConsiderationPrice() {
+
+        let min;
+        let max;
+
+        switch (stampDuty.value) {
+
+            case "Core Critical":
+                min = 50000;
+                max = 100000;
+                break;
+
+            case "Crucial":
+                min = 21000;
+                max = 50000;
+                break;
+
+            case "Specialized":
+                min = 11000;
+                max = 20000;
+                break;
+
+            case "Procedural":
+                min = 1000;
+                max = 10000;
+                break;
+
+            default:
+                considerationPrice.value = "";
+                return;
+        }
+
+        // Generate random amount
+        const randomAmount =
+            Math.floor(Math.random() * (max - min + 1)) + min;
+
+        // Round to nearest ₹1,000
+        const roundedAmount =
+            Math.round(randomAmount / 1000) * 1000;
+
+        // Indian number format
+        considerationPrice.value =
+            "₹" + roundedAmount.toLocaleString("en-IN");
+    }
+
+    // Generate when Stamp Duty option changes
+    stampDuty.addEventListener("change", generateConsiderationPrice);
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    function syncValue(inputId, displayId) {
+        const input = document.getElementById(inputId);
+        const display = document.getElementById(displayId);
+
+        if (!input || !display) {
+            console.warn("Element not found:", inputId, displayId);
+            return;
+        }
+
+        function update() {
+            display.textContent = input.value;
+        }
+
+        input.addEventListener("input", update);
+        input.addEventListener("change", update);
+
+        update();
+    }
+
+    // Petitioner → Purchased By
+    syncValue("petitioner", "refPurchasedBy");
+
+    // Document description
+    syncValue("stampDescription", "refStampDescription");
+
+    // Consideration price
+    syncValue("considerationPrice", "refConsiderationPrice");
+
+    // Petitioner → First Party
+    syncValue("petitioner", "refFirstParty");
+
+    // Respondent → Second Party
+    syncValue("respondent", "refSecondParty");
+
+    // Petitioner → Stamp Duty Paid By
+    syncValue("petitioner", "refStampDutyPaidBy");
+
+    // Stamp duty → Stamp Duty Amount
+    syncValue("stampDuty", "refStampDutyAmount");
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const stateElement = document.getElementById("state");
+    const govtElement = document.getElementById("estampRefGovt");
+
+    if (!stateElement || !govtElement) {
+        console.error("State or Government element not found.");
+        return;
+    }
+
+    function updateGovernmentName() {
+        const state = stateElement.value.trim();
+
+        if (state) {
+            govtElement.textContent = "Government of " + state;
+        } else {
+            govtElement.textContent = "Government of [State Name]";
+        }
+    }
+
+    // Update when state is selected
+    stateElement.addEventListener("change", updateGovernmentName);
+
+    // Set initial value
+    updateGovernmentName();
+
+});
 
 </script>
 
