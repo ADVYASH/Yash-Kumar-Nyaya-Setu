@@ -4416,55 +4416,389 @@ Clear Form
 
 <div class="a4-page judgement-page" id="judgementPage">
     <div class="judgement-content" id="judgementContent">
-        <h1 class="judgement-title">VERDICT / DETERMINATION</h1>
+        <h1 class="judgement-title" style="font-size: 22px;">VERDICT / DETERMINATION</h1>
         <div id="judgementAllFields">
 
     <div class="case-information-section">
-        <h2 class="judgement-section-heading">Case Information</h2>
+        <h2 class="judgement-section-heading" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">    Case Information </h2>
 
         <div class="judgement-body case-information-body">
 
             <p class="case-information-text">
-                The case record should contain all essential information
-                required for the proper identification, classification, and
-                documentation of the matter. The
-                <strong data-field="caseName"></strong>
-                should clearly specify the name or title by which the case is
-                to be identified, while the
-                <strong data-field="caseType"></strong>
-                should indicate the nature or category of the case. The
-                <strong data-field="caseNumber"></strong>
-                should be entered as the official reference number assigned
-                to the case, and the
-                <strong data-field="firNumber"></strong>
-                should specify the corresponding First Information Report
-                number, where applicable. The
-                <strong data-field="firYear"></strong>
-                should mention the year in which the FIR was registered, and
-                the
-                <strong data-field="firDate"></strong>
-                should provide the exact date of registration of the FIR in
-                the required day-month-year format. The
-                <strong data-field="complaintNumber"></strong>
-                should identify the applicable level or stage of the case by
-                selecting the appropriate option from the available choices.
-                In addition, the
-                <strong data-field="complaintDate"></strong>
-                should specify the date on which the complaint was filed or
-                received, also in the required day-month-year format. The
-                record should further include the name of the relevant
-                <strong data-field="policeStation"></strong>
-                responsible for handling or registering the matter, along
-                with the applicable
-                <strong data-field="citation"></strong>,
-                which may contain the relevant legal citation, reference, or
-                other identifying citation associated with the case.
-                Collectively, the Case Name, Case Type, Case Number, FIR
-                Number, FIR Year, FIR Date, Case Level, Complaint Date,
-                Police Station, and Citation provide a comprehensive set of
-                details necessary for accurately recording, identifying,
-                tracking, and managing the case throughout the relevant legal
-                or administrative process.
+                The Case Details section begins with the basic information of the matter, 
+                where the 
+                <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NAME ⦔</strong>
+                <strong data-field="caseName" style="color: blue; text-transform: uppercase;"></strong> 
+                is entered to identify the case and the parties involved. 
+                Once the case name has been provided, the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE TYPE ⦔</strong> <strong data-field="caseType" style="color: blue; text-transform: uppercase;"></strong> 
+                is selected to define the nature 
+                and classification of the matter. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NUMBER ⦔</strong> <strong data-field="caseNumber" style="color: blue; text-transform: uppercase;"></strong> 
+                is then entered to provide the 
+                official reference through which the case can be identified and tracked. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE LEVEL ⦔</strong> 
+                <strong data-field="caseLevel" style="color: blue; text-transform: uppercase;"> </strong>
+                specifies the applicable level of the case and helps establish where the matter falls 
+                within the relevant judicial structure. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DATE OF COMPLAINT ⦔</strong> <strong data-field="complaintDate" style="color: blue; text-transform: uppercase;"></strong> 
+                records the date associated 
+                with the filing or complaint, establishing the relevant point in time from which the case 
+                information is documented. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CITATION ⦔</strong> <strong data-field="citation" style="color: blue; text-transform: uppercase;"></strong> 
+                captures the citation connected with the matter 
+                and provides the relevant legal reference associated with the case. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DISTRICT ⦔</strong> 
+                <strong data-field="district" style="color: blue; text-transform: uppercase;"></strong> 
+                identifies the district connected with the case, followed by the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ STATE ⦔</strong> <strong data-field="state" style="color: blue; text-transform: uppercase;"></strong>, 
+                which establishes the broader geographical jurisdiction in which the matter is situated. Finally, 
+                the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ COUNTRY ⦔</strong> <strong data-field="country" style="color: blue; text-transform: uppercase;"></strong> identifies the country associated with the case. Together, these details form the 
+                complete Case Details section, taking the case from its basic identification through its classification, 
+                official reference, level, date, citation, and geographical jurisdiction in a clear and continuous manner.           
+            </p>
+
+        </div>
+    </div>
+
+    <div class="case-information-section">
+        <h2 class="judgement-section-heading" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">    Case Information </h2>
+
+        <div class="judgement-body case-information-body">
+
+            <p class="case-information-text">
+                The Case Details section begins with the basic information of the matter, 
+                where the 
+                <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NAME ⦔</strong>
+                <strong data-field="caseName" style="color: blue; text-transform: uppercase;"></strong> 
+                is entered to identify the case and the parties involved. 
+                Once the case name has been provided, the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE TYPE ⦔</strong> <strong data-field="caseType" style="color: blue; text-transform: uppercase;"></strong> 
+                is selected to define the nature 
+                and classification of the matter. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NUMBER ⦔</strong> <strong data-field="caseNumber" style="color: blue; text-transform: uppercase;"></strong> 
+                is then entered to provide the 
+                official reference through which the case can be identified and tracked. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE LEVEL ⦔</strong> 
+                <strong data-field="caseLevel" style="color: blue; text-transform: uppercase;"> </strong>
+                specifies the applicable level of the case and helps establish where the matter falls 
+                within the relevant judicial structure. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DATE OF COMPLAINT ⦔</strong> <strong data-field="complaintDate" style="color: blue; text-transform: uppercase;"></strong> 
+                records the date associated 
+                with the filing or complaint, establishing the relevant point in time from which the case 
+                information is documented. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CITATION ⦔</strong> <strong data-field="citation" style="color: blue; text-transform: uppercase;"></strong> 
+                captures the citation connected with the matter 
+                and provides the relevant legal reference associated with the case. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DISTRICT ⦔</strong> 
+                <strong data-field="district" style="color: blue; text-transform: uppercase;"></strong> 
+                identifies the district connected with the case, followed by the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ STATE ⦔</strong> <strong data-field="state" style="color: blue; text-transform: uppercase;"></strong>, 
+                which establishes the broader geographical jurisdiction in which the matter is situated. Finally, 
+                the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ COUNTRY ⦔</strong> <strong data-field="country" style="color: blue; text-transform: uppercase;"></strong> identifies the country associated with the case. Together, these details form the 
+                complete Case Details section, taking the case from its basic identification through its classification, 
+                official reference, level, date, citation, and geographical jurisdiction in a clear and continuous manner.           
+            </p>
+
+        </div>
+    </div>
+
+    <div class="case-information-section">
+        <h2 class="judgement-section-heading" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">    Case Information </h2>
+
+        <div class="judgement-body case-information-body">
+
+            <p class="case-information-text">
+                The Case Details section begins with the basic information of the matter, 
+                where the 
+                <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NAME ⦔</strong>
+                <strong data-field="caseName" style="color: blue; text-transform: uppercase;"></strong> 
+                is entered to identify the case and the parties involved. 
+                Once the case name has been provided, the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE TYPE ⦔</strong> <strong data-field="caseType" style="color: blue; text-transform: uppercase;"></strong> 
+                is selected to define the nature 
+                and classification of the matter. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NUMBER ⦔</strong> <strong data-field="caseNumber" style="color: blue; text-transform: uppercase;"></strong> 
+                is then entered to provide the 
+                official reference through which the case can be identified and tracked. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE LEVEL ⦔</strong> 
+                <strong data-field="caseLevel" style="color: blue; text-transform: uppercase;"> </strong>
+                specifies the applicable level of the case and helps establish where the matter falls 
+                within the relevant judicial structure. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DATE OF COMPLAINT ⦔</strong> <strong data-field="complaintDate" style="color: blue; text-transform: uppercase;"></strong> 
+                records the date associated 
+                with the filing or complaint, establishing the relevant point in time from which the case 
+                information is documented. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CITATION ⦔</strong> <strong data-field="citation" style="color: blue; text-transform: uppercase;"></strong> 
+                captures the citation connected with the matter 
+                and provides the relevant legal reference associated with the case. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DISTRICT ⦔</strong> 
+                <strong data-field="district" style="color: blue; text-transform: uppercase;"></strong> 
+                identifies the district connected with the case, followed by the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ STATE ⦔</strong> <strong data-field="state" style="color: blue; text-transform: uppercase;"></strong>, 
+                which establishes the broader geographical jurisdiction in which the matter is situated. Finally, 
+                the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ COUNTRY ⦔</strong> <strong data-field="country" style="color: blue; text-transform: uppercase;"></strong> identifies the country associated with the case. Together, these details form the 
+                complete Case Details section, taking the case from its basic identification through its classification, 
+                official reference, level, date, citation, and geographical jurisdiction in a clear and continuous manner.           
+            </p>
+
+        </div>
+    </div>
+
+    <div class="case-information-section">
+        <h2 class="judgement-section-heading" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">    Case Information </h2>
+
+        <div class="judgement-body case-information-body">
+
+            <p class="case-information-text">
+                The Case Details section begins with the basic information of the matter, 
+                where the 
+                <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NAME ⦔</strong>
+                <strong data-field="caseName" style="color: blue; text-transform: uppercase;"></strong> 
+                is entered to identify the case and the parties involved. 
+                Once the case name has been provided, the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE TYPE ⦔</strong> <strong data-field="caseType" style="color: blue; text-transform: uppercase;"></strong> 
+                is selected to define the nature 
+                and classification of the matter. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NUMBER ⦔</strong> <strong data-field="caseNumber" style="color: blue; text-transform: uppercase;"></strong> 
+                is then entered to provide the 
+                official reference through which the case can be identified and tracked. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE LEVEL ⦔</strong> 
+                <strong data-field="caseLevel" style="color: blue; text-transform: uppercase;"> </strong>
+                specifies the applicable level of the case and helps establish where the matter falls 
+                within the relevant judicial structure. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DATE OF COMPLAINT ⦔</strong> <strong data-field="complaintDate" style="color: blue; text-transform: uppercase;"></strong> 
+                records the date associated 
+                with the filing or complaint, establishing the relevant point in time from which the case 
+                information is documented. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CITATION ⦔</strong> <strong data-field="citation" style="color: blue; text-transform: uppercase;"></strong> 
+                captures the citation connected with the matter 
+                and provides the relevant legal reference associated with the case. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DISTRICT ⦔</strong> 
+                <strong data-field="district" style="color: blue; text-transform: uppercase;"></strong> 
+                identifies the district connected with the case, followed by the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ STATE ⦔</strong> <strong data-field="state" style="color: blue; text-transform: uppercase;"></strong>, 
+                which establishes the broader geographical jurisdiction in which the matter is situated. Finally, 
+                the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ COUNTRY ⦔</strong> <strong data-field="country" style="color: blue; text-transform: uppercase;"></strong> identifies the country associated with the case. Together, these details form the 
+                complete Case Details section, taking the case from its basic identification through its classification, 
+                official reference, level, date, citation, and geographical jurisdiction in a clear and continuous manner.           
+            </p>
+
+        </div>
+    </div>
+
+    <div class="case-information-section">
+        <h2 class="judgement-section-heading" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">    Case Information </h2>
+
+        <div class="judgement-body case-information-body">
+
+            <p class="case-information-text">
+                The Case Details section begins with the basic information of the matter, 
+                where the 
+                <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NAME ⦔</strong>
+                <strong data-field="caseName" style="color: blue; text-transform: uppercase;"></strong> 
+                is entered to identify the case and the parties involved. 
+                Once the case name has been provided, the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE TYPE ⦔</strong> <strong data-field="caseType" style="color: blue; text-transform: uppercase;"></strong> 
+                is selected to define the nature 
+                and classification of the matter. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NUMBER ⦔</strong> <strong data-field="caseNumber" style="color: blue; text-transform: uppercase;"></strong> 
+                is then entered to provide the 
+                official reference through which the case can be identified and tracked. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE LEVEL ⦔</strong> 
+                <strong data-field="caseLevel" style="color: blue; text-transform: uppercase;"> </strong>
+                specifies the applicable level of the case and helps establish where the matter falls 
+                within the relevant judicial structure. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DATE OF COMPLAINT ⦔</strong> <strong data-field="complaintDate" style="color: blue; text-transform: uppercase;"></strong> 
+                records the date associated 
+                with the filing or complaint, establishing the relevant point in time from which the case 
+                information is documented. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CITATION ⦔</strong> <strong data-field="citation" style="color: blue; text-transform: uppercase;"></strong> 
+                captures the citation connected with the matter 
+                and provides the relevant legal reference associated with the case. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DISTRICT ⦔</strong> 
+                <strong data-field="district" style="color: blue; text-transform: uppercase;"></strong> 
+                identifies the district connected with the case, followed by the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ STATE ⦔</strong> <strong data-field="state" style="color: blue; text-transform: uppercase;"></strong>, 
+                which establishes the broader geographical jurisdiction in which the matter is situated. Finally, 
+                the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ COUNTRY ⦔</strong> <strong data-field="country" style="color: blue; text-transform: uppercase;"></strong> identifies the country associated with the case. Together, these details form the 
+                complete Case Details section, taking the case from its basic identification through its classification, 
+                official reference, level, date, citation, and geographical jurisdiction in a clear and continuous manner.           
+            </p>
+
+        </div>
+    </div>
+
+    <div class="case-information-section">
+        <h2 class="judgement-section-heading" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">    Case Information </h2>
+
+        <div class="judgement-body case-information-body">
+
+            <p class="case-information-text">
+                The Case Details section begins with the basic information of the matter, 
+                where the 
+                <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NAME ⦔</strong>
+                <strong data-field="caseName" style="color: blue; text-transform: uppercase;"></strong> 
+                is entered to identify the case and the parties involved. 
+                Once the case name has been provided, the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE TYPE ⦔</strong> <strong data-field="caseType" style="color: blue; text-transform: uppercase;"></strong> 
+                is selected to define the nature 
+                and classification of the matter. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NUMBER ⦔</strong> <strong data-field="caseNumber" style="color: blue; text-transform: uppercase;"></strong> 
+                is then entered to provide the 
+                official reference through which the case can be identified and tracked. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE LEVEL ⦔</strong> 
+                <strong data-field="caseLevel" style="color: blue; text-transform: uppercase;"> </strong>
+                specifies the applicable level of the case and helps establish where the matter falls 
+                within the relevant judicial structure. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DATE OF COMPLAINT ⦔</strong> <strong data-field="complaintDate" style="color: blue; text-transform: uppercase;"></strong> 
+                records the date associated 
+                with the filing or complaint, establishing the relevant point in time from which the case 
+                information is documented. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CITATION ⦔</strong> <strong data-field="citation" style="color: blue; text-transform: uppercase;"></strong> 
+                captures the citation connected with the matter 
+                and provides the relevant legal reference associated with the case. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DISTRICT ⦔</strong> 
+                <strong data-field="district" style="color: blue; text-transform: uppercase;"></strong> 
+                identifies the district connected with the case, followed by the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ STATE ⦔</strong> <strong data-field="state" style="color: blue; text-transform: uppercase;"></strong>, 
+                which establishes the broader geographical jurisdiction in which the matter is situated. Finally, 
+                the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ COUNTRY ⦔</strong> <strong data-field="country" style="color: blue; text-transform: uppercase;"></strong> identifies the country associated with the case. Together, these details form the 
+                complete Case Details section, taking the case from its basic identification through its classification, 
+                official reference, level, date, citation, and geographical jurisdiction in a clear and continuous manner.           
+            </p>
+
+        </div>
+    </div>
+
+    <div class="case-information-section">
+        <h2 class="judgement-section-heading" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">    Case Information </h2>
+
+        <div class="judgement-body case-information-body">
+
+            <p class="case-information-text">
+                The Case Details section begins with the basic information of the matter, 
+                where the 
+                <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NAME ⦔</strong>
+                <strong data-field="caseName" style="color: blue; text-transform: uppercase;"></strong> 
+                is entered to identify the case and the parties involved. 
+                Once the case name has been provided, the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE TYPE ⦔</strong> <strong data-field="caseType" style="color: blue; text-transform: uppercase;"></strong> 
+                is selected to define the nature 
+                and classification of the matter. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NUMBER ⦔</strong> <strong data-field="caseNumber" style="color: blue; text-transform: uppercase;"></strong> 
+                is then entered to provide the 
+                official reference through which the case can be identified and tracked. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE LEVEL ⦔</strong> 
+                <strong data-field="caseLevel" style="color: blue; text-transform: uppercase;"> </strong>
+                specifies the applicable level of the case and helps establish where the matter falls 
+                within the relevant judicial structure. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DATE OF COMPLAINT ⦔</strong> <strong data-field="complaintDate" style="color: blue; text-transform: uppercase;"></strong> 
+                records the date associated 
+                with the filing or complaint, establishing the relevant point in time from which the case 
+                information is documented. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CITATION ⦔</strong> <strong data-field="citation" style="color: blue; text-transform: uppercase;"></strong> 
+                captures the citation connected with the matter 
+                and provides the relevant legal reference associated with the case. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DISTRICT ⦔</strong> 
+                <strong data-field="district" style="color: blue; text-transform: uppercase;"></strong> 
+                identifies the district connected with the case, followed by the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ STATE ⦔</strong> <strong data-field="state" style="color: blue; text-transform: uppercase;"></strong>, 
+                which establishes the broader geographical jurisdiction in which the matter is situated. Finally, 
+                the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ COUNTRY ⦔</strong> <strong data-field="country" style="color: blue; text-transform: uppercase;"></strong> identifies the country associated with the case. Together, these details form the 
+                complete Case Details section, taking the case from its basic identification through its classification, 
+                official reference, level, date, citation, and geographical jurisdiction in a clear and continuous manner.           
+            </p>
+
+        </div>
+    </div>
+
+    <div class="case-information-section">
+        <h2 class="judgement-section-heading" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">    Case Information </h2>
+
+        <div class="judgement-body case-information-body">
+
+            <p class="case-information-text">
+                The Case Details section begins with the basic information of the matter, 
+                where the 
+                <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NAME ⦔</strong>
+                <strong data-field="caseName" style="color: blue; text-transform: uppercase;"></strong> 
+                is entered to identify the case and the parties involved. 
+                Once the case name has been provided, the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE TYPE ⦔</strong> <strong data-field="caseType" style="color: blue; text-transform: uppercase;"></strong> 
+                is selected to define the nature 
+                and classification of the matter. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NUMBER ⦔</strong> <strong data-field="caseNumber" style="color: blue; text-transform: uppercase;"></strong> 
+                is then entered to provide the 
+                official reference through which the case can be identified and tracked. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE LEVEL ⦔</strong> 
+                <strong data-field="caseLevel" style="color: blue; text-transform: uppercase;"> </strong>
+                specifies the applicable level of the case and helps establish where the matter falls 
+                within the relevant judicial structure. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DATE OF COMPLAINT ⦔</strong> <strong data-field="complaintDate" style="color: blue; text-transform: uppercase;"></strong> 
+                records the date associated 
+                with the filing or complaint, establishing the relevant point in time from which the case 
+                information is documented. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CITATION ⦔</strong> <strong data-field="citation" style="color: blue; text-transform: uppercase;"></strong> 
+                captures the citation connected with the matter 
+                and provides the relevant legal reference associated with the case. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DISTRICT ⦔</strong> 
+                <strong data-field="district" style="color: blue; text-transform: uppercase;"></strong> 
+                identifies the district connected with the case, followed by the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ STATE ⦔</strong> <strong data-field="state" style="color: blue; text-transform: uppercase;"></strong>, 
+                which establishes the broader geographical jurisdiction in which the matter is situated. Finally, 
+                the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ COUNTRY ⦔</strong> <strong data-field="country" style="color: blue; text-transform: uppercase;"></strong> identifies the country associated with the case. Together, these details form the 
+                complete Case Details section, taking the case from its basic identification through its classification, 
+                official reference, level, date, citation, and geographical jurisdiction in a clear and continuous manner.           
+            </p>
+
+        </div>
+    </div>
+
+    <div class="case-information-section">
+        <h2 class="judgement-section-heading" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">    Case Information </h2>
+
+        <div class="judgement-body case-information-body">
+
+            <p class="case-information-text">
+                The Case Details section begins with the basic information of the matter, 
+                where the 
+                <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NAME ⦔</strong>
+                <strong data-field="caseName" style="color: blue; text-transform: uppercase;"></strong> 
+                is entered to identify the case and the parties involved. 
+                Once the case name has been provided, the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE TYPE ⦔</strong> <strong data-field="caseType" style="color: blue; text-transform: uppercase;"></strong> 
+                is selected to define the nature 
+                and classification of the matter. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NUMBER ⦔</strong> <strong data-field="caseNumber" style="color: blue; text-transform: uppercase;"></strong> 
+                is then entered to provide the 
+                official reference through which the case can be identified and tracked. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE LEVEL ⦔</strong> 
+                <strong data-field="caseLevel" style="color: blue; text-transform: uppercase;"> </strong>
+                specifies the applicable level of the case and helps establish where the matter falls 
+                within the relevant judicial structure. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DATE OF COMPLAINT ⦔</strong> <strong data-field="complaintDate" style="color: blue; text-transform: uppercase;"></strong> 
+                records the date associated 
+                with the filing or complaint, establishing the relevant point in time from which the case 
+                information is documented. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CITATION ⦔</strong> <strong data-field="citation" style="color: blue; text-transform: uppercase;"></strong> 
+                captures the citation connected with the matter 
+                and provides the relevant legal reference associated with the case. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DISTRICT ⦔</strong> 
+                <strong data-field="district" style="color: blue; text-transform: uppercase;"></strong> 
+                identifies the district connected with the case, followed by the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ STATE ⦔</strong> <strong data-field="state" style="color: blue; text-transform: uppercase;"></strong>, 
+                which establishes the broader geographical jurisdiction in which the matter is situated. Finally, 
+                the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ COUNTRY ⦔</strong> <strong data-field="country" style="color: blue; text-transform: uppercase;"></strong> identifies the country associated with the case. Together, these details form the 
+                complete Case Details section, taking the case from its basic identification through its classification, 
+                official reference, level, date, citation, and geographical jurisdiction in a clear and continuous manner.           
+            </p>
+
+        </div>
+    </div>
+
+    <div class="case-information-section">
+        <h2 class="judgement-section-heading" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">    Case Information </h2>
+
+        <div class="judgement-body case-information-body">
+
+            <p class="case-information-text">
+                The Case Details section begins with the basic information of the matter, 
+                where the 
+                <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NAME ⦔</strong>
+                <strong data-field="caseName" style="color: blue; text-transform: uppercase;"></strong> 
+                is entered to identify the case and the parties involved. 
+                Once the case name has been provided, the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE TYPE ⦔</strong> <strong data-field="caseType" style="color: blue; text-transform: uppercase;"></strong> 
+                is selected to define the nature 
+                and classification of the matter. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NUMBER ⦔</strong> <strong data-field="caseNumber" style="color: blue; text-transform: uppercase;"></strong> 
+                is then entered to provide the 
+                official reference through which the case can be identified and tracked. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE LEVEL ⦔</strong> 
+                <strong data-field="caseLevel" style="color: blue; text-transform: uppercase;"> </strong>
+                specifies the applicable level of the case and helps establish where the matter falls 
+                within the relevant judicial structure. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DATE OF COMPLAINT ⦔</strong> <strong data-field="complaintDate" style="color: blue; text-transform: uppercase;"></strong> 
+                records the date associated 
+                with the filing or complaint, establishing the relevant point in time from which the case 
+                information is documented. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CITATION ⦔</strong> <strong data-field="citation" style="color: blue; text-transform: uppercase;"></strong> 
+                captures the citation connected with the matter 
+                and provides the relevant legal reference associated with the case. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DISTRICT ⦔</strong> 
+                <strong data-field="district" style="color: blue; text-transform: uppercase;"></strong> 
+                identifies the district connected with the case, followed by the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ STATE ⦔</strong> <strong data-field="state" style="color: blue; text-transform: uppercase;"></strong>, 
+                which establishes the broader geographical jurisdiction in which the matter is situated. Finally, 
+                the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ COUNTRY ⦔</strong> <strong data-field="country" style="color: blue; text-transform: uppercase;"></strong> identifies the country associated with the case. Together, these details form the 
+                complete Case Details section, taking the case from its basic identification through its classification, 
+                official reference, level, date, citation, and geographical jurisdiction in a clear and continuous manner.           
+            </p>
+
+        </div>
+    </div>
+
+    <div class="case-information-section">
+        <h2 class="judgement-section-heading" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">    Case Information </h2>
+
+        <div class="judgement-body case-information-body">
+
+            <p class="case-information-text">
+                The Case Details section begins with the basic information of the matter, 
+                where the 
+                <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NAME ⦔</strong>
+                <strong data-field="caseName" style="color: blue; text-transform: uppercase;"></strong> 
+                is entered to identify the case and the parties involved. 
+                Once the case name has been provided, the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE TYPE ⦔</strong> <strong data-field="caseType" style="color: blue; text-transform: uppercase;"></strong> 
+                is selected to define the nature 
+                and classification of the matter. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE NUMBER ⦔</strong> <strong data-field="caseNumber" style="color: blue; text-transform: uppercase;"></strong> 
+                is then entered to provide the 
+                official reference through which the case can be identified and tracked. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CASE LEVEL ⦔</strong> 
+                <strong data-field="caseLevel" style="color: blue; text-transform: uppercase;"> </strong>
+                specifies the applicable level of the case and helps establish where the matter falls 
+                within the relevant judicial structure. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DATE OF COMPLAINT ⦔</strong> <strong data-field="complaintDate" style="color: blue; text-transform: uppercase;"></strong> 
+                records the date associated 
+                with the filing or complaint, establishing the relevant point in time from which the case 
+                information is documented. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ CITATION ⦔</strong> <strong data-field="citation" style="color: blue; text-transform: uppercase;"></strong> 
+                captures the citation connected with the matter 
+                and provides the relevant legal reference associated with the case. The <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ DISTRICT ⦔</strong> 
+                <strong data-field="district" style="color: blue; text-transform: uppercase;"></strong> 
+                identifies the district connected with the case, followed by the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ STATE ⦔</strong> <strong data-field="state" style="color: blue; text-transform: uppercase;"></strong>, 
+                which establishes the broader geographical jurisdiction in which the matter is situated. Finally, 
+                the <strong style="color: maroon; text-transform: lowercase; font-style: italic;">⦓ COUNTRY ⦔</strong> <strong data-field="country" style="color: blue; text-transform: uppercase;"></strong> identifies the country associated with the case. Together, these details form the 
+                complete Case Details section, taking the case from its basic identification through its classification, 
+                official reference, level, date, citation, and geographical jurisdiction in a clear and continuous manner.           
             </p>
 
         </div>
