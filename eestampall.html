@@ -200,6 +200,11 @@ button:hover {
     padding: 6px;
 }
 
+.not-stated {
+    color: #dc2626 !important;
+    font-weight: 600;
+}
+
 .signature {
     margin-top: 60px;
     display: flex;
@@ -1952,7 +1957,278 @@ button:hover {
     }
 }
 
+/* =========================================================
+   PAGE 6 — VERDICT / DETERMINATION + AUTO CONTINUATION
+   ========================================================= */
+.judgement-page {
+    position: relative;
+    width: 210mm;
+    height: 297mm;
+    min-height: 297mm;
+    max-height: 297mm;
+    box-sizing: border-box;
+    background: #fff;
+    color: #000;
+    font-family: "Times New Roman", Times, serif;
+    padding: 17mm 18mm 18mm;
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+}
+
+.judgement-page .judgement-content {
+    position: relative;
+    z-index: 2;
+    height: 251mm;
+    min-height: 251mm;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.judgement-title {
+    margin: 0 0 7mm;
+    text-align: center;
+    font-size: 19pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.judgement-section {
+    margin: 0 0 7mm;
+    break-inside: avoid;
+}
+
+.judgement-section-heading {
+    margin: 0 0 4mm;
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.judgement-body {
+    margin: 0;
+    text-align: justify;
+    font-size: 12pt;
+    line-height: 1.55;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.judgement-body p {
+    margin: 0 0 4.5mm;
+    text-align: justify;
+    text-indent: 10mm;
+}
+
+.judgement-footer {
+    position: absolute;
+    left: 18mm;
+    right: 18mm;
+    bottom: 7mm;
+    z-index: 5;
+    border-top: 1px solid #777;
+    padding-top: 2.5mm;
+    text-align: center;
+    font-size: 9pt;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.judgement-footer .case-name-footer {
+    font-weight: bold;
+}
+
+.judgement-continuation .judgement-content {
+    padding-top: 1mm;
+}
+
+.judgement-continuation-title {
+    margin: 0 0 7mm;
+    text-align: center;
+    font-size: 15pt;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+@media print {
+    .judgement-page {
+        width: 210mm !important;
+        height: 297mm !important;
+        min-height: 297mm !important;
+        max-height: 297mm !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        overflow: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+    }
+
+    .judgement-footer {
+        display: block !important;
+    }
+}
+
+
+.footer-separator {
+    margin: 0 2mm;
+}
+.page-number-footer {
+    font-weight: normal;
+}
+
+.case-information-section { margin-top: 2mm; }
+.case-information-section .judgement-section-heading { margin-bottom: 7mm; }
+.case-information-text {
+    text-align: justify;
+    line-height: 1.6;
+    font-size: 12pt;
+    text-indent: 10mm;
+}
+.case-information-text strong { font-weight: 700; }
 </style>
+
+<style>
+/* =========================================================
+   FULL-SCREEN FORM — optimized for 1920x1080 desktop
+   ========================================================= */
+html, body {
+    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+header {
+    width: 100%;
+    padding: 18px 32px;
+}
+
+.container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 18px 24px 90px;
+}
+
+#masterForm {
+    width: 100%;
+    max-width: none;
+}
+
+.section {
+    width: 100%;
+    margin-bottom: 16px;
+    border-radius: 8px;
+}
+
+.section-body {
+    padding: 18px 20px;
+}
+
+.form-grid {
+    width: 100%;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px 18px;
+}
+
+.field {
+    min-width: 0;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    min-width: 0;
+}
+
+textarea {
+    min-height: 90px;
+}
+
+.actions {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+
+/* 1920x1080 and other large desktop screens */
+@media (min-width: 1600px) {
+    .container {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .section-body {
+        padding: 20px 24px;
+    }
+
+    .form-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px 22px;
+    }
+
+    input,
+    select {
+        min-height: 42px;
+    }
+
+    textarea {
+        min-height: 100px;
+    }
+}
+
+/* Medium desktop */
+@media (min-width: 1100px) and (max-width: 1599px) {
+    .form-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* Tablet / smaller screens */
+@media (min-width: 801px) and (max-width: 1099px) {
+    .form-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+    .container {
+        padding: 12px 12px 90px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-body {
+        padding: 14px;
+    }
+
+    header {
+        padding: 16px 18px;
+    }
+}
+
+/* Keep print output exactly as A4; this only changes the on-screen form. */
+@media print {
+    .container,
+    header {
+        display: none !important;
+    }
+}
+</style>
+
 </head>
 
 <body>
@@ -1964,6 +2240,7 @@ button:hover {
 
 
 
+<!-- FIELD NUMBERING: 1-100 follows the user's supplied list; FIR Passport Photo remains unnumbered as supplied. -->
 <div class="container">
 
 <form id="masterForm">
@@ -1973,68 +2250,114 @@ button:hover {
 ========================= -->
 
 <div class="section">
-<div class="section-title">1. Case Information — Fields 1–10</div>
-<div class="section-body">
-<div class="form-grid">
 
-<div class="field">
-<label>1. Case Name</label>
-<input id="caseName">
-</div>
+  <div class="section-title">1. Metadata</div>
 
-<div class="field">
-<label>2. Case Type</label>
-<input id="caseType">
-</div>
+  <div class="section-body">
 
-<div class="field">
-<label>3. Case Number</label>
-<input id="caseNumber">
-</div>
+    <div class="form-grid">
 
-<div class="field">
-<label>4. FIR Number</label>
-<input id="firNumber">
-</div>
+      <div class="field">
+        <label>1. Case Name</label>
+        <input id="caseName">
+      </div>
 
-<div class="field">
-<label>5. FIR Year</label>
-<input id="firYear" readonly>
-</div>
+      <div class="field">
+        <label>2. Case Type</label>
+        <input id="caseType">
+      </div>
 
-<div class="field">
-<label>6. FIR Date</label>
-<input type="date" id="firDate">
-</div>
+      <div class="field">
+        <label>3. Case Number</label>
+        <input id="caseNumber">
+      </div>
 
-<div class="field">
-  <label>7. Case level</label>
-  <select id="complaintNumber">
-    <option value="">Select an option</option>
-    <option value="Core Critical">Core Critical</option>
-    <option value="Crucial">Crucial</option>
-    <option value="Procedural">Procedural</option>
-    <option value="Specialized">Specialized</option>
-  </select>
-</div>
+      <div class="field">
+        <label>4. Case Level</label>
+        <select id="caseLevel">
+          <option value="">Select an option</option>
+          <option value="Core Critical">Core Critical</option>
+          <option value="Crucial">Crucial</option>
+          <option value="Procedural">Procedural</option>
+          <option value="Specialized">Specialized</option>
+        </select>
+      </div>
 
-<div class="field">
-<label>8. Complaint Date</label>
-<input type="date" id="complaintDate">
-</div>
+      <div class="field">
+        <label>10. Complaint Date</label>
+        <input type="date" id="complaintDate">
+      </div>
 
-<div class="field">
-<label>9. Police Station (PS)</label>
-<input id="policeStation">
-</div>
+      <div class="field">
+        <label>5. Citation</label>
+        <input id="citation">
+      </div>
 
-<div class="field">
-<label>10. Citation</label>
-<input id="citation">
-</div>
+      <div class="field">
+        <label>13. District</label>
+        <input id="district">
+      </div>
 
-</div>
-</div>
+      <div class="field">
+        <label for="state">14. State / Union Territory</label>
+        <select id="state" name="state">
+          <option value="">Select State / Union Territory</option>
+
+          <!-- States -->
+          <option value="Andhra Pradesh">Andhra Pradesh</option>
+          <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+          <option value="Assam">Assam</option>
+          <option value="Bihar">Bihar</option>
+          <option value="Chhattisgarh">Chhattisgarh</option>
+          <option value="Goa">Goa</option>
+          <option value="Gujarat">Gujarat</option>
+          <option value="Haryana">Haryana</option>
+          <option value="Himachal Pradesh">Himachal Pradesh</option>
+          <option value="Jharkhand">Jharkhand</option>
+          <option value="Karnataka">Karnataka</option>
+          <option value="Kerala">Kerala</option>
+          <option value="Madhya Pradesh">Madhya Pradesh</option>
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Manipur">Manipur</option>
+          <option value="Meghalaya">Meghalaya</option>
+          <option value="Mizoram">Mizoram</option>
+          <option value="Nagaland">Nagaland</option>
+          <option value="Odisha">Odisha</option>
+          <option value="Punjab">Punjab</option>
+          <option value="Rajasthan">Rajasthan</option>
+          <option value="Sikkim">Sikkim</option>
+          <option value="Tamil Nadu">Tamil Nadu</option>
+          <option value="Telangana">Telangana</option>
+          <option value="Tripura">Tripura</option>
+          <option value="Uttar Pradesh">Uttar Pradesh</option>
+          <option value="Uttarakhand">Uttarakhand</option>
+          <option value="West Bengal">West Bengal</option>
+
+          <!-- Union Territories -->
+          <option value="Andaman and Nicobar Islands">
+            Andaman and Nicobar Islands
+          </option>
+          <option value="Chandigarh">Chandigarh</option>
+          <option value="Dadra and Nagar Haveli and Daman and Diu">
+            Dadra and Nagar Haveli and Daman and Diu
+          </option>
+          <option value="Delhi">Delhi</option>
+          <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+          <option value="Ladakh">Ladakh</option>
+          <option value="Lakshadweep">Lakshadweep</option>
+          <option value="Puducherry">Puducherry</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>15. Country</label>
+        <input id="country" value="India">
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
 
@@ -2043,33 +2366,73 @@ button:hover {
 ========================= -->
 
 <div class="section">
-<div class="section-title">2. Parties — Fields 11–15</div>
+<div class="section-title">2. FIR Registration Details</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-<label>11. Petitioner</label>
-<input id="petitioner">
+  <label>6. FIR Number</label>
+  <input id="firNumber">
 </div>
 
 <div class="field">
-<label>12. Advocate Petitioner</label>
-<input id="advocatePetitioner">
+  <label>7. FIR Year</label>
+  <input id="firYear" readonly>
 </div>
 
 <div class="field">
-<label>13. Respondent</label>
-<input id="respondent">
+  <label>8. FIR Date</label>
+  <input type="date" id="firDate">
 </div>
 
 <div class="field">
-<label>14. Advocate Respondent</label>
-<input id="advocateRespondent">
+  <label>9. Police Station (PS)</label>
+  <input id="policeStation">
 </div>
 
 <div class="field">
-<label>15. Police Station Code</label>
-<input id="policeStationCode">
+  <label>11. Police Station Code</label>
+  <input id="policeStationCode">
+</div>
+
+<div class="field">
+  <label>16. Judgement Date</label>
+  <input type="date" id="firRegistrationDate">
+</div>
+
+<div class="field">
+  <label>19. Crime Number</label>
+  <input id="crimeNumber">
+</div>
+
+<div class="field">
+  <label>17. Case Diary Number</label>
+  <input id="caseDiaryNumber">
+</div>
+
+<div class="field">
+  <label>18. Nature / Category of Case</label>
+  <input id="caseCategory">
+</div>
+
+<div class="field full">
+  <label>12. Police Station Address Full</label>
+  <textarea id="policeStationAddress"></textarea>
+</div>
+
+<div class="field">
+  <label>20. FIR Report Category</label>
+  <input id="firReportCategory">
+</div>
+
+<div class="field full">
+  <label>21. Complainant Details</label>
+  <textarea id="complainantDetails"></textarea>
+</div>
+
+<div class="field full">
+  <label>22. Occurrence Details / Report Details</label>
+  <textarea id="occurrenceReportDetails"></textarea>
 </div>
 
 </div>
@@ -2082,119 +2445,18 @@ button:hover {
 ========================= -->
 
 <div class="section">
-<div class="section-title">3. Location / Jurisdiction — Fields 16–18</div>
+<div class="section-title">3. Parties Involved</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-<label>16. District</label>
-<input id="district">
+<label>23. Petitioner</label>
+<input id="petitioner">
 </div>
 
 <div class="field">
-  <label for="state">17. State / Union Territory</label>
-  <select id="state" name="state">
-    <option value="">Select State / Union Territory</option>
-
-    <!-- States -->
-    <option value="Andhra Pradesh">Andhra Pradesh</option>
-    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-    <option value="Assam">Assam</option>
-    <option value="Bihar">Bihar</option>
-    <option value="Chhattisgarh">Chhattisgarh</option>
-    <option value="Goa">Goa</option>
-    <option value="Gujarat">Gujarat</option>
-    <option value="Haryana">Haryana</option>
-    <option value="Himachal Pradesh">Himachal Pradesh</option>
-    <option value="Jharkhand">Jharkhand</option>
-    <option value="Karnataka">Karnataka</option>
-    <option value="Kerala">Kerala</option>
-    <option value="Madhya Pradesh">Madhya Pradesh</option>
-    <option value="Maharashtra">Maharashtra</option>
-    <option value="Manipur">Manipur</option>
-    <option value="Meghalaya">Meghalaya</option>
-    <option value="Mizoram">Mizoram</option>
-    <option value="Nagaland">Nagaland</option>
-    <option value="Odisha">Odisha</option>
-    <option value="Punjab">Punjab</option>
-    <option value="Rajasthan">Rajasthan</option>
-    <option value="Sikkim">Sikkim</option>
-    <option value="Tamil Nadu">Tamil Nadu</option>
-    <option value="Telangana">Telangana</option>
-    <option value="Tripura">Tripura</option>
-    <option value="Uttar Pradesh">Uttar Pradesh</option>
-    <option value="Uttarakhand">Uttarakhand</option>
-    <option value="West Bengal">West Bengal</option>
-
-    <!-- Union Territories -->
-    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-    <option value="Chandigarh">Chandigarh</option>
-    <option value="Dadra and Nagar Haveli and Daman and Diu">
-      Dadra and Nagar Haveli and Daman and Diu
-    </option>
-    <option value="Delhi">Delhi</option>
-    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-    <option value="Ladakh">Ladakh</option>
-    <option value="Lakshadweep">Lakshadweep</option>
-    <option value="Puducherry">Puducherry</option>
-  </select>
-</div>
-
-<div class="field">
-<label>18. Country</label>
-<input id="country" value="India">
-</div>
-
-</div>
-</div>
-</div>
-
-
-<!-- =========================
-     FIR / INVESTIGATION
-========================= -->
-
-<div class="section">
-<div class="section-title">4. FIR / Investigation Basics — Fields 19–22</div>
-<div class="section-body">
-<div class="form-grid">
-
-<div class="field">
-<label>19. Date of Registration of FIR</label>
-<input type="date" id="firRegistrationDate">
-</div>
-
-<div class="field">
-<label>20. Crime Number</label>
-<input id="crimeNumber">
-</div>
-
-<div class="field">
-<label>21. Case Diary Number</label>
-<input id="caseDiaryNumber">
-</div>
-
-<div class="field">
-<label>22. Nature / Category of Case</label>
-<input id="caseCategory">
-</div>
-
-<div class="photo-upload-box">
-    <label for="firPassportPhoto">
-        Add FIR PASSPORT PHOTO
-    </label>
-
-    <input
-        type="file"
-        id="firPassportPhoto"
-        accept="image/*"
-    >
-
-    <img
-        id="firPassportPhotoPreview"
-        class="fir-photo-preview"
-        alt="FIR Passport Photo Preview"
-    >
+<label>24. Advocate Petitioner</label>
+<input id="advocatePetitioner">
 </div>
 
 </div>
@@ -2207,43 +2469,18 @@ button:hover {
 ========================= -->
 
 <div class="section">
-<div class="section-title">5. Court / Proceedings — Fields 23–29</div>
+<div class="section-title">4. Complainant Details</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-<label>23. Court Name</label>
-<input id="courtName">
+<label>25. Respondent</label>
+<input id="respondent">
 </div>
 
 <div class="field">
-<label>24. Court Case Number</label>
-<input id="courtCaseNumber">
-</div>
-
-<div class="field">
-<label>25. Judge / Presiding Officer</label>
-<input id="judge">
-</div>
-
-<div class="field">
-<label>26. Date of First Court Appearance</label>
-<input type="date" id="firstAppearance">
-</div>
-
-<div class="field">
-<label>27. Charges Framed</label>
-<textarea id="chargesFramed"></textarea>
-</div>
-
-<div class="field">
-<label>28. Date of Framing of Charges</label>
-<input type="date" id="chargesDate">
-</div>
-
-<div class="field">
-<label>29. State</label>
-<input id="courtState">
+<label>26. Advocate Respondent</label>
+<input id="advocateRespondent">
 </div>
 
 </div>
@@ -2256,29 +2493,112 @@ button:hover {
 ========================= -->
 
 <div class="section">
-<div class="section-title">6. Stamp / E-Stamp — Fields 30–32</div>
+<div class="section-title">5. Victim Information</div>
 <div class="section-body">
 <div class="form-grid">
 
-<div class="field">
-<label>30. Stamp Description</label>
-<input id="stampDescription">
+<div class="field full">
+  <label>21. Complainant Details</label>
+  <textarea id="complainantDetails"></textarea>
 </div>
 
 <div class="field">
-    <label>31. Consideration Price</label>
-    <input id="considerationPrice" readonly>
+  <label>27. Complainant Full Name</label>
+  <input id="complainantName">
 </div>
 
 <div class="field">
-    <label>32. Stamp Duty Amount</label>
-    <select id="stampDuty">
-        <option value="">Select Option</option>
-        <option value="Core Critical">1. Core Critical</option>
-        <option value="Crucial">2. Crucial</option>
-        <option value="Specialized">3. Specialized</option>
-        <option value="Procedural">4. Procedural</option>
-    </select>
+  <label>28. Father's Name</label>
+  <input id="complainantFather">
+</div>
+
+<div class="field">
+  <label>29. Mother's Name</label>
+  <input id="complainantMother">
+</div>
+
+<div class="field">
+  <label>30. Husband/Wife Name</label>
+  <input id="complainantSpouse">
+</div>
+
+<div class="field">
+  <label>31. Age</label>
+  <input type="number" id="complainantAge">
+</div>
+
+<div class="field">
+  <label>32. Date of Birth</label>
+  <input type="date" id="complainantDOB">
+</div>
+
+<div class="field">
+  <label>33. Occupation</label>
+  <input id="complainantOccupation">
+</div>
+
+<div class="field full">
+  <label>34. Address</label>
+  <textarea id="complainantAddress"></textarea>
+</div>
+
+<div class="field">
+  <label>35. City / Village</label>
+  <input id="complainantCity">
+</div>
+
+<div class="field">
+  <label>38. Contact Details</label>
+  <input id="complainantContact">
+</div>
+
+<div class="field">
+  <label>39. Relationship to Victim</label>
+  <input id="relationshipVictim">
+</div>
+
+<div class="field">
+  <label>40. Relationship to Accused</label>
+  <input id="relationshipAccused">
+</div>
+
+<div class="field">
+  <label>41. Eyewitness?</label>
+  <select id="complainantEyewitness">
+    <option value="">Select</option>
+    <option>Yes</option>
+    <option>No</option>
+    <option>Unknown</option>
+  </select>
+</div>
+
+<div class="field">
+  <label>42. Complaint Type</label>
+  <select id="complaintType">
+    <option value="">Select</option>
+    <option>Written</option>
+    <option>Oral</option>
+  </select>
+</div>
+
+<div class="field">
+  <label>43. Additional Information</label>
+  <input id="field59">
+</div>
+
+<div class="field">
+  <label>44. Authority to Which Complaint Was Submitted</label>
+  <input id="complaintAuthority">
+</div>
+
+<div class="field">
+  <label>45. Date Complaint Was Submitted</label>
+  <input type="date" id="complaintSubmittedDate">
+</div>
+
+<div class="field full">
+  <label>46. Action Requested by Complainant</label>
+  <textarea id="actionRequested"></textarea>
 </div>
 
 </div>
@@ -2291,58 +2611,63 @@ button:hover {
 ========================= -->
 
 <div class="section">
-<div class="section-title">7. Judgement / Court Details — Fields 33–42</div>
+<div class="section-title">6. Accused Information</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-<label>33. Court Name</label>
-<input id="courtName2">
+  <label>47. Victim Full Name</label>
+  <input id="victimName">
 </div>
 
 <div class="field">
-<label>34. On Bench</label>
-<input id="onBench">
+  <label>48. Father's Name</label>
+  <input id="victimFather">
 </div>
 
 <div class="field">
-<label>35. Judgement By</label>
-<input id="judgementBy">
+  <label>49. Mother's Name</label>
+  <input id="victimMother">
 </div>
 
 <div class="field">
-<label>36. FIR Number</label>
-<input id="firNumber2">
+  <label>50. Age</label>
+  <input type="number" id="victimAge">
 </div>
 
 <div class="field">
-<label>37. Police Station</label>
-<input id="policeStation2">
-</div>
-
-<div class="field">
-<label>38. FIR Date</label>
-<input type="date" id="firDate2">
+  <label>51. Occupation</label>
+  <input id="victimOccupation">
 </div>
 
 <div class="field full">
-<label>39. Police Station Address Full</label>
-<textarea id="policeStationAddress"></textarea>
+  <label>52. Address</label>
+  <textarea id="victimAddress"></textarea>
 </div>
 
 <div class="field">
-<label>40. FIR Report Category</label>
-<input id="firReportCategory">
+  <label>53. Relationship with Complainant</label>
+  <input id="victimRelationshipComplainant">
+</div>
+
+<div class="field">
+  <label>54. Relationship with Accused</label>
+  <input id="victimRelationshipAccused">
+</div>
+
+<div class="field">
+  <label>55. Victim Sustained Injury?</label>
+  <select id="victimInjury">
+    <option value="">Select</option>
+    <option>Yes</option>
+    <option>No</option>
+    <option>Unknown</option>
+  </select>
 </div>
 
 <div class="field full">
-<label>41. Complainant Details</label>
-<textarea id="complainantDetails"></textarea>
-</div>
-
-<div class="field full">
-<label>42. Occurrence Details / Report Details</label>
-<textarea id="occurrenceReportDetails"></textarea>
+  <label>56. Details of Alleged Loss / Damage / Injury</label>
+  <textarea id="lossDamageInjury"></textarea>
 </div>
 
 </div>
@@ -2355,117 +2680,59 @@ button:hover {
 ========================= -->
 
 <div class="section">
-<div class="section-title">8. Complainant Information — Fields 43–62</div>
+<div class="section-title">7. Case Facts & Investigation</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-<label>43. Complainant Full Name</label>
-<input id="complainantName">
+  <label>57. Accused Name</label>
+  <input id="accusedName">
 </div>
 
 <div class="field">
-<label>44. Father's Name</label>
-<input id="complainantFather">
-</div>
-
-<div class="field">
-<label>45. Mother's Name</label>
-<input id="complainantMother">
-</div>
-
-<div class="field">
-<label>46. Husband/Wife Name</label>
-<input id="complainantSpouse">
-</div>
-
-<div class="field">
-<label>47. Age</label>
-<input type="number" id="complainantAge">
-</div>
-
-<div class="field">
-<label>48. Date of Birth</label>
-<input type="date" id="complainantDOB">
-</div>
-
-<div class="field">
-<label>49. Occupation</label>
-<input id="complainantOccupation">
+  <label>58. Father's Name</label>
+  <input id="accusedFather">
 </div>
 
 <div class="field full">
-<label>50. Address</label>
-<textarea id="complainantAddress"></textarea>
+  <label>59. Address</label>
+  <textarea id="accusedAddress"></textarea>
 </div>
 
 <div class="field">
-<label>51. City / Village</label>
-<input id="complainantCity">
+  <label>60. Occupation</label>
+  <input id="accusedOccupation">
 </div>
 
 <div class="field">
-<label>52. District</label>
-<input id="complainantDistrict">
+  <label>61. Alleged Role</label>
+  <input id="accusedRole">
 </div>
 
 <div class="field">
-<label>53. State</label>
-<input id="complainantState">
+  <label>62. Number of Accused Persons</label>
+  <input type="number" id="accusedCount" min="1">
 </div>
 
 <div class="field">
-<label>54. Contact Details</label>
-<input id="complainantContact">
+  <label>63. Known to Complainant?</label>
+  <select id="accusedKnown">
+    <option value="">Select</option>
+    <option>Yes</option>
+    <option>No</option>
+    <option>Partially</option>
+    <option>Unknown</option>
+  </select>
 </div>
 
 <div class="field">
-<label>55. Relationship to Victim</label>
-<input id="relationshipVictim">
-</div>
-
-<div class="field">
-<label>56. Relationship to Accused</label>
-<input id="relationshipAccused">
-</div>
-
-<div class="field">
-<label>57. Eyewitness?</label>
-<select id="complainantEyewitness">
-<option value="">Select</option>
-<option>Yes</option>
-<option>No</option>
-<option>Unknown</option>
-</select>
-</div>
-
-<div class="field">
-<label>58. Complaint Type</label>
-<select id="complaintType">
-<option value="">Select</option>
-<option>Written</option>
-<option>Oral</option>
-</select>
-</div>
-
-<div class="field">
-<label>59. Additional Information</label>
-<input id="field59">
-</div>
-
-<div class="field">
-<label>60. Authority to Which Complaint Was Submitted</label>
-<input id="complaintAuthority">
-</div>
-
-<div class="field">
-<label>61. Date Complaint Was Submitted</label>
-<input type="date" id="complaintSubmittedDate">
+  <label>64. Relationship with Complainant</label>
+  <input id="accusedRelationship">
 </div>
 
 <div class="field full">
-<label>62. Action Requested by Complainant</label>
-<textarea id="actionRequested"></textarea>
+  <label>65. Previous Dispute Between Parties</label>
+  <textarea id="previousDispute"></textarea>
 </div>
 
 </div>
@@ -2478,63 +2745,83 @@ button:hover {
 ========================= -->
 
 <div class="section">
-<div class="section-title">9. Victim Information — Fields 63–72</div>
+<div class="section-title">8. Judicial Outcome</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-<label>63. Victim Full Name</label>
-<input id="victimName">
+  <label>66. Date of Incident</label>
+  <input type="date" id="incidentDate">
 </div>
 
 <div class="field">
-<label>64. Father's Name</label>
-<input id="victimFather">
+  <label>67. Day of Incident</label>
+  <input id="incidentDay" readonly>
 </div>
 
 <div class="field">
-<label>65. Mother's Name</label>
-<input id="victimMother">
+  <label>68. Approximate Time</label>
+  <input type="time" id="incidentTime">
 </div>
 
 <div class="field">
-<label>66. Age</label>
-<input type="number" id="victimAge">
-</div>
-
-<div class="field">
-<label>67. Occupation</label>
-<input id="victimOccupation">
+  <label>69. Place of Incident</label>
+  <input id="incidentPlace">
 </div>
 
 <div class="field full">
-<label>68. Address</label>
-<textarea id="victimAddress"></textarea>
+  <label>70. Complete Address of Place</label>
+  <textarea id="incidentAddress"></textarea>
 </div>
 
 <div class="field">
-<label>69. Relationship with Complainant</label>
-<input id="victimRelationshipComplainant">
-</div>
-
-<div class="field">
-<label>70. Relationship with Accused</label>
-<input id="victimRelationshipAccused">
-</div>
-
-<div class="field">
-<label>71. Victim Sustained Injury?</label>
-<select id="victimInjury">
-<option value="">Select</option>
-<option>Yes</option>
-<option>No</option>
-<option>Unknown</option>
-</select>
+  <label>71. Nature of Place</label>
+  <input id="placeNature">
 </div>
 
 <div class="field full">
-<label>72. Details of Alleged Loss / Damage / Injury</label>
-<textarea id="lossDamageInjury"></textarea>
+  <label>72. Persons Present at the Place</label>
+  <textarea id="personsPresent"></textarea>
+</div>
+
+<div class="field full">
+  <label>73. Events Immediately Before Incident</label>
+  <textarea id="beforeIncident"></textarea>
+</div>
+
+<div class="field full">
+  <label>74. Detailed Description of Incident</label>
+  <textarea id="incidentDescription"></textarea>
+</div>
+
+<div class="field full">
+  <label>75. Events Immediately After Incident</label>
+  <textarea id="afterIncident"></textarea>
+</div>
+
+<div class="field full">
+  <label>76. Alleged Motive / Reason</label>
+  <textarea id="motive"></textarea>
+</div>
+
+<div class="field full">
+  <label>77. Alleged Threats</label>
+  <textarea id="threats"></textarea>
+</div>
+
+<div class="field full">
+  <label>78. Alleged Injury</label>
+  <textarea id="allegedInjury"></textarea>
+</div>
+
+<div class="field full">
+  <label>79. Alleged Property Damage</label>
+  <textarea id="propertyDamage"></textarea>
+</div>
+
+<div class="field full">
+  <label>80. Alleged Financial Loss</label>
+  <textarea id="financialLoss"></textarea>
 </div>
 
 </div>
@@ -2547,181 +2834,27 @@ button:hover {
 ========================= -->
 
 <div class="section">
-<div class="section-title">10. Accused Information — Fields 73–81</div>
+<div class="section-title">9. Stamp Paper Information</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-<label>73. Accused Name</label>
-<input id="accusedName">
-</div>
-
-<div class="field">
-<label>74. Father's Name</label>
-<input id="accusedFather">
-</div>
-
-<div class="field full">
-<label>75. Address</label>
-<textarea id="accusedAddress"></textarea>
-</div>
-
-<div class="field">
-<label>76. Occupation</label>
-<input id="accusedOccupation">
-</div>
-
-<div class="field">
-<label>77. Alleged Role</label>
-<input id="accusedRole">
-</div>
-
-<div class="field">
-<label>78. Number of Accused Persons</label>
-<input type="number" id="accusedCount" min="1">
-</div>
-
-<div class="field">
-<label>79. Known to Complainant?</label>
-<select id="accusedKnown">
-<option value="">Select</option>
-<option>Yes</option>
-<option>No</option>
-<option>Partially</option>
-<option>Unknown</option>
-</select>
-</div>
-
-<div class="field">
-<label>80. Relationship with Complainant</label>
-<input id="accusedRelationship">
-</div>
-
-<div class="field full">
-<label>81. Previous Dispute Between Parties</label>
-<textarea id="previousDispute"></textarea>
-</div>
-
-</div>
-</div>
-</div>
-
-
-<!-- =========================
-     INCIDENT
-========================= -->
-
-<div class="section">
-<div class="section-title">11. Incident / Occurrence — Fields 82–96</div>
-<div class="section-body">
-<div class="form-grid">
-
-<div class="field">
-<label>82. Date of Incident</label>
-<input type="date" id="incidentDate">
-</div>
-
-<div class="field">
-<label>83. Day of Incident</label>
-<input id="incidentDay" readonly>
-</div>
-
-<div class="field">
-<label>84. Approximate Time</label>
-<input type="time" id="incidentTime">
-</div>
-
-<div class="field">
-<label>85. Place of Incident</label>
-<input id="incidentPlace">
-</div>
-
-<div class="field full">
-<label>86. Complete Address of Place</label>
-<textarea id="incidentAddress"></textarea>
-</div>
-
-<div class="field">
-<label>87. Nature of Place</label>
-<input id="placeNature">
-</div>
-
-<div class="field full">
-<label>88. Persons Present at the Place</label>
-<textarea id="personsPresent"></textarea>
-</div>
-
-<div class="field full">
-<label>89. Events Immediately Before Incident</label>
-<textarea id="beforeIncident"></textarea>
-</div>
-
-<div class="field full">
-<label>90. Detailed Description of Incident</label>
-<textarea id="incidentDescription"></textarea>
-</div>
-
-<div class="field full">
-<label>91. Events Immediately After Incident</label>
-<textarea id="afterIncident"></textarea>
-</div>
-
-<div class="field full">
-<label>92. Alleged Motive / Reason</label>
-<textarea id="motive"></textarea>
-</div>
-
-<div class="field full">
-<label>93. Alleged Threats</label>
-<textarea id="threats"></textarea>
-</div>
-
-<div class="field full">
-<label>94. Alleged Injury</label>
-<textarea id="allegedInjury"></textarea>
-</div>
-
-<div class="field full">
-<label>95. Alleged Property Damage</label>
-<textarea id="propertyDamage"></textarea>
-</div>
-
-<div class="field full">
-<label>96. Alleged Financial Loss</label>
-<textarea id="financialLoss"></textarea>
-</div>
-
-</div>
-</div>
-</div>
-
-
-<!-- =========================
-     LEGAL
-========================= -->
-
-<div class="section">
-<div class="section-title">12. Legal Sections / Offences — Fields 97–106</div>
-<div class="section-body">
-<div class="form-grid">
-
-<div class="field">
-<label>97. Sections Mentioned in Complaint</label>
+<label>88. Sections Mentioned in Complaint</label>
 <input id="sectionsComplaint">
 </div>
 
 <div class="field">
-<label>98. Sections Mentioned in FIR</label>
+<label>89. Sections Mentioned in FIR</label>
 <input id="sectionsFIR">
 </div>
 
 <div class="field">
-<label>99. Applicable Act / Law</label>
+<label>90. Applicable Act / Law</label>
 <input id="applicableLaw">
 </div>
 
 <div class="field">
-<label>100. Sections Subsequently Added?</label>
+<label>91. Sections Subsequently Added?</label>
 <select id="sectionsAdded">
 <option value="">Select</option>
 <option>Yes</option>
@@ -2730,12 +2863,12 @@ button:hover {
 </div>
 
 <div class="field">
-<label>101. Date of Addition</label>
+<label>92. Date of Addition</label>
 <input type="date" id="sectionAdditionDate">
 </div>
 
 <div class="field">
-<label>102. Sections Deleted?</label>
+<label>93. Sections Deleted?</label>
 <select id="sectionsDeleted">
 <option value="">Select</option>
 <option>Yes</option>
@@ -2743,18 +2876,24 @@ button:hover {
 </select>
 </div>
 
+<div class="field full">
+<label>86. Section Deleted — Body / Reasons</label>
+<textarea id="sectionsDeletedDetails"
+    placeholder="Write the Section Deleted details here. Use separate paragraphs for long text."></textarea>
+</div>
+
 <div class="field">
-<label>103. Present Sections</label>
+<label>94. Present Sections</label>
 <input id="presentSections">
 </div>
 
 <div class="field">
-<label>104. Nature of Alleged Offences</label>
+<label>95. Nature of Alleged Offences</label>
 <input id="offenceNature">
 </div>
 
 <div class="field">
-<label>105. Bailable / Non-Bailable</label>
+<label>96. Bailable / Non-Bailable</label>
 <select id="bailable">
 <option value="">Select</option>
 <option>Bailable</option>
@@ -2765,7 +2904,7 @@ button:hover {
 </div>
 
 <div class="field">
-<label>106. Cognizable / Non-Cognizable</label>
+<label>97. Cognizable / Non-Cognizable</label>
 <select id="cognizable">
 <option value="">Select</option>
 <option>Cognizable</option>
@@ -2781,107 +2920,87 @@ button:hover {
 
 
 <!-- =========================
-     INVESTIGATION
+     Additional fields required by supplied 1-100 specification
 ========================= -->
-
 <div class="section">
-<div class="section-title">13. Investigation / Police Action — Fields 107–123</div>
-<div class="section-body">
-<div class="form-grid">
+  <div class="section-title">Additional Fields</div>
+  <div class="section-body">
+    <div class="form-grid">
 
-<div class="field">
-<label>107. Name of Investigating Officer</label>
-<input id="ioName">
-</div>
+      <div class="field">
+        <label>4. Case level</label>
+        <input type="text" id="complaintNumber">
+      </div>
 
-<div class="field">
-<label>108. Rank of Investigating Officer</label>
-<input id="ioRank">
-</div>
+      <div class="field">
+        <label>36. District</label>
+        <input type="text" id="complainantDistrict">
+      </div>
 
-<div class="field">
-<label>109. Date Investigation Started</label>
-<input type="date" id="investigationStart">
-</div>
+      <div class="field">
+        <label>37. State</label>
+        <input type="text" id="complainantState">
+      </div>
 
-<div class="field">
-<label>110. Police Station Officer / SHO</label>
-<input id="sho">
-</div>
+      <div class="field">
+        <label>81. Court Name</label>
+        <input type="text" id="courtName">
+      </div>
 
-<div class="field full">
-<label>111. Initial Police Action</label>
-<textarea id="initialPoliceAction"></textarea>
-</div>
+      <div class="field">
+        <label>82. Court Case Number</label>
+        <input type="text" id="courtCaseNumber">
+      </div>
 
-<div class="field full">
-<label>112. Site Inspection Details</label>
-<textarea id="siteInspection"></textarea>
-</div>
+      <div class="field">
+        <label>83. Date of First Court Appearance</label>
+        <input type="date" id="firstAppearance">
+      </div>
 
-<div class="field">
-<label>113. Site Plan Prepared?</label>
-<select id="sitePlan">
-<option value="">Select</option>
-<option>Yes</option>
-<option>No</option>
-</select>
-</div>
+      <div class="field">
+        <label>84. Charges Framed</label>
+        <input type="text" id="chargesFramed">
+      </div>
 
-<div class="field">
-<label>114. Date of Site Inspection</label>
-<input type="date" id="siteInspectionDate">
-</div>
+      <div class="field">
+        <label>85. Date of Framing of Charges</label>
+        <input type="date" id="chargesDate">
+      </div>
 
-<div class="field full">
-<label>115. Witnesses Examined by Police</label>
-<textarea id="witnessesExamined"></textarea>
-</div>
+      <div class="field">
+        <label>86. On Bench</label>
+        <input type="text" id="onBench">
+      </div>
 
-<div class="field">
-<label>116. Number of Witnesses</label>
-<input type="number" id="witnessCount" min="0">
-</div>
+      <div class="field">
+        <label>87. Judgement By</label>
+        <input type="text" id="judgementBy">
+      </div>
 
-<div class="field full">
-<label>117. Witness Statement Details</label>
-<textarea id="witnessStatements"></textarea>
-</div>
+      <div class="field">
+        <label>98. Stamp Description</label>
+        <input type="text" id="stampDescription">
+      </div>
 
-<div class="field full">
-<label>118. Documentary Evidence Collected</label>
-<textarea id="documentaryEvidence"></textarea>
-</div>
+      <div class="field">
+        <label>99. Consideration Price</label>
+        <input type="text" id="considerationPrice">
+      </div>
 
-<div class="field full">
-<label>119. Electronic Evidence Collected</label>
-<textarea id="electronicEvidence"></textarea>
-</div>
+      <div class="field">
+        <label>100. Stamp Duty Amount</label>
+        <input type="text" id="stampDuty" class="stamp-duty-amount" data-stamp-duty readonly>
+      </div>
 
-<div class="field full">
-<label>120. CCTV Footage Details</label>
-<textarea id="cctvDetails"></textarea>
+    </div>
+  </div>
 </div>
 
-<div class="field full">
-<label>121. Call Records / Communication Evidence</label>
-<textarea id="callRecords"></textarea>
-</div>
 
-<div class="field full">
-<label>122. Photographs / Videos Available</label>
-<textarea id="photosVideos"></textarea>
-</div>
-
-<div class="field full">
-<label>123. Medical Examination Details</label>
-<textarea id="medicalDetails"></textarea>
-</div>
-
-</div>
-</div>
-</div>
-
+      <div class="field">
+        <label>FIR Passport Photo</label>
+        <input type="file" id="firPassportPhoto" accept="image/*">
+      </div>
 
 </form>
 
@@ -3489,53 +3608,71 @@ Clear Form
 
 </div>
 
-<!-- PAGE 6 -->
+<!-- PAGE 6 — ALL FIELDS / VERDICT / DETERMINATION -->
 
-<div class="a4-page">
-<h1>JUDGEMENT CONC.</h1>
+<div class="a4-page judgement-page" id="judgementPage">
+    <div class="judgement-content" id="judgementContent">
+        <h1 class="judgement-title">VERDICT / DETERMINATION</h1>
+        <div id="judgementAllFields">
 
-<div class="doc-row">
-<div class="doc-label">Court Name</div>
-<div class="doc-value" data-field="courtName"></div>
+    <div class="case-information-section">
+        <h2 class="judgement-section-heading">Case Information</h2>
+
+        <div class="judgement-body case-information-body">
+
+            <p class="case-information-text">
+                The case record should contain all essential information
+                required for the proper identification, classification, and
+                documentation of the matter. The
+                <strong data-field="caseName"></strong>
+                should clearly specify the name or title by which the case is
+                to be identified, while the
+                <strong data-field="caseType"></strong>
+                should indicate the nature or category of the case. The
+                <strong data-field="caseNumber"></strong>
+                should be entered as the official reference number assigned
+                to the case, and the
+                <strong data-field="firNumber"></strong>
+                should specify the corresponding First Information Report
+                number, where applicable. The
+                <strong data-field="firYear"></strong>
+                should mention the year in which the FIR was registered, and
+                the
+                <strong data-field="firDate"></strong>
+                should provide the exact date of registration of the FIR in
+                the required day-month-year format. The
+                <strong data-field="complaintNumber"></strong>
+                should identify the applicable level or stage of the case by
+                selecting the appropriate option from the available choices.
+                In addition, the
+                <strong data-field="complaintDate"></strong>
+                should specify the date on which the complaint was filed or
+                received, also in the required day-month-year format. The
+                record should further include the name of the relevant
+                <strong data-field="policeStation"></strong>
+                responsible for handling or registering the matter, along
+                with the applicable
+                <strong data-field="citation"></strong>,
+                which may contain the relevant legal citation, reference, or
+                other identifying citation associated with the case.
+                Collectively, the Case Name, Case Type, Case Number, FIR
+                Number, FIR Year, FIR Date, Case Level, Complaint Date,
+                Police Station, and Citation provide a comprehensive set of
+                details necessary for accurately recording, identifying,
+                tracking, and managing the case throughout the relevant legal
+                or administrative process.
+            </p>
+
+        </div>
+    </div>
+
 </div>
+    </div>
 
-<div class="doc-row">
-<div class="doc-label">Court Case Number</div>
-<div class="doc-value" data-field="courtCaseNumber"></div>
-</div>
-
-<div class="doc-row">
-<div class="doc-label">Judge / Presiding Officer</div>
-<div class="doc-value" data-field="judge"></div>
-</div>
-
-<div class="doc-row">
-<div class="doc-label">FIR Number</div>
-<div class="doc-value" data-field="firNumber"></div>
-</div>
-
-<div class="doc-row">
-<div class="doc-label">Sections in FIR</div>
-<div class="doc-value" data-field="sectionsFIR"></div>
-</div>
-
-<div class="doc-row">
-<div class="doc-label">Present Sections</div>
-<div class="doc-value" data-field="presentSections"></div>
-</div>
-
-<div class="doc-row">
-<div class="doc-label">Nature of Offence</div>
-<div class="doc-value" data-field="offenceNature"></div>
-</div>
-
-<div class="doc-row">
-<div class="doc-label">Judgement By</div>
-<div class="doc-value" data-field="judgementBy"></div>
-</div>
-
-</div>
-
+    <footer class="judgement-footer">
+        <span class="case-name-footer-label">Case:</span>
+        <span class="case-name-footer" id="judgementCaseNameFooter"></span><span class="footer-separator"> | </span><span class="page-number-footer"></span>
+    </footer>
 </div>
 
 
@@ -3584,6 +3721,18 @@ function getValue(id) {
     if (!element) return "";
 
     return element.value || "";
+}
+
+const STAMP_DUTY_BY_CASE_LEVEL = {
+    "Core Critical": "₹1,000",
+    "Crucial": "₹500",
+    "Specialized": "₹200",
+    "Procedural": "₹100"
+};
+
+function getStampDutyAmount() {
+    const caseLevel = document.getElementById("caseLevel")?.value || "";
+    return STAMP_DUTY_BY_CASE_LEVEL[caseLevel] || "";
 }
 
 function generateDemoPage3QR() {
@@ -3647,9 +3796,28 @@ NOT A GOVERNMENT DOCUMENT
 
 function generateDocuments() {
 
+    // Always derive stamp duty from Case Level before generating pages.
+    if (typeof updateStampDutyAmount === "function") {
+        updateStampDutyAmount();
+    }
+
     /* =====================================
        POPULATE ALL DATA-FIELD ELEMENTS
     ===================================== */
+
+    /*
+       EMPTY OUTPUT VALUES
+       If a form field is blank, show "Not Stated" in red
+       everywhere that field is used in the generated pages.
+    */
+    function setGeneratedValue(element, value) {
+        if (!element) return;
+
+        const cleanValue = String(value ?? "").trim();
+
+        element.classList.toggle("not-stated", !cleanValue);
+        element.textContent = cleanValue || "Not Stated";
+    }
 
     document.querySelectorAll("[data-field]").forEach(element => {
 
@@ -3673,7 +3841,7 @@ function generateDocuments() {
             });
         }
 
-        element.textContent = value;
+        setGeneratedValue(element, value);
 
     });
 
@@ -3682,7 +3850,7 @@ function generateDocuments() {
     const considerationRef = document.getElementById("refConsiderationPrice");
 
     if (considerationInput && considerationRef) {
-        considerationRef.textContent = considerationInput.value || "";
+        setGeneratedValue(considerationRef, considerationInput.value);
     }
 
     /* Page 4 — copy values from the existing reference spans. */
@@ -3690,7 +3858,7 @@ function generateDocuments() {
         const source = document.getElementById(sourceId);
         const target = document.getElementById(targetId);
         if (source && target) {
-            target.textContent = source.textContent || source.value || "";
+            setGeneratedValue(target, source.textContent || source.value);
         }
     };
 
@@ -3713,8 +3881,10 @@ function generateDocuments() {
         document.getElementById("stampPaperApplicableSections");
 
     if (applicableTarget) {
-        applicableTarget.textContent =
-            applicableSections ? (applicableSections.value || "") : "";
+        setGeneratedValue(
+            applicableTarget,
+            applicableSections ? applicableSections.value : ""
+        );
     }
 
     /* Sample denomination header. */
@@ -3725,7 +3895,7 @@ function generateDocuments() {
         "Procedural": "stamppaperimages/100estamp.png"
     };
 
-    const stampDutyLevel = document.getElementById("stampDuty")?.value || "";
+    const stampDutyLevel = document.getElementById("caseLevel")?.value || "";
     const stampPaperHeader = document.getElementById("stampPaperHeaderImage");
 
     if (stampPaperHeader) {
@@ -3734,7 +3904,7 @@ function generateDocuments() {
 
 
     /* Q7 CASE LEVEL -> AFFIDAVIT CV SEAL */
-    const caseLevel = document.getElementById("complaintNumber")?.value || "";
+    const caseLevel = document.getElementById("caseLevel")?.value || "";
     const caseLevelSeal = document.getElementById("caseLevelSeal");
 
     const caseLevelSealMap = {
@@ -3806,6 +3976,7 @@ try {
     setTimeout(function () {
         if (typeof updateFIRFields === "function") updateFIRFields();
         if (typeof paginateFIR === "function") paginateFIR();
+        if (typeof paginateJudgementPage === "function") paginateJudgementPage();
     }, 50);
 
 }
@@ -3942,58 +4113,41 @@ generateEstampNumber();
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const stampDuty = document.getElementById("stampDuty");
+    const caseLevel = document.getElementById("caseLevel");
     const considerationPrice = document.getElementById("considerationPrice");
 
     function generateConsiderationPrice() {
+        if (!caseLevel || !considerationPrice) return;
 
         let min;
         let max;
 
-        switch (stampDuty.value) {
-
+        switch (caseLevel.value) {
             case "Core Critical":
-                min = 50000;
-                max = 100000;
-                break;
-
+                min = 50000; max = 100000; break;
             case "Crucial":
-                min = 21000;
-                max = 50000;
-                break;
-
+                min = 21000; max = 50000; break;
             case "Specialized":
-                min = 11000;
-                max = 20000;
-                break;
-
+                min = 11000; max = 20000; break;
             case "Procedural":
-                min = 1000;
-                max = 10000;
-                break;
-
+                min = 1000; max = 10000; break;
             default:
                 considerationPrice.value = "";
                 return;
         }
 
-        // Generate random amount
-        const randomAmount =
-            Math.floor(Math.random() * (max - min + 1)) + min;
+        const randomAmount = Math.floor(Math.random() * (max - min + 1)) + min;
+        const roundedAmount = Math.round(randomAmount / 1000) * 1000;
+        considerationPrice.value = "₹" + roundedAmount.toLocaleString("en-IN");
 
-        // Round to nearest ₹1,000
-        const roundedAmount =
-            Math.round(randomAmount / 1000) * 1000;
-
-        // Indian number format
-        considerationPrice.value =
-            "₹" + roundedAmount.toLocaleString("en-IN");
+        const ref = document.getElementById("refConsiderationPrice");
+        if (ref) ref.textContent = considerationPrice.value;
     }
 
-    // Generate when Stamp Duty option changes
-    stampDuty.addEventListener("change", generateConsiderationPrice);
-
-    if (stampDuty.value) generateConsiderationPrice();
+    if (caseLevel) {
+        caseLevel.addEventListener("change", generateConsiderationPrice);
+        caseLevel.addEventListener("input", generateConsiderationPrice);
+    }
 
 });
 
@@ -4037,7 +4191,9 @@ document.addEventListener("DOMContentLoaded", function () {
     syncValue("petitioner", "refStampDutyPaidBy");
 
     // Stamp duty → Stamp Duty Amount
-    syncValue("stampDuty", "refStampDutyAmount");
+    if (typeof updateStampDutyAmount === "function") {
+        updateStampDutyAmount();
+    }
 
 });
 
@@ -4347,10 +4503,89 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-</script>
 
-</body>
-</html>
+/* PAGE 6 — STATIC HTML PARAGRAPH / FIELD VALUE POPULATION */
+(function () {
+    const CASE_INFO_FIELDS = [
+        "caseName",
+        "caseType",
+        "caseNumber",
+        "firNumber",
+        "firYear",
+        "firDate",
+        "complaintNumber",
+        "complaintDate",
+        "policeStation",
+        "citation"
+    ];
+
+    function getValue(id) {
+        const el = document.getElementById(id);
+        if (!el) return "Not Stated";
+
+        let value = String(el.value || el.textContent || "").trim();
+
+        if (el.type === "date" && value) {
+            const d = new Date(value + "T00:00:00");
+            value = d.toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            });
+        }
+
+        return value || "Not Stated";
+    }
+
+    /*
+     * The paragraph itself is static HTML.
+     * JavaScript only puts the current field values into
+     * the existing <strong data-field="..."> elements.
+     */
+    function populateCaseInformation() {
+        document.querySelectorAll("[data-field]").forEach(function (element) {
+            const id = element.getAttribute("data-field");
+            const value = getValue(id);
+            element.textContent = value;
+            element.classList.toggle("not-stated", value === "Not Stated");
+        });
+
+        updateFooter();
+    }
+
+    function updateFooter() {
+        const pages = Array.from(document.querySelectorAll(".judgement-page"));
+        const total = pages.length;
+
+        pages.forEach(function (page, index) {
+            const caseFooter = page.querySelector(".case-name-footer");
+            if (caseFooter) {
+                caseFooter.textContent = getValue("caseName");
+            }
+
+            const pageNumber = page.querySelector(".page-number-footer");
+            if (pageNumber) {
+                pageNumber.textContent = `Page ${index + 1} of ${total}`;
+            }
+        });
+    }
+
+    window.paginateJudgementPage = populateCaseInformation;
+
+    document.addEventListener("DOMContentLoaded", function () {
+        CASE_INFO_FIELDS.forEach(function (id) {
+            const element = document.getElementById(id);
+
+            if (element) {
+                element.addEventListener("input", populateCaseInformation);
+                element.addEventListener("change", populateCaseInformation);
+            }
+        });
+
+        populateCaseInformation();
+    });
+})();
+
 
 
 /* Keep logo + seal on every FIR page after pagination */
@@ -4441,3 +4676,97 @@ function applySealToEveryFIRPage() {
         }
     });
 })();
+
+/* ============================================
+   CASE LEVEL -> STAMP DUTY AMOUNT
+============================================ */
+
+function updateStampDutyEverywhere() {
+
+    const amount = getStampDutyAmount();
+
+    /* Main stamp duty field */
+    const stampDutyInput =
+        document.getElementById("stampDuty");
+
+    if (stampDutyInput) {
+        stampDutyInput.value = amount;
+    }
+
+
+    /* E-Stamp Reference Page */
+    const refAmount =
+        document.getElementById("refStampDutyAmount");
+
+    if (refAmount) {
+        refAmount.textContent = amount;
+    }
+
+
+    /* Stamp Paper Page */
+    const stampPaperAmount =
+        document.getElementById("stampPaperStampDutyAmount");
+
+    if (stampPaperAmount) {
+        stampPaperAmount.textContent = amount;
+    }
+
+
+    /* Any other page using data-stamp-duty */
+    document.querySelectorAll(
+        "[data-stamp-duty], .stamp-duty-amount"
+    ).forEach(function (element) {
+
+        if ("value" in element) {
+            element.value = amount;
+        } else {
+            element.textContent = amount;
+        }
+
+    });
+}
+
+
+function updateStampDutyAmount() {
+
+    const amount = getStampDutyAmount();
+
+    const stampDutyInput =
+        document.getElementById("stampDuty");
+
+    if (stampDutyInput) {
+        stampDutyInput.value = amount;
+    }
+
+    updateStampDutyEverywhere();
+}
+
+
+/* Automatically run when Case Level changes */
+document.addEventListener("DOMContentLoaded", function () {
+
+    const caseLevel =
+        document.getElementById("caseLevel");
+
+    if (caseLevel) {
+
+        caseLevel.addEventListener(
+            "change",
+            updateStampDutyAmount
+        );
+
+        caseLevel.addEventListener(
+            "input",
+            updateStampDutyAmount
+        );
+    }
+
+    /* Set initial value */
+    updateStampDutyAmount();
+
+});
+
+</script>
+
+</body>
+</html>
