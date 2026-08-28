@@ -2464,6 +2464,171 @@ header {
 .btn-success {
     background: linear-gradient(135deg, #a16207, #7c4a03);
 }
+
+/* =========================================================
+   PAGE 7 — A4 PHOTO SLIP
+   ========================================================= */
+.photo-slip-page {
+    width: 210mm !important;
+    height: 297mm !important;
+    min-height: 297mm !important;
+    max-height: 297mm !important;
+    margin: 0 auto;
+    padding: 0 !important;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    page-break-after: always;
+    break-after: page;
+}
+.photo-slip-top {
+    height: 197mm;
+    padding: 10mm 14mm 0;
+    box-sizing: border-box;
+}
+.photo-slip-police {
+    height: 32mm;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.photo-slip-police-logo {
+    width: 25mm;
+    height: 25mm;
+    object-fit: contain;
+}
+.photo-slip-heading {
+    text-align: center;
+    margin-top: 2mm;
+}
+.photo-slip-case-name {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 19pt;
+    font-weight: 800;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+.photo-slip-case-number {
+    margin-top: 2mm;
+    font-size: 9.5pt;
+}
+.photo-slip-photo-area {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24mm;
+    margin-top: 15mm;
+}
+.photo-card {
+    width: 45mm;
+    text-align: center;
+}
+.photo-card-title {
+    font-size: 8.5pt;
+    font-weight: 700;
+    margin-bottom: 2mm;
+}
+.photo-slip-photo {
+    display: block;
+    width: 35mm !important;
+    height: 45mm !important;
+    margin: 0 auto;
+    object-fit: cover;
+    border: 1px solid #000;
+    background: #fff;
+}
+.photo-card-name {
+    margin-top: 2mm;
+    min-height: 5mm;
+    font-size: 8.5pt;
+    font-weight: 600;
+    word-break: break-word;
+}
+.photo-slip-cut-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 197mm;
+    border-top: 1px dashed #000;
+    text-align: center;
+}
+.photo-slip-cut-line span {
+    position: relative;
+    top: -4.5mm;
+    background: #fff;
+    padding: 0 4mm;
+    font-size: 7.5pt;
+    font-weight: 700;
+}
+.photo-slip-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100mm;
+    padding: 8mm 14mm;
+    box-sizing: border-box;
+    text-align: center;
+}
+.photo-slip-bottom-title {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.photo-slip-bottom-details {
+    margin-top: 5mm;
+    display: flex;
+    justify-content: center;
+    gap: 12mm;
+    font-size: 9pt;
+}
+@media print {
+    .photo-slip-page {
+        width: 210mm !important;
+        height: 297mm !important;
+        min-height: 297mm !important;
+        max-height: 297mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+
+.photo-slip-cut-photos {
+    display: flex;
+    justify-content: center;
+    gap: 24mm;
+    margin-top: 4mm;
+}
+.cut-photo-card {
+    width: 45mm;
+    text-align: center;
+}
+.cut-photo-label {
+    font-size: 7pt;
+    font-weight: 700;
+    margin-bottom: 1.5mm;
+    text-transform: uppercase;
+}
+.photo-slip-bottom-photo {
+    display: block;
+    width: 35mm !important;
+    height: 45mm !important;
+    margin: 0 auto;
+    object-fit: cover;
+    border: 1px solid #000;
+    background: #fff;
+}
+
 </style>
 
 </head>
@@ -3239,11 +3404,21 @@ header {
         <input type="file" id="firPassportPhoto" accept="image/*">
       </div>
 
+      <div class="field">
+        <label>Petitioner Photo</label>
+        <input type="file" id="petitionerPhoto" accept="image/*">
+      </div>
+
+      <div class="field">
+        <label>Respondent Photo</label>
+        <input type="file" id="respondentPhoto" accept="image/*">
+      </div>
+
 </form>
 
 <div class="actions">
 <button class="btn-primary" onclick="generateDocuments()">
-Generate 6 Pages
+Generate 7 Pages
 </button>
 
 <button class="btn-success" onclick="window.print()">
@@ -3974,6 +4149,44 @@ Clear Form
         <span class="case-name-footer" id="judgementCaseNameFooter"></span><span class="footer-separator"> | </span><span class="page-number-footer"></span>
     </footer>
 </div>
+
+<!-- =========================
+     PAGE 7 — PHOTO CUT-OUT SLIP
+========================= -->
+<div class="a4-page photo-slip-page" id="photoSlipPage">
+    <div class="photo-slip-top">
+        <div class="photo-slip-police">
+            <img id="photoSlipPoliceLogo" class="photo-slip-police-logo" alt="State Police Logo">
+        </div>
+
+        <div class="photo-slip-heading">
+            <div class="photo-slip-case-name" id="photoSlipCaseName"></div>
+            <div class="photo-slip-case-number" id="photoSlipCaseNumber"></div>
+        </div>
+    </div>
+
+    <div class="photo-slip-cut-line"><span>✂ CUT HERE — BOTTOM 100 mm</span></div>
+
+    <div class="photo-slip-bottom">
+        <div class="photo-slip-bottom-title">PHOTO IDENTIFICATION SLIP</div>
+        <div class="photo-slip-bottom-details">
+            <span id="photoSlipBottomCase"></span>
+            <span id="photoSlipBottomNumber"></span>
+        </div>
+
+        <div class="photo-slip-cut-photos">
+            <div class="cut-photo-card">
+                <div class="cut-photo-label">PETITIONER PHOTO</div>
+                <img id="photoSlipBottomPetitionerPhoto" class="photo-slip-bottom-photo" alt="Petitioner Photo">
+            </div>
+            <div class="cut-photo-card">
+                <div class="cut-photo-label">RESPONDENT PHOTO</div>
+                <img id="photoSlipBottomRespondentPhoto" class="photo-slip-bottom-photo" alt="Respondent Photo">
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <script>
@@ -5132,7 +5345,75 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-</script>
+/* =========================================================
+   PAGE 7 — PETITIONER / RESPONDENT PHOTOS
+   ========================================================= */
+(function () {
+    function stateSlug(name) {
+        const map = (typeof FIR_STATE_SLUGS !== "undefined") ? FIR_STATE_SLUGS : {};
+        if (map[name]) return map[name];
+        return (name || "").toLowerCase()
+            .replace(/&/g, "and")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "");
+    }
 
+    function updatePhotoSlip() {
+        const val = id => (document.getElementById(id)?.value || "").trim();
+        const set = (id, value) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = value;
+        };
+
+        const state = val("state");
+        const caseName = val("caseName") || "CASE NAME";
+        const caseNumber = val("caseNumber") || "—";
+
+        const logo = document.getElementById("photoSlipPoliceLogo");
+        if (logo) {
+            const slug = stateSlug(state);
+            logo.src = slug ? "seal/" + slug + ".png" : "";
+            logo.style.display = slug ? "block" : "none";
+        }
+
+        set("photoSlipCaseName", caseName);
+        set("photoSlipCaseNumber", "Case Number: " + caseNumber);
+        set("photoSlipPetitionerName", val("petitioner"));
+        set("photoSlipRespondentName", val("respondent"));
+        set("photoSlipBottomCase", caseName);
+        set("photoSlipBottomNumber", caseNumber);
+    }
+
+    function bindPhoto(inputId, outputId) {
+        const input = document.getElementById(inputId);
+        const output = document.getElementById(outputId);
+        if (!input || !output) return;
+        input.addEventListener("change", function () {
+            const file = this.files && this.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => output.src = e.target.result;
+            reader.readAsDataURL(file);
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        bindPhoto("petitionerPhoto", "photoSlipPetitionerPhoto");
+        bindPhoto("respondentPhoto", "photoSlipRespondentPhoto");
+        bindPhoto("petitionerPhoto", "photoSlipBottomPetitionerPhoto");
+        bindPhoto("respondentPhoto", "photoSlipBottomRespondentPhoto");
+
+        ["state", "caseName", "caseNumber", "petitioner", "respondent"].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener("input", updatePhotoSlip);
+                el.addEventListener("change", updatePhotoSlip);
+            }
+        });
+        updatePhotoSlip();
+    });
+})();
+
+</script>
 </body>
 </html>
