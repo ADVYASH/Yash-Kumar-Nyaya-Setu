@@ -2960,6 +2960,57 @@ button:active{transform:translateY(0) scale(.98)!important;}
 @keyframes titleSweep{0%,60%{transform:translateX(-110%)}100%{transform:translateX(110%)}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
+
+<style>
+/* =========================================================
+   PAGE 6 VERDICT / DETERMINATION — TRUE MULTI-PAGE FLOW
+   Content is carried forward page-by-page without clipping.
+   ========================================================= */
+.judgement-page .judgement-content {
+    height: 251mm !important;
+    min-height: 251mm !important;
+    max-height: 251mm !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+.judgement-page .judgement-all-fields,
+.judgement-page #judgementAllFields {
+    display: block;
+    width: 100%;
+}
+
+.judgement-section,
+.case-information-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.judgement-continuation .judgement-content {
+    padding-top: 1mm !important;
+}
+
+.judgement-continuation-title {
+    margin: 0 0 7mm !important;
+    text-align: center;
+    font-size: 15pt;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+@media print {
+    .judgement-page {
+        overflow: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+    }
+
+    .judgement-page .judgement-content {
+        overflow: hidden !important;
+    }
+}
+</style>
+
 </head>
 
 <body>
@@ -5746,7 +5797,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-/* PAGE 6 — STATIC HTML PARAGRAPH / FIELD VALUE POPULATION */
+/* =========================================================
+   PAGE 6 — VERDICT / DETERMINATION — REAL MULTI-PAGE PAGINATION
+   ========================================================= */
 (function () {
     const CASE_INFO_FIELDS = [
         "caseName",
@@ -5779,23 +5832,325 @@ document.addEventListener("DOMContentLoaded", function () {
         return value || "Not Stated";
     }
 
-    /*
-     * The paragraph itself is static HTML.
-     * JavaScript only puts the current field values into
-     * the existing <strong data-field="..."> elements.
-     */
-    function populateCaseInformation() {
-        document.querySelectorAll("[data-field]").forEach(function (element) {
+    function populateCaseInformationFields() {
+        document.querySelectorAll("#judgementAllFields [data-field]").forEach(function (element) {
             const id = element.getAttribute("data-field");
             const value = getValue(id);
             element.textContent = value;
             element.classList.toggle("not-stated", value === "Not Stated");
         });
-
-        updateFooter();
     }
 
-    function updateFooter() {
+    function createJudgementPage(isContinuation) {
+        const page = document.createElement("div");
+        page.className = "a4-page judgement-page" +
+            (isContinuation ? " judgement-continuation" : "");
+
+        const content = document.createElement("div");
+        content.className = "judgement-content";
+
+        const title = document.createElement("h1");
+        title.className = isContinuation
+            ? "judgement-continuation-title"
+            : "judgement-title";
+        title.textContent = isContinuation
+            ? "VERDICT / DETERMINATION — CONTINUED"
+            : "VERDICT / DETERMINATION";
+        content.appendChild(title);
+
+        const allFields = document.createElement("div");
+        allFields.className = "judgement-all-fields";
+        allFields.id = isContinuation ? "" : "judgementAllFields";
+        content.appendChild(allFields);
+
+        const footer = document.createElement("footer");
+        footer.className = "judgement-footer";
+        footer.innerHTML =
+            '<span class="case-name-footer-label">Case:</span> ' +
+            '<span class="case-name-footer"></span>' +
+            '<span class="footer-separator"> | </span>' +
+            '<span class="page-number-footer"></span>';
+        page.appendChild(content);
+        page.appendChild(footer);
+
+        return {
+            page: page,
+            content: content,
+            allFields: allFields
+        };
+    }
+
+    function contentOverflows(content) {
+        return content.scrollHeight > content.clientHeight + 1;
+    }
+
+    /*
+     * Build Page 6 as a true continuous flow.
+     * A completed topic is followed immediately by the next topic when
+     * there is room. If a topic is too long for the remaining space,
+     * its paragraph is split at the exact text position that fits and
+     * the remainder continues on the next page.
+     */
+    function getTextNodes(root) {
+        const walker = document.createTreeWalker(
+            root,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode: function (node) {
+                    return node.nodeValue ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+                }
+            }
+        );
+        const nodes = [];
+        let node;
+        while ((node = walker.nextNode())) nodes.push(node);
+        return nodes;
+    }
+
+    function makeRangeForCharacters(root, count) {
+        const nodes = getTextNodes(root);
+        const range = document.createRange();
+        if (!nodes.length) return null;
+
+        let remaining = count;
+        let startNode = nodes[0];
+        let startOffset = 0;
+
+        range.setStart(startNode, startOffset);
+
+        for (let i = 0; i < nodes.length; i++) {
+            const node = nodes[i];
+            if (remaining <= node.nodeValue.length) {
+                range.setEnd(node, remaining);
+                return range;
+            }
+            remaining -= node.nodeValue.length;
+        }
+
+        const last = nodes[nodes.length - 1];
+        range.setEnd(last, last.nodeValue.length);
+        return range;
+    }
+
+    function textFragment(root, count) {
+        if (count <= 0) return document.createDocumentFragment();
+        const range = makeRangeForCharacters(root, count);
+        return range ? range.cloneContents() : document.createDocumentFragment();
+    }
+
+    function splitParagraphToFit(paragraph, availableContainer) {
+        const totalText = paragraph.textContent || "";
+        const totalChars = totalText.length;
+        if (!totalChars) return { first: paragraph.cloneNode(true), remainder: null };
+
+        const first = paragraph.cloneNode(false);
+        const remainder = paragraph.cloneNode(false);
+
+        /* Binary-search the largest character count that fits. */
+        let low = 0;
+        let high = totalChars;
+        let best = 0;
+
+        while (low <= high) {
+            const mid = Math.floor((low + high) / 2);
+            first.innerHTML = "";
+            first.appendChild(textFragment(paragraph, mid));
+            availableContainer.appendChild(first);
+
+            const fits = !contentOverflows(availableContainer);
+            availableContainer.removeChild(first);
+
+            if (fits) {
+                best = mid;
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        /* Prefer a word boundary so the continuation reads naturally. */
+        let cut = best;
+        if (cut > 0 && cut < totalChars) {
+            const before = totalText.slice(0, cut);
+            const lastSpace = Math.max(before.lastIndexOf(" "), before.lastIndexOf("\n"));
+            if (lastSpace > Math.max(20, cut - 80)) cut = lastSpace;
+        }
+
+        /* If even one character cannot fit, tell the caller to start a new page. */
+        if (cut <= 0) return { first: null, remainder: paragraph.cloneNode(true) };
+
+        first.innerHTML = "";
+        first.appendChild(textFragment(paragraph, cut));
+        remainder.innerHTML = "";
+        remainder.appendChild(textFragment(paragraph, totalChars));
+
+        /* Remove the already-used prefix from the remainder using a Range. */
+        const remainderRange = makeRangeForCharacters(remainder, cut);
+        if (remainderRange) remainderRange.deleteContents();
+
+        return {
+            first: first,
+            remainder: remainder.textContent.trim() ? remainder : null
+        };
+    }
+
+    function createSectionShell(sourceSection, continuation) {
+        const section = sourceSection.cloneNode(true);
+        section.querySelectorAll(".judgement-body p, .case-information-text").forEach(function (p) {
+            p.innerHTML = "";
+        });
+        if (continuation) {
+            const heading = section.querySelector(".judgement-section-heading");
+            if (heading) heading.textContent = "Case Information — Continued";
+        }
+        return section;
+    }
+
+    function appendSectionFlow(sourceSection, current) {
+        const paragraphs = Array.from(sourceSection.querySelectorAll(".judgement-body p, .case-information-text"));
+
+        if (!paragraphs.length) {
+            const section = sourceSection.cloneNode(true);
+            current.allFields.appendChild(section);
+            if (contentOverflows(current.content)) {
+                current.allFields.removeChild(section);
+                current = createJudgementContinuation(current);
+                current.allFields.appendChild(section);
+            }
+            return current;
+        }
+
+        let section = createSectionShell(sourceSection, false);
+        current.allFields.appendChild(section);
+
+        for (let pi = 0; pi < paragraphs.length; pi++) {
+            const sourceParagraph = paragraphs[pi];
+            const targetParagraph = section.querySelectorAll(".judgement-body p, .case-information-text")[pi];
+            if (!targetParagraph) continue;
+
+            targetParagraph.innerHTML = sourceParagraph.innerHTML;
+
+            if (!contentOverflows(current.content)) continue;
+
+            /* Remove the overflowing paragraph content and split it across pages. */
+            targetParagraph.innerHTML = "";
+            const split = splitParagraphToFit(sourceParagraph, current.content);
+
+            if (split.first) {
+                targetParagraph.replaceWith(split.first);
+            } else {
+                targetParagraph.remove();
+            }
+
+            if (split.remainder) {
+                current = createJudgementContinuation(current);
+                let continuationSection = createSectionShell(sourceSection, true);
+                current.allFields.appendChild(continuationSection);
+                const continuationParagraph = continuationSection.querySelectorAll(".judgement-body p, .case-information-text")[pi] ||
+                    continuationSection.querySelector(".judgement-body p, .case-information-text");
+                continuationParagraph.innerHTML = split.remainder.innerHTML;
+
+                /* Continue splitting the same paragraph until it fully fits. */
+                let remainingParagraph = continuationParagraph;
+                while (contentOverflows(current.content)) {
+                    const currentHTML = remainingParagraph.cloneNode(true);
+                    remainingParagraph.innerHTML = "";
+                    const nextSplit = splitParagraphToFit(currentHTML, current.content);
+
+                    if (!nextSplit.first) {
+                        current = createJudgementContinuation(current);
+                        continuationSection = createSectionShell(sourceSection, true);
+                        current.allFields.appendChild(continuationSection);
+                        remainingParagraph = continuationSection.querySelector(".judgement-body p, .case-information-text");
+                        remainingParagraph.innerHTML = currentHTML.innerHTML;
+                        continue;
+                    }
+
+                    remainingParagraph.replaceWith(nextSplit.first);
+                    if (!nextSplit.remainder) break;
+
+                    current = createJudgementContinuation(current);
+                    continuationSection = createSectionShell(sourceSection, true);
+                    current.allFields.appendChild(continuationSection);
+                    remainingParagraph = continuationSection.querySelector(".judgement-body p, .case-information-text");
+                    remainingParagraph.innerHTML = nextSplit.remainder.innerHTML;
+                }
+            }
+        }
+
+        return current;
+    }
+
+    function createJudgementContinuation(current) {
+        const next = createJudgementPage(true);
+        const printArea = document.getElementById("printArea");
+        if (printArea) {
+            /* Continuation pages MUST stay immediately after Page 6.
+               Never insert them before the earlier pages (Page 1, 2, 3...). */
+            const photoSlipPage = document.getElementById("photoSlipPage");
+            if (photoSlipPage && photoSlipPage.parentNode === printArea) {
+                printArea.insertBefore(next.page, photoSlipPage);
+            } else {
+                /* Fallback: insert immediately after the current judgement page. */
+                if (current.page.nextSibling) {
+                    printArea.insertBefore(next.page, current.page.nextSibling);
+                } else {
+                    printArea.appendChild(next.page);
+                }
+            }
+        }
+        return next;
+    }
+
+    let judgementMasterTemplate = null;
+
+    function paginateJudgementPage() {
+        const firstPage = document.getElementById("judgementPage");
+        if (!firstPage) return;
+
+        const firstContent = firstPage.querySelector(".judgement-content");
+        const master = document.getElementById("judgementAllFields");
+        if (!firstContent || !master) return;
+
+        /* Keep one untouched master copy. Re-pagination must never use the
+           already-paginated first page as its source, otherwise later refreshes
+           can lose content or create strange page starts. */
+        if (!judgementMasterTemplate) {
+            judgementMasterTemplate = master.cloneNode(true);
+        } else {
+            /* Refresh field values in the master template before rebuilding. */
+            judgementMasterTemplate.querySelectorAll("[data-field]").forEach(function (element) {
+                const id = element.getAttribute("data-field");
+                const value = getValue(id);
+                element.textContent = value;
+                element.classList.toggle("not-stated", value === "Not Stated");
+            });
+        }
+
+        const sourceNodes = Array.from(judgementMasterTemplate.children).map(function (node) {
+            return node.cloneNode(true);
+        });
+
+        document.querySelectorAll(".judgement-continuation").forEach(function (page) {
+            page.remove();
+        });
+
+        master.innerHTML = "";
+
+        let current = {
+            page: firstPage,
+            content: firstContent,
+            allFields: master
+        };
+
+        sourceNodes.forEach(function (sourceSection) {
+            current = appendSectionFlow(sourceSection, current);
+        });
+
+        updateJudgementFooter();
+    }
+
+    function updateJudgementFooter() {
         const pages = Array.from(document.querySelectorAll(".judgement-page"));
         const total = pages.length;
 
@@ -5807,27 +6162,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const pageNumber = page.querySelector(".page-number-footer");
             if (pageNumber) {
-                pageNumber.textContent = `Page ${index + 1} of ${total}`;
+                pageNumber.textContent =
+                    "Judgement Page " + (index + 1) + " of " + total;
             }
         });
     }
 
-    window.paginateJudgementPage = populateCaseInformation;
+    function refreshJudgementPages() {
+        populateCaseInformationFields();
+        requestAnimationFrame(function () {
+            paginateJudgementPage();
+        });
+    }
+
+    window.paginateJudgementPage = refreshJudgementPages;
 
     document.addEventListener("DOMContentLoaded", function () {
         CASE_INFO_FIELDS.forEach(function (id) {
             const element = document.getElementById(id);
 
             if (element) {
-                element.addEventListener("input", populateCaseInformation);
-                element.addEventListener("change", populateCaseInformation);
+                element.addEventListener("input", refreshJudgementPages);
+                element.addEventListener("change", refreshJudgementPages);
             }
         });
 
-        populateCaseInformation();
+        refreshJudgementPages();
     });
 })();
-
 
 
 /* Keep logo + seal on every FIR page after pagination */
