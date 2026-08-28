@@ -143,7 +143,7 @@ button {
 }
 
 .btn-success {
-    background: #059669;
+    background: #8a5a00;
     color: white;
 }
 
@@ -254,7 +254,7 @@ button:hover {
     position: relative;
     overflow: hidden;
 
-    background: #ffffff;
+    background: #fffdf9;
 
     padding: 17mm 16mm;
 
@@ -2089,6 +2089,194 @@ button:hover {
     text-indent: 10mm;
 }
 .case-information-text strong { font-weight: 700; }
+
+/* =========================================================
+   MODERN FORM THEME — NAVY / INDIGO / SLATE
+   ========================================================= */
+:root {
+    --ui-bg: #f7f3ef;
+    --ui-surface: #fffdf9;
+    --ui-surface-soft: #faf7f2;
+    --ui-border: #e6ddd2;
+    --ui-border-focus: #9f1239;
+    --ui-text: #2b1b1b;
+    --ui-muted: #766b65;
+    --ui-primary: #5b2333;
+    --ui-primary-dark: #3b1f2b;
+    --ui-accent: #9f1239;
+    --ui-accent-soft: #f9e8ee;
+    --ui-success: #8a5a00;
+    --ui-shadow: 0 10px 30px rgba(15, 23, 42, .07);
+    --ui-radius: 14px;
+}
+
+body {
+    background:
+        radial-gradient(circle at 10% 0%, rgba(79,70,229,.06), transparent 28%),
+        radial-gradient(circle at 90% 0%, rgba(14,165,233,.05), transparent 25%),
+        var(--ui-bg);
+    color: var(--ui-text);
+}
+
+header {
+    background: linear-gradient(135deg, #2b1b1b 0%, #26354d 55%, #5b2333 100%);
+    padding: 26px 34px;
+    box-shadow: 0 4px 18px rgba(15,23,42,.14);
+}
+
+header h1 {
+    font-size: 26px;
+    letter-spacing: -.4px;
+}
+
+header p {
+    color: #eadfd8;
+    margin-top: 8px;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 28px auto 100px;
+    padding: 0 24px;
+}
+
+.section {
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius);
+    margin-bottom: 22px;
+    box-shadow: var(--ui-shadow);
+    overflow: hidden;
+}
+
+.section-title {
+    background: linear-gradient(135deg, #26354d, #5b2333);
+    color: #fff;
+    padding: 15px 20px;
+    font-size: 16px;
+    letter-spacing: .2px;
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+}
+
+.section-body {
+    padding: 24px;
+}
+
+.form-grid {
+    gap: 19px 22px;
+}
+
+.field {
+    position: relative;
+}
+
+label {
+    color: #5b2333;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 7px;
+    letter-spacing: .1px;
+}
+
+label span {
+    color: var(--ui-muted);
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 11px 13px;
+    border: 1px solid #d8cbc0;
+    border-radius: 9px;
+    font-size: 14px;
+    color: var(--ui-text);
+    background: #fff;
+    transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    border-color: #bca99b;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--ui-border-focus);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+}
+
+textarea {
+    min-height: 100px;
+    line-height: 1.5;
+}
+
+.actions {
+    position: sticky;
+    bottom: 0;
+    background: rgba(255,255,255,.94);
+    backdrop-filter: blur(12px);
+    padding: 15px 20px;
+    border-top: 1px solid var(--ui-border);
+    box-shadow: 0 -8px 24px rgba(15,23,42,.06);
+}
+
+button {
+    border-radius: 9px;
+    padding: 11px 20px;
+    font-size: 14px;
+    transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+
+button:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #9f1239, #7f0d2e);
+    box-shadow: 0 5px 14px rgba(79,70,229,.22);
+}
+
+.btn-secondary {
+    background: #66515a;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #a16207, #7c4a03);
+    box-shadow: 0 5px 14px rgba(5,150,105,.18);
+}
+
+/* Better mobile form */
+@media(max-width: 800px) {
+    header {
+        padding: 22px 20px;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    .container {
+        padding: 0 14px;
+        margin-top: 18px;
+    }
+
+    .section-body {
+        padding: 18px;
+    }
+
+    .section-title {
+        padding: 14px 16px;
+    }
+}
+
 </style>
 
 <style>
@@ -2226,6 +2414,55 @@ textarea {
     header {
         display: none !important;
     }
+}
+</style>
+
+
+<style>
+/* Form-only visual refinements */
+.container > .section:first-child {
+    margin-top: 4px;
+}
+
+.section + .section {
+    scroll-margin-top: 20px;
+}
+
+.field input[type="file"] {
+    padding: 8px;
+    background: var(--ui-surface-soft);
+}
+
+.field input[type="file"]::file-selector-button {
+    border: 0;
+    border-radius: 7px;
+    padding: 8px 12px;
+    margin-right: 10px;
+    background: var(--ui-accent-soft);
+    color: #7f0d2e;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+::placeholder {
+    color: #a99b91;
+}
+</style>
+
+
+<style>
+/* Warm Burgundy + Gold accents */
+.section-title {
+    border-left: 5px solid #c08a2e;
+}
+header {
+    border-bottom: 3px solid #c08a2e;
+}
+.btn-primary {
+    border: 1px solid #7f0d2e;
+}
+.btn-success {
+    background: linear-gradient(135deg, #a16207, #7c4a03);
 }
 </style>
 
@@ -3035,7 +3272,7 @@ Clear Form
 
     <!-- GOVT TYPE BORDER -->
     <div class="govt-border"></div>
-
+<h1>Student Record</h1>
     <!-- WATERMARK -->
     <img
         src="passport/3.png"
@@ -3457,7 +3694,7 @@ Clear Form
     </div>
 
     <div class="stamp-paper-content">
-
+<h1>Stamp Paper</h1>
         <div class="stamp-row">
             <span>CERTIFICATE NUMBER:</span>
             <strong id="stampPaperCertNo"></strong>
@@ -3542,7 +3779,7 @@ Clear Form
         <div class="fir-motto">शांति सेवा न्याय</div>
 
         <div class="fir-title">
-            <strong>FIRST</strong> INFORMATION REPORT
+            <strong>F</strong>IRST <strong>I</strong>NFORMATION <strong>R</strong>EPORT
         </div>
 
         <div class="fir-subtitle">
@@ -3587,11 +3824,80 @@ Clear Form
     <!-- FIR PARAGRAPHS -->
     <div class="fir-paragraphs" id="firParagraphs">
 
-        <p id="firComplainantDetails"></p>
+        <p>
+            <strong>Nature / Category of Case</strong><br>
+            <span id="firCaseCategory"></span>
+        </p>
 
-        <p id="firOccurrenceReportDetails"></p>
+        <p>
+            <strong>Police Station Address Full</strong><br>
+            <span id="firPoliceStationAddress"></span>
+        </p>
 
-        <p id="firIncidentDescription"></p>
+        <p>
+            <strong>FIR Report Category</strong><br>
+            <span id="firReportCategoryParagraph"></span>
+        </p>
+
+        <p>
+            <strong>Complainant Details</strong><br>
+            <span id="firComplainantDetails"></span>
+        </p>
+
+        <p>
+            <strong>Occurrence Details / Report Details</strong><br>
+            <span id="firOccurrenceReportDetails"></span>
+        </p>
+
+        <p>
+            <strong>Detailed Description of Incident</strong><br>
+            <span id="firIncidentDescription"></span>
+        </p>
+
+        <p>
+            <strong>Alleged Motive / Reason</strong><br>
+            <span id="firMotive"></span>
+        </p>
+
+        <p>
+            <strong>Alleged Threats</strong><br>
+            <span id="firThreats"></span>
+        </p>
+
+        <p>
+            <strong>Alleged Injury</strong><br>
+            <span id="firAllegedInjury"></span>
+        </p>
+
+        <p>
+            <strong>Alleged Property Damage</strong><br>
+            <span id="firPropertyDamage"></span>
+        </p>
+
+        <p>
+            <strong>Alleged Financial Loss</strong><br>
+            <span id="firFinancialLoss"></span>
+        </p>
+
+        <p>
+            <strong>Sections Mentioned in Complaint</strong><br>
+            <span id="firSectionsComplaint"></span>
+        </p>
+
+        <p>
+            <strong>Sections Mentioned in FIR</strong><br>
+            <span id="firSectionsFIR"></span>
+        </p>
+
+        <p>
+            <strong>Applicable Act / Law</strong><br>
+            <span id="firApplicableLaw"></span>
+        </p>
+
+        <p>
+            <strong>Nature of Alleged Offences</strong><br>
+            <span id="firOffenceNature"></span>
+        </p>
 
     </div>
 
@@ -4300,9 +4606,21 @@ function updateFIRFields() {
         firRegistrationDate: "firRegistrationDateDisplay",
         crimeNumber: "firCrimeNumberDisplay",
         caseDiaryNumber: "firCaseDiaryNumberDisplay",
+        caseCategory: "firCaseCategory",
+        policeStationAddress: "firPoliceStationAddress",
+        firReportCategory: "firReportCategoryParagraph",
         complainantDetails: "firComplainantDetails",
         occurrenceReportDetails: "firOccurrenceReportDetails",
-        incidentDescription: "firIncidentDescription"
+        incidentDescription: "firIncidentDescription",
+        motive: "firMotive",
+        threats: "firThreats",
+        allegedInjury: "firAllegedInjury",
+        propertyDamage: "firPropertyDamage",
+        financialLoss: "firFinancialLoss",
+        sectionsComplaint: "firSectionsComplaint",
+        sectionsFIR: "firSectionsFIR",
+        applicableLaw: "firApplicableLaw",
+        offenceNature: "firOffenceNature"
     };
 
     Object.keys(map).forEach(id => {
@@ -4358,22 +4676,42 @@ function paginateFIR() {
 
     clearFIRContinuationPages();
 
-    /* Read the actual form values every time. */
-    const textValues = [
-        document.getElementById("complainantDetails")?.value || "",
-        document.getElementById("occurrenceReportDetails")?.value || "",
-        document.getElementById("incidentDescription")?.value || ""
-    ].map(v => v.trim()).filter(Boolean);
+    const fields = [
+        ["Nature / Category of Case", "caseCategory"],
+        ["Police Station Address Full", "policeStationAddress"],
+        ["FIR Report Category", "firReportCategory"],
+        ["Complainant Details", "complainantDetails"],
+        ["Occurrence Details / Report Details", "occurrenceReportDetails"],
+        ["Detailed Description of Incident", "incidentDescription"],
+        ["Alleged Motive / Reason", "motive"],
+        ["Alleged Threats", "threats"],
+        ["Alleged Injury", "allegedInjury"],
+        ["Alleged Property Damage", "propertyDamage"],
+        ["Alleged Financial Loss", "financialLoss"],
+        ["Sections Mentioned in Complaint", "sectionsComplaint"],
+        ["Sections Mentioned in FIR", "sectionsFIR"],
+        ["Applicable Act / Law", "applicableLaw"],
+        ["Nature of Alleged Offences", "offenceNature"]
+    ];
+
+    const fieldValues = fields
+        .map(([label, id]) => ({
+            label,
+            id,
+            value: document.getElementById(id)?.value?.trim() || ""
+        }))
+        .filter(item => item.value);
 
     firstContent.innerHTML = "";
 
-    if (!textValues.length) {
-        document.getElementById("firStateSeal").style.display = "block";
+    if (!fieldValues.length) {
+        const seal = document.getElementById("firStateSeal");
+        if (seal) seal.style.display = "block";
         return;
     }
 
     let currentContent = firstContent;
-    let pages = [firstPage];
+    const pages = [firstPage];
 
     function newPage() {
         const page = createFIRContinuationPage();
@@ -4383,35 +4721,67 @@ function paginateFIR() {
         return content;
     }
 
-    function addTextWithPagination(text) {
-        let words = text.split(/\s+/).filter(Boolean);
-        let paragraph = document.createElement("p");
+    function createFieldParagraph(label, value) {
+        const paragraph = document.createElement("p");
+
+        const heading = document.createElement("strong");
+        heading.textContent = label;
+
+        const lineBreak = document.createElement("br");
+        const answer = document.createElement("span");
+        answer.textContent = value;
+
+        paragraph.appendChild(heading);
+        paragraph.appendChild(lineBreak);
+        paragraph.appendChild(answer);
+
+        return paragraph;
+    }
+
+    function addFieldWithPagination(label, value) {
+        let paragraph = createFieldParagraph(label, value);
         currentContent.appendChild(paragraph);
 
-        for (let i = 0; i < words.length; i++) {
-            const previous = paragraph.textContent;
-            paragraph.textContent = previous ? previous + " " + words[i] : words[i];
+        if (currentContent.scrollHeight <= currentContent.clientHeight) return;
 
-            if (currentContent.scrollHeight > currentContent.clientHeight) {
-                paragraph.textContent = previous;
+        paragraph.remove();
+        currentContent = newPage();
+        if (!currentContent) return;
 
-                /* If the current page has no usable word, prevent an infinite loop. */
-                if (!previous) paragraph.remove();
+        paragraph = createFieldParagraph(label, value);
+        currentContent.appendChild(paragraph);
 
-                currentContent = newPage();
-                if (!currentContent) return;
+        /* If one field itself is too long, split only its answer across pages. */
+        if (currentContent.scrollHeight > currentContent.clientHeight) {
+            const words = value.split(/\s+/).filter(Boolean);
+            paragraph.remove();
 
-                paragraph = document.createElement("p");
-                paragraph.textContent = words[i];
-                currentContent.appendChild(paragraph);
+            let firstPart = createFieldParagraph(label, "");
+            currentContent.appendChild(firstPart);
+            const answer = firstPart.querySelector("span");
+
+            for (let i = 0; i < words.length; i++) {
+                const previous = answer.textContent;
+                answer.textContent = previous ? previous + " " + words[i] : words[i];
+
+                if (currentContent.scrollHeight > currentContent.clientHeight) {
+                    answer.textContent = previous;
+                    currentContent = newPage();
+                    if (!currentContent) return;
+
+                    firstPart = createFieldParagraph(label, words[i]);
+                    currentContent.appendChild(firstPart);
+                }
             }
         }
     }
 
-    textValues.forEach(addTextWithPagination);
+    fieldValues.forEach(item => addFieldWithPagination(item.label, item.value));
 
     /* Seal belongs only on the final A4 FIR page. */
-    document.getElementById("firStateSeal").style.display = "none";
+    const firstSeal = document.getElementById("firStateSeal");
+    if (firstSeal) firstSeal.style.display = "none";
+
     document.querySelectorAll(".fir-auto-page").forEach(page => {
         page.classList.remove("fir-final-page");
         const seal = page.querySelector(".fir-auto-seal");
@@ -4420,7 +4790,7 @@ function paginateFIR() {
 
     const finalPage = pages[pages.length - 1];
     if (finalPage === firstPage) {
-        document.getElementById("firStateSeal").style.display = "block";
+        if (firstSeal) firstSeal.style.display = "block";
     } else {
         finalPage.classList.add("fir-final-page");
         const finalSeal = finalPage.querySelector(".fir-auto-seal");
@@ -4458,7 +4828,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     ["firReportCategory", "firNumber", "policeStation", "firRegistrationDate", "crimeNumber", "caseDiaryNumber",
-     "complainantDetails", "occurrenceReportDetails", "incidentDescription"].forEach(id => {
+     "caseCategory", "policeStationAddress", "complainantDetails", "occurrenceReportDetails",
+     "incidentDescription", "motive", "threats", "allegedInjury", "propertyDamage", "financialLoss",
+     "sectionsComplaint", "sectionsFIR", "applicableLaw", "offenceNature"].forEach(id => {
         const field = document.getElementById(id);
         if (!field) return;
         field.addEventListener("input", updateFIRFields);
