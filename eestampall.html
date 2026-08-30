@@ -2784,7 +2784,7 @@ header p {
 
 label {
     color: #373b66;
-    font-size: 13px;
+    font-size: 18px;
     font-weight: 700;
     margin-bottom: 7px;
 }
@@ -3021,11 +3021,10 @@ button:active{transform:translateY(0) scale(.98)!important;}
 <body>
 
 <header>
-    <h1>Legal Document Generator</h1>
-    <p>Enter information once and generate six A4 documents.</p>
+<h1 style="text-align: center; font-size: 30px; font-weight: 700;">
+    Nyaya Setu | न्याय सेतु
+</h1>
 </header>
-
-
 
 <!-- FIELD NUMBERING: 1-100 follows the user's supplied list; FIR Passport Photo remains unnumbered as supplied. -->
 <div class="container">
@@ -3038,29 +3037,29 @@ button:active{transform:translateY(0) scale(.98)!important;}
 
 <div class="section">
 
-  <div class="section-title">1. Metadata</div>
+  <div class="section-title">Metadata</div>
 
   <div class="section-body">
 
     <div class="form-grid">
 
       <div class="field">
-        <label>1. Case Name</label>
+        <label>Case Name</label>
         <input id="caseName">
       </div>
 
       <div class="field">
-        <label>2. Case Type</label>
+        <label>Case Type</label>
         <input id="caseType">
       </div>
 
       <div class="field">
-        <label>3. Case Number</label>
+        <label>Case Number</label>
         <input id="caseNumber">
       </div>
 
       <div class="field">
-        <label>4. Case Level</label>
+        <label>Case Level</label>
         <select id="caseLevel">
           <option value="">Select an option</option>
           <option value="Core Critical">Core Critical</option>
@@ -3071,22 +3070,22 @@ button:active{transform:translateY(0) scale(.98)!important;}
       </div>
 
       <div class="field">
-        <label>10. Complaint Date</label>
+        <label>Complaint Date</label>
         <input type="date" id="complaintDate">
       </div>
 
       <div class="field">
-        <label>5. Citation</label>
+        <label>Citation</label>
         <input id="citation">
       </div>
 
       <div class="field">
-        <label>13. District</label>
+        <label>District</label>
         <input id="district">
       </div>
 
       <div class="field">
-        <label for="state">14. State / Union Territory</label>
+        <label for="state">State / Union Territory</label>
         <select id="state" name="state">
           <option value="">Select State / Union Territory</option>
 
@@ -3137,7 +3136,7 @@ button:active{transform:translateY(0) scale(.98)!important;}
       </div>
 
       <div class="field">
-        <label>15. Country</label>
+        <label>Country</label>
         <input id="country" value="India">
       </div>
 
@@ -3153,72 +3152,72 @@ button:active{transform:translateY(0) scale(.98)!important;}
 ========================= -->
 
 <div class="section">
-<div class="section-title">2. FIR Registration Details</div>
+<div class="section-title">FIR Registration Details</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-  <label>6. FIR Number</label>
+  <label>FIR Number</label>
   <input id="firNumber">
 </div>
 
 <div class="field">
-  <label>7. FIR Year</label>
+  <label>FIR Year</label>
   <input id="firYear" readonly>
 </div>
 
 <div class="field">
-  <label>8. FIR Date</label>
+  <label>FIR Date</label>
   <input type="date" id="firDate">
 </div>
 
 <div class="field">
-  <label>9. Police Station (PS)</label>
+  <label>Police Station (PS)</label>
   <input id="policeStation">
 </div>
 
 <div class="field">
-  <label>11. Police Station Code</label>
+  <label>Police Station Code</label>
   <input id="policeStationCode">
 </div>
 
 <div class="field">
-  <label>16. Judgement Date</label>
+  <label>Judgement Date</label>
   <input type="date" id="firRegistrationDate">
 </div>
 
 <div class="field">
-  <label>19. Crime Number</label>
+  <label>Crime Number</label>
   <input id="crimeNumber">
 </div>
 
 <div class="field">
-  <label>17. Case Diary Number</label>
+  <label>Case Diary Number</label>
   <input id="caseDiaryNumber">
 </div>
 
 <div class="field">
-  <label>18. Nature / Category of Case</label>
+  <label>Nature / Category of Case</label>
   <input id="caseCategory">
 </div>
 
 <div class="field full">
-  <label>12. Police Station Address Full</label>
+  <label>Police Station Address Full</label>
   <textarea id="policeStationAddress"></textarea>
 </div>
 
 <div class="field">
-  <label>20. FIR Report Category</label>
+  <label>FIR Report Category</label>
   <input id="firReportCategory">
 </div>
 
 <div class="field full">
-  <label>21. Complainant Details</label>
+  <label>Complainant Details</label>
   <textarea id="complainantDetails"></textarea>
 </div>
 
 <div class="field full">
-  <label>22. Occurrence Details / Report Details</label>
+  <label>Occurrence Details / Report Details</label>
   <textarea id="occurrenceReportDetails"></textarea>
 </div>
 
@@ -3232,17 +3231,17 @@ button:active{transform:translateY(0) scale(.98)!important;}
 ========================= -->
 
 <div class="section">
-<div class="section-title">3. Parties Involved</div>
+<div class="section-title">Parties Involved</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-<label>23. Petitioner</label>
+<label>Petitioner</label>
 <input id="petitioner">
 </div>
 
 <div class="field">
-<label>24. Advocate Petitioner</label>
+<label>Advocate Petitioner</label>
 <input id="advocatePetitioner">
 </div>
 
@@ -3256,17 +3255,17 @@ button:active{transform:translateY(0) scale(.98)!important;}
 ========================= -->
 
 <div class="section">
-<div class="section-title">4. Complainant Details</div>
+<div class="section-title">Complainant Details</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-<label>25. Respondent</label>
+<label>Respondent</label>
 <input id="respondent">
 </div>
 
 <div class="field">
-<label>26. Advocate Respondent</label>
+<label>Advocate Respondent</label>
 <input id="advocateRespondent">
 </div>
 
@@ -3280,77 +3279,77 @@ button:active{transform:translateY(0) scale(.98)!important;}
 ========================= -->
 
 <div class="section">
-<div class="section-title">5. Victim Information</div>
+<div class="section-title">Victim Information</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field full">
-  <label>21. Complainant Details</label>
+  <label>Complainant Details</label>
   <textarea id="complainantDetails"></textarea>
 </div>
 
 <div class="field">
-  <label>27. Complainant Full Name</label>
+  <label>Complainant Full Name</label>
   <input id="complainantName">
 </div>
 
 <div class="field">
-  <label>28. Father's Name</label>
+  <label>Father's Name</label>
   <input id="complainantFather">
 </div>
 
 <div class="field">
-  <label>29. Mother's Name</label>
+  <label>Mother's Name</label>
   <input id="complainantMother">
 </div>
 
 <div class="field">
-  <label>30. Husband/Wife Name</label>
+  <label>Husband/Wife Name</label>
   <input id="complainantSpouse">
 </div>
 
 <div class="field">
-  <label>31. Age</label>
+  <label>Age</label>
   <input type="number" id="complainantAge">
 </div>
 
 <div class="field">
-  <label>32. Date of Birth</label>
+  <label>Date of Birth</label>
   <input type="date" id="complainantDOB">
 </div>
 
 <div class="field">
-  <label>33. Occupation</label>
+  <label>Occupation</label>
   <input id="complainantOccupation">
 </div>
 
 <div class="field full">
-  <label>34. Address</label>
+  <label>Address</label>
   <textarea id="complainantAddress"></textarea>
 </div>
 
 <div class="field">
-  <label>35. City / Village</label>
+  <label>City / Village</label>
   <input id="complainantCity">
 </div>
 
 <div class="field">
-  <label>38. Contact Details</label>
+  <label>Contact Details</label>
   <input id="complainantContact">
 </div>
 
 <div class="field">
-  <label>39. Relationship to Victim</label>
+  <label>Relationship to Victim</label>
   <input id="relationshipVictim">
 </div>
 
 <div class="field">
-  <label>40. Relationship to Accused</label>
+  <label>Relationship to Accused</label>
   <input id="relationshipAccused">
 </div>
 
 <div class="field">
-  <label>41. Eyewitness?</label>
+  <label>Eyewitness?</label>
   <select id="complainantEyewitness">
     <option value="">Select</option>
     <option>Yes</option>
@@ -3360,7 +3359,7 @@ button:active{transform:translateY(0) scale(.98)!important;}
 </div>
 
 <div class="field">
-  <label>42. Complaint Type</label>
+  <label>Complaint Type</label>
   <select id="complaintType">
     <option value="">Select</option>
     <option>Written</option>
@@ -3369,22 +3368,22 @@ button:active{transform:translateY(0) scale(.98)!important;}
 </div>
 
 <div class="field">
-  <label>43. Additional Information</label>
+  <label>Additional Information</label>
   <input id="field59">
 </div>
 
 <div class="field">
-  <label>44. Authority to Which Complaint Was Submitted</label>
+  <label>Authority to Which Complaint Was Submitted</label>
   <input id="complaintAuthority">
 </div>
 
 <div class="field">
-  <label>45. Date Complaint Was Submitted</label>
+  <label>Date Complaint Was Submitted</label>
   <input type="date" id="complaintSubmittedDate">
 </div>
 
 <div class="field full">
-  <label>46. Action Requested by Complainant</label>
+  <label>Action Requested by Complainant</label>
   <textarea id="actionRequested"></textarea>
 </div>
 
@@ -3398,52 +3397,52 @@ button:active{transform:translateY(0) scale(.98)!important;}
 ========================= -->
 
 <div class="section">
-<div class="section-title">6. Accused Information</div>
+<div class="section-title">Accused Information</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-  <label>47. Victim Full Name</label>
+  <label>Victim Full Name</label>
   <input id="victimName">
 </div>
 
 <div class="field">
-  <label>48. Father's Name</label>
+  <label>Father's Name</label>
   <input id="victimFather">
 </div>
 
 <div class="field">
-  <label>49. Mother's Name</label>
+  <label>Mother's Name</label>
   <input id="victimMother">
 </div>
 
 <div class="field">
-  <label>50. Age</label>
+  <label>Age</label>
   <input type="number" id="victimAge">
 </div>
 
 <div class="field">
-  <label>51. Occupation</label>
+  <label>Occupation</label>
   <input id="victimOccupation">
 </div>
 
 <div class="field full">
-  <label>52. Address</label>
+  <label>Address</label>
   <textarea id="victimAddress"></textarea>
 </div>
 
 <div class="field">
-  <label>53. Relationship with Complainant</label>
+  <label>Relationship with Complainant</label>
   <input id="victimRelationshipComplainant">
 </div>
 
 <div class="field">
-  <label>54. Relationship with Accused</label>
+  <label>Relationship with Accused</label>
   <input id="victimRelationshipAccused">
 </div>
 
 <div class="field">
-  <label>55. Victim Sustained Injury?</label>
+  <label>Victim Sustained Injury?</label>
   <select id="victimInjury">
     <option value="">Select</option>
     <option>Yes</option>
@@ -3453,7 +3452,7 @@ button:active{transform:translateY(0) scale(.98)!important;}
 </div>
 
 <div class="field full">
-  <label>56. Details of Alleged Loss / Damage / Injury</label>
+  <label>Details of Alleged Loss / Damage / Injury</label>
   <textarea id="lossDamageInjury"></textarea>
 </div>
 
@@ -3467,42 +3466,42 @@ button:active{transform:translateY(0) scale(.98)!important;}
 ========================= -->
 
 <div class="section">
-<div class="section-title">7. Case Facts & Investigation</div>
+<div class="section-title">Case Facts & Investigation</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-  <label>57. Accused Name</label>
+  <label>Accused Name</label>
   <input id="accusedName">
 </div>
 
 <div class="field">
-  <label>58. Father's Name</label>
+  <label>Father's Name</label>
   <input id="accusedFather">
 </div>
 
 <div class="field full">
-  <label>59. Address</label>
+  <label>Address</label>
   <textarea id="accusedAddress"></textarea>
 </div>
 
 <div class="field">
-  <label>60. Occupation</label>
+  <label>Occupation</label>
   <input id="accusedOccupation">
 </div>
 
 <div class="field">
-  <label>61. Alleged Role</label>
+  <label>Alleged Role</label>
   <input id="accusedRole">
 </div>
 
 <div class="field">
-  <label>62. Number of Accused Persons</label>
+  <label>Number of Accused Persons</label>
   <input type="number" id="accusedCount" min="1">
 </div>
 
 <div class="field">
-  <label>63. Known to Complainant?</label>
+  <label>Known to Complainant?</label>
   <select id="accusedKnown">
     <option value="">Select</option>
     <option>Yes</option>
@@ -3513,12 +3512,12 @@ button:active{transform:translateY(0) scale(.98)!important;}
 </div>
 
 <div class="field">
-  <label>64. Relationship with Complainant</label>
+  <label>Relationship with Complainant</label>
   <input id="accusedRelationship">
 </div>
 
 <div class="field full">
-  <label>65. Previous Dispute Between Parties</label>
+  <label>Previous Dispute Between Parties</label>
   <textarea id="previousDispute"></textarea>
 </div>
 
@@ -3532,82 +3531,82 @@ button:active{transform:translateY(0) scale(.98)!important;}
 ========================= -->
 
 <div class="section">
-<div class="section-title">8. Judicial Outcome</div>
+<div class="section-title">Judicial Outcome</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-  <label>66. Date of Incident</label>
+  <label>Date of Incident</label>
   <input type="date" id="incidentDate">
 </div>
 
 <div class="field">
-  <label>67. Day of Incident</label>
+  <label>Day of Incident</label>
   <input id="incidentDay" readonly>
 </div>
 
 <div class="field">
-  <label>68. Approximate Time</label>
+  <label>Approximate Time</label>
   <input type="time" id="incidentTime">
 </div>
 
 <div class="field">
-  <label>69. Place of Incident</label>
+  <label>Place of Incident</label>
   <input id="incidentPlace">
 </div>
 
 <div class="field full">
-  <label>70. Complete Address of Place</label>
+  <label>Complete Address of Place</label>
   <textarea id="incidentAddress"></textarea>
 </div>
 
 <div class="field">
-  <label>71. Nature of Place</label>
+  <label>Nature of Place</label>
   <input id="placeNature">
 </div>
 
 <div class="field full">
-  <label>72. Persons Present at the Place</label>
+  <label>Persons Present at the Place</label>
   <textarea id="personsPresent"></textarea>
 </div>
 
 <div class="field full">
-  <label>73. Events Immediately Before Incident</label>
+  <label>Events Immediately Before Incident</label>
   <textarea id="beforeIncident"></textarea>
 </div>
 
 <div class="field full">
-  <label>74. Detailed Description of Incident</label>
+  <label>Detailed Description of Incident</label>
   <textarea id="incidentDescription"></textarea>
 </div>
 
 <div class="field full">
-  <label>75. Events Immediately After Incident</label>
+  <label>Events Immediately After Incident</label>
   <textarea id="afterIncident"></textarea>
 </div>
 
 <div class="field full">
-  <label>76. Alleged Motive / Reason</label>
+  <label>Alleged Motive / Reason</label>
   <textarea id="motive"></textarea>
 </div>
 
 <div class="field full">
-  <label>77. Alleged Threats</label>
+  <label>Alleged Threats</label>
   <textarea id="threats"></textarea>
 </div>
 
 <div class="field full">
-  <label>78. Alleged Injury</label>
+  <label>Alleged Injury</label>
   <textarea id="allegedInjury"></textarea>
 </div>
 
 <div class="field full">
-  <label>79. Alleged Property Damage</label>
+  <label>Alleged Property Damage</label>
   <textarea id="propertyDamage"></textarea>
 </div>
 
 <div class="field full">
-  <label>80. Alleged Financial Loss</label>
+  <label>Alleged Financial Loss</label>
   <textarea id="financialLoss"></textarea>
 </div>
 
@@ -3621,27 +3620,27 @@ button:active{transform:translateY(0) scale(.98)!important;}
 ========================= -->
 
 <div class="section">
-<div class="section-title">9. Stamp Paper Information</div>
+<div class="section-title">Stamp Paper Information</div>
 <div class="section-body">
 <div class="form-grid">
 
 <div class="field">
-<label>88. Sections Mentioned in Complaint</label>
+<label>Sections Mentioned in Complaint</label>
 <input id="sectionsComplaint">
 </div>
 
 <div class="field">
-<label>89. Sections Mentioned in FIR</label>
+<label>Sections Mentioned in FIR</label>
 <input id="sectionsFIR">
 </div>
 
 <div class="field">
-<label>90. Applicable Act / Law</label>
+<label>Applicable Act / Law</label>
 <input id="applicableLaw">
 </div>
 
 <div class="field">
-<label>91. Sections Subsequently Added?</label>
+<label>Sections Subsequently Added?</label>
 <select id="sectionsAdded">
 <option value="">Select</option>
 <option>Yes</option>
@@ -3650,12 +3649,12 @@ button:active{transform:translateY(0) scale(.98)!important;}
 </div>
 
 <div class="field">
-<label>92. Date of Addition</label>
+<label>Date of Addition</label>
 <input type="date" id="sectionAdditionDate">
 </div>
 
 <div class="field">
-<label>93. Sections Deleted?</label>
+<label>Sections Deleted?</label>
 <select id="sectionsDeleted">
 <option value="">Select</option>
 <option>Yes</option>
@@ -3664,23 +3663,23 @@ button:active{transform:translateY(0) scale(.98)!important;}
 </div>
 
 <div class="field full">
-<label>86. Section Deleted — Body / Reasons</label>
+<label>Section Deleted — Body / Reasons</label>
 <textarea id="sectionsDeletedDetails"
     placeholder="Write the Section Deleted details here. Use separate paragraphs for long text."></textarea>
 </div>
 
 <div class="field">
-<label>94. Present Sections</label>
+<label>Present Sections</label>
 <input id="presentSections">
 </div>
 
 <div class="field">
-<label>95. Nature of Alleged Offences</label>
+<label>Nature of Alleged Offences</label>
 <input id="offenceNature">
 </div>
 
 <div class="field">
-<label>96. Bailable / Non-Bailable</label>
+<label>Bailable / Non-Bailable</label>
 <select id="bailable">
 <option value="">Select</option>
 <option>Bailable</option>
@@ -3691,7 +3690,7 @@ button:active{transform:translateY(0) scale(.98)!important;}
 </div>
 
 <div class="field">
-<label>97. Cognizable / Non-Cognizable</label>
+<label>Cognizable / Non-Cognizable</label>
 <select id="cognizable">
 <option value="">Select</option>
 <option>Cognizable</option>
@@ -3715,67 +3714,67 @@ button:active{transform:translateY(0) scale(.98)!important;}
     <div class="form-grid">
 
       <div class="field">
-        <label>4. Case level</label>
+        <label>Case level</label>
         <input type="text" id="complaintNumber">
       </div>
 
       <div class="field">
-        <label>36. District</label>
+        <label>District</label>
         <input type="text" id="complainantDistrict">
       </div>
 
       <div class="field">
-        <label>37. State</label>
+        <label>State</label>
         <input type="text" id="complainantState">
       </div>
 
       <div class="field">
-        <label>81. Court Name</label>
+        <label>Court Name</label>
         <input type="text" id="courtName">
       </div>
 
       <div class="field">
-        <label>82. Court Case Number</label>
+        <label>Court Case Number</label>
         <input type="text" id="courtCaseNumber">
       </div>
 
       <div class="field">
-        <label>83. Date of First Court Appearance</label>
+        <label>Date of First Court Appearance</label>
         <input type="date" id="firstAppearance">
       </div>
 
       <div class="field">
-        <label>84. Charges Framed</label>
+        <label>Charges Framed</label>
         <input type="text" id="chargesFramed">
       </div>
 
       <div class="field">
-        <label>85. Date of Framing of Charges</label>
+        <label>Date of Framing of Charges</label>
         <input type="date" id="chargesDate">
       </div>
 
       <div class="field">
-        <label>86. On Bench</label>
+        <label>On Bench</label>
         <input type="text" id="onBench">
       </div>
 
       <div class="field">
-        <label>87. Judgement By</label>
+        <label>Judgement By</label>
         <input type="text" id="judgementBy">
       </div>
 
       <div class="field">
-        <label>98. Stamp Description</label>
+        <label>Stamp Description</label>
         <input type="text" id="stampDescription">
       </div>
 
       <div class="field">
-        <label>99. Consideration Price</label>
+        <label>Consideration Price</label>
         <input type="text" id="considerationPrice">
       </div>
 
       <div class="field">
-        <label>100. Stamp Duty Amount</label>
+        <label>Stamp Duty Amount</label>
         <input type="text" id="stampDuty" class="stamp-duty-amount" data-stamp-duty readonly>
       </div>
 
