@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Galgotia University - Student Subject Registration</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #ffffff;
+    color: #000;
+  }
+  .container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+  }
+  /* Header with logo */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .logo {
+    height: 80px;
+    margin-right: 20px;
+  }
+  h1, h2 {
+    text-align: center;
+    color: #000;
+  }
+  /* Student details styling */
+  .student-details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid #000;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+  }
+  .student-photo {
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #000;
+  }
+  .details {
+    line-height: 1.6;
+  }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  table-layout: fixed;
+}
+
+table, th, td {
+  border: 1px solid #000;
+}
+
+th {
+  background-color: #000;
+  color: #fff;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+  /* Button styling */
+  .register-btn {
+    display: block;
+    width: 220px;
+    margin: 30px auto;
+    padding: 12px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .register-btn:hover {
+    background-color: #333;
+  }
+  /* Total price display */
+  #totalPrice {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+
+#totalPrice {
+  text-align: right;
+  font-size: 20px;
+  margin-top: 20px;
+  padding: 15px;
+  font-weight: bold;
+  border: 1px solid #000;
+  background-color: #f0f0f0;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- University Logo and Title -->
+  <div class="header">
+    <img src="https://cdn.discordapp.com/attachments/1425481129611235356/1437479030545973328/Galgotias-University-Logo-300x174.png?ex=6913642b&is=691212ab&hm=fa2a1911851db76892bf78d70012ea80cf7684f398eb25e46f62e6f18e164082&" alt="University Logo" class="logo" />
+    <h1>Galgotias Univesity</h1>
+  </div>
+  
+  <!-- Student Details -->
+  <h2>Student Details</h2>
+  <div class="student-details">
+    <img src="https://cdn.discordapp.com/attachments/1425481129611235356/1437477032836464763/575842025_2655613081485282_7731329331765492988_n.jpg?ex=6913624f&is=691210cf&hm=127f7b6fd6dff0a97d6e6fb762995fa906f8c04d933c9144828cdc9c812acdfa&" alt="Student Photo" class="student-photo" />
+    <div class="details">
+      <p><strong>Name:</strong> Yash Kumar</p>
+      <p><strong>Admission ID:</strong> 23GSOL1030102</p>
+      <p><strong>Date of Birth:</strong> 23/06/2004</p>
+      <p><strong>Session:</strong> 2023-2028</p>
+      <p><strong>Father's Name:</strong> Charan Singh</p>
+      <p><strong>Mother's Name:</strong> Meena Devi</p>
+      <p><strong>Course:</strong> Bachelor of Business Administration & Bachelor of Law</p>
+      <p><strong>Semester:</strong> 6</p>
+    </div>
+  </div>
+  
+  <!-- Subjects Table -->
+  <h2>Volume II / ETE</h2>
+<table>
+  <colgroup>
+    <col style="width: 5%;">
+    <col style="width: 60%;">
+    <col style="width: 20%;">
+    <col style="width: 15%;">
+  </colgroup>
+
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Subject Name</th>
+      <th>Book Links</th>
+      <th>Price (INR)</th>
+    </tr>
+  </thead>
+    <tbody>
+      <!-- Existing subjects -->
+      <tr>
+        <td>1</td>
+        <td>Class Actions in Privacy Law</td>
+        <td><a href="https://amzn.in/d/02PKyMNJ">Click here for book link</a></td>
+        <td>6,641</a></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Consular Law and Practice</td>
+        <td><a href="https://amzn.in/d/0ce3wdmv">Click here for book link</a></td>
+        <td>23,738</a></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Global Perspectives in Urban Law: The Legal Power of Cities (Juris Diversitas)</td>
+        <td><a href="https://amzn.in/d/0bUJIpKJ">Click here for book link</a></td>
+        <td>4,628</a></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Employment Law: The Essentials</td>
+        <td><a href="https://amzn.in/d/07MKhsvf">Click here for book link</a></td>
+        <td>17,291</a></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>The Discipline Of Law</td>
+        <td><a href="https://amzn.in/d/09FLJAkN">Click here for book link</a></td>
+        <td>8,110</a></td>
+      </tr>
+
+      <tr>
+        <td>6</td>
+        <td>Treatise on Arbitration Law & Practice – A Critical Commentary on Part I of the Act of 1996 | M Sricharan Rangarajan | OakBridge (2 Vol. Set)</td>
+        <td><a href="https://amzn.in/d/06NpqT6w">Click here for book link</a></td>
+        <td>3,700</a></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>R.K. Jain's Customs Law Manual [Finance Act 2026 Edition] – Definitive Two-Volume Consolidated Reference—Integrating the Annotated Customs Act 1962 | Allied Laws | New CBIC's Customs Manual 2025</td>
+        <td><a href="https://amzn.in/d/0eL7iuR7">Click here for book link</a></td>
+        <td>3,375</a></td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>SEBI</td>
+        <td><a href="https://amzn.in/d/08puNKrL">Click here for book link</a></td>
+        <td>5,003</a></td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Insights into Legal and Economic Issues in India</td>
+        <td><a href="https://amzn.in/d/0dTw1Wer">Click here for book link</a></td>
+        <td>16,811</a></td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Human Rights</td>
+        <td><a href="https://amzn.in/d/05ZTgpSr">Click here for book link</a></td>
+        <td>29,119</a></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <!-- Total Price Display -->
+  <div id="totalPrice">Total Price: 0 INR</div>
+  
+  <!-- Register Button -->
+  <button class="register-btn" onclick="registerSubjects()">Order/Buy Books Before (10 September, 2026)</button>
+</div>
+
+<script>
+  function calculateTotal() {
+    const rows = document.querySelectorAll("table tbody tr");
+    let total = 0;
+
+    rows.forEach(row => {
+      const priceCell = row.cells[3];
+
+      if (priceCell) {
+        const price = parseFloat(
+          priceCell.textContent.replace(/[^0-9.]/g, "")
+        );
+
+        if (!isNaN(price)) {
+          total += price;
+        }
+      }
+    });
+
+    document.getElementById("totalPrice").textContent =
+      "Total Price: " + total.toLocaleString("en-IN") + " INR";
+  }
+
+  // Calculate automatically when the page loads
+  calculateTotal();
+</script>
+
+</body>
+</html>
