@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passport Photo Studio</title>
+
+<style>
+:root {
+    --blue: #2563eb;
+    --blue-dark: #1d4ed8;
+    --navy: #0f172a;
+    --slate: #475569;
+    --muted: #64748b;
+    --bg: #eef3f9;
+    --border: #dbe3ef;
+    --white: #fff;
+    --red: #ef4444;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, Arial, sans-serif;
+    color: var(--navy);
+    background:
+        radial-gradient(circle at 10% 10%, #dbeafe 0, transparent 30%),
+        radial-gradient(circle at 90% 20%, #e0e7ff 0, transparent 28%),
+        var(--bg);
+}
+
+/* ================= HEADER ================= */
+
+.header {
+    color: white;
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #172554,
+        #1d4ed8
+    );
+
+    padding: 22px 30px;
+
+    box-shadow: 0 5px 25px rgba(15,23,42,.2);
+
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: "";
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.06);
+
+    top: -160px;
+    right: 10%;
+
+    animation: floatCircle 7s ease-in-out infinite;
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.04);
+
+    bottom: -120px;
+    left: 15%;
+
+    animation: floatCircle 9s ease-in-out infinite reverse;
+}
+
+@keyframes floatCircle {
+    0%,100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(20px) rotate(12deg);
+    }
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    position: relative;
+    z-index: 2;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    animation: slideDown .6s ease both;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 14px;
+
+    background: rgba(255,255,255,.14);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 26px;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.12),
+        0 8px 20px rgba(0,0,0,.15);
+
+    animation: cameraPulse 3s ease-in-out infinite;
+}
+
+@keyframes cameraPulse {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.header p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    opacity: .7;
+}
+
+.counter {
+    background: rgba(255,255,255,.12);
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    padding: 10px 16px;
+
+    border-radius: 12px;
+
+    font-size: 13px;
+
+    backdrop-filter: blur(10px);
+
+    transition: .3s;
+}
+
+.counter.bump {
+    animation: counterBump .35s ease;
+}
+
+@keyframes counterBump {
+    50% {
+        transform: scale(1.12);
+    }
+}
+
+/* ================= MAIN ================= */
+
+.container {
+    max-width: 1200px;
+    margin: 26px auto;
+    padding: 0 18px;
+}
+
+/* ================= CONTROL PANEL ================= */
+
+.control-panel {
+    background: rgba(255,255,255,.92);
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 21px;
+
+    box-shadow:
+        0 10px 35px rgba(15,23,42,.07);
+
+    animation: fadeUp .65s ease both;
+
+    backdrop-filter: blur(8px);
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.control-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+}
+
+.control-title h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.control-title p {
+    margin: 5px 0 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+/* ================= BUTTONS ================= */
+
+button,
+.upload-button {
+    min-height: 42px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    padding: 0 16px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+button:hover,
+.upload-button:hover {
+    transform: translateY(-2px);
+}
+
+button:active,
+.upload-button:active {
+    transform: translateY(1px) scale(.98);
+}
+
+.primary,
+.upload-button {
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+    color: white;
+
+    box-shadow:
+        0 6px 15px rgba(37,99,235,.22);
+}
+
+.primary:hover,
+.upload-button:hover {
+    box-shadow:
+        0 9px 22px rgba(37,99,235,.3);
+}
+
+.secondary {
+    background: #f1f5f9;
+    color: #334155;
+}
+
+.danger {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/* ================= DROP ZONE ================= */
+
+.drop-zone {
+    margin-top: 18px;
+
+    border: 2px dashed #bfdbfe;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #f8fbff
+        );
+
+    border-radius: 14px;
+
+    padding: 21px;
+
+    text-align: center;
+
+    color: var(--slate);
+
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+
+    animation:
+        dropAppear .8s .15s ease both,
+        gentleFloat 4s 1s ease-in-out infinite;
+}
+
+@keyframes dropAppear {
+    from {
+        opacity: 0;
+        transform: scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes gentleFloat {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+.drop-zone:hover,
+.drop-zone.dragover {
+    border-color: var(--blue);
+
+    background: #dbeafe;
+
+    box-shadow:
+        0 8px 25px rgba(37,99,235,.12);
+
+    transform: translateY(-3px);
+}
+
+.drop-icon {
+    font-size: 28px;
+
+    margin-bottom: 5px;
+
+    animation:
+        uploadBounce 2.2s ease-in-out infinite;
+}
+
+@keyframes uploadBounce {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+.drop-zone strong {
+    color: #1e40af;
+}
+
+.drop-zone small {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--muted);
+}
+
+/* ================= SETTINGS ================= */
+
+.settings {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 17px;
+}
+
+.setting {
+    background: #f8fafc;
+
+    border: 1px solid var(--border);
+
+    padding: 10px 14px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease;
+}
+
+.setting:hover {
+    transform: translateY(-2px);
+
+    border-color: #bfdbfe;
+}
+
+/* ================= PHOTO LIST ================= */
+
+.section-heading {
+    margin: 30px 0 12px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    font-size: 18px;
+}
+
+.photo-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(280px, 1fr));
+
+    gap: 12px;
+}
+
+.photo-item {
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 13px;
+
+    padding: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    box-shadow:
+        0 4px 15px rgba(15,23,42,.04);
+
+    animation:
+        photoIn .45s cubic-bezier(.2,.8,.2,1) both;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+.photo-item:hover {
+    transform: translateY(-4px);
+
+    border-color: #bfdbfe;
+
+    box-shadow:
+        0 12px 25px rgba(15,23,42,.09);
+}
+
+@keyframes photoIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.photo-thumb {
+    width: 60px;
+    height: 80px;
+
+    object-fit: cover;
+
+    border: 2px solid #334155;
+
+    border-radius: 5px;
+
+    background: #eee;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.photo-item:hover .photo-thumb {
+    transform: scale(1.05);
+
+    box-shadow:
+        0 5px 12px rgba(15,23,42,.15);
+}
+
+.photo-info {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.photo-number {
+    font-size: 11px;
+
+    color: var(--muted);
+
+    margin-bottom: 5px;
+}
+
+.name-input {
+    width: 100%;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    padding: 8px 9px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color .2s,
+        box-shadow .2s;
+}
+
+.name-input:focus {
+    border-color: var(--blue);
+
+    box-shadow:
+        0 0 0 3px #dbeafe;
+}
+
+.remove {
+    margin-top: 7px;
+
+    padding: 6px 10px;
+
+    min-height: 30px;
+
+    font-size: 11px;
+
+    background: #fee2e2;
+
+    color: #b91c1c;
+}
+
+/* ================= PREVIEW ================= */
+
+.preview-header {
+    margin: 32px 0 14px;
+
+    animation: fadeUp .6s .2s ease both;
+}
+
+.preview-header h2 {
+    margin: 0;
+
+    font-size: 20px;
+}
+
+.preview-header p {
+    margin: 4px 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+.pages {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 28px;
+}
+
+/* ================= A4 ================= */
+
+.a4-page {
+    width: 210mm;
+    height: 297mm;
+
+    background: white;
+
+    padding: 7mm;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, 30mm);
+
+    grid-auto-rows: 49mm;
+
+    column-gap: 2mm;
+
+    row-gap: 1mm;
+
+    align-content: start;
+
+    box-shadow:
+        0 12px 40px rgba(15,23,42,.16);
+
+    border-radius: 2px;
+
+    animation:
+        pageAppear .7s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes pageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ================= PHOTO CARD ================= */
+
+.photo-card {
+    width: 30mm;
+    height: 47mm;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    animation:
+        cardAppear .4s ease both;
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: scale(.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.photo-frame {
+    width: 30mm;
+    height: 40mm;
+
+    border: .35mm solid #111827;
+
+    background: white;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        box-shadow .25s ease,
+        transform .25s ease;
+}
+
+.photo-card:hover .photo-frame {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 3px 8px rgba(15,23,42,.2);
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.photo-name {
+    width: 30mm;
+    height: 7mm;
+
+    margin-top: .5mm;
+
+    border-left: .35mm solid #111827;
+    border-right: .35mm solid #111827;
+    border-bottom: .35mm solid #111827;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 1mm;
+
+    font-size: 8.5pt;
+
+    font-weight: 600;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+/* ================= EMPTY ================= */
+
+.empty {
+    text-align: center;
+
+    padding: 55px 20px;
+
+    background: white;
+
+    border: 1px dashed #cbd5e1;
+
+    border-radius: 14px;
+
+    color: var(--muted);
+
+    animation: fadeUp .4s ease both;
+}
+
+.empty-icon {
+    font-size: 42px;
+
+    animation:
+        cameraPulse 2.5s ease-in-out infinite;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media screen and (max-width: 900px) {
+
+    .header-inner {
+        align-items: flex-start;
+    }
+
+    .counter {
+        display: none;
+    }
+
+    .pages {
+        overflow-x: auto;
+
+        align-items: flex-start;
+
+        padding-bottom: 20px;
+    }
+
+    .a4-page {
+        flex-shrink: 0;
+
+        transform: scale(.72);
+
+        transform-origin: top left;
+
+        margin-right: -59mm;
+
+        margin-bottom: -83mm;
+    }
+}
+
+/* ================= PRINT ================= */
+
+@media print {
+
+    @page {
+        size: A4 portrait;
+        margin: 0;
+    }
+
+    body {
+        background: white;
+    }
+
+    .header,
+    .container > .control-panel,
+    .photo-list,
+    .section-heading,
+    .preview-header,
+    .empty {
+        display: none !important;
+    }
+
+    .container {
+        margin: 0;
+        padding: 0;
+        max-width: none;
+    }
+
+    .pages {
+        display: block;
+    }
+
+    .a4-page {
+        width: 210mm;
+        height: 297mm;
+
+        margin: 0;
+        padding: 7mm;
+
+        border-radius: 0;
+
+        box-shadow: none;
+
+        page-break-after: always;
+
+        animation: none;
+    }
+
+    .a4-page:last-child {
+        page-break-after: auto;
+    }
+
+    .photo-card,
+    .photo-frame {
+        transition: none;
+        animation: none;
+    }
+}
+
+/* Respect reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                📸
+            </div>
+
+            <div>
+                <h1>Passport Photo Studio</h1>
+                <p>A4 Passport Photo Printing System</p>
+            </div>
+
+        </div>
+
+        <div class="counter" id="counter">
+            0 Photos
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+<section class="control-panel">
+
+    <div class="control-top">
+
+        <div class="control-title">
+
+            <h2>Photo Manager</h2>
+
+            <p>
+                Upload different photos and give each one its own name.
+            </p>
+
+        </div>
+
+
+        <div class="actions">
+
+            <label class="upload-button">
+
+                ＋ Add Photos
+
+                <input
+                    id="fileInput"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                >
+
+            </label>
+
+
+            <button
+                type="button"
+                class="primary"
+                id="printButton"
+            >
+                🖨 Print A4
+            </button>
+
+
+            <button
+                type="button"
+                class="danger"
+                id="clearButton"
+            >
+                Clear All
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="drop-zone"
+        id="dropZone"
+    >
+
+        <div class="drop-icon">
+            📁
+        </div>
+
+        <strong>
+            Drag & Drop Photos Here
+        </strong>
+
+        <div>
+            or click "Add Photos"
+        </div>
+
+        <small>
+            JPG, JPEG, PNG and other image formats
+        </small>
+
+    </div>
+
+
+    <div class="settings">
+
+        <div class="setting">
+            📐 Photo Size:
+            <strong>3 × 4 cm</strong>
+        </div>
+
+        <div class="setting">
+            📄 Paper:
+            <strong>A4</strong>
+        </div>
+
+        <div class="setting">
+            📷 Per Page:
+            <strong>42 Photos</strong>
+        </div>
+
+        <div class="setting">
+            ✂️ Border:
+            <strong>Enabled</strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="section-heading">
+
+    <h2>Your Photos</h2>
+
+    <span id="photoCountText"></span>
+
+</div>
+
+
+<section
+    id="photoList"
+    class="photo-list"
+></section>
+
+
+<div class="preview-header">
+
+    <h2>A4 Print Preview</h2>
+
+    <p>
+        Each photo is exactly 3 × 4 cm with an individual border and name.
+    </p>
+
+</div>
+
+
+<div
+    id="pages"
+    class="pages"
+></div>
+
+</main>
+
+
+<script>
+
+let photos = [];
+
+const fileInput =
+    document.getElementById("fileInput");
+
+const photoList =
+    document.getElementById("photoList");
+
+const pages =
+    document.getElementById("pages");
+
+const counter =
+    document.getElementById("counter");
+
+const photoCountText =
+    document.getElementById("photoCountText");
+
+const dropZone =
+    document.getElementById("dropZone");
+
+const printButton =
+    document.getElementById("printButton");
+
+const clearButton =
+    document.getElementById("clearButton");
+
+
+/* =========================
+   ADD FILES
+========================= */
+
+function addFiles(files) {
+
+    const imageFiles =
+        files.filter(file =>
+            file.type.startsWith("image/")
+        );
+
+
+    imageFiles.forEach((file, fileIndex) => {
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function(event) {
+
+                photos.push({
+
+                    id:
+                        Date.now() +
+                        Math.random(),
+
+                    src:
+                        event.target.result,
+
+                    name:
+                        file.name.replace(
+                            /\.[^/.]+$/,
+                            ""
+                        )
+
+                });
+
+
+                render();
+
+            };
+
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+
+/* =========================
+   FILE INPUT
+========================= */
+
+fileInput.addEventListener(
+    "change",
+    function(event) {
+
+        addFiles(
+            Array.from(event.target.files)
+        );
+
+        fileInput.value = "";
+
+    }
+);
+
+
+/* =========================
+   DRAG & DROP
+========================= */
+
+dropZone.addEventListener(
+    "dragover",
+    function(event) {
+
+        event.preventDefault();
+
+        dropZone.classList.add(
+            "dragover"
+        );
+
+    }
+);
+
+
+dropZone.addEventListener(
+    "dragleave",
+    function() {
+
+        dropZone.classList.remove(
+            "dragover"
+        );
+
+    }
+);
+
+
+dropZone.addEventListener(
+    "drop",
+    function(event) {
+
+        event.preventDefault();
+
+        dropZone.classList.remove(
+            "dragover"
+        );
+
+        addFiles(
+            Array.from(
+                event.dataTransfer.files
+            )
+        );
+
+    }
+);
+
+
+/* =========================
+   RENDER
+========================= */
+
+function render() {
+
+    renderPhotoList();
+
+    renderPages();
+
+    updateCounter();
+
+}
+
+
+/* =========================
+   COUNTER
+========================= */
+
+function updateCounter() {
+
+    const count =
+        photos.length;
+
+
+    counter.textContent =
+        count +
+        (count === 1
+            ? " Photo"
+            : " Photos");
+
+
+    photoCountText.textContent =
+        count === 0
+            ? ""
+            : `${count} photo${
+                count === 1
+                    ? ""
+                    : "s"
+              } added`;
+
+
+    counter.classList.remove(
+        "bump"
+    );
+
+
+    void counter.offsetWidth;
+
+
+    counter.classList.add(
+        "bump"
+    );
+
+}
+
+
+/* =========================
+   PHOTO LIST
+========================= */
+
+function renderPhotoList() {
+
+    photoList.innerHTML = "";
+
+
+    if (photos.length === 0) {
+
+        photoList.innerHTML = `
+
+            <div
+                class="empty"
+                style="grid-column:1/-1;"
+            >
+
+                <div class="empty-icon">
+                    📷
+                </div>
+
+                <h3>
+                    No photos added yet
+                </h3>
+
+                <p>
+                    Add your passport photos to begin.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    photos.forEach(
+        function(photo, index) {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+            item.className =
+                "photo-item";
+
+            item.style.animationDelay =
+                Math.min(
+                    index * 35,
+                    350
+                ) + "ms";
+
+
+            const image =
+                document.createElement(
+                    "img"
+                );
+
+            image.className =
+                "photo-thumb";
+
+            image.src =
+                photo.src;
+
+            image.alt =
+                "Photo " +
+                (index + 1);
+
+
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+            info.className =
+                "photo-info";
+
+
+            const number =
+                document.createElement(
+                    "div"
+                );
+
+            number.className =
+                "photo-number";
+
+            number.textContent =
+                "Photo " +
+                (index + 1);
+
+
+            const input =
+                document.createElement(
+                    "input"
+                );
+
+            input.className =
+                "name-input";
+
+            input.type =
+                "text";
+
+            input.value =
+                photo.name;
+
+            input.placeholder =
+                "Enter person's name";
+
+
+            input.addEventListener(
+                "input",
+                function() {
+
+                    photos[index].name =
+                        input.value;
+
+                    renderPages();
+
+                }
+            );
+
+
+            const remove =
+                document.createElement(
+                    "button"
+                );
+
+            remove.type =
+                "button";
+
+            remove.className =
+                "remove";
+
+            remove.textContent =
+                "Remove";
+
+
+            remove.addEventListener(
+                "click",
+                function() {
+
+                    const card =
+                        item;
+
+                    card.style.transform =
+                        "translateX(20px)";
+
+                    card.style.opacity =
+                        "0";
+
+
+                    setTimeout(
+                        function() {
+
+                            photos.splice(
+                                index,
+                                1
+                            );
+
+                            render();
+
+                        },
+                        180
+                    );
+
+                }
+            );
+
+
+            info.appendChild(
+                number
+            );
+
+            info.appendChild(
+                input
+            );
+
+            info.appendChild(
+                remove
+            );
+
+
+            item.appendChild(
+                image
+            );
+
+            item.appendChild(
+                info
+            );
+
+
+            photoList.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   A4 PAGES
+========================= */
+
+function renderPages() {
+
+    pages.innerHTML = "";
+
+
+    if (photos.length === 0)
+        return;
+
+
+    const photosPerPage =
+        42;
+
+
+    for (
+        let start = 0;
+        start < photos.length;
+        start += photosPerPage
+    ) {
+
+        const page =
+            document.createElement(
+                "div"
+            );
+
+        page.className =
+            "a4-page";
+
+
+        const pagePhotos =
+            photos.slice(
+                start,
+                start + photosPerPage
+            );
+
+
+        pagePhotos.forEach(
+            function(photo, index) {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+                card.className =
+                    "photo-card";
+
+
+                card.style.animationDelay =
+                    Math.min(
+                        index * 15,
+                        300
+                    ) + "ms";
+
+
+                const frame =
+                    document.createElement(
+                        "div"
+                    );
+
+                frame.className =
+                    "photo-frame";
+
+
+                const img =
+                    document.createElement(
+                        "img"
+                    );
+
+                img.src =
+                    photo.src;
+
+                img.alt =
+                    photo.name ||
+                    "Passport photo";
+
+
+                const name =
+                    document.createElement(
+                        "div"
+                    );
+
+                name.className =
+                    "photo-name";
+
+                name.textContent =
+                    photo.name || "";
+
+
+                frame.appendChild(
+                    img
+                );
+
+                card.appendChild(
+                    frame
+                );
+
+                card.appendChild(
+                    name
+                );
+
+                page.appendChild(
+                    card
+                );
+
+            }
+        );
+
+
+        pages.appendChild(
+            page
+        );
+
+    }
+
+}
+
+
+/* =========================
+   PRINT
+========================= */
+
+printButton.addEventListener(
+    "click",
+    function() {
+
+        if (photos.length === 0) {
+
+            alert(
+                "Please add photos before printing."
+            );
+
+            return;
+
+        }
+
+
+        window.print();
+
+    }
+);
+
+
+/* =========================
+   CLEAR
+========================= */
+
+clearButton.addEventListener(
+    "click",
+    function() {
+
+        if (photos.length === 0)
+            return;
+
+
+        if (
+            !confirm(
+                "Are you sure you want to remove all photos?"
+            )
+        )
+            return;
+
+
+        photos = [];
+
+        render();
+
+    }
+);
+
+
+/* =========================
+   INITIAL
+========================= */
+
+render();
+
+</script>
+
+</body>
+</html>
