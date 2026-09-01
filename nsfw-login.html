@@ -46,6 +46,10 @@
             justify-content: center;
 
             text-align: center;
+
+            /* This is the real page that will appear blurred behind the popup. */
+            position: relative;
+            z-index: 0;
         }
 
         .website h1 {
@@ -98,10 +102,27 @@
 
             padding: 20px;
 
-            background: rgba(0, 0, 0, 0.58);
+            /* Keep the actual index.html visible behind the popup.
+               The overlay itself is transparent except for a dark tint,
+               so the page underneath is what gets blurred. */
+            background: rgba(0, 0, 0, 0.48);
 
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
+        }
+
+        /* Make the page underneath feel like a blurred copy of index.html */
+        .password-overlay::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: rgba(15, 23, 42, 0.10);
+        }
+
+        .password-popup {
+            position: relative;
+            z-index: 1;
         }
 
         /* =====================================================
