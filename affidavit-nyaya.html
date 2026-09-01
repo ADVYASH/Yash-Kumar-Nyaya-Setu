@@ -3214,7 +3214,7 @@ button:active{transform:translateY(0) scale(.98)!important;}
 </form>
 
 <div class="actions">
-<button class="btn-primary" onclick="generateDocuments()">
+<button type="button" class="btn-primary" id="generateDocumentsButton">
 Generate
 </button>
 
@@ -3423,7 +3423,7 @@ function getValue(id) {
     return element.value || "";
 }
 
-const STAMP_DUTY_BY_CASE_LEVEL = {
+window.STAMP_DUTY_BY_CASE_LEVEL = {
     "Core Critical": "₹1,000",
     "Crucial": "₹500",
     "Specialized": "₹200",
@@ -3431,8 +3431,10 @@ const STAMP_DUTY_BY_CASE_LEVEL = {
 };
 
 function getStampDutyAmount() {
-    const caseLevel = document.getElementById("caseLevel")?.value || "";
-    return STAMP_DUTY_BY_CASE_LEVEL[caseLevel] || "";
+    const caseLevelElement = document.getElementById("caseLevel");
+    const caseLevel = caseLevelElement ? caseLevelElement.value : "";
+    const stampMap = window.STAMP_DUTY_BY_CASE_LEVEL || {};
+    return stampMap[caseLevel] || "";
 }
 
 function generateDemoPage3QR() {
@@ -4255,35 +4257,6 @@ document.addEventListener("DOMContentLoaded", function () {
     updateFIRStateImages();
 });
 
-/* Run pagination after the existing Generate Documents function has populated the form. */
-const originalGenerateDocuments = window.generateDocuments;
-if (typeof originalGenerateDocuments === "function") {
-    window.generateDocuments = function () {
-        originalGenerateDocuments.apply(this, arguments);
-        setTimeout(function () {
-            updateFIRFields();
-            paginateFIR();
-        }, 50);
-    };
-}
-
-/* If the function is declared later in the same script, the wrapper above may not see it yet.
-   The Generate button is also handled by this delegated listener as a safety net. */
-document.addEventListener("DOMContentLoaded", function () {
-    document.addEventListener("click", function (event) {
-        const button = event.target.closest("button");
-        if (!button) return;
-        const label = (button.textContent || "").trim().toLowerCase();
-        if (label.includes("generate")) {
-            setTimeout(function () {
-                updateFIRFields();
-                paginateFIR();
-            }, 100);
-        }
-    });
-});
-
-
 /* =========================================================
    PAGE 6 — VERDICT / DETERMINATION — REAL MULTI-PAGE PAGINATION
    ========================================================= */
@@ -4928,33 +4901,81 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </script>
 <script>
-/* FINAL GENERATE BUTTON SAFETY HANDLER */
+window.generateDocuments = generateDocuments;
+
+/* FINAL GENERATE BUTTON HANDLER — SINGLE SOURCE OF TRUTH */
 (function () {
     function runGenerate(event) {
-        const button = event && event.currentTarget;
+        if (event) event.preventDefault();
+
         try {
-            if (typeof window.generateDocuments !== "function") {
-                console.error("Generate button: generateDocuments() is unavailable.");
-                alert("Generate could not start. Please reload this page and try again.");
-                return;
+            const generator = window.generateDocuments;
+            if (typeof generator !== "function") {
+                throw new Error("generateDocuments() is unavailable.");
             }
-            window.generateDocuments();
-        } catch (err) {
-            console.error("Generate button error:", err);
+
+            // Make the output container measurable before pagination.
             const printArea = document.getElementById("printArea");
-            if (printArea) printArea.style.display = "block";
-            alert("The document could not be generated. Open the browser console for details.");
+            if (!printArea) {
+                throw new Error("#printArea was not found.");
+            }
+
+            printArea.hidden = false;
+            printArea.style.display = "block";
+            printArea.classList.add("generated");
+
+            generator();
+
+            // Pagination needs rendered dimensions, so wait for layout.
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    try {
+                        if (typeof window.updateFIRFields === "function") {
+                            window.updateFIRFields();
+                        }
+                        if (typeof window.updateFIRStateImages === "function") {
+                            window.updateFIRStateImages();
+                        }
+                        if (typeof window.paginateFIR === "function") {
+                            window.paginateFIR();
+                        }
+                        if (typeof window.paginateJudgementPage === "function") {
+                            window.paginateJudgementPage();
+                        }
+
+                        printArea.hidden = false;
+                        printArea.style.display = "block";
+                        printArea.classList.add("generated");
+                        printArea.scrollIntoView({ behavior: "smooth", block: "start" });
+                    } catch (paginationError) {
+                        console.error("PAGINATION ERROR:", paginationError);
+                    }
+                });
+            });
+
+        } catch (err) {
+            console.error("DOCUMENT GENERATION ERROR:", err);
+            alert("The document could not be generated.\n\n" + (err && err.message ? err.message : err));
         }
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll("button").forEach(function (button) {
-            if ((button.textContent || "").trim().toLowerCase() === "generate") {
-                button.removeAttribute("onclick");
-                button.addEventListener("click", runGenerate);
-            }
-        });
-    });
+    function bindGenerateButton() {
+        const button = document.getElementById("generateDocumentsButton");
+        if (!button) {
+            console.error("Generate button #generateDocumentsButton was not found.");
+            return;
+        }
+
+        // Remove any old inline handler if an older copy of the page is loaded.
+        button.removeAttribute("onclick");
+        button.addEventListener("click", runGenerate);
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", bindGenerateButton, { once: true });
+    } else {
+        bindGenerateButton();
+    }
 })();
 </script>
 </body>
