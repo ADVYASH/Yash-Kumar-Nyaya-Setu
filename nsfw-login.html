@@ -1,1 +1,1583 @@
-nsfw-login.html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Protected Website</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(circle at top left, #2563eb 0%, transparent 35%),
+                radial-gradient(circle at bottom right, #7c3aed 0%, transparent 35%),
+                #0f172a;
+
+            color: white;
+        }
+
+        /* =====================================================
+           MAIN WEBSITE
+           ===================================================== */
+
+        .website {
+            min-height: 100vh;
+
+            padding: 80px 25px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .website h1 {
+            margin: 0 0 20px;
+
+            font-size: clamp(36px, 6vw, 64px);
+        }
+
+        .website p {
+            max-width: 650px;
+
+            margin: 0;
+
+            color: rgba(255, 255, 255, 0.7);
+
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .demo-button {
+            margin-top: 35px;
+
+            padding: 14px 25px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: white;
+            color: #111827;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           PASSWORD OVERLAY
+           ===================================================== */
+
+        .password-overlay {
+            position: fixed;
+            inset: 0;
+
+            z-index: 99999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(0, 0, 0, 0.58);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        /* =====================================================
+           POPUP
+           ===================================================== */
+
+        .password-popup {
+            width: 100%;
+            max-width: 420px;
+
+            padding: 35px;
+
+            border-radius: 22px;
+
+            background: rgba(255, 255, 255, 0.10);
+
+            border: 1px solid rgba(255, 255, 255, 0.18);
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.55),
+                inset 0 1px 1px rgba(255, 255, 255, 0.12);
+
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+
+            text-align: center;
+        }
+
+        /* =====================================================
+           LOCK ICON
+           ===================================================== */
+
+        .lock-icon {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.10);
+
+            font-size: 32px;
+        }
+
+        /* =====================================================
+           TITLES
+           ===================================================== */
+
+        .password-popup h2 {
+            margin: 0 0 10px;
+
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .description {
+            margin: 0 0 25px;
+
+            color: rgba(255, 255, 255, 0.65);
+
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           INPUT
+           ===================================================== */
+
+        .password-input {
+            width: 100%;
+
+            padding: 15px;
+
+            border: 1px solid rgba(255, 255, 255, 0.22);
+
+            border-radius: 12px;
+
+            outline: none;
+
+            background: rgba(0, 0, 0, 0.25);
+
+            color: white;
+
+            font-size: 16px;
+
+            text-align: center;
+
+            letter-spacing: 2px;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .password-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+
+            letter-spacing: 0;
+        }
+
+        .password-input:focus {
+            border-color: #60a5fa;
+
+            box-shadow:
+                0 0 0 3px rgba(96, 165, 250, 0.15);
+        }
+
+        /* =====================================================
+           BUTTON
+           ===================================================== */
+
+        .unlock-button {
+            width: 100%;
+
+            margin-top: 15px;
+
+            padding: 15px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .unlock-button:hover {
+            background: #3b82f6;
+
+            transform: translateY(-1px);
+        }
+
+        .unlock-button:disabled {
+            opacity: 0.5;
+
+            cursor: not-allowed;
+        }
+
+        /* =====================================================
+           MESSAGE
+           ===================================================== */
+
+        .message {
+            min-height: 22px;
+
+            margin-top: 16px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        .error {
+            color: #fca5a5;
+        }
+
+        .success {
+            color: #86efac;
+
+            font-size: 17px;
+        }
+
+        /* =====================================================
+           ATTEMPTS
+           ===================================================== */
+
+        .attempts {
+            margin-top: 15px;
+
+            color: rgba(255, 255, 255, 0.55);
+
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           LOCKOUT
+           ===================================================== */
+
+        .lockout {
+            color: rgba(255, 255, 255, 0.75);
+
+            line-height: 1.6;
+        }
+
+        .lockout-icon {
+            font-size: 48px;
+
+            margin-bottom: 10px;
+        }
+
+        .lockout h3 {
+            margin: 5px 0 10px;
+
+            font-size: 24px;
+        }
+
+        .countdown {
+            margin-top: 18px;
+
+            font-size: 30px;
+
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            color: white;
+        }
+
+        .lockout-note {
+            margin-top: 15px;
+
+            color: rgba(255, 255, 255, 0.45);
+
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           ADMIN BUTTON
+           ===================================================== */
+
+        .admin-button {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 7px 12px;
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            border-radius: 7px;
+
+            background: rgba(255, 255, 255, 0.04);
+
+            color: rgba(255, 255, 255, 0.45);
+
+            font-size: 11px;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .admin-button:hover {
+            background: rgba(255, 255, 255, 0.09);
+
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        /* =====================================================
+           ADMIN QUESTION
+           ===================================================== */
+
+        .admin-question {
+            text-align: center;
+        }
+
+        .admin-question h3 {
+            margin: 0 0 12px;
+
+            font-size: 22px;
+        }
+
+        .admin-question p {
+            margin: 0 0 20px;
+
+            color: rgba(255, 255, 255, 0.65);
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+        .admin-input {
+            width: 100%;
+
+            padding: 14px;
+
+            border: 1px solid rgba(255, 255, 255, 0.22);
+
+            border-radius: 11px;
+
+            outline: none;
+
+            background: rgba(0, 0, 0, 0.25);
+
+            color: white;
+
+            font-size: 15px;
+
+            text-align: center;
+        }
+
+        .admin-input:focus {
+            border-color: #60a5fa;
+
+            box-shadow:
+                0 0 0 3px rgba(96, 165, 250, 0.15);
+        }
+
+        .admin-actions {
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 12px;
+        }
+
+        .admin-submit,
+        .admin-cancel {
+            flex: 1;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .admin-submit {
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+        }
+
+        .admin-submit:hover {
+            background: #3b82f6;
+        }
+
+        .admin-cancel {
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            background: rgba(255, 255, 255, 0.05);
+
+            color: white;
+        }
+
+        /* =====================================================
+           HIDDEN
+           ===================================================== */
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* =====================================================
+           SHAKE
+           ===================================================== */
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(-9px);
+            }
+
+            40% {
+                transform: translateX(9px);
+            }
+
+            60% {
+                transform: translateX(-7px);
+            }
+
+            80% {
+                transform: translateX(7px);
+            }
+        }
+
+        .shake {
+            animation: shake 0.4s ease;
+        }
+
+        /* =====================================================
+           MOBILE
+           ===================================================== */
+
+        @media (max-width: 500px) {
+
+            .password-popup {
+                padding: 28px 22px;
+            }
+
+            .password-popup h2 {
+                font-size: 25px;
+            }
+
+            .lock-icon {
+                width: 60px;
+                height: 60px;
+
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         WEBSITE CONTENT
+         ===================================================== -->
+
+    <main class="website">
+
+        <h1>
+            Welcome
+        </h1>
+
+        <p>
+            Your website content goes here.
+        </p>
+
+        <button
+            class="demo-button"
+            onclick="alert('Website content is unlocked!')"
+        >
+            Website Content
+        </button>
+
+    </main>
+
+
+    <!-- =====================================================
+         PASSWORD OVERLAY
+         ===================================================== -->
+
+    <div
+        class="password-overlay"
+        id="passwordOverlay"
+    >
+
+        <div
+            class="password-popup"
+            id="passwordPopup"
+        >
+
+            <!-- =================================================
+                 NORMAL PASSWORD SCREEN
+                 ================================================= -->
+
+            <div id="normalScreen">
+
+                <div class="lock-icon">
+                    🔒
+                </div>
+
+
+                <h2>
+                    Enter Password
+                </h2>
+
+
+                <p class="description">
+                    This website is protected.<br>
+                    Enter the password to continue.
+                </p>
+
+
+                <input
+                    type="password"
+                    id="passwordInput"
+                    class="password-input"
+                    placeholder="Enter password"
+                    autocomplete="off"
+                    maxlength="30"
+                >
+
+
+                <button
+                    type="button"
+                    class="unlock-button"
+                    id="unlockButton"
+                    onclick="checkPassword()"
+                >
+                    Unlock
+                </button>
+
+
+                <div
+                    class="message"
+                    id="message"
+                ></div>
+
+
+                <div
+                    class="attempts"
+                    id="attempts"
+                >
+                    3 attempts remaining
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 LOCKOUT SCREEN
+                 ================================================= -->
+
+            <div
+                id="lockoutScreen"
+                class="hidden"
+            >
+
+                <div class="lockout">
+
+                    <div class="lockout-icon">
+                        🔐
+                    </div>
+
+
+                    <h3>
+                        Access Locked
+                    </h3>
+
+
+                    <p>
+                        Too many incorrect password attempts.
+                        Please try again after the lockout period.
+                    </p>
+
+
+                    <div
+                        class="countdown"
+                        id="countdown"
+                    >
+                        12:00:00
+                    </div>
+
+
+                    <div class="lockout-note">
+                        Access will automatically become
+                        available when the timer expires.
+                    </div>
+
+
+                    <!-- SMALL ADMIN OPTION -->
+
+                    <button
+                        type="button"
+                        class="admin-button"
+                        onclick="openAdmin()"
+                    >
+                        Admin
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ADMIN QUESTION SCREEN
+                 ================================================= -->
+
+            <div
+                id="adminScreen"
+                class="hidden"
+            >
+
+                <div class="admin-question">
+
+                    <div
+                        class="lock-icon"
+                        style="margin-bottom:15px;"
+                    >
+                        🛠️
+                    </div>
+
+
+                    <h3>
+                        Admin Verification
+                    </h3>
+
+
+                    <p>
+                        What is the full form of
+                        <strong>BSTCH</strong>?
+                    </p>
+
+
+                    <input
+                        type="text"
+                        id="adminInput"
+                        class="admin-input"
+                        placeholder="Enter your answer"
+                        autocomplete="off"
+                    >
+
+
+                    <div class="admin-actions">
+
+                        <button
+                            type="button"
+                            class="admin-cancel"
+                            onclick="closeAdmin()"
+                        >
+                            Cancel
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="admin-submit"
+                            onclick="verifyAdmin()"
+                        >
+                            Verify
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="message"
+                        id="adminMessage"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        /* =====================================================
+           PASSWORDS
+           ===================================================== */
+
+        const VALID_PASSWORDS = [
+
+            "202320282026",
+            "202320262028",
+            "202620232028",
+            "202620282023",
+            "202820232026",
+            "202820262023"
+
+        ];
+
+
+        /* =====================================================
+           ADMIN ANSWER
+           ===================================================== */
+
+        const ADMIN_ANSWER =
+            "bella shadow tiger coco hazel";
+
+
+        /* =====================================================
+           SETTINGS
+           ===================================================== */
+
+        const MAX_ATTEMPTS = 3;
+
+        const LOCKOUT_DURATION =
+            12 * 60 * 60 * 1000;
+
+
+        /* =====================================================
+           STORAGE KEYS
+           ===================================================== */
+
+        const ATTEMPTS_KEY =
+            "passwordAttempts";
+
+        const LOCKOUT_KEY =
+            "passwordLockoutUntil";
+
+
+        /* =====================================================
+           ELEMENTS
+           ===================================================== */
+
+        const overlay =
+            document.getElementById(
+                "passwordOverlay"
+            );
+
+        const popup =
+            document.getElementById(
+                "passwordPopup"
+            );
+
+        const normalScreen =
+            document.getElementById(
+                "normalScreen"
+            );
+
+        const passwordInput =
+            document.getElementById(
+                "passwordInput"
+            );
+
+        const unlockButton =
+            document.getElementById(
+                "unlockButton"
+            );
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+        const attemptsDisplay =
+            document.getElementById(
+                "attempts"
+            );
+
+        const lockoutScreen =
+            document.getElementById(
+                "lockoutScreen"
+            );
+
+        const countdown =
+            document.getElementById(
+                "countdown"
+            );
+
+        const adminScreen =
+            document.getElementById(
+                "adminScreen"
+            );
+
+        const adminInput =
+            document.getElementById(
+                "adminInput"
+            );
+
+        const adminMessage =
+            document.getElementById(
+                "adminMessage"
+            );
+
+
+        let countdownInterval = null;
+
+
+        /* =====================================================
+           PAGE LOAD
+           ===================================================== */
+
+        window.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const lockoutUntil =
+                    Number(
+                        localStorage.getItem(
+                            LOCKOUT_KEY
+                        )
+                    );
+
+
+                /*
+                 * Still locked.
+                 */
+
+                if (
+                    lockoutUntil &&
+                    Date.now() < lockoutUntil
+                ) {
+
+                    showLockout(
+                        lockoutUntil
+                    );
+
+                    return;
+                }
+
+
+                /*
+                 * Lockout expired.
+                 */
+
+                if (
+                    lockoutUntil &&
+                    Date.now() >= lockoutUntil
+                ) {
+
+                    clearLockout();
+
+                }
+
+
+                updateAttempts();
+
+                passwordInput.focus();
+
+            }
+        );
+
+
+        /* =====================================================
+           PASSWORD CHECK
+           ===================================================== */
+
+        function checkPassword() {
+
+            const lockoutUntil =
+                Number(
+                    localStorage.getItem(
+                        LOCKOUT_KEY
+                    )
+                );
+
+
+            /*
+             * Don't allow password attempts
+             * while locked.
+             */
+
+            if (
+                lockoutUntil &&
+                Date.now() < lockoutUntil
+            ) {
+
+                showLockout(
+                    lockoutUntil
+                );
+
+                return;
+            }
+
+
+            const enteredPassword =
+                passwordInput.value.trim();
+
+
+            if (!enteredPassword) {
+
+                showMessage(
+                    "Please enter a password.",
+                    "error"
+                );
+
+                passwordInput.focus();
+
+                return;
+            }
+
+
+            /* =================================================
+               CORRECT PASSWORD
+               ================================================= */
+
+            if (
+                VALID_PASSWORDS.includes(
+                    enteredPassword
+                )
+            ) {
+
+                /*
+                 * Clear failed attempts.
+                 */
+
+                localStorage.removeItem(
+                    ATTEMPTS_KEY
+                );
+
+                localStorage.removeItem(
+                    LOCKOUT_KEY
+                );
+
+
+                /*
+                 * Access granted.
+                 */
+
+                showMessage(
+                    "Access Granted ✓",
+                    "success"
+                );
+
+
+                passwordInput.disabled =
+                    true;
+
+                unlockButton.disabled =
+                    true;
+
+
+                /*
+                 * Open nsfw.html.
+                 */
+
+                try {
+
+                    window.open(
+                        "nsfw.html",
+                        "_blank"
+                    );
+
+                } catch (error) {
+
+                    console.log(error);
+
+                }
+
+
+                /*
+                 * Return current tab to index.html.
+                 *
+                 * Because successful login is NOT stored,
+                 * index.html will ask for the password again.
+                 */
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "index.html";
+
+                    },
+                    800
+                );
+
+
+                return;
+            }
+
+
+            /* =================================================
+               WRONG PASSWORD
+               ================================================= */
+
+            let attempts =
+                Number(
+                    localStorage.getItem(
+                        ATTEMPTS_KEY
+                    ) || 0
+                );
+
+
+            attempts++;
+
+
+            localStorage.setItem(
+                ATTEMPTS_KEY,
+                attempts
+            );
+
+
+            /*
+             * Three failed attempts.
+             */
+
+            if (
+                attempts >= MAX_ATTEMPTS
+            ) {
+
+                const lockoutUntil =
+                    Date.now() +
+                    LOCKOUT_DURATION;
+
+
+                localStorage.setItem(
+                    LOCKOUT_KEY,
+                    lockoutUntil
+                );
+
+
+                showLockout(
+                    lockoutUntil
+                );
+
+
+                return;
+            }
+
+
+            const remaining =
+                MAX_ATTEMPTS - attempts;
+
+
+            showMessage(
+                "Incorrect password.",
+                "error"
+            );
+
+
+            attemptsDisplay.textContent =
+                remaining +
+                (
+                    remaining === 1
+                        ? " attempt remaining"
+                        : " attempts remaining"
+                );
+
+
+            passwordInput.value = "";
+
+            passwordInput.focus();
+
+
+            popup.classList.remove(
+                "shake"
+            );
+
+            void popup.offsetWidth;
+
+            popup.classList.add(
+                "shake"
+            );
+
+        }
+
+
+        /* =====================================================
+           SHOW LOCKOUT
+           ===================================================== */
+
+        function showLockout(
+            lockoutUntil
+        ) {
+
+            normalScreen.classList.add(
+                "hidden"
+            );
+
+            adminScreen.classList.add(
+                "hidden"
+            );
+
+            lockoutScreen.classList.remove(
+                "hidden"
+            );
+
+
+            updateCountdown(
+                lockoutUntil
+            );
+
+        }
+
+
+        /* =====================================================
+           COUNTDOWN
+           ===================================================== */
+
+        function updateCountdown(
+            lockoutUntil
+        ) {
+
+            if (countdownInterval) {
+
+                clearInterval(
+                    countdownInterval
+                );
+
+            }
+
+
+            function update() {
+
+                const remaining =
+                    lockoutUntil -
+                    Date.now();
+
+
+                /*
+                 * Lockout finished.
+                 */
+
+                if (remaining <= 0) {
+
+                    clearInterval(
+                        countdownInterval
+                    );
+
+
+                    clearLockout();
+
+                    return;
+                }
+
+
+                const totalSeconds =
+                    Math.floor(
+                        remaining / 1000
+                    );
+
+
+                const hours =
+                    Math.floor(
+                        totalSeconds / 3600
+                    );
+
+
+                const minutes =
+                    Math.floor(
+                        (totalSeconds % 3600) / 60
+                    );
+
+
+                const seconds =
+                    totalSeconds % 60;
+
+
+                countdown.textContent =
+                    String(hours).padStart(
+                        2,
+                        "0"
+                    ) +
+                    ":" +
+                    String(minutes).padStart(
+                        2,
+                        "0"
+                    ) +
+                    ":" +
+                    String(seconds).padStart(
+                        2,
+                        "0"
+                    );
+
+            }
+
+
+            update();
+
+
+            countdownInterval =
+                setInterval(
+                    update,
+                    1000
+                );
+
+        }
+
+
+        /* =====================================================
+           OPEN ADMIN
+           ===================================================== */
+
+        function openAdmin() {
+
+            lockoutScreen.classList.add(
+                "hidden"
+            );
+
+            adminScreen.classList.remove(
+                "hidden"
+            );
+
+
+            adminInput.value = "";
+
+            adminMessage.textContent = "";
+
+            adminMessage.className =
+                "message";
+
+
+            adminInput.focus();
+
+        }
+
+
+        /* =====================================================
+           CLOSE ADMIN
+           ===================================================== */
+
+        function closeAdmin() {
+
+            adminScreen.classList.add(
+                "hidden"
+            );
+
+            lockoutScreen.classList.remove(
+                "hidden"
+            );
+
+
+            adminInput.value = "";
+
+            adminMessage.textContent = "";
+
+        }
+
+
+        /* =====================================================
+           VERIFY ADMIN ANSWER
+           ===================================================== */
+
+        function verifyAdmin() {
+
+            const answer =
+                adminInput.value
+                    .trim()
+                    .replace(/\s+/g, " ")
+                    .toLowerCase();
+
+
+            /*
+             * Case-insensitive comparison.
+             *
+             * These all work:
+             *
+             * bella shadow tiger coco hazel
+             * Bella Shadow Tiger Coco Hazel
+             * BELLA SHADOW TIGER COCO HAZEL
+             * BeLlA ShAdOw TiGeR CoCo HaZeL
+             */
+
+            if (
+                answer ===
+                ADMIN_ANSWER.toLowerCase()
+            ) {
+
+                /*
+                 * Admin verification successful.
+                 */
+
+                adminMessage.textContent =
+                    "Admin verification successful ✓";
+
+                adminMessage.className =
+                    "message success";
+
+
+                /*
+                 * Remove the 12-hour lockout.
+                 */
+
+                localStorage.removeItem(
+                    LOCKOUT_KEY
+                );
+
+                localStorage.removeItem(
+                    ATTEMPTS_KEY
+                );
+
+
+                /*
+                 * Return to password screen.
+                 */
+
+                setTimeout(
+                    function () {
+
+                        adminScreen.classList.add(
+                            "hidden"
+                        );
+
+                        normalScreen.classList.remove(
+                            "hidden"
+                        );
+
+
+                        attemptsDisplay.textContent =
+                            "3 attempts remaining";
+
+
+                        passwordInput.value = "";
+
+                        passwordInput.disabled =
+                            false;
+
+                        unlockButton.disabled =
+                            false;
+
+
+                        passwordInput.focus();
+
+                    },
+                    700
+                );
+
+
+                return;
+            }
+
+
+            /*
+             * Wrong admin answer.
+             */
+
+            adminMessage.textContent =
+                "Incorrect answer.";
+
+            adminMessage.className =
+                "message error";
+
+
+            adminInput.value = "";
+
+            adminInput.focus();
+
+
+            popup.classList.remove(
+                "shake"
+            );
+
+            void popup.offsetWidth;
+
+            popup.classList.add(
+                "shake"
+            );
+
+        }
+
+
+        /* =====================================================
+           CLEAR LOCKOUT
+           ===================================================== */
+
+        function clearLockout() {
+
+            localStorage.removeItem(
+                LOCKOUT_KEY
+            );
+
+            localStorage.removeItem(
+                ATTEMPTS_KEY
+            );
+
+
+            if (countdownInterval) {
+
+                clearInterval(
+                    countdownInterval
+                );
+
+            }
+
+
+            lockoutScreen.classList.add(
+                "hidden"
+            );
+
+            adminScreen.classList.add(
+                "hidden"
+            );
+
+            normalScreen.classList.remove(
+                "hidden"
+            );
+
+
+            attemptsDisplay.textContent =
+                "3 attempts remaining";
+
+
+            passwordInput.value = "";
+
+            passwordInput.disabled =
+                false;
+
+            unlockButton.disabled =
+                false;
+
+
+            passwordInput.focus();
+
+        }
+
+
+        /* =====================================================
+           UPDATE ATTEMPTS
+           ===================================================== */
+
+        function updateAttempts() {
+
+            const attempts =
+                Number(
+                    localStorage.getItem(
+                        ATTEMPTS_KEY
+                    ) || 0
+                );
+
+
+            const remaining =
+                Math.max(
+                    0,
+                    MAX_ATTEMPTS - attempts
+                );
+
+
+            attemptsDisplay.textContent =
+                remaining +
+                (
+                    remaining === 1
+                        ? " attempt remaining"
+                        : " attempts remaining"
+                );
+
+        }
+
+
+        /* =====================================================
+           MESSAGE
+           ===================================================== */
+
+        function showMessage(
+            text,
+            type
+        ) {
+
+            message.textContent =
+                text;
+
+            message.className =
+                "message " + type;
+
+        }
+
+
+        /* =====================================================
+           ENTER KEY
+           ===================================================== */
+
+        passwordInput.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    checkPassword();
+
+                }
+
+            }
+        );
+
+
+        adminInput.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    verifyAdmin();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
