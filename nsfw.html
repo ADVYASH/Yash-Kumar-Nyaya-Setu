@@ -30,7 +30,7 @@
             margin: 0;
             padding: 0;
             min-height: 100%;
-            background: var(--black);
+            background: transparent;
             color: var(--white);
             font-family: Arial, Helvetica, sans-serif;
         }
@@ -47,13 +47,7 @@
             height: 180px;
             width: 100%;
 
-            background:
-                linear-gradient(
-                    180deg,
-                    #050505 0%,
-                    #090909 70%,
-                    #000000 100%
-                );
+            background: rgba(5, 5, 5, 0.72);
 
             border-bottom: 1px solid #3b0b17;
 
@@ -388,7 +382,9 @@
 
             align-items: start;
 
-            background: #000000;
+            background: transparent;
+            position: relative;
+            z-index: 1;
         }
 
         /* =========================
@@ -400,12 +396,7 @@
 
             padding: 14px 12px 18px;
 
-            background:
-                linear-gradient(
-                    180deg,
-                    #090909 0%,
-                    #050505 100%
-                );
+            background: rgba(9, 9, 9, 0.72);
 
             border-right: 1px solid #242424;
             border-bottom: 1px solid #1c1c1c;
@@ -699,11 +690,47 @@
             }
         }
     
-        /* WALLPAPER SLIDESHOW */
-        .wallpaper-slideshow { position: fixed; inset: 0; z-index: -2; overflow: hidden; background:#000; pointer-events:none; }
-        .wallpaper-slide { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .8s ease-in-out; }
-        .wallpaper-slide.active { opacity:1; }
-        .wallpaper-overlay { position:absolute; inset:0; background:rgba(0,0,0,.35); }
+        /* =========================
+           WALLPAPER SLIDESHOW
+           Uses nsfwwallpaper/1.jpg through 30.jpg directly.
+           No images.json is required.
+        ========================= */
+        .wallpaper-slideshow {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            background: #000;
+            pointer-events: none;
+        }
+
+        .wallpaper-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0;
+            transition: opacity .8s ease-in-out;
+        }
+
+        .wallpaper-slide.active {
+            opacity: 1;
+        }
+
+        .wallpaper-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: rgba(0, 0, 0, .28);
+        }
+
+        .header,
+        .columns {
+            position: relative;
+            z-index: 1;
+        }
 
     </style>
 </head>
@@ -2440,39 +2467,52 @@
 
 
     <script>
-    // Wallpaper slideshow: every image in nsfwwallpaper/ is shown for 2 seconds.
-    // Browsers cannot enumerate a local folder directly, so the script uses a
-    // generated manifest (nsfwwallpaper/images.json).
-    async function startWallpaperSlideshow() {
-        const box = document.querySelector('.wallpaper-slideshow');
-        const overlay = box.querySelector('.wallpaper-overlay');
-        let files = [];
-        try {
-            const r = await fetch('nsfwwallpaper/images.json', { cache: 'no-store' });
-            if (!r.ok) throw new Error('manifest unavailable');
-            files = await r.json();
-        } catch (e) {
-            console.warn('Could not load nsfwwallpaper/images.json', e);
-            return;
-        }
-        files = files.filter(Boolean);
-        if (!files.length) return;
-        const slides = files.map((file, i) => {
-            const img = document.createElement('img');
-            img.className = 'wallpaper-slide' + (i === 0 ? ' active' : '');
-            img.src = 'nsfwwallpaper/' + file.split('/').map(encodeURIComponent).join('/');
-            img.alt = '';
-            box.insertBefore(img, overlay);
-            return img;
-        });
-        let current = 0;
-        setInterval(() => {
-            slides[current].classList.remove('active');
-            current = (current + 1) % slides.length;
+        /* =====================================================
+           WALLPAPER SLIDESHOW
+           30 images: nsfwwallpaper/1.jpg ... 30.jpg
+           Changes every 2 seconds. No manifest is required.
+        ===================================================== */
+        (function startWallpaperSlideshow() {
+            const box = document.querySelector('.wallpaper-slideshow');
+            if (!box) return;
+
+            const overlay = box.querySelector('.wallpaper-overlay');
+            const files = Array.from(
+                { length: 30 },
+                (_, index) => `${index + 1}.jpg`
+            );
+
+            const slides = [];
+
+            files.forEach((file, index) => {
+                const img = document.createElement('img');
+
+                img.className = 'wallpaper-slide';
+                img.src = `nsfwwallpaper/${file}`;
+                img.alt = '';
+                img.decoding = 'async';
+                img.loading = index === 0 ? 'eager' : 'lazy';
+
+                img.addEventListener('error', () => {
+                    console.warn(`Wallpaper could not be loaded: ${img.src}`);
+                    img.remove();
+                });
+
+                box.insertBefore(img, overlay);
+                slides.push(img);
+            });
+
+            if (!slides.length) return;
+
+            let current = 0;
             slides[current].classList.add('active');
-        }, 2000);
-    }
-    startWallpaperSlideshow();
+
+            setInterval(() => {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 2000);
+        })();
     </script>
 
 </body>
