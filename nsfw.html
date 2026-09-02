@@ -172,6 +172,47 @@
                 0 0 5px rgba(181, 29, 64, 0.4);
         }
 
+        /* IMAGE VIEW BUTTON */
+        .image-view-link {
+            position: absolute;
+            left: 78px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--white);
+            text-decoration: none;
+            font-size: 30px;
+            line-height: 1;
+
+            cursor: pointer;
+            user-select: none;
+
+            border-radius: 6px;
+
+            transition:
+                transform 0.2s ease,
+                filter 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .image-view-link:hover {
+            transform: translateY(-50%) scale(1.1);
+            filter: drop-shadow(0 0 6px rgba(181, 29, 64, 0.5));
+            background: rgba(114, 19, 38, 0.18);
+        }
+
+        .image-view-link:focus-visible {
+            outline: 2px solid var(--hot-red);
+            outline-offset: 3px;
+        }
+
         /* =========================
            MENU TABLE
         ========================= */
@@ -636,6 +677,13 @@
                 height: 3px;
             }
 
+            .image-view-link {
+                left: 54px;
+                width: 34px;
+                height: 34px;
+                font-size: 25px;
+            }
+
             .menu-table-container {
                 width: 170px;
             }
@@ -650,10 +698,22 @@
                 height: 27px;
             }
         }
+    
+        /* WALLPAPER SLIDESHOW */
+        .wallpaper-slideshow { position: fixed; inset: 0; z-index: -2; overflow: hidden; background:#000; pointer-events:none; }
+        .wallpaper-slide { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .8s ease-in-out; }
+        .wallpaper-slide.active { opacity:1; }
+        .wallpaper-overlay { position:absolute; inset:0; background:rgba(0,0,0,.35); }
+
     </style>
 </head>
 
 <body>
+
+    <div class="wallpaper-slideshow" aria-hidden="true">
+        <div class="wallpaper-overlay"></div>
+    </div>
+
 
     <!-- =========================
          HEADER
@@ -678,11 +738,18 @@
                 <span></span>
             </div>
 
+            <!-- IMAGE VIEW -->
+            <a
+                class="image-view-link"
+                href="nsfwimages.html"
+                aria-label="Open image view"
+                title="Image View"
+            >🖼️</a>
+
             <div
                 class="menu-table-container"
                 id="menuTable"
-            >
-                <table class="menu-table">
+                            <table class="menu-table">
 
                     <thead>
                         <tr>
@@ -2369,6 +2436,43 @@
             }
         );
 
+    </script>
+
+
+    <script>
+    // Wallpaper slideshow: every image in nsfwwallpaper/ is shown for 2 seconds.
+    // Browsers cannot enumerate a local folder directly, so the script uses a
+    // generated manifest (nsfwwallpaper/images.json).
+    async function startWallpaperSlideshow() {
+        const box = document.querySelector('.wallpaper-slideshow');
+        const overlay = box.querySelector('.wallpaper-overlay');
+        let files = [];
+        try {
+            const r = await fetch('nsfwwallpaper/images.json', { cache: 'no-store' });
+            if (!r.ok) throw new Error('manifest unavailable');
+            files = await r.json();
+        } catch (e) {
+            console.warn('Could not load nsfwwallpaper/images.json', e);
+            return;
+        }
+        files = files.filter(Boolean);
+        if (!files.length) return;
+        const slides = files.map((file, i) => {
+            const img = document.createElement('img');
+            img.className = 'wallpaper-slide' + (i === 0 ? ' active' : '');
+            img.src = 'nsfwwallpaper/' + file.split('/').map(encodeURIComponent).join('/');
+            img.alt = '';
+            box.insertBefore(img, overlay);
+            return img;
+        });
+        let current = 0;
+        setInterval(() => {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }, 2000);
+    }
+    startWallpaperSlideshow();
     </script>
 
 </body>
