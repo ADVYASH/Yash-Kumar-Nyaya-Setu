@@ -301,7 +301,7 @@ opacity:0.85;
 /* ================= ANNOUNCEMENT ================= */
 
 .announcement{
-max-width:1100px;
+max-width:2000px;
 margin:0 auto 80px;
 display:flex;
 gap:40px;
@@ -637,7 +637,7 @@ font-size:14px;
 ===================================================== */
 
 .main-dashboard{
-    max-width:1400px;
+    max-width:1800px;
     margin:0 auto 80px;
 
     display:grid;
@@ -2132,6 +2132,67 @@ font-size:14px;
 }
 
 
+
+
+/* ================= COPYRIGHT FOOTER: CENTERED ================= */
+
+.copyright-footer-inner{
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+    text-align:center;
+}
+
+.copyright-footer-image{
+    flex:0 0 auto;
+    text-align:center;
+}
+
+.copyright-footer-image img{
+    width:100px;
+    height:100px;
+    object-fit:contain;
+    display:block;
+    margin:0 auto 8px;
+    pointer-events:none;
+    user-select:none;
+}
+
+.copyright-footer-image div{
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:1px;
+    line-height:1.4;
+    white-space:nowrap;
+}
+
+.copyright-footer-text{
+    width:100%;
+    text-align:center;
+}
+
+.copyright-footer-text p{
+    margin:7px 0;
+    font-size:14px;
+    line-height:1.6;
+    opacity:.9;
+}
+
+@media(max-width:600px){
+    .copyright-footer-inner{
+        gap:16px;
+    }
+
+    .copyright-footer-text{
+        text-align:center;
+    }
+}
+
 /* LAST UPDATED */
 
 #lastUpdated{
@@ -3359,71 +3420,35 @@ font-size:14px;
 </div>
 
 <!-- =====================================================
-     FIRST FOOTER - MEHENDI / YELLOWISH
-===================================================== -->
-
-<footer class="main-footer">
-
-    <div class="footer-inner">
-
-        <!-- LEFT: A-P LINKS -->
-
-<div class="footer-links">
-
-    <a href="accessibility.html">Accessibility</a>
-    <a href="faqs.html">FAQs</a>
-    <a href="pay-scales.html">Pay Scales</a>
-    <a href="accounts.html">Accounts</a>
-    <a href="important-links.html">Important Links</a>
-    <a href="citizens-charter.html">Citizen's Charter</a>
-    <a href="webcast.html">Webcast</a>
-    <a href="telephone-directory.html">Telephone Directory</a>
-    <a href="steps-taken-during-covid-19.html">Steps taken during Covid-19</a>
-    <a href="officers-officials.html">Officers / Officials</a>
-    <a href="guided-tour.html">Guided Tour</a>
-    <a href="india-code.html">India Code</a>
-    <a href="argument-transcripts.html">Argument Transcripts</a>
-    <a href="employee-corner.html">Employee Corner</a>
-    <a href="officers-servant-rules.html">Officers Servant Rules</a>
-
-</div>
-
-
-        <!-- RIGHT: ASHOKA EMBLEM -->
-
-        <div class="supreme-court-emblem">
-
-            <img
-                src="digitalbutton/34.png"
-                alt="State Emblem of India"
-            >
-
-            <div>SUPREME COURT OF INDIA</div>
-
-        </div>
-
-    </div>
-
-</footer>
-
-<!-- =====================================================
      SECOND FOOTER - BLACK
 ===================================================== -->
 
 <footer class="copyright-footer">
+    <div class="copyright-footer-inner">
 
-    <p>
-        Content Owned by Mr Yash Kumar and Supreme Court of India
-    </p>
+        <div class="copyright-footer-image">
+            <img
+                src="digitalbutton/34.png"
+                alt="State Emblem of India"
+            >
+            <div>SUPREME COURT OF INDIA</div>
+        </div>
 
-    <p>
-        ©All Rights Reserved to Yash Kumar
-    </p>
+        <div class="copyright-footer-text">
+            <p>
+                Content Owned by Mr Yash Kumar and Supreme Court of India
+            </p>
 
-    <p>
-        Last Updated - <span id="lastUpdated"></span>
-    </p>
+            <p>
+                ©All Rights Reserved to Yash Kumar
+            </p>
 
+            <p>
+                Last Updated - <span id="lastUpdated"></span>
+            </p>
+        </div>
+
+    </div>
 </footer>
 
 <script>
@@ -4221,6 +4246,23 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 });
 
+</script>
+
+
+<script>
+(function () {
+    const lastUpdated = document.getElementById("lastUpdated");
+    if (!lastUpdated) return;
+
+    const date = new Date();
+    date.setDate(date.getDate() - 3);
+
+    const day = date.getDate();
+    const month = date.toLocaleString("en-US", { month: "long" });
+    const year = date.getFullYear();
+
+    lastUpdated.textContent = `${day} ${month}, ${year}`;
+})();
 </script>
 
 </body>
