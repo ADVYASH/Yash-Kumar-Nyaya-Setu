@@ -280,22 +280,30 @@ margin-bottom:10px;
 opacity:0.8;
 }
 
-.hero h1{
-font-size:64px;
-font-weight:900;
-margin-bottom:15px;
-animation:float 4s ease-in-out infinite;
-}
-
 .hero h4{
 font-weight:400;
 opacity:0.85;
 }
 
+.hero h1{
+    font-size:64px;
+    font-weight:900;
+    margin-bottom:15px;
+    color:#ff3cac;
+    text-shadow:0 0 20px currentColor;
+    animation:float 4s ease-in-out infinite;
+}
+
 @keyframes float{
-0%{transform:translateY(0);}
-50%{transform:translateY(-10px);}
-100%{transform:translateY(0);}
+    0%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+    100%{
+        transform:translateY(0);
+    }
 }
 
 /* ================= ANNOUNCEMENT ================= */
@@ -2278,10 +2286,65 @@ font-size:14px;
   color: inherit;
   text-decoration: none;
 }
+
+/* ================= FIXED DELHI CLOCK + DATE ================= */
+.delhi-clock{
+    position:fixed;
+    top:72px;
+    left:14px;
+    z-index:9999;
+    width:fit-content;
+    min-width:155px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:3px;
+    padding:9px 13px;
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:10px;
+    background:rgba(10,10,18,0.86);
+    color:#fff;
+    font-family:monospace;
+    box-shadow:0 0 14px rgba(255,60,172,0.25);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+}
+.delhi-clock-label{
+    color:#ff3cac;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+#delhiTime{
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:1px;
+    line-height:1.1;
+}
+#delhiDate{
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.3px;
+    color:rgba(255,255,255,0.88);
+}
+@media(max-width:600px){
+    .delhi-clock{
+        top:60px;
+        left:8px;
+        min-width:135px;
+        padding:7px 10px;
+    }
+    #delhiTime{font-size:15px;}
+    #delhiDate{font-size:10px;}
+    .delhi-clock-label{font-size:9px;}
+}
+
 </style>
 </head>
 
 <body>
+
 <video class="site-background-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
 <source src="background/frozen.mp4" type="video/mp4">
 </video>
@@ -2318,6 +2381,13 @@ font-size:14px;
         <a href="javascript:void(0)" class="nav-trigger">News &amp; Events</a>
     </div>
 </nav>
+
+<!-- Automatic Delhi (India) 24-hour clock -->
+<div class="delhi-clock" aria-label="Current Delhi time">
+    <span class="delhi-clock-label">DELHI • INDIA</span>
+    <span id="delhiTime">00:00:00</span>
+    <span id="delhiDate">Saturday, 05 September 2026</span>
+</div>
 
 <div class="hero">
 <h3>⚖️National Digital Court & Legal Services Portal⚖️</h3>
@@ -3684,7 +3754,6 @@ document.addEventListener("keydown", function(event){
 
 
 
-<script>
 (function () {
     const lastUpdated = document.getElementById("lastUpdated");
     if (!lastUpdated) return;
@@ -3698,6 +3767,91 @@ document.addEventListener("keydown", function(event){
 
     lastUpdated.textContent = `${day} ${month}, ${year}`;
 })();
+
+</script>
+
+<script>
+
+// Nyaya Setu heading colour changes every 1 second.
+
+(function(){
+
+  const heading = document.querySelector('.hero h1');
+
+  if (!heading) return;
+
+  const colors = [
+  '#FF00CC','#39FF14','#0062FF','#FFE700','#F000FF',
+  '#02F7D8','#FF5F00','#66FF00','#099FFF','#FD1C03',
+  '#E6FB04','#0D00FF','#FF3300','#74EE15','#00FFFF',
+  '#2CFF05','#6600FF','#FFFF00','#FF0090','#4DEEEA'
+];
+
+  let i = 0;
+
+  // Set the first colour immediately.
+  heading.style.setProperty('color', colors[0], 'important');
+  heading.style.setProperty(
+    'text-shadow',
+    '0 0 20px ' + colors[0],
+    'important'
+  );
+
+  // Change colour every 1 second.
+  setInterval(function(){
+
+    i = (i + 1) % colors.length;
+
+    heading.style.setProperty(
+      'color',
+      colors[i],
+      'important'
+    );
+
+    heading.style.setProperty(
+      'text-shadow',
+      '0 0 20px ' + colors[i],
+      'important'
+    );
+
+  }, 1000);
+
+})();
+
+
+// Automatic Delhi time in 24-hour format (Asia/Kolkata).
+(function(){
+  const clock = document.getElementById('delhiTime');
+  if (!clock) return;
+
+  const date = document.getElementById('delhiDate');
+
+  function updateDelhiDateTime(){
+    const now = new Date();
+
+    clock.textContent = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Kolkata',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    }).format(now);
+
+    if (date) {
+      date.textContent = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Kolkata',
+        weekday: 'long',
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      }).format(now);
+    }
+  }
+
+  updateDelhiDateTime();
+  setInterval(updateDelhiDateTime, 1000);
+})();
+
 </script>
 
 </body>
