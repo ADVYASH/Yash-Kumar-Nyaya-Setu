@@ -78,6 +78,17 @@ nav{
 
 .main-nav{
     isolation:isolate;
+    position:sticky;
+    top:0;
+    padding-left:190px;
+}
+
+.main-nav .delhi-clock{
+    position:absolute;
+    top:50%;
+    left:14px;
+    transform:translateY(-50%);
+    z-index:10002;
 }
 
 .nav-dropdown{
@@ -2329,15 +2340,17 @@ font-size:14px;
     color:rgba(255,255,255,0.88);
 }
 @media(max-width:600px){
-    .delhi-clock{
-        top:60px;
-        left:8px;
-        min-width:135px;
-        padding:7px 10px;
+    .main-nav{
+        padding-left:145px;
     }
-    #delhiTime{font-size:15px;}
-    #delhiDate{font-size:10px;}
-    .delhi-clock-label{font-size:9px;}
+    .main-nav .delhi-clock{
+        left:8px;
+        min-width:128px;
+        padding:6px 8px;
+    }
+    #delhiTime{font-size:14px;}
+    #delhiDate{font-size:9px;}
+    .delhi-clock-label{font-size:8px;}
 }
 
 </style>
@@ -2351,6 +2364,12 @@ font-size:14px;
 
 
 <nav class="main-nav">
+    <!-- Automatic Delhi (India) 24-hour clock -->
+    <div class="delhi-clock" aria-label="Current Delhi time">
+        <span class="delhi-clock-label">DELHI • INDIA</span>
+        <span id="delhiTime">00:00:00</span>
+        <span id="delhiDate">Saturday, 05 September 2026</span>
+    </div>
     <a href="index.html" class="nav-home">Home</a>
 
     <div class="nav-dropdown" data-popup="aboutPopup">
@@ -2381,13 +2400,6 @@ font-size:14px;
         <a href="javascript:void(0)" class="nav-trigger">News &amp; Events</a>
     </div>
 </nav>
-
-<!-- Automatic Delhi (India) 24-hour clock -->
-<div class="delhi-clock" aria-label="Current Delhi time">
-    <span class="delhi-clock-label">DELHI • INDIA</span>
-    <span id="delhiTime">00:00:00</span>
-    <span id="delhiDate">Saturday, 05 September 2026</span>
-</div>
 
 <div class="hero">
 <h3>⚖️National Digital Court & Legal Services Portal⚖️</h3>
