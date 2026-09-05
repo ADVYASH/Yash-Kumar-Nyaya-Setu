@@ -6200,56 +6200,153 @@ body {
     if (!box) return;
 
     const overlay = box.querySelector('.wallpaper-overlay');
-    // Only two GIFs are kept in the DOM at once. This is much lighter than
-    // creating 100 animated GIF elements during the initial page load.
     const files = Array.from({length: 100}, (_, i) => (i + 1) + '.gif');
     let index = Math.floor(Math.random() * files.length);
     let active = null;
+    let timer = null;
+    let stopped = false;
 
-    function makeSlide(src, isActive) {
+    // Read the GIF's actual frame delays so we can wait for the animation
+    // to finish once before moving to the next GIF.
+    async function getGifDuration(url) {
+        try {
+            const response = await fetch(url, { cache: 'force-cache' });
+            if (!response.ok) return 5000;
+            const buffer = await response.arrayBuffer();
+            const bytes = new Uint8Array(buffer);
+
+            // GIF89a/GIF87a header + logical screen descriptor.
+            if (bytes.length < 13 ||
+                String.fromCharCode(...bytes.slice(0, 3)) !== 'GIF') return 5000;
+
+            let p = 13;
+            const packed = bytes[10];
+            if (packed & 0x80) p += 3 * (1 << ((packed & 7) + 1));
+
+            let duration = 0;
+            let pendingDelay = 0;
+
+            while (p < bytes.length) {
+                const block = bytes[p++];
+
+                // Trailer.
+                if (block === 0x3B) break;
+
+                // Extension block.
+                if (block === 0x21) {
+                    const label = bytes[p++];
+
+                    // Graphic Control Extension: delay is bytes p+2,p+3.
+                    if (label === 0xF9 && p + 5 < bytes.length) {
+                        const blockSize = bytes[p++];
+                        if (blockSize === 4) {
+                            p++; // packed fields
+                            pendingDelay = bytes[p] | (bytes[p + 1] << 8);
+                            p += 2;
+                            p++; // transparent color index
+                            p++; // block terminator
+                            continue;
+                        }
+                    }
+
+                    // Skip extension sub-blocks.
+                    while (p < bytes.length) {
+                        const size = bytes[p++];
+                        if (size === 0) break;
+                        p += size;
+                    }
+                    continue;
+                }
+
+                // Image descriptor.
+                if (block === 0x2C) {
+                    if (p + 9 >= bytes.length) break;
+                    const imagePacked = bytes[p + 8];
+                    p += 9;
+                    if (imagePacked & 0x80) p += 3 * (1 << ((imagePacked & 7) + 1));
+                    if (p >= bytes.length) break;
+                    p++; // LZW minimum code size
+
+                    while (p < bytes.length) {
+                        const size = bytes[p++];
+                        if (size === 0) break;
+                        p += size;
+                    }
+
+                    // GIF delays are in 1/100 second units.
+                    duration += pendingDelay * 10;
+                    pendingDelay = 0;
+                    continue;
+                }
+
+                break;
+            }
+
+            // Some GIFs have 0 delay frames. Keep a small safety minimum.
+            return Math.max(duration, 1000);
+        } catch (e) {
+            return 5000;
+        }
+    }
+
+    function makeSlide(src) {
         const img = document.createElement('img');
-        img.className = 'wallpaper-slide' + (isActive ? ' active' : '');
+        img.className = 'wallpaper-slide active';
         img.alt = '';
         img.decoding = 'async';
-        img.loading = isActive ? 'eager' : 'lazy';
+        img.loading = 'eager';
         img.src = 'nsfwwallpaper/' + src;
         img.addEventListener('error', () => img.remove(), {once: true});
         box.insertBefore(img, overlay);
         return img;
     }
 
-    active = makeSlide(files[index], true);
+    function waitForImage(img) {
+        if (img.complete) return Promise.resolve();
+        return new Promise(resolve => {
+            img.addEventListener('load', resolve, {once: true});
+            img.addEventListener('error', resolve, {once: true});
+        });
+    }
 
-    function next() {
-        const old = active;
+    async function playNext() {
+        if (stopped) return;
+
         index = (index + 1) % files.length;
-        const next = makeSlide(files[index], false);
+        const src = 'nsfwwallpaper/' + files[index];
+        const next = makeSlide(files[index]);
+        await waitForImage(next);
 
-        // Decode before fading in, avoiding a blank flash.
-        const show = () => {
-            requestAnimationFrame(() => {
-                next.classList.add('active');
-                if (old) {
-                    old.classList.remove('active');
-                    setTimeout(() => old.remove(), 700);
-                }
-                active = next;
-            });
-        };
-        if (next.decode) next.decode().then(show).catch(show);
-        else show();
+        if (active && active !== next) active.remove();
+        active = next;
+
+        // Do not use a fixed 5-second interval. Wait for THIS GIF's real
+        // animation length, then start the following GIF.
+        const duration = await getGifDuration(src);
+        timer = setTimeout(playNext, duration);
     }
 
-    // Pause when the tab is hidden: saves CPU/GPU while the page is not visible.
-    let timer = null;
-    function start() {
-        if (!timer) timer = setInterval(next, 5000);
+    async function start() {
+        if (stopped || timer) return;
+        const duration = await getGifDuration('nsfwwallpaper/' + files[index]);
+        if (!stopped) timer = setTimeout(playNext, duration);
     }
+
     function stop() {
-        clearInterval(timer);
+        if (timer) clearTimeout(timer);
         timer = null;
     }
-    document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+
+    active = makeSlide(files[index]);
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            stop();
+        } else {
+            start();
+        }
+    });
+
     start();
 })();
 </script>
