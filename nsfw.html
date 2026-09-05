@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Educational Resources</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #111;
+        }
+
+        /* =========================================
+           BACKGROUND WALLPAPER
+        ========================================= */
+
+        .wallpaper {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            opacity: 1;
+            transition: opacity 0.9s ease-in-out;
+        }
+
+        .wallpaper-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.55),
+                    rgba(0, 0, 0, 0.65)
+                );
+        }
+
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
+
+        .container {
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 24px 18px 60px;
+        }
+
+        /* =========================================
+           HEADING
+        ========================================= */
+
+        .main-heading {
+            text-align: center;
+            font-size: clamp(32px, 5vw, 60px);
+            font-weight: 800;
+            margin-bottom: 30px;
+
+            text-shadow:
+                0 3px 10px rgba(0, 0, 0, 0.8),
+                0 0 25px rgba(255, 255, 255, 0.2);
+        }
+
+        /* =========================================
+           BUTTONS
+        ========================================= */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 35px;
+        }
+
+        .resource-button {
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(0, 0, 0, 0.65);
+            color: white;
+
+            min-width: 55px;
+            padding: 12px 20px;
+
+            border-radius: 8px;
+            cursor: pointer;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .resource-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .resource-button.active {
+            background: #ffffff;
+            color: #111;
+
+            box-shadow:
+                0 5px 20px rgba(255, 255, 255, 0.35);
+        }
+
+        /* =========================================
+           RESOURCE SECTIONS
+        ========================================= */
+
+        .resource-section {
+            display: none;
+        }
+
+        .resource-section.active {
+            display: block;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 25px;
+
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        /* =========================================
+           PHOTO GRID
+           2 PHOTOS PER ROW
+        ========================================= */
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        /* =========================================
+           PHOTO CARD
+        ========================================= */
+
+/* =========================================
+   NEON ANIMATED PHOTO CARD
+========================================= */
+
+.photo-card {
+    position: relative;
+
+    background: rgba(0, 0, 0, 0.78);
+
+    border-radius: 14px;
+
+    padding: 12px;
+
+    /* Remove normal border */
+    border: none;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.45);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* =========================================
+   ANIMATED NEON BORDER
+========================================= */
+
+.photo-card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -3px;
+
+    border-radius: 17px;
+
+    background:
+        conic-gradient(
+            from 0deg,
+            #00ffff,
+            #008cff,
+            #7a00ff,
+            #ff00cc,
+            #ff0066,
+            #ffea00,
+            #00ff88,
+            #00ffff
+        );
+
+    animation:
+        neonRotate 3s linear infinite;
+
+    z-index: 0;
+}
+
+
+/* =========================================
+   INNER DARK LAYER
+   Keeps the neon only around the edge
+========================================= */
+
+.photo-card::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 3px;
+
+    border-radius: 11px;
+
+    background: rgba(0, 0, 0, 0.82);
+
+    z-index: 1;
+}
+
+
+/* =========================================
+   KEEP CARD CONTENT ABOVE NEON
+========================================= */
+
+.photo-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================================
+   NEON ROTATION
+========================================= */
+
+@keyframes neonRotate {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================
+   HOVER EFFECT
+========================================= */
+
+.photo-card:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 0 10px rgba(0, 255, 255, 0.5),
+        0 0 25px rgba(0, 140, 255, 0.45),
+        0 12px 40px rgba(0, 0, 0, 0.7);
+}
+
+        /* =========================================
+           IMAGE
+        ========================================= */
+
+        .photo-link {
+            display: block;
+
+            width: 100%;
+
+            /*
+             * Landscape display area.
+             * object-fit: contain means the FULL
+             * image is visible and NOT CROPPED.
+             */
+            height: 300px;
+
+            background: rgba(255, 255, 255, 0.05);
+
+            border-radius: 8px;
+
+            overflow: hidden;
+        }
+
+        .photo-link img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+            object-position: center;
+
+            display: block;
+
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:hover .photo-link img {
+            transform: scale(1.02);
+        }
+
+        /* =========================================
+           PHOTO TITLE
+        ========================================= */
+
+        .photo-title {
+            text-align: center;
+
+            font-size: 19px;
+            font-weight: bold;
+
+            padding: 15px 8px 7px;
+
+            color: #ffffff;
+
+            text-shadow:
+                0 2px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            text-align: center;
+            padding: 45px 10px 15px;
+
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 14px;
+        }
+
+        /* =========================================
+           TABLET
+        ========================================= */
+
+        @media (max-width: 1000px) {
+            .container {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .photo-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 650px) {
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .main-heading {
+                font-size: 34px;
+            }
+
+            .buttons {
+                gap: 7px;
+            }
+
+            .resource-button {
+                min-width: 45px;
+                padding: 10px 14px;
+                font-size: 15px;
+            }
+
+            .photo-link {
+                aspect-ratio: 16 / 9;
+                height: auto;
+            }
+
+            .photo-title {
+                font-size: 17px;
+            }
+
+            .photo-card {
+                padding: 8px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================
+         BACKGROUND
+    ========================================== -->
+
+    <div class="wallpaper" id="wallpaper"></div>
+    <div class="wallpaper-overlay"></div>
+
+
+    <main class="container">
+
+        <!-- =========================================
+             MAIN HEADING
+        ========================================== -->
+
+        <h1 class="main-heading">
+            Educational Resources
+        </h1>
+
+
+        <!-- =========================================
+             BUTTONS 1-10
+        ========================================== -->
+
+        <div class="buttons">
+
+            <button class="resource-button active"
+                    onclick="showSection(1)">
+                1
+            </button>
+
+            <button class="resource-button"
+                    onclick="showSection(2)">
+                2
+            </button>
+
+            <button class="resource-button"
+                    onclick="showSection(3)">
+                3
+            </button>
+
+            <button class="resource-button"
+                    onclick="showSection(4)">
+                4
+            </button>
+
+            <button class="resource-button"
+                    onclick="showSection(5)">
+                5
+            </button>
+
+            <button class="resource-button"
+                    onclick="showSection(6)">
+                6
+            </button>
+
+            <button class="resource-button"
+                    onclick="showSection(7)">
+                7
+            </button>
+
+            <button class="resource-button"
+                    onclick="showSection(8)">
+                8
+            </button>
+
+            <button class="resource-button"
+                    onclick="showSection(9)">
+                9
+            </button>
+
+            <button class="resource-button"
+                    onclick="showSection(10)">
+                10
+            </button>
+
+        </div>
+
+
+        <!-- =========================================
+             RESOURCE SECTIONS
+        ========================================== -->
+
+        <div id="resources"></div>
+
+
+    </main>
+
+
+    <footer>
+        Educational Resources
+    </footer>
+
+
+    <script>
+
+        /* =====================================================
+           PHOTO DATA
+
+           Each section contains 20 photos.
+           There are 2 photos per row.
+
+           Change:
+             image = your image filename
+             title = title shown underneath
+             link = website opened in a NEW TAB
+        ===================================================== */
+
+        const resources = {
+
+            1: [
+                { image: "nsfwlogo/1.png",  title: "Resource 1",  link: "https://example.com/1" },
+                { image: "images/1-2.jpg",  title: "Resource 2",  link: "https://example.com/2" },
+                { image: "images/1-3.jpg",  title: "Resource 3",  link: "https://example.com/3" },
+                { image: "images/1-4.jpg",  title: "Resource 4",  link: "https://example.com/4" },
+                { image: "images/1-5.jpg",  title: "Resource 5",  link: "https://example.com/5" },
+                { image: "images/1-6.jpg",  title: "Resource 6",  link: "https://example.com/6" },
+                { image: "images/1-7.jpg",  title: "Resource 7",  link: "https://example.com/7" },
+                { image: "images/1-8.jpg",  title: "Resource 8",  link: "https://example.com/8" },
+                { image: "images/1-9.jpg",  title: "Resource 9",  link: "https://example.com/9" },
+                { image: "images/1-10.jpg", title: "Resource 10", link: "https://example.com/10" },
+                { image: "images/1-11.jpg", title: "Resource 11", link: "https://example.com/11" },
+                { image: "images/1-12.jpg", title: "Resource 12", link: "https://example.com/12" },
+                { image: "images/1-13.jpg", title: "Resource 13", link: "https://example.com/13" },
+                { image: "images/1-14.jpg", title: "Resource 14", link: "https://example.com/14" },
+                { image: "images/1-15.jpg", title: "Resource 15", link: "https://example.com/15" },
+                { image: "images/1-16.jpg", title: "Resource 16", link: "https://example.com/16" },
+                { image: "images/1-17.jpg", title: "Resource 17", link: "https://example.com/17" },
+                { image: "images/1-18.jpg", title: "Resource 18", link: "https://example.com/18" },
+                { image: "images/1-19.jpg", title: "Resource 19", link: "https://example.com/19" },
+                { image: "images/1-20.jpg", title: "Resource 20", link: "https://example.com/20" }
+            ],
+
+            2: [],
+            3: [],
+            4: [],
+            5: [],
+            6: [],
+            7: [],
+            8: [],
+            9: [],
+            10: []
+        };
+
+
+        /* =====================================================
+           AUTOMATICALLY CREATE 20 PLACEHOLDER ITEMS
+           FOR SECTIONS 2-10
+
+           You can replace these later with your real
+           image names, titles and links.
+        ===================================================== */
+
+        for (let section = 2; section <= 10; section++) {
+
+            for (let i = 1; i <= 20; i++) {
+
+                resources[section].push({
+
+                    image: `images/${section}-${i}.jpg`,
+
+                    title: `Section ${section} - Resource ${i}`,
+
+                    link: `https://example.com/${section}-${i}`
+
+                });
+
+            }
+        }
+
+
+        /* =====================================================
+           CREATE RESOURCE SECTIONS
+        ===================================================== */
+
+        const resourcesContainer =
+            document.getElementById("resources");
+
+
+        for (let section = 1; section <= 10; section++) {
+
+            const sectionElement =
+                document.createElement("section");
+
+            sectionElement.className =
+                "resource-section";
+
+            sectionElement.id =
+                `section-${section}`;
+
+
+            if (section === 1) {
+                sectionElement.classList.add("active");
+            }
+
+
+            const heading =
+                document.createElement("h2");
+
+            heading.className =
+                "section-title";
+
+            heading.textContent =
+                `Educational Resources - ${section}`;
+
+
+            sectionElement.appendChild(heading);
+
+
+            const grid =
+                document.createElement("div");
+
+            grid.className =
+                "photo-grid";
+
+
+            resources[section].forEach(item => {
+
+                const card =
+                    document.createElement("article");
+
+                card.className =
+                    "photo-card";
+
+
+                /*
+                 * Clicking the image opens the
+                 * specified URL in a new tab.
+                 */
+
+                const link =
+                    document.createElement("a");
+
+                link.className =
+                    "photo-link";
+
+                link.href =
+                    item.link;
+
+                link.target =
+                    "_blank";
+
+                link.rel =
+                    "noopener noreferrer";
+
+
+                const image =
+                    document.createElement("img");
+
+                image.src =
+                    item.image;
+
+                image.alt =
+                    item.title;
+
+                /*
+                 * Browser fallback if image is missing.
+                 */
+
+                image.onerror = function() {
+
+                    this.style.display = "none";
+
+                    this.parentElement.style.background =
+                        "rgba(255,255,255,0.08)";
+
+                };
+
+
+                link.appendChild(image);
+
+
+                const title =
+                    document.createElement("div");
+
+                title.className =
+                    "photo-title";
+
+                title.textContent =
+                    item.title;
+
+
+                card.appendChild(link);
+
+                card.appendChild(title);
+
+                grid.appendChild(card);
+
+            });
+
+
+            sectionElement.appendChild(grid);
+
+            resourcesContainer.appendChild(sectionElement);
+
+        }
+
+
+        /* =====================================================
+           BUTTON / SECTION SWITCHING
+        ===================================================== */
+
+        function showSection(number) {
+
+            /*
+             * Hide every section.
+             */
+
+            document
+                .querySelectorAll(".resource-section")
+                .forEach(section => {
+
+                    section.classList.remove("active");
+
+                });
+
+
+            /*
+             * Show selected section.
+             */
+
+            const selected =
+                document.getElementById(
+                    `section-${number}`
+                );
+
+            if (selected) {
+                selected.classList.add("active");
+            }
+
+
+            /*
+             * Update active button.
+             */
+
+            document
+                .querySelectorAll(".resource-button")
+                .forEach(button => {
+
+                    button.classList.remove("active");
+
+                });
+
+
+            const buttons =
+                document.querySelectorAll(
+                    ".resource-button"
+                );
+
+            if (buttons[number - 1]) {
+
+                buttons[number - 1]
+                    .classList.add("active");
+
+            }
+
+
+            /*
+             * Scroll back toward the heading.
+             */
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =====================================================
+           BACKGROUND WALLPAPER SLIDESHOW
+           
+           Files:
+           
+           nsfwwallpaper/1.gif
+           nsfwwallpaper/2.gif
+           ...
+           nsfwwallpaper/100.gif
+
+           The order is SHUFFLED.
+           
+           One wallpaper every 2 seconds.
+           
+           Fade transition.
+        ===================================================== */
+
+        const wallpaper =
+            document.getElementById("wallpaper");
+
+
+        /*
+         * Create numbers 1-100.
+         */
+
+        let wallpapers =
+            Array.from(
+                { length: 100 },
+                (_, index) => index + 1
+            );
+
+
+        /*
+         * Fisher-Yates shuffle.
+         */
+
+        function shuffle(array) {
+
+            for (
+                let i = array.length - 1;
+                i > 0;
+                i--
+            ) {
+
+                const j =
+                    Math.floor(
+                        Math.random() * (i + 1)
+                    );
+
+
+                [
+                    array[i],
+                    array[j]
+                ] =
+                [
+                    array[j],
+                    array[i]
+                ];
+
+            }
+
+            return array;
+        }
+
+
+        wallpapers =
+            shuffle(wallpapers);
+
+
+        let wallpaperIndex = 0;
+
+
+        /*
+         * Set first wallpaper.
+         */
+
+        function setWallpaper(number) {
+
+            wallpaper.style.backgroundImage =
+                `url("nsfwwallpaper/${number}.gif")`;
+
+        }
+
+
+        setWallpaper(
+            wallpapers[wallpaperIndex]
+        );
+
+
+        /*
+         * Change wallpaper every 2 seconds.
+         *
+         * First fade OUT.
+         * Then change image.
+         * Then fade IN.
+         */
+
+        setInterval(() => {
+
+            wallpaper.style.opacity = "0";
+
+
+            setTimeout(() => {
+
+                wallpaperIndex++;
+
+
+                /*
+                 * When all 100 wallpapers have
+                 * been shown, shuffle again.
+                 */
+
+                if (
+                    wallpaperIndex >= wallpapers.length
+                ) {
+
+                    wallpapers =
+                        shuffle(wallpapers);
+
+                    wallpaperIndex = 0;
+
+                }
+
+
+                setWallpaper(
+                    wallpapers[wallpaperIndex]
+                );
+
+
+                wallpaper.style.opacity = "1";
+
+            }, 900);
+
+
+        }, 2000);
+
+    </script>
+
+</body>
+</html>
