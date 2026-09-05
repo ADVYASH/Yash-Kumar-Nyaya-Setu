@@ -3763,26 +3763,27 @@ document.addEventListener("keydown", function(event){
 
 });
 
+</script>
 
-
+<script>
 
 (function () {
     const lastUpdated = document.getElementById("lastUpdated");
     if (!lastUpdated) return;
 
     const date = new Date();
-    date.setDate(date.getDate() - 3);
+
+    // Automatically subtract 11 days from today's date
+    date.setDate(date.getDate() - 11);
 
     const day = date.getDate();
-    const month = date.toLocaleString("en-US", { month: "long" });
+    const month = date.toLocaleString("en-US", {
+        month: "long"
+    });
     const year = date.getFullYear();
 
     lastUpdated.textContent = `${day} ${month}, ${year}`;
 })();
-
-</script>
-
-<script>
 
 // Nyaya Setu heading colour changes every 1 second.
 
