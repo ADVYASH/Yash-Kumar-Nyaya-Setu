@@ -134,6 +134,15 @@ a{
     .gallery{columns:2 145px;column-gap:8px}
     .photo{margin-bottom:8px}
 }
+
+.name{
+    padding:9px 12px;
+    font-size:12px;
+    color:#9da5b4;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
 </style>
 </head>
 
@@ -323,13 +332,7 @@ async function loadGallery() {
             img.alt = file.name;
             img.loading = "lazy";
 
-            const name = document.createElement("div");
-
-            name.className = "name";
-            name.textContent = file.name;
-
             figure.appendChild(img);
-            figure.appendChild(name);
 
             gallery.appendChild(figure);
 
