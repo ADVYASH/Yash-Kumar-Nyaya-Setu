@@ -51,12 +51,17 @@ z-index:-2;
 pointer-events:none;
 }
 
-/* Dark overlay */
+/* Dark overlay — reduced so the Tokyo wallpaper is more visible */
 body::before{
 content:"";
 position:fixed;
 inset:0;
-background:rgba(0,0,0,0.75);
+background:linear-gradient(
+    180deg,
+    rgba(0,0,0,0.30) 0%,
+    rgba(0,0,0,0.40) 50%,
+    rgba(0,0,0,0.48) 100%
+);
 z-index:-1;
 }
 
