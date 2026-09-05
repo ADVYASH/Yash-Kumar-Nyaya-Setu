@@ -164,6 +164,9 @@ a{
         <button id="uploadBtn">
             Add Photo to Gallery
         </button>
+<button id="clearTokenBtn" type="button">
+            Clear Token
+        </button>
 
     </div>
 
@@ -198,7 +201,7 @@ const GITHUB_FOLDER = "gallery";
 
    Example:
 
-   const GITHUB_TOKEN = "github_pat_xxxxxxxxxxxxx";
+   const GITHUB_TOKEN = "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";
 
    IMPORTANT:
    Anyone who can access this HTML file can technically
@@ -206,7 +209,7 @@ const GITHUB_FOLDER = "gallery";
    risk is acceptable.
 */
 
-const GITHUB_TOKEN = "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";
+const GITHUB_TOKEN = "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";
 
 
 /* =========================================================
@@ -404,20 +407,6 @@ async function uploadPhotos() {
 
         return;
     }
-
-    if (
-        !GITHUB_TOKEN ||
-        GITHUB_TOKEN === "YOUR_GITHUB_TOKEN_HERE"
-    ) {
-
-        status(
-            "Please paste your GitHub token into GITHUB_TOKEN in this HTML file.",
-            "error"
-        );
-
-        return;
-    }
-
     uploadBtn.disabled = true;
     refreshBtn.disabled = true;
 
@@ -503,6 +492,11 @@ async function uploadPhotos() {
 
                     if (data.message) {
                         errorMessage = data.message;
+
+                        if (data.message.toLowerCase().includes("bad credentials")) {
+                            errorMessage =
+                                "GitHub says Bad credentials. Revoke the old token and create a new token with repository Contents: Read and write permission.";
+                        }
                     }
 
                 } catch(e) {}
