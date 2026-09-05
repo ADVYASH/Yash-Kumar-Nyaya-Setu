@@ -41,7 +41,7 @@
             background-size: cover;
 
             opacity: 1;
-            transition: opacity 0.9s ease-in-out;
+            transition: none;
         }
 
         .wallpaper-overlay {
@@ -154,9 +154,19 @@
 
         .photo-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 20px;
             width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Alternating centered rows:
+           2 photos, then 1 centered photo, then 2, then 1... */
+        .photo-grid .photo-card:nth-child(3n) {
+            grid-column: 1 / -1;
+            justify-self: center;
+            width: calc((100% - 20px) / 2);
         }
 
         /* =========================================
@@ -449,12 +459,16 @@
 
         @media (max-width: 1000px) {
             .container {
-                padding-left: 14px;
-                padding-right: 14px;
+                padding-left: 30px;
+                padding-right: 30px;
             }
 
             .photo-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .photo-grid .photo-card:nth-child(3n) {
+                width: calc((100% - 20px) / 2);
             }
         }
 
@@ -463,12 +477,27 @@
         ========================================= */
 
         @media (max-width: 650px) {
+            .container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
             .photo-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .photo-grid .photo-card:nth-child(3n) {
+                grid-column: auto;
+                width: 100%;
             }
         }
 
         @media (max-width: 500px) {
+
+            .container {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
 
             .main-heading {
                 font-size: 34px;
@@ -547,10 +576,132 @@
     ) !important;
 }
 
+
+        /* =========================================
+           PASSWORD LOCK SCREEN
+        ========================================= */
+        body.locked {
+            overflow: hidden;
+        }
+
+        .password-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .password-modal {
+            width: min(420px, 100%);
+            padding: 30px;
+            border-radius: 18px;
+            background: rgba(15, 15, 15, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow:
+                0 0 25px rgba(0, 255, 255, 0.25),
+                0 20px 70px rgba(0, 0, 0, 0.75);
+            text-align: center;
+        }
+
+        .password-modal h2 {
+            margin-bottom: 10px;
+            font-size: 27px;
+            color: #fff;
+        }
+
+        .password-modal p {
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 14px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            outline: none;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: 4px;
+        }
+
+        .password-input:focus {
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .password-submit {
+            width: 100%;
+            margin-top: 14px;
+            padding: 13px 16px;
+            border: 0;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #00ffff;
+            color: #071010;
+            font-size: 16px;
+            font-weight: 800;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .password-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.55);
+        }
+
+        .password-error {
+            min-height: 20px;
+            margin-top: 10px;
+            color: #ff4d6d;
+            font-size: 13px;
+        }
+
+        .password-modal.shake {
+            animation: passwordShake 0.35s ease;
+        }
+
+        @keyframes passwordShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
 </style>
 </head>
 
-<body>
+<body class="locked">
+
+    <!-- =========================================
+         PASSWORD LOCK
+    ========================================== -->
+    <div class="password-overlay" id="passwordOverlay">
+        <form class="password-modal" id="passwordModal">
+            <h2>Enter Password</h2>
+            <p>Enter the password to access the educational resources.</p>
+            <input
+                id="passwordInput"
+                class="password-input"
+                type="password"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="Password"
+                aria-label="Password"
+                autofocus
+            >
+            <button class="password-submit" type="submit">Unlock</button>
+            <div class="password-error" id="passwordError" aria-live="polite"></div>
+        </form>
+    </div>
+
 
     <!-- =========================================
          BACKGROUND
@@ -646,6 +797,36 @@
 
 
     <script>
+
+        /* =====================================================
+           PASSWORD PROTECTION
+           Password: 11111111
+        ===================================================== */
+        const ACCESS_PASSWORD = "11111111";
+        const passwordOverlay = document.getElementById("passwordOverlay");
+        const passwordModal = document.getElementById("passwordModal");
+        const passwordInput = document.getElementById("passwordInput");
+        const passwordError = document.getElementById("passwordError");
+
+        passwordInput.focus();
+
+        passwordModal.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (passwordInput.value === ACCESS_PASSWORD) {
+                document.body.classList.remove("locked");
+                passwordOverlay.style.display = "none";
+                passwordInput.value = "";
+            } else {
+                passwordError.textContent = "Incorrect password. Please try again.";
+                passwordInput.value = "";
+                passwordModal.classList.remove("shake");
+                void passwordModal.offsetWidth;
+                passwordModal.classList.add("shake");
+                passwordInput.focus();
+            }
+        });
+
 
         /* =====================================================
            PHOTO DATA
@@ -922,19 +1103,17 @@
 
         /* =====================================================
            BACKGROUND WALLPAPER SLIDESHOW
-           
+
            Files:
-           
            nsfwwallpaper/1.gif
            nsfwwallpaper/2.gif
            ...
            nsfwwallpaper/100.gif
 
            The order is SHUFFLED.
-           
-           One wallpaper every 2 seconds.
-           
-           Fade transition.
+
+           Each wallpaper stays for 2.2 seconds.
+           Switches instantly — no fade.
         ===================================================== */
 
         const wallpaper =
@@ -968,7 +1147,6 @@
                     Math.floor(
                         Math.random() * (i + 1)
                     );
-
 
                 [
                     array[i],
@@ -1010,51 +1188,35 @@
 
 
         /*
-         * Change wallpaper every 2 seconds.
-         *
-         * First fade OUT.
-         * Then change image.
-         * Then fade IN.
+         * Change wallpaper every 2.2 seconds.
+         * No fade, no delay — just switch to the next one.
          */
 
         setInterval(() => {
 
-            wallpaper.style.opacity = "0";
+            wallpaperIndex++;
 
+            /*
+             * When all 100 wallpapers have
+             * been shown, shuffle again.
+             */
 
-            setTimeout(() => {
+            if (
+                wallpaperIndex >= wallpapers.length
+            ) {
 
-                wallpaperIndex++;
+                wallpapers =
+                    shuffle(wallpapers);
 
+                wallpaperIndex = 0;
 
-                /*
-                 * When all 100 wallpapers have
-                 * been shown, shuffle again.
-                 */
+            }
 
-                if (
-                    wallpaperIndex >= wallpapers.length
-                ) {
+            setWallpaper(
+                wallpapers[wallpaperIndex]
+            );
 
-                    wallpapers =
-                        shuffle(wallpapers);
-
-                    wallpaperIndex = 0;
-
-                }
-
-
-                setWallpaper(
-                    wallpapers[wallpaperIndex]
-                );
-
-
-                wallpaper.style.opacity = "1";
-
-            }, 900);
-
-
-        }, 2000);
+        }, 2200);
 
     </script>
 
