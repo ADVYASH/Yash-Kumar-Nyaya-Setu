@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Orders - Amazon Style Mockup</title>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff}
+  body{min-width:1100px}
+  .topbar{
+    height:62px;background:#111b27;color:#fff;display:flex;align-items:center;
+    padding:0 24px;gap:20px
+  }
+  .logo{font-size:29px;font-weight:700;letter-spacing:-1.8px;white-space:nowrap}
+  .logo small{font-size:13px;letter-spacing:0;color:#fff}
+  .search{height:42px;display:flex;flex:1;max-width:1180px;margin-left:16px}
+  .search select{width:54px;border:0;border-radius:4px 0 0 4px;background:#eee;padding:0 8px;color:#333}
+  .search input{flex:1;border:0;padding:0 14px;font-size:16px;outline:none}
+  .search button{width:48px;border:0;background:#f6a723;border-radius:0 4px 4px 0;font-size:25px}
+  .nav-right{display:flex;align-items:center;gap:25px;font-size:13px;white-space:nowrap}
+  .nav-right b{font-size:14px}
+  .cart{font-size:15px;font-weight:bold}
+  .nav2{height:40px;background:#1c2b3a;color:#fff;display:flex;align-items:center;padding:0 24px;gap:25px;font-size:14px}
+  .nav2 span{white-space:nowrap}.nav2 .all{font-size:16px;font-weight:bold}
+  .page{width:950px;margin:0 auto;padding-bottom:60px}
+  .crumb{font-size:14px;color:#2168a8;margin-top:14px}
+  .title-row{display:flex;justify-content:space-between;align-items:center;margin-top:17px}
+  h1{font-size:30px;font-weight:500;margin:0}
+  .order-search{display:flex;gap:10px}
+  .order-search input{width:335px;height:35px;border:1px solid #9aa0a6;border-radius:9px;padding:0 13px;font-size:14px}
+  .order-search button{height:35px;border:0;border-radius:20px;background:#333;color:white;font-weight:bold;padding:0 17px}
+  .tabs{display:flex;gap:28px;border-bottom:1px solid #ddd;margin-top:19px;height:39px}
+  .tab{padding:0 13px 12px;font-size:14px;color:#2168a8}
+  .tab.active{font-weight:bold;color:#111;border-bottom:2px solid #f08804}
+  .range{font-size:14px;margin:16px 0 11px;font-weight:bold}
+  .range select{font-size:14px;padding:8px 9px;margin-left:4px;border:1px solid #aaa;border-radius:7px;background:white}
+  .columns{display:grid;grid-template-columns:1fr 280px;gap:20px}
+  .order-card{border:1px solid #d5d9d9;border-radius:8px;overflow:hidden;margin-bottom:12px}
+  .order-head{height:68px;background:#f0f2f2;display:grid;grid-template-columns:125px 105px 1fr 250px;padding:16px 18px;gap:8px;font-size:12px}
+  .order-head .label{font-size:11px;color:#555;text-transform:uppercase}
+  .order-head .value{font-size:13px;margin-top:3px}
+  .ship{position:relative}
+  .ship:after{content:"⌄";font-size:20px;position:absolute;left:74px;top:12px}
+  .order-id{text-align:right}
+  .order-links{font-size:13px;color:#2168a8;margin-top:4px}
+  .order-body{padding:16px 18px 18px}
+  .arrival{font-size:18px;font-weight:bold;color:#007185;margin-bottom:10px}
+  .product-row{display:grid;grid-template-columns:90px 1fr 238px;gap:14px;align-items:start}
+  .product-img{width:75px;height:75px;border-radius:3px;display:flex;align-items:center;justify-content:center}
+  .cat-treat{background:#fff;overflow:hidden;box-shadow:inset 0 0 0 1px #ddd}.cat-treat img{width:100%;height:100%;object-fit:cover;display:block}
+  .mask{background:linear-gradient(135deg,#fff,#d9e7ef);border:1px solid #ddd;color:#80b8c5;font-size:10px;font-weight:bold;text-align:center}
+  .pname{font-size:15px;line-height:21px;color:#1466a0}
+  .qty{display:inline-flex;margin-left:5px;width:20px;height:20px;border:1px solid #ccc;border-radius:50%;align-items:center;justify-content:center;font-size:12px;color:#333}
+  .buyagain{display:inline-block;background:#ffd21a;color:#111;padding:7px 14px;border-radius:18px;font-weight:bold;font-size:13px;margin-top:8px}
+  .actions{display:flex;flex-direction:column;gap:6px}
+  .actions button{height:35px;border:1px solid #a7adb3;border-radius:18px;background:white;font-size:14px}
+  .actions .track{background:#ffd21a;border-color:#ffd21a}
+  .side{border:1px solid #ddd;border-radius:8px;padding:18px 12px;height:max-content}
+  .side h2{font-size:19px;margin:0 0 18px 7px}
+  .side-item{display:grid;grid-template-columns:78px 1fr;gap:10px;margin:0 6px 23px}
+  .side-img{width:72px;height:72px;background:#c9b08d;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold}
+  .side-img.one{background:#333;color:white}.side-img.frag{background:#3b2b24;color:#fff}
+  .side-title{color:#2168a8;font-size:14px;line-height:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .price{font-size:18px;margin:3px 0}.price.red{color:#d00}
+  .mrp{font-size:12px;color:#555;text-decoration:line-through}
+  .delivery{font-size:12px;margin-top:6px}.delivery b{font-weight:bold}
+  .side-buy{display:inline-block;margin-top:5px;background:#ffd21a;border-radius:16px;padding:6px 12px;font-size:12px;font-weight:bold}
+  @media(max-width:1200px){body{min-width:1000px}.page{width:900px}.columns{grid-template-columns:1fr 270px}.product-row{grid-template-columns:78px 1fr 220px}}
+</style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="logo">amazon<small>.in</small></div>
+      <div class="search">
+        <select><option>All</option></select>
+        <input placeholder="Search Amazon.in">
+        <button>⌕</button>
+      </div>
+      <div class="nav-right">
+        <span>🇮🇳 <b>EN</b>⌄</span>
+        <span>Hello, Yash<br><b>Account &amp; Lists</b>⌄</span>
+        <span>Returns<br><b>&amp; Orders</b></span>
+        <span class="cart">🛒 Cart</span>
+      </div>
+    </div>
+    <nav class="nav2">
+      <span class="all">☰ All</span><span>🔵 All</span><span>Fresh</span><span>Bestsellers</span>
+      <span>Hotel Booking</span><span>Today's Deals</span><span>Keep Shopping for</span><span>Buy Again</span>
+      <span>New Releases</span><span>Sell</span><span>Prime Video</span><span>Gift Cards</span>
+      <span>Amazon Pay</span><span>Gift Ideas</span><span>Browsing History⌄</span>
+      <span>Amazon Business⌄</span><span>Prime⌄</span>
+    </nav>
+  </header>
+
+  <main class="page">
+    <div class="crumb">Your Account › <span>Your Orders</span></div>
+
+    <div class="title-row">
+      <h1>Your Orders</h1>
+      <div class="order-search">
+        <input placeholder="🔍  Search all orders">
+        <button>Search Orders</button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active">Orders</div><div class="tab">Buy Again</div><div class="tab">Not Yet Shipped</div>
+    </div>
+
+    <div class="range">41 orders placed in
+      <select><option>past 6 months</option><option>2026</option><option>2025</option></select>
+    </div>
+
+    <div class="columns">
+      <section>
+        <article class="order-card">
+          <div class="order-head">
+            <div><div class="label">Order placed</div><div class="value">12 September 2026</div></div>
+            <div><div class="label">Total</div><div class="value">₹6,641</div></div>
+            <div class="ship"><div class="label">Ship to</div><div class="value">Yash kumar</div></div>
+            <div class="order-id"><div class="label">Order #171-9010391-5288308</div><div class="order-links">View order details　 Invoice⌄</div></div>
+          </div>
+          <div class="order-body">
+            <div class="arrival">Arriving Saturday</div>
+            <div class="product-row">
+              <div class="product-img cat-treat"><img src="book/1.png" alt="1"></div>
+              <div>
+                <div class="pname">Class Actions in Privacy Law <span class="qty">2</span></div>
+                <span class="buyagain">⟳　Buy It Again</span>
+              </div>
+              <div class="actions">
+                <button class="track">Track package</button>
+                <button>Request cancellation</button>
+                <button>Return or replace items</button>
+                <button>Ask Product Question</button>
+                <button>Write a product review</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="order-card">
+          <div class="order-head">
+            <div><div class="label">Order placed</div><div class="value">12 September 2026</div></div>
+            <div><div class="label">Total</div><div class="value">₹23,738</div></div>
+            <div class="ship"><div class="label">Ship to</div><div class="value">Yash kumar</div></div>
+            <div class="order-id"><div class="label">Order #171-9010391-5288309</div><div class="order-links">View order details　 Invoice⌄</div></div>
+          </div>
+          <div class="order-body">
+            <div class="arrival">Arriving Saturday</div>
+            <div class="product-row">
+              <div class="product-img cat-treat"><img src="book/2.png" alt="2"></div>
+              <div>
+                <div class="pname">Consular Law and Practice <span class="qty">1</span></div>
+                <span class="buyagain">⟳　Buy It Again</span>
+              </div>
+              <div class="actions">
+                <button class="track">Track package</button>
+                <button>Request cancellation</button>
+                <button>Return or replace items</button>
+                <button>Ask Product Question</button>
+                <button>Write a product review</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="order-card">
+          <div class="order-head">
+            <div><div class="label">Order placed</div><div class="value">12 September 2026</div></div>
+            <div><div class="label">Total</div><div class="value">₹4,628</div></div>
+            <div class="ship"><div class="label">Ship to</div><div class="value">Yash kumar</div></div>
+            <div class="order-id"><div class="label">Order #171-9010391-5288309</div><div class="order-links">View order details　 Invoice⌄</div></div>
+          </div>
+          <div class="order-body">
+            <div class="arrival">Arriving Saturday</div>
+            <div class="product-row">
+              <div class="product-img cat-treat"><img src="book/3.png" alt="3"></div>
+              <div>
+                <div class="pname">Global Perspectives in Urban Law: The Legal Power of Cities (Juris Diversitas) <span class="qty">1</span></div>
+                <span class="buyagain">⟳　Buy It Again</span>
+              </div>
+              <div class="actions">
+                <button class="track">Track package</button>
+                <button>Request cancellation</button>
+                <button>Return or replace items</button>
+                <button>Ask Product Question</button>
+                <button>Write a product review</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="order-card">
+          <div class="order-head">
+            <div><div class="label">Order placed</div><div class="value">12 September 2026</div></div>
+            <div><div class="label">Total</div><div class="value">₹17,291</div></div>
+            <div class="ship"><div class="label">Ship to</div><div class="value">Yash kumar</div></div>
+            <div class="order-id"><div class="label">Order #171-9010391-5288309</div><div class="order-links">View order details　 Invoice⌄</div></div>
+          </div>
+          <div class="order-body">
+            <div class="arrival">Arriving Saturday</div>
+            <div class="product-row">
+              <div class="product-img cat-treat"><img src="book/4.png" alt="4"></div>
+              <div>
+                <div class="pname">Employment Law: The Essentials <span class="qty">1</span></div>
+                <span class="buyagain">⟳　Buy It Again</span>
+              </div>
+              <div class="actions">
+                <button class="track">Track package</button>
+                <button>Request cancellation</button>
+                <button>Return or replace items</button>
+                <button>Ask Product Question</button>
+                <button>Write a product review</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="order-card">
+          <div class="order-head">
+            <div><div class="label">Order placed</div><div class="value">12 September 2026</div></div>
+            <div><div class="label">Total</div><div class="value">₹8,110</div></div>
+            <div class="ship"><div class="label">Ship to</div><div class="value">Yash kumar</div></div>
+            <div class="order-id"><div class="label">Order #171-9010391-5288309</div><div class="order-links">View order details　 Invoice⌄</div></div>
+          </div>
+          <div class="order-body">
+            <div class="arrival">Arriving Saturday</div>
+            <div class="product-row">
+              <div class="product-img cat-treat"><img src="book/5.png" alt="5"></div>
+              <div>
+                <div class="pname">The Discipline Of Law <span class="qty">1</span></div>
+                <span class="buyagain">⟳　Buy It Again</span>
+              </div>
+              <div class="actions">
+                <button class="track">Track package</button>
+                <button>Request cancellation</button>
+                <button>Return or replace items</button>
+                <button>Ask Product Question</button>
+                <button>Write a product review</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="order-card">
+          <div class="order-head">
+            <div><div class="label">Order placed</div><div class="value">12 September 2026</div></div>
+            <div><div class="label">Total</div><div class="value">₹3,700</div></div>
+            <div class="ship"><div class="label">Ship to</div><div class="value">Yash kumar</div></div>
+            <div class="order-id"><div class="label">Order #171-9010391-5288309</div><div class="order-links">View order details　 Invoice⌄</div></div>
+          </div>
+          <div class="order-body">
+            <div class="arrival">Arriving Saturday</div>
+            <div class="product-row">
+              <div class="product-img cat-treat"><img src="book/6.png" alt="6"></div>
+              <div>
+                <div class="pname">Treatise on Arbitration Law & Practice – A Critical Commentary on Part I of the Act of 1996 | M Sricharan Rangarajan | OakBridge (2 Vol. Set) <span class="qty">1</span></div>
+                <span class="buyagain">⟳　Buy It Again</span>
+              </div>
+              <div class="actions">
+                <button class="track">Track package</button>
+                <button>Request cancellation</button>
+                <button>Return or replace items</button>
+                <button>Ask Product Question</button>
+                <button>Write a product review</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="order-card">
+          <div class="order-head">
+            <div><div class="label">Order placed</div><div class="value">12 September 2026</div></div>
+            <div><div class="label">Total</div><div class="value">₹3,375</div></div>
+            <div class="ship"><div class="label">Ship to</div><div class="value">Yash kumar</div></div>
+            <div class="order-id"><div class="label">Order #171-9010391-5288309</div><div class="order-links">View order details　 Invoice⌄</div></div>
+          </div>
+          <div class="order-body">
+            <div class="arrival">Arriving Saturday</div>
+            <div class="product-row">
+              <div class="product-img cat-treat"><img src="book/7.png" alt="7"></div>
+              <div>
+                <div class="pname">R.K. Jain's Customs Law Manual [Finance Act 2026 Edition] – Definitive Two-Volume Consolidated Reference—Integrating the Annotated Customs Act 1962 | Allied Laws | New CBIC's Customs Manual 2025 <span class="qty">1</span></div>
+                <span class="buyagain">⟳　Buy It Again</span>
+              </div>
+              <div class="actions">
+                <button class="track">Track package</button>
+                <button>Request cancellation</button>
+                <button>Return or replace items</button>
+                <button>Ask Product Question</button>
+                <button>Write a product review</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="order-card">
+          <div class="order-head">
+            <div><div class="label">Order placed</div><div class="value">12 September 2026</div></div>
+            <div><div class="label">Total</div><div class="value">₹5,003</div></div>
+            <div class="ship"><div class="label">Ship to</div><div class="value">Yash kumar</div></div>
+            <div class="order-id"><div class="label">Order #171-9010391-5288309</div><div class="order-links">View order details　 Invoice⌄</div></div>
+          </div>
+          <div class="order-body">
+            <div class="arrival">Arriving Saturday</div>
+            <div class="product-row">
+              <div class="product-img cat-treat"><img src="book/8.png" alt="8"></div>
+              <div>
+                <div class="pname">SEBI <span class="qty">1</span></div>
+                <span class="buyagain">⟳　Buy It Again</span>
+              </div>
+              <div class="actions">
+                <button class="track">Track package</button>
+                <button>Request cancellation</button>
+                <button>Return or replace items</button>
+                <button>Ask Product Question</button>
+                <button>Write a product review</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="order-card">
+          <div class="order-head">
+            <div><div class="label">Order placed</div><div class="value">12 September 2026</div></div>
+            <div><div class="label">Total</div><div class="value">₹16,811</div></div>
+            <div class="ship"><div class="label">Ship to</div><div class="value">Yash kumar</div></div>
+            <div class="order-id"><div class="label">Order #171-9010391-5288309</div><div class="order-links">View order details　 Invoice⌄</div></div>
+          </div>
+          <div class="order-body">
+            <div class="arrival">Arriving Saturday</div>
+            <div class="product-row">
+              <div class="product-img cat-treat"><img src="book/9.png" alt="9"></div>
+              <div>
+                <div class="pname">Insights into Legal and Economic Issues in India <span class="qty">1</span></div>
+                <span class="buyagain">⟳　Buy It Again</span>
+              </div>
+              <div class="actions">
+                <button class="track">Track package</button>
+                <button>Request cancellation</button>
+                <button>Return or replace items</button>
+                <button>Ask Product Question</button>
+                <button>Write a product review</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="order-card">
+          <div class="order-head">
+            <div><div class="label">Order placed</div><div class="value">12 September 2026</div></div>
+            <div><div class="label">Total</div><div class="value">₹29,119</div></div>
+            <div class="ship"><div class="label">Ship to</div><div class="value">Yash kumar</div></div>
+            <div class="order-id"><div class="label">Order #171-9010391-5288309</div><div class="order-links">View order details　 Invoice⌄</div></div>
+          </div>
+          <div class="order-body">
+            <div class="arrival">Arriving Saturday</div>
+            <div class="product-row">
+              <div class="product-img cat-treat"><img src="book/10.png" alt="10"></div>
+              <div>
+                <div class="pname">Human Rights <span class="qty">1</span></div>
+                <span class="buyagain">⟳　Buy It Again</span>
+              </div>
+              <div class="actions">
+                <button class="track">Track package</button>
+                <button>Request cancellation</button>
+                <button>Return or replace items</button>
+                <button>Ask Product Question</button>
+                <button>Write a product review</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <aside class="side">
+        <h2>Buy it again</h2>
+        <div class="side-item">
+          <div>
+            <div class="side-title">Sheba Fine Premium Kitt...</div>
+            <div class="price">₹2,235<sup>00</sup></div>
+            <div class="mrp">(₹114.03 / 100 g)</div>
+            <div class="mrp">M.R.P.: ₹2,240.00</div>
+            <div class="delivery">Get it by <b>Friday, September 11</b></div>
+            <div class="delivery">FREE Delivery by Amazon</div>
+            <div class="side-buy">Add to cart</div>
+          </div>
+        </div>
+        <div class="side-item">
+          <div>
+            <div class="side-title">Involve Your Senses One...</div>
+            <div class="price red">-13% ₹389<sup>00</sup></div>
+            <div class="mrp">(₹972.50/100 g)</div>
+            <div class="mrp">M.R.P.: ₹449.00</div>
+            <div class="delivery">Get it by <b>Friday, September 11</b></div>
+            <div class="delivery">FREE Delivery by Amazon</div>
+            <div class="side-buy">Add to cart</div>
+          </div>
+        </div>
+        <div class="side-item">
+          <div>
+            <div class="side-title">Fogg Scent Wood Extrem...</div>
+            <div class="price red">-40% ₹479<sup>00</sup></div>
+            <div class="mrp">₹4.79/millilitre</div>
+            <div class="mrp">M.R.P.: ₹799.00</div>
+            <div class="delivery">Get it by <b>Friday, September 11</b></div>
+            <div class="delivery">FREE Delivery by Amazon</div>
+            <div class="side-buy">Add to cart</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+<script>
+  // Small UI interactions for the static mockup.
+  document.querySelector('.order-search button').addEventListener('click', function(){
+    const q=document.querySelector('.order-search input').value.trim();
+    if(q) alert('Searching orders for: ' + q);
+  });
+  document.querySelectorAll('.actions button, .side-buy, .buyagain').forEach(btn=>{
+    btn.addEventListener('click', ()=> {
+      if(btn.classList.contains('track')) alert('Tracking details would open here.');
+      else if(btn.classList.contains('side-buy')) alert('Item added to cart.');
+      else if(btn.classList.contains('buyagain')) alert('Item added to cart.');
+    });
+  });
+</script>
+</body>
+</html>
