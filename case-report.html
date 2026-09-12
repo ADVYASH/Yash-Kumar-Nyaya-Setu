@@ -5771,17 +5771,7 @@ function paginateFIR() {
         ["Police Station Address Full", "policeStationAddress"],
         ["FIR Report Category", "firReportCategory"],
         ["Complainant Details", "complainantDetails"],
-        ["Occurrence Details / Report Details", "occurrenceReportDetails"],
-        ["Detailed Description of Incident", "incidentDescription"],
-        ["Alleged Motive / Reason", "motive"],
-        ["Alleged Threats", "threats"],
-        ["Alleged Injury", "allegedInjury"],
-        ["Alleged Property Damage", "propertyDamage"],
-        ["Alleged Financial Loss", "financialLoss"],
-        ["Sections Mentioned in Complaint", "sectionsComplaint"],
-        ["Sections Mentioned in FIR", "sectionsFIR"],
-        ["Applicable Act / Law", "applicableLaw"],
-        ["Nature of Alleged Offences", "offenceNature"]
+        ["Occurrence Details / Report Details", "occurrenceReportDetails"]
     ];
 
     const fieldValues = fields
@@ -5918,9 +5908,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     ["firReportCategory", "firNumber", "policeStation", "firRegistrationDate", "crimeNumber", "caseDiaryNumber",
-     "caseCategory", "policeStationAddress", "complainantDetails", "occurrenceReportDetails",
-     "incidentDescription", "motive", "threats", "allegedInjury", "propertyDamage", "financialLoss",
-     "sectionsComplaint", "sectionsFIR", "applicableLaw", "offenceNature"].forEach(id => {
+     "caseCategory", "policeStationAddress", "complainantDetails", "occurrenceReportDetails"].forEach(id => {
         const field = document.getElementById(id);
         if (!field) return;
         field.addEventListener("input", updateFIRFields);
