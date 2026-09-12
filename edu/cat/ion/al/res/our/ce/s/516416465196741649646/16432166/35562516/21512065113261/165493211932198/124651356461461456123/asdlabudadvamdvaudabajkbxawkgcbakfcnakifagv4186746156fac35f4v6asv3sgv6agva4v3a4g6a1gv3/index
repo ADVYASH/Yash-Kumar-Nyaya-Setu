@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Educational Resources - All Courses</title>
+
+    <style>
+        :root {
+            --black: #000000;
+            --dark: #080808;
+            --dark-gray: #111111;
+            --gray: #1a1a1a;
+
+            --red: #721326;
+            --hot-red: #b51d40;
+            --accent: #8d2947;
+
+            --white: #fbfbfb;
+            --soft-white: #dddddd;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            background: transparent;
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            height: 180px;
+            width: 100%;
+
+            background: rgba(5, 5, 5, 0.42);
+
+            border-bottom: 1px solid #3b0b17;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            box-shadow:
+                0 3px 18px rgba(0, 0, 0, 0.9);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        /* =========================
+           HEADER LOGO
+        ========================= */
+
+        .header img {
+            width: 4cm;
+            height: 4cm;
+
+            object-fit: contain;
+
+            filter:
+                drop-shadow(
+                    0 0 5px rgba(181, 29, 64, 0.25)
+                );
+        }
+
+        /* =========================
+           NSFW TITLE
+        ========================= */
+
+        .title {
+            margin: 0;
+
+            font-family:
+                "Arial Rounded MT Bold",
+                "Cooper Black",
+                "Arial Black",
+                Arial,
+                sans-serif;
+
+            font-size: 60px;
+            font-weight: 900;
+
+            letter-spacing: 4px;
+
+            color: var(--hot-red);
+
+            -webkit-text-stroke: 2px var(--white);
+
+            text-shadow:
+                0 0 4px rgba(181, 29, 64, 0.45),
+                0 0 10px rgba(114, 19, 38, 0.25);
+
+            white-space: nowrap;
+        }
+
+        /* =========================
+           MENU
+        ========================= */
+
+        .menu-wrapper {
+            position: absolute;
+
+            left: 24px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            z-index: 1000;
+        }
+
+        .menu-icon {
+            width: 42px;
+            height: 36px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            padding: 5px 0;
+
+            cursor: pointer;
+
+            user-select: none;
+        }
+
+        .menu-icon span {
+            display: block;
+
+            width: 42px;
+            height: 4px;
+
+            background: var(--white);
+
+            border-radius: 5px;
+
+            transition:
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .menu-icon:hover span {
+            background: var(--hot-red);
+
+            box-shadow:
+                0 0 5px rgba(181, 29, 64, 0.4);
+        }
+
+        /* IMAGE VIEW BUTTON */
+        .image-view-link {
+            position: absolute;
+            left: 78px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--white);
+            text-decoration: none;
+            font-size: 30px;
+            line-height: 1;
+
+            cursor: pointer;
+            user-select: none;
+
+            border-radius: 6px;
+
+            transition:
+                transform 0.2s ease,
+                filter 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .image-view-link:hover {
+            transform: translateY(-50%) scale(1.1);
+            filter: drop-shadow(0 0 6px rgba(181, 29, 64, 0.5));
+            background: rgba(114, 19, 38, 0.18);
+        }
+
+        .image-view-link:focus-visible {
+            outline: 2px solid var(--hot-red);
+            outline-offset: 3px;
+        }
+
+        /* =========================
+           MENU TABLE
+        ========================= */
+
+        .menu-table-container {
+            position: absolute;
+
+            top: 48px;
+            left: 0;
+
+            width: 190px;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(-8px);
+
+            transition:
+                opacity 0.2s ease,
+                transform 0.2s ease,
+                visibility 0.2s ease;
+        }
+
+        .menu-table-container.active {
+            opacity: 1;
+            visibility: visible;
+
+            transform: translateY(0);
+        }
+
+        .menu-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background: #080808;
+
+            border: 1px solid #3b0b17;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.8);
+        }
+
+        .menu-table th {
+            padding: 12px;
+
+            background: var(--white);
+            color: #ff0000;
+
+            font-size: 15px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            border-bottom: 1px solid #555;
+        }
+
+        .menu-table td {
+            padding: 11px 14px;
+
+            color: var(--soft-white);
+
+            background: #ff0000;
+
+            border-bottom: 1px solid #202020;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                padding-left 0.2s ease;
+        }
+
+        .menu-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .menu-table td:hover {
+            background: #151515;
+            color: var(--hot-red);
+            padding-left: 19px;
+        }
+
+        /* =========================
+           18+ ANIMATION
+        ========================= */
+
+        .adult-animation {
+            position: absolute;
+
+            right: 28px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 48px;
+
+            user-select: none;
+
+            animation:
+                adultPulse 2.4s ease-in-out infinite,
+                adultFloat 3.2s ease-in-out infinite,
+                adultRotate 5s ease-in-out infinite;
+
+            filter:
+                drop-shadow(
+                    0 0 5px rgba(181, 29, 64, 0.25)
+                );
+        }
+
+        @keyframes adultPulse {
+            0%,
+            100% {
+                opacity: 0.85;
+
+                filter:
+                    drop-shadow(
+                        0 0 3px rgba(181, 29, 64, 0.15)
+                    );
+            }
+
+            50% {
+                opacity: 1;
+
+                filter:
+                    drop-shadow(
+                        0 0 9px rgba(181, 29, 64, 0.4)
+                    );
+            }
+        }
+
+        @keyframes adultFloat {
+            0%,
+            100% {
+                margin-top: 0;
+            }
+
+            50% {
+                margin-top: -6px;
+            }
+        }
+
+        @keyframes adultRotate {
+            0%,
+            100% {
+                transform:
+                    translateY(-50%)
+                    rotate(-2deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-50%)
+                    rotate(2deg);
+            }
+        }
+
+        /* =========================
+           CATEGORY BUTTONS + EXPANDABLE CONTENT
+        ========================= */
+
+        .category-area {
+            width: 100%;
+            padding: 16px 18px 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-buttons {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(10, minmax(0, 1fr));
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .category-button {
+            min-height: 42px;
+            padding: 8px 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background: rgba(8, 8, 8, 0.86);
+            color: var(--white);
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            transition:
+                background 0.18s ease,
+                color 0.18s ease,
+                border-color 0.18s ease,
+                transform 0.18s ease;
+        }
+
+        .category-button:hover,
+        .category-button.active {
+            background: var(--hot-red);
+            color: #fff;
+            border-color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .category-content {
+            width: 100%;
+        }
+
+        .category {
+            display: none;
+            width: 100%;
+            padding: 14px 12px 18px;
+            background: rgba(9, 9, 9, 0.48);
+            border: 1px solid #242424;
+        }
+
+        .category.active {
+            display: block;
+        }
+
+        .category h2 {
+            margin: 0 0 12px;
+            padding: 7px 8px;
+            color: var(--white);
+            font-size: 17px;
+            font-weight: 900;
+            text-align: center;
+            letter-spacing: 0.5px;
+            background: #0c0c0c;
+            border: 2px solid #eeeeee;
+            border-radius: 3px;
+        }
+
+        .category ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0 10px;
+        }
+
+        .category li {
+            margin: 0;
+            padding: 0;
+        }
+
+        .category a {
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 8px;
+            color: #f5f5f5;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.25;
+            border-bottom: 1px solid #202020;
+            transition:
+                color 0.18s ease,
+                background 0.18s ease,
+                padding-left 0.18s ease;
+        }
+
+        .category a:hover {
+            color: #ffffff;
+            background: linear-gradient(
+                90deg,
+                rgba(114, 19, 38, 0.16),
+                transparent
+            );
+            padding-left: 12px;
+        }
+
+        .category a img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+            flex-shrink: 0;
+            border-radius: 3px;
+        }
+
+        @media (max-width: 1200px) {
+            .category-buttons {
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+            }
+
+            .category ul {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 900px) {
+            .category-buttons {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+
+            .category ul {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .category-area {
+                padding: 10px;
+            }
+
+            .category-buttons {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .category ul {
+                grid-template-columns: 1fr;
+            }
+
+            .category-button {
+                min-height: 40px;
+                font-size: 12px;
+            }
+        }
+
+        /* =========================
+       WALLPAPER SLIDESHOW
+       nsfwwallpaper/1.gif through 100.gif
+       Changes every 2 seconds.
+    ========================= */
+    .wallpaper-slideshow {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        background: #000;
+        pointer-events: none;
+    }
+
+    .wallpaper-slide {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
+    }
+
+    .wallpaper-slide.active {
+        opacity: 1;
+    }
+
+    .wallpaper-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background: rgba(0, 0, 0, 0.08);
+    }
+
+    .header,
+    .columns {
+        position: relative;
+        z-index: 1;
+    }
+    </style>
+
+<style id="category-button-size-fix">
+.category-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    width: 100% !important;
+}
+
+.category-button {
+    display: inline-flex !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+}
+</style>
+
+
+<style id="category-button-small-fix">
+.category-button {
+    padding: 6px 9px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+}
+</style>
+
+
+<style id="category-button-colors">
+.category-button {
+    color: #111 !important;
+    border: 1px solid rgba(0,0,0,.15) !important;
+}
+.category-button:nth-child(8n+1) { background: #86efac !important; }
+.category-button:nth-child(8n+2) { background: #fde047 !important; }
+.category-button:nth-child(8n+3) { background: #93c5fd !important; }
+.category-button:nth-child(8n+4) { background: #f9a8d4 !important; }
+.category-button:nth-child(8n+5) { background: #c4b5fd !important; }
+.category-button:nth-child(8n+6) { background: #67e8f9 !important; }
+.category-button:nth-child(8n+7) { background: #fdba74 !important; }
+.category-button:nth-child(8n+8) { background: #fca5a5 !important; }
+
+.category-button:hover {
+    filter: brightness(0.94);
+    transform: translateY(-1px);
+}
+.category-button.active {
+    filter: brightness(0.88);
+    box-shadow: 0 0 0 2px rgba(0,0,0,.18);
+}
+</style>
+
+
+<style id="category-button-extra-small">
+.category-button {
+    padding: 5px 8px !important;
+    font-size: 13px !important;
+    line-height: 1.15 !important;
+    border-radius: 7px !important;
+}
+</style>
+
+
+<style id="neon-red-hover">
+.category-button {
+    transition: background-color 0.15s ease, color 0.15s ease,
+                box-shadow 0.15s ease, transform 0.15s ease !important;
+}
+
+.category-button:hover {
+    background: #ff1744 !important;
+    color: #ffffff !important;
+    border-color: #ff1744 !important;
+    box-shadow:
+        0 0 5px #ff1744,
+        0 0 12px #ff1744,
+        0 0 24px rgba(255, 23, 68, 0.9) !important;
+    transform: translateY(-1px);
+}
+</style>
+
+
+<style id="text-based-button-height">
+.category-button {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 3px 8px !important;
+    font-size: 13px !important;
+    line-height: 1.15 !important;
+    box-sizing: border-box !important;
+    align-items: center !important;
+}
+</style>
+
+
+<style id="menu-dropdown-fix">
+.menu-wrapper {
+    z-index: 3000 !important;
+}
+
+.menu-table-container {
+    z-index: 2999 !important;
+    top: 30px !important;
+    left: -8px !important;
+    width: 190px !important;
+    padding-top: 18px !important;
+}
+
+.menu-table {
+    position: relative !important;
+    z-index: 2999 !important;
+    border-radius: 0 0 8px 8px !important;
+    overflow: hidden !important;
+}
+</style>
+
+
+<style id="menu-only-fixed">
+/* Keep only the menu emoji/button visible */
+.menu-table-container,
+.menu-table {
+    display: none !important;
+}
+
+/* Keep the menu button permanently fixed while the page scrolls */
+.menu-wrapper {
+    position: fixed !important;
+    top: 18px !important;
+    left: 18px !important;
+    z-index: 99999 !important;
+}
+</style>
+
+
+<style id="home-top-button">
+.menu-button {
+    font-size: 0 !important;
+    width: 42px !important;
+    height: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+}
+.menu-button::before {
+    content: "⌂";
+    font-size: 26px;
+    line-height: 1;
+}
+</style>
+
+
+
+<style id="home-button-final-fix">
+/* Permanently fixed home button */
+.menu-wrapper {
+    position: fixed !important;
+    top: 18px !important;
+    left: 18px !important;
+    z-index: 99999 !important;
+}
+
+/* Hide original three-line icon/text and show a home emoji */
+.menu-button {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.menu-button::before {
+    content: "🏠" !important;
+    display: block !important;
+    font-size: 24px !important;
+    line-height: 1 !important;
+}
+
+/* No dropdown/menu options */
+.menu-table-container,
+.menu-table {
+    display: none !important;
+}
+</style>
+<script id="home-button-final-script">
+document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.querySelector(".menu-button");
+    if (!btn) return;
+
+    btn.setAttribute("aria-label", "Home");
+    btn.setAttribute("title", "Home");
+
+    btn.onclick = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return false;
+    };
+});
+</script>
+
+
+<style id="remove-top-left-buttons">
+.menu-wrapper,
+.image-view-link {
+    display: none !important;
+}
+</style>
+
+
+<style id="home-button-style">
+.home-top-button {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 1rem;
+    font-weight: 800;
+    border: 1px solid #333;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,.2);
+}
+
+.home-top-button:hover {
+    background: #1d4ed8;
+    color: #fff !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+</style>
+
+
+
+
+
+<style id="performance-optimizations">
+    /* Faster first paint / less work for hidden categories. */
+    .category:not(.active) {
+        content-visibility: auto;
+        contain-intrinsic-size: 420px;
+    }
+    .category-card-image {
+        content-visibility: auto;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+        }
+    }
+</style>
+
+<style id="FINAL-6-PORTRAIT-LAYOUT">
+/* ===== FINAL REQUESTED LAYOUT =====
+   Category buttons removed.
+   All categories shown.
+   6 portrait cards per row on desktop.
+*/
+.category-buttons {
+    display: none !important;
+}
+
+.category {
+    display: block !important;
+    width: 100% !important;
+    padding: 14px 12px 24px !important;
+    margin: 0 0 18px !important;
+    background: rgba(9, 9, 9, 0.48) !important;
+    border: 1px solid #242424 !important;
+}
+
+.category-card-grid {
+    display: grid !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.category-card {
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    background: rgba(8, 8, 8, 0.88) !important;
+    border: 2px solid #00ffff !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+}
+
+.category-card-image-link {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 2 / 3 !important;
+    overflow: hidden !important;
+    background: #111 !important;
+}
+
+.category-card-image {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    margin: 0 !important;
+}
+
+.category-card-title-link,
+.category-card-title-link:link,
+.category-card-title-link:visited,
+.category-card-title-link:hover,
+.category-card-title-link:focus,
+.category-card-title-link:active {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-height: 46px !important;
+    padding: 8px 5px !important;
+    box-sizing: border-box !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    text-align: center !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+}
+
+.category-card:hover {
+    transform: translateY(-3px) !important;
+    border-color: #ff1744 !important;
+    box-shadow:
+        0 0 6px #ff1744,
+        0 0 14px #ff1744,
+        0 0 30px rgba(255,23,68,.9) !important;
+}
+
+.category-card:hover .category-card-image {
+    transform: scale(1.03) !important;
+}
+
+/* Desktop = exactly 6 */
+@media (min-width: 1201px) {
+    .category-card-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    }
+}
+
+/* Smaller screens */
+@media (max-width: 1200px) {
+    .category-card-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 1000px) {
+    .category-card-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .category-card-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 520px) {
+    .category-card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+</style>
+
+
+<style id="smaller-photo-cards">
+.category-card-grid {
+    width: 92% !important;
+    margin: 0 auto !important;
+    gap: 14px !important;
+}
+
+.category-card {
+    width: 100% !important;
+}
+
+.category-card-image-link {
+    aspect-ratio: 3 / 4 !important;
+}
+
+.category-card-title-link {
+    min-height: 38px !important;
+    font-size: 14px !important;
+    padding: 6px 4px !important;
+}
+
+@media (max-width: 1200px) {
+    .category-card-grid {
+        width: 94% !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .category-card-grid {
+        width: 96% !important;
+    }
+}
+</style>
+
+
+<style id="smaller-photo-cards-more">
+.category-card-grid {
+    width: 86% !important;
+    margin: 0 auto !important;
+    gap: 12px !important;
+}
+
+.category-card-image-link {
+    aspect-ratio: 3 / 4 !important;
+}
+
+.category-card-title-link {
+    min-height: 34px !important;
+    font-size: 13px !important;
+    padding: 5px 3px !important;
+}
+
+@media (max-width: 1200px) {
+    .category-card-grid {
+        width: 92% !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .category-card-grid {
+        width: 95% !important;
+    }
+}
+</style>
+
+
+<style id="smaller-photo-cards-final">
+.category-card-grid {
+    width: 78% !important;
+    margin: 0 auto !important;
+    gap: 10px !important;
+}
+
+.category-card-image-link {
+    aspect-ratio: 3 / 4 !important;
+}
+
+.category-card-title-link {
+    min-height: 30px !important;
+    font-size: 12px !important;
+    padding: 4px 2px !important;
+}
+
+@media (max-width: 1200px) {
+    .category-card-grid {
+        width: 88% !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .category-card-grid {
+        width: 94% !important;
+    }
+}
+</style>
+
+
+<style id="seven-photos-per-row">
+.category-card-grid {
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+    width: 78% !important;
+    margin: 0 auto !important;
+    gap: 10px !important;
+}
+
+@media (min-width: 1201px) {
+    .category-card-grid {
+        grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .category-card-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+        width: 88% !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .category-card-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        width: 94% !important;
+    }
+}
+
+@media (max-width: 520px) {
+    .category-card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+</style>
+
+</head>
+
+<body class="password-locked">
+
+
+<!-- PASSWORD GATE -->
+<style id="password-gate-style">
+    body.password-locked > *:not(#password-gate) {
+        visibility: hidden !important;
+    }
+
+    #password-gate {
+        position: fixed;
+        inset: 0;
+        z-index: 2147483647;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000;
+        padding: 20px;
+    }
+
+    #password-gate .password-box {
+        width: min(420px, 92vw);
+        padding: 32px 28px;
+        background: #0b0b0b;
+        border: 1px solid #333;
+        border-radius: 14px;
+        box-shadow: 0 20px 70px rgba(0,0,0,.75);
+        text-align: center;
+    }
+
+    #password-gate h2 {
+        margin: 0 0 10px;
+        color: #fff;
+        font-size: 25px;
+    }
+
+    #password-gate p {
+        margin: 0 0 20px;
+        color: #aaa;
+        font-size: 14px;
+    }
+
+    #password-gate input {
+        width: 100%;
+        padding: 13px 14px;
+        border: 1px solid #444;
+        border-radius: 8px;
+        outline: none;
+        background: #151515;
+        color: #fff;
+        font-size: 16px;
+    }
+
+    #password-gate input:focus {
+        border-color: #ff1744;
+        box-shadow: 0 0 0 2px rgba(255,23,68,.15);
+    }
+
+    #password-gate button {
+        width: 100%;
+        margin-top: 12px;
+        padding: 13px 16px;
+        border: 0;
+        border-radius: 8px;
+        background: #ff1744;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 800;
+        cursor: pointer;
+    }
+
+    #password-gate button:hover {
+        background: #e9143d;
+    }
+
+    #password-gate .password-error {
+        min-height: 20px;
+        margin-top: 10px;
+        color: #ff6b81;
+        font-size: 13px;
+    }
+</style>
+<script id="password-gate-script">
+(function () {
+    const PASSWORD = "````````";
+
+    function unlock() {
+        const input = document.getElementById("site-password");
+        const error = document.getElementById("password-error");
+
+        if (input.value === PASSWORD) {
+            sessionStorage.setItem("siteUnlocked", "1");
+            document.body.classList.remove("password-locked");
+            const gate = document.getElementById("password-gate");
+            if (gate) gate.remove();
+        } else {
+            error.textContent = "Incorrect password.";
+            input.select();
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Keep the gate out of the way on normal reloads in the same tab.
+        if (sessionStorage.getItem("siteUnlocked") === "1") {
+            document.body.classList.remove("password-locked");
+            return;
+        }
+        document.body.classList.add("password-locked");
+
+        const gate = document.createElement("div");
+        gate.id = "password-gate";
+        gate.innerHTML = `
+            <div class="password-box">
+                <h2>Password Required</h2>
+                <p>Enter the password to open this website.</p>
+                <input id="site-password" type="password"
+                       autocomplete="off" placeholder="Enter password"
+                       aria-label="Password">
+                <button id="unlock-site" type="button">Open Website</button>
+                <div id="password-error" class="password-error"></div>
+            </div>
+        `;
+
+        document.body.appendChild(gate);
+
+        const input = document.getElementById("site-password");
+        const button = document.getElementById("unlock-site");
+
+        button.addEventListener("click", unlock);
+        input.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") unlock();
+        });
+
+        input.focus();
+    });
+})();
+</script>
+
+
+<a href="#" class="home-top-button" aria-label="Go to top">Home</a>
+
+
+    <div class="wallpaper-slideshow" aria-hidden="true">
+        <div class="wallpaper-overlay"></div>
+    </div>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="header">
+
+        <!-- MENU -->
+
+        <div class="menu-wrapper">
+
+            <div
+                class="menu-icon"
+                id="menuButton"
+                role="button"
+                tabindex="0"
+                aria-label="Open menu"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <!-- IMAGE VIEW -->
+            <a
+                class="image-view-link"
+                href="nsfwimages.html"
+                aria-label="Open image view"
+                title="Image View"
+            >🖼️</a>
+
+            <div
+                class="menu-table-container"
+                id="menuTable">
+                            <table class="menu-table">
+
+                    <thead>
+                        <tr>
+                            <th>MENU</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Home</td>
+                        </tr>
+
+                        <tr>
+                            <td>Categories</td>
+                        </tr>
+
+                        <tr>
+                            <td>Popular</td>
+                        </tr>
+
+                        <tr>
+                            <td>Latest</td>
+                        </tr>
+
+                        <tr>
+                            <td>Favorites</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+
+
+        <!-- LOGO + TITLE -->
+
+        <div class="header-content">
+
+            <img
+                src="logo/nsfw.png"
+                alt="NSFW Logo"
+            >
+
+            <h1 class="title">
+                Educational Resources
+            </h1>
+
+        </div>
+
+
+        <!-- 18+ -->
+
+        <div
+            class="adult-animation"
+            aria-label="18 plus"
+        >
+            🔞
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         CATEGORY GRID
+    ========================= -->
+
+ <main class="category-area">
+
+        <!-- All category buttons appear directly below the title -->
+
+        <!-- Only the selected category opens here -->
+
+        <div
+            class="category-content"
+            id="categoryGrid"
+        >
+            <section class="category">
+                <div class="category-card-grid">
+                <div class="category-card">
+    <a class="category-card-image-link" href="ers/512401.html">
+        <img class="category-card-image" src="er/1.jpg" alt="1" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512401.html">Free Sites</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512402.html">
+        <img class="category-card-image" src="er/2.jpg" alt="2" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512402.html">VR</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512403.html">
+        <img class="category-card-image" src="er/3.jpg" alt="3" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512403.html">Free Onlyfans Account</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512404.html">
+        <img class="category-card-image" src="er/4.jpg" alt="4" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512404.html">Cam Sites</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512405.html">
+        <img class="category-card-image" src="er/5.jpg" alt="5" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512405.html">Tiktok Sites</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512406.html">
+        <img class="category-card-image" src="er/6.jpg" alt="6" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512406.html">Voyeur Sites</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512407.html">
+        <img class="category-card-image" src="er/7.png" alt="7" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512407.html">Models Directory</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512408.html">
+        <img class="category-card-image" src="er/8.jpg" alt="8" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512408.html">Amateur Sites</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512409.html">
+        <img class="category-card-image" src="er/9.jpg" alt="9" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512409.html">Milf</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512410.html">
+        <img class="category-card-image" src="er/10.jpg" alt="10" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512410.html">Erotic</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512411.html">
+        <img class="category-card-image" src="er/11.jpg" alt="11" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512411.html">Anal</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512412.html">
+        <img class="category-card-image" src="er/12.jpg" alt="12" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512412.html">Adult Engine</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512413.html">
+        <img class="category-card-image" src="er/13.jpg" alt="13" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512413.html">Pictures</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512414.html">
+        <img class="category-card-image" src="er/14.jpg" alt="14" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512414.html">Asian</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512415.html">
+        <img class="category-card-image" src="er/15.jpg" alt="15" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512415.html">Top Porn Networks</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512416.html">
+        <img class="category-card-image" src="er/16.jpg" alt="16" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512416.html">Black</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512417.html">
+        <img class="category-card-image" src="er/17.jpg" alt="17" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512417.html">Games</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512418.html">
+        <img class="category-card-image" src="er/18.jpg" alt="18" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512418.html">Pornstar Database</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512419.html">
+        <img class="category-card-image" src="er/19.jpg" alt="19" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512419.html">Indian</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512420.html">
+        <img class="category-card-image" src="ers/20.jpg" alt="20" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512420.html">Deepfake</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512421.html">
+        <img class="category-card-image" src="er/21.jpg" alt="21" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512421.html">Leak Sites</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512422.html">
+        <img class="category-card-image" src="er/22.jpg" alt="22" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512422.html">Escort Sites</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512423.html">
+        <img class="category-card-image" src="er/23.png" alt="23" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512423.html">Porn Download Sites</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512424.html">
+        <img class="category-card-image" src="er/24.jpg" alt="24" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512424.html">Pinay Porn</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512425.html">
+        <img class="category-card-image" src="er/25.jpg" alt="25" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512425.html">German</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512426.html">
+        <img class="category-card-image" src="er/26.jpg" alt="26" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512426.html">Celebrities</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512427.html">
+        <img class="category-card-image" src="er/27.jpg" alt="27" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512427.html">movie</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512428.html">
+        <img class="category-card-image" src="er/28.jpg" alt="28" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512428.html">upskirt</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512429.html">
+        <img class="category-card-image" src="er/29.jpg" alt="29" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512429.html">lesbian</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512430.html">
+        <img class="category-card-image" src="er/30.jpg" alt="30" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512430.html">arabic</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512431.html">
+        <img class="category-card-image" src="er/31.jpg" alt="31" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512431.html">High Traffic Sites</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512432.html">
+        <img class="category-card-image" src="er/32.jpg" alt="32" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512432.html">Teenish</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512433.html">
+        <img class="category-card-image" src="er/33.jpg" alt="33" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512433.html">Japan</a>
+</div>
+
+<div class="category-card">
+    <a class="category-card-image-link" href="ers/512434.html">
+        <img class="category-card-image" src="er/34.webp" alt="33" loading="lazy" decoding="async">
+    </a>
+    <a class="category-card-title-link" href="ers/512434.html">Forced</a>
+</div>
+                </div>
+            </section>
+        </div>
+</main>
+
+
+    <script>
+
+        /*
+        =====================================================
+        EDIT YOUR LINKS HERE
+        =====================================================
+
+        Format:
+
+        ["LINK NAME", "LINK URL"]
+
+        Example:
+
+        ["Google", "https://www.google.com"]
+
+        The first value is what visitors see.
+
+        The second value is where the link goes.
+
+        You can change all 10 links in every category.
+
+        Logos remain automatic:
+        1.png, 2.png, 3.png ... 780.png
+        */
+
+        /* MENU
+        ===================================================== */
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const menuTable =
+            document.getElementById("menuTable");
+
+
+        function toggleMenu(event) {
+
+            event.stopPropagation();
+
+            const isActive =
+                menuTable.classList.toggle("active");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                isActive
+            );
+        }
+
+
+        /* CLICK MENU */
+
+        menuButton.addEventListener(
+            "click",
+            toggleMenu
+        );
+
+
+        /* KEYBOARD MENU */
+
+        menuButton.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+
+                    event.preventDefault();
+
+                    toggleMenu(event);
+                }
+
+            }
+        );
+
+
+        /* KEEP MENU OPEN */
+
+        menuTable.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+            }
+        );
+
+
+        /* CLOSE MENU WHEN CLICKING ELSEWHERE */
+
+        document.addEventListener(
+            "click",
+            function() {
+
+                menuTable.classList.remove("active");
+
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+        );
+
+    </script>
+
+
+    <script id="optimized-wallpaper-script">
+(function () {
+    const box = document.querySelector('.wallpaper-slideshow');
+    if (!box) return;
+
+    const overlay = box.querySelector('.wallpaper-overlay');
+    const files = Array.from({ length: 100 }, (_, i) => `${i + 1}.gif`);
+    let index = 0;
+    let active = null;
+
+    function showNext() {
+        const src = 'nsfwwallpaper/' + files[index];
+
+        const img = document.createElement('img');
+        img.className = 'wallpaper-slide';
+        img.alt = '';
+        img.decoding = 'async';
+        img.loading = 'eager';
+        img.src = src;
+
+        img.addEventListener('load', function () {
+            if (active) {
+                active.classList.remove('active');
+                setTimeout(() => {
+                    if (active && !active.classList.contains('active')) {
+                        active.remove();
+                    }
+                }, 900);
+            }
+
+            box.insertBefore(img, overlay);
+            requestAnimationFrame(() => img.classList.add('active'));
+            active = img;
+        }, { once: true });
+
+        img.addEventListener('error', function () {
+            img.remove();
+        }, { once: true });
+
+        index = (index + 1) % files.length;
+    }
+
+    // First wallpaper immediately, then change every 2 seconds.
+    showNext();
+    setInterval(showNext, 2000);
+})();
+</script>
+
+<script id="home-top-script">
+document.addEventListener("DOMContentLoaded", function () {
+    const menuButton = document.querySelector(".menu-button");
+    if (!menuButton) return;
+
+    menuButton.setAttribute("aria-label", "Go to top");
+    menuButton.setAttribute("title", "Go to top");
+
+    menuButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+});
+</script>
+
+
+
+</body>
+</html>
