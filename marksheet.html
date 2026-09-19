@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>University Marksheet Generator</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef1f5;color:#172033}
+header{background:#102a56;color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:15px}
+header h1{margin:0;font-size:24px}
+header span{font-size:12px;opacity:.85}
+.container{display:grid;grid-template-columns:390px 1fr;gap:20px;padding:20px;max-width:1500px;margin:auto}
+.panel{background:#fff;border-radius:12px;padding:20px;box-shadow:0 4px 18px #0001}
+.panel h2{margin:0 0 15px;color:#102a56;font-size:20px}
+.section{border-top:1px solid #ddd;padding-top:15px;margin-top:15px}
+label{font-weight:700;font-size:12px;display:block;margin:9px 0 5px}
+input,select{width:100%;padding:10px;border:1px solid #cbd3df;border-radius:7px;font-size:14px;background:#fff}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{border:0;border-radius:7px;padding:10px 13px;font-weight:700;cursor:pointer}
+.primary{background:#102a56;color:#fff}
+.green{background:#16834b;color:#fff}
+.red{background:#b42318;color:#fff}
+.gray{background:#e8edf4;color:#172033}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.subject{display:grid;grid-template-columns:1fr 105px 75px 75px 32px;gap:5px;margin-bottom:7px}
+.subject input{padding:8px}
+.subject button{padding:5px;background:#fee4e2;color:#b42318}
+.photo-box{display:flex;align-items:center;gap:12px}
+#photoPreview{width:90px;height:110px;border:1px dashed #aaa;object-fit:cover;background:#f5f5f5}
+.small{font-size:11px;color:#667085}
+.preview-wrap{overflow:auto}
+.mark-sheet{width:794px;min-height:1123px;background:#fff;margin:auto;padding:28px;border:1px solid #222;position:relative;color:#111}
+.watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;font-size:55px;color:#102a56;opacity:.045;transform:rotate(-28deg);font-weight:900}
+.uni{text-align:center;border-bottom:2px solid #102a56;padding-bottom:10px}
+.uni-header{display:flex;align-items:center;justify-content:center;gap:18px;min-height:82px}
+.uni-logo-wrap{width:85px;display:flex;align-items:center;justify-content:center}
+.uni-logo{width:75px;height:75px;object-fit:contain;display:none}
+.uni-text{text-align:center;flex:1}
+.uni-text h1{margin:0;font-size:25px;color:#102a56}
+.uni-text h2{margin:5px 0;font-size:15px}
+.uni-text p{margin:3px;font-size:10px}
+.uni h1{margin:0;font-size:25px;color:#102a56}
+.uni h2{margin:5px 0;font-size:15px}
+.uni p{margin:3px;font-size:10px}
+.title{text-align:center;font-size:18px;font-weight:bold;margin:14px 0 10px;text-transform:uppercase}
+.notice{text-align:center;font-size:9px;color:#8a1c1c;margin-bottom:10px}
+.student-info{border:1px solid #222;display:grid;grid-template-columns:1fr 115px;margin-bottom:12px}
+.info-left{display:grid;grid-template-columns:145px 1fr}
+.info-left div{border-bottom:1px solid #aaa;padding:6px;font-size:10px}
+.info-left div:nth-last-child(-n+2){border-bottom:0}
+.info-label{font-weight:bold;background:#f2f4f7}
+.student-photo{display:flex;align-items:center;justify-content:center;border-left:1px solid #222;padding:7px}
+.student-photo img{width:90px;height:110px;object-fit:cover;border:1px solid #777}
+table{width:100%;border-collapse:collapse;font-size:10px}
+th,td{border:1px solid #222;padding:6px;text-align:center}
+th{background:#e9edf3}
+td.subject-name{text-align:left}
+.summary{margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #222}
+.summary div{padding:8px;border-right:1px solid #222;text-align:center;font-size:10px}
+.summary div:last-child{border-right:0}
+.summary b{display:block;font-size:12px;margin-top:3px}
+.footer{margin-top:25px;font-size:9px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.signature{text-align:center;padding-top:5px;margin-top:30px}
+
+.signature img {
+    width: 350px !important;
+    height: 130px !important;
+    object-fit: contain;
+}
+.disclaimer{position:absolute;bottom:8px;left:28px;right:28px;text-align:center;font-size:7px;color:#777}
+@media(max-width:900px){.container{grid-template-columns:1fr}.mark-sheet{transform-origin:top left}}
+@media print{
+body{background:#fff}
+header,.panel{display:none!important}
+.container{display:block;padding:0}
+.preview-wrap{overflow:visible}
+.mark-sheet{margin:0;width:210mm;min-height:297mm;padding:9mm;border:1px solid #111}
+@page{size:A4 portrait;margin:0}
+}
+</style>
+</head>
+<body>
+
+<!-- ================================================================
+     ✏️ EASY EDIT AREA — CHANGE THESE VALUES ONLY
+     ================================================================
+     You can edit university text, default student data, subjects,
+     grading scale and colours here without searching the rest of
+     the HTML.
+================================================================ -->
+
+<script>
+/* ---------- UNIVERSITY / DOCUMENT ---------- */
+const EDIT_UNIVERSITY = {
+  controllerSignature: "https://raw.githubusercontent.com/ADVYASH/Yash-Kumar-Nyaya-Setu/main/myphoto/gucsign.png",
+  logo: "https://raw.githubusercontent.com/ADVYASH/Yash-Kumar-Nyaya-Setu/main/myphoto/gulogo.png", // Galgotias University logo
+  logoWidth: 75,
+  logoHeight: 75,
+  name: "GALGOTIAS UNIVERSITY",
+  location: "Sector 17A, Greater Noida, Uttar Pradesh, India",
+  documentTitle: "MARKSHEET",
+  statementTitle: "Statement of Marks",
+};
+
+/* ---------- DEFAULT STUDENT DATA ---------- */
+const EDIT_STUDENT = {
+  photo: "https://raw.githubusercontent.com/ADVYASH/Yash-Kumar-Nyaya-Setu/main/myphoto/myphoto.png",
+  name: "Yash Kumar",
+  roll: "SOL2023147581030102",
+  registration: "23GSOL1030102",
+  father: "Charan Singh",
+  mother: "Meena Devi",
+  course: "Bachelor of Business Administration and Bachelor of Laws (Honours)",
+  semester: "VII",
+  session: "2026-2027",
+  examination: "September 2026"
+};
+
+/* ---------- DEFAULT SUBJECTS ----------
+   Add, remove or edit subjects here.
+   Format: { code: "...", name: "...", max: 100, marks: 80 }
+*/
+const EDIT_SUBJECTS = [
+  {code:"", name:"Constitutional Law", max:100, marks:78},
+  {code:"", name:"Company Law", max:100, marks:82},
+  {code:"", name:"Law of Evidence", max:100, marks:75},
+  {code:"", name:"Legal Language & Communication", max:100, marks:88},
+  {code:"", name:"Business Environment", max:100, marks:81},
+  {code:"", name:"Clinical / Practical Course", max:100, marks:90}
+];
+
+/* ---------- GRADE SCALE ----------
+   Change the percentage boundaries and grade points here.
+*/
+const EDIT_GRADES = [
+  {min:90, grade:"O",  point:10},
+  {min:80, grade:"A+", point:9},
+  {min:70, grade:"A",  point:8},
+  {min:60, grade:"B+", point:7},
+  {min:50, grade:"B",  point:6},
+  {min:40, grade:"C",  point:5},
+  {min:33, grade:"P",  point:4},
+  {min:0,  grade:"F",  point:0}
+];
+
+/* ---------- APPEARANCE ---------- */
+const EDIT_STYLE = {
+  primary: "#102a56",
+  pageBackground: "#eef1f5",
+  tableHeader: "#e9edf3"
+};
+</script>
+
+<header>
+  <h1>Marksheet Generator</h1>
+  <span>University-style educational document generator</span>
+</header>
+
+<div class="container">
+<section class="panel">
+<h2>Enter Marksheet Details</h2>
+<div style="background:#eef5ff;border:1px solid #b9d2f5;padding:10px;border-radius:8px;font-size:12px;margin-bottom:12px">
+<b>Easy editing:</b> For normal use, edit the fields below. For changing the default design, university name, grading scale or default subjects, edit the <b>✏️ EASY EDIT AREA</b> near the top of this HTML file.
+</div>
+
+<div class="section">
+<label>Student Name</label><input id="name" value="Yash Kumar" oninput="generate()">
+<div class="row">
+<div><label>Enrollment / Roll No.</label><input id="roll" value="SOL2023103010214758" oninput="generate()"></div>
+<div><label>Registration No.</label><input id="reg" value="23gsol1030102" oninput="generate()"></div>
+</div>
+<div class="row">
+<div><label>Father's Name</label><input id="father" value="Charan Singh" oninput="generate()"></div>
+<div><label>Mother's Name</label><input id="mother" value="" oninput="generate()"></div>
+</div>
+</div>
+
+<div class="section">
+<div class="row">
+<div><label>Course</label><input id="course" value="" oninput="generate()"></div>
+<div><label>Semester</label><input id="semester" value="" oninput="generate()"></div>
+</div>
+<div class="row">
+<div><label>Academic Session</label><input id="session" value="" oninput="generate()"></div>
+<div>
+  <label>Examination</label>
+  <select id="exam" onchange="generate()">
+    <option value="STE">STE - Summer Term Examination</option>
+    <option value="MTE">MTE - Mid Term Examination</option>
+    <option value="ETE">ETE - End Term Examination</option>
+    <option value="BG">BG - Back Log Examination</option>
+  </select>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h3 style="margin:0 0 8px">Subjects</h3>
+<div class="small">Enter subject code, subject name, maximum marks and marks obtained. Grade and result are calculated automatically.</div>
+<div id="subjects"></div>
+<button class="gray" onclick="addSubject()">+ Add Subject</button>
+</div>
+
+<div class="section">
+<label>Student Photo</label>
+<div class="photo-box">
+<img id="photoPreview" alt="Photo">
+<input type="file" id="photo" accept="image/*" onchange="loadPhoto(event)">
+</div>
+</div>
+<div class="section">
+<label>University Logo — Left Side</label>
+<div class="photo-box">
+  <img id="logoPreview" alt="Logo Preview" style="width:75px;height:75px;object-fit:contain;border:1px dashed #aaa;background:#f5f5f5">
+  <div style="flex:1">
+    <input type="file" id="universityLogo" accept="image/*" onchange="loadUniversityLogo(event)">
+    <div class="small" style="margin-top:5px">Upload PNG/JPG/WebP. The logo appears on the left of the university name.</div>
+  </div>
+</div>
+<div class="row" style="margin-top:8px">
+  <div><label>Logo Width (px)</label><input id="logoWidth" type="number" min="30" max="150" value="75" oninput="updateLogoSize()"></div>
+  <div><label>Logo Height (px)</label><input id="logoHeight" type="number" min="30" max="150" value="75" oninput="updateLogoSize()"></div>
+</div>
+</div>
+
+<div class="actions">
+<button class="primary" onclick="generate()">Generate</button>
+<button class="green" onclick="window.print()">Print / Save PDF</button>
+<button class="gray" onclick="sampleData()">Sample Data</button>
+<button class="red" onclick="resetAll()">Reset</button>
+</div>
+<p class="small" style="margin-top:12px">This generator creates a clearly marked educational/template document. It is not an official Galgotias University marksheet.</p>
+</section>
+
+<section class="preview-wrap">
+<div class="mark-sheet" id="marksheet">
+<div class="watermark">Galgotia University</div>
+<div class="uni">
+  <div class="uni-header">
+    <div class="uni-logo-wrap">
+      <img id="pUniversityLogo" class="uni-logo" alt="University Logo">
+    </div>
+    <div class="uni-text">
+      <h1>GALGOTIAS UNIVERSITY</h1>
+      <h2>MARKSHEET</h2>
+      <p>Sector 17A, Greater Noida, Uttar Pradesh, India</p>
+    </div>
+  </div>
+</div>
+
+<div class="title">Statement of Marks</div>
+
+<div class="student-info">
+<div class="info-left">
+<div class="info-label">Student Name</div><div id="pName"></div>
+<div class="info-label">Enrollment / Roll No.</div><div id="pRoll"></div>
+<div class="info-label">Registration No.</div><div id="pReg"></div>
+<div class="info-label">Father's Name</div><div id="pFather"></div>
+<div class="info-label">Course</div><div id="pCourse"></div>
+<div class="info-label">Semester</div><div id="pSemester"></div>
+<div class="info-label">Academic Session</div><div id="pSession"></div>
+<div class="info-label">Examination</div><div id="pExam"></div>
+</div>
+<div class="student-photo"><img id="pPhoto" alt="Student Photo"></div>
+</div>
+
+<table>
+<thead><tr><th>S.No.</th><th>Subject Code</th><th>Course / Subject</th><th>Max Marks</th><th>Marks Obtained</th><th>Grade</th><th>Grade Point</th><th>Result</th></tr></thead>
+<tbody id="marksBody"></tbody>
+</table>
+
+<div class="summary">
+<div>Total Marks<b id="pTotal">0 / 0</b></div>
+<div>Percentage<b id="pPercent">0%</b></div>
+<div>SGPA<b id="pSGPA">0.00</b></div>
+<div>Overall Result<b id="pResult">-</b></div>
+</div>
+
+<div style="margin-top:12px;font-size:9px"><b>Grading Scale:</b> O = 10, A+ = 9, A = 8, B+ = 7, B = 6, C = 5, P = 4, F = 0</div>
+
+<div class="footer">
+<div>
+<b>Date of Issue:</b> <span id="issueDate"></span><br><br>
+This is to certify that the marks and grades shown in this Statement of Marks / Grade Card represent the academic performance recorded for the student in the examination concerned.
+<br>
+The statement contains the course/subject-wise marks, grades, and other academic particulars as applicable to the examination record. The result is subject to the rules, regulations, and verification procedures of the University.
+<br><br>
+<b>Note:</b> This statement should be treated as valid only when issued and authenticated through the official channels of the University.
+</div>
+<div>
+<div class="signature">
+  <img id="controllerSignature" src="" alt="Controller Signature"
+       style="width:150px;height:55px;object-fit:contain;display:block;margin:0 auto 5px;">
+  <b>Controller of Examinations</b><br>
+  <small>Sample / Template Signature Area</small>
+</div>
+</div>
+</div>
+<div class="disclaimer">
+    <strong>GALGOTsIAS UNIVERSITY</strong> • Greater Noida, Uttar Pradesh, India<br>
+    Statement of Marks / Grade Card • Subject to verification from official University records
+</div>
+</div>
+</section>
+</div>
+
+<script>
+let subjectData = EDIT_SUBJECTS.map(s => [s.code, s.name, s.max, s.marks]);
+
+function addSubject(code="",name="",max="",marks=""){
+ const box=document.createElement("div"); box.className="subject";
+ box.innerHTML=`<input class="scode" placeholder="Subject Code" value="${code}">
+ <input class="sname" placeholder="Subject name" value="${name}">
+ <input class="smax" type="number" min="0" placeholder="Max" value="${max}">
+ <input class="smarks" type="number" min="0" placeholder="Marks" value="${marks}">
+ <button title="Remove" onclick="this.parentElement.remove();generate()">×</button>`;
+ document.getElementById("subjects").appendChild(box);
+ [box.querySelector(".scode"),box.querySelector(".sname"),box.querySelector(".smax"),box.querySelector(".smarks")].forEach(x=>x.addEventListener("input",generate));
+}
+function init(){subjectData.forEach(x=>addSubject(...x));generate()}
+function grade(p){
+ const found = EDIT_GRADES.find(x => p >= x.min) || EDIT_GRADES[EDIT_GRADES.length-1];
+ return [found.grade, found.point];
+}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function generate(){
+ const ids=["name","roll","reg","father","course","semester","session","exam"];
+ ids.forEach(id=>document.getElementById("p"+id.charAt(0).toUpperCase()+id.slice(1)).textContent=document.getElementById(id).value);
+ document.getElementById("issueDate").textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+ const body=document.getElementById("marksBody");body.innerHTML="";
+ let total=0,maxTotal=0,points=0,count=0,failed=false;
+ document.querySelectorAll(".subject").forEach((row,i)=>{
+   const code=row.querySelector(".scode").value||"—";
+   const n=row.querySelector(".sname").value||"—";
+   const mx=Number(row.querySelector(".smax").value)||0;
+   const m=Math.min(Number(row.querySelector(".smarks").value)||0,mx);
+   const pct=mx?m/mx*100:0; const [g,gp]=grade(pct);
+   if(g==="F")failed=true;
+   total+=m;maxTotal+=mx;points+=gp;count++;
+   body.insertAdjacentHTML("beforeend",`<tr><td>${i+1}</td><td>${esc(code)}</td><td class="subject-name">${esc(n)}</td><td>${mx}</td><td>${m}</td><td>${g}</td><td>${gp}</td><td>${g==="F"?"FAIL":"PASS"}</td></tr>`);
+ });
+ const percent=maxTotal?total/maxTotal*100:0;
+ document.getElementById("pTotal").textContent=`${total} / ${maxTotal}`;
+ document.getElementById("pPercent").textContent=percent.toFixed(2)+"%";
+ document.getElementById("pSGPA").textContent=count?(points/count).toFixed(2):"0.00";
+ document.getElementById("pResult").textContent=count?(failed?"FAIL":"PASS"):"-";
+}
+
+function loadUniversityLogo(e){
+ const f=e.target.files[0];
+ if(!f)return;
+ const r=new FileReader();
+ r.onload=()=>{
+   const src=r.result;
+   document.getElementById("logoPreview").src=src;
+   const img=document.getElementById("pUniversityLogo");
+   img.src=src;
+   img.style.display="block";
+   updateLogoSize();
+ };
+ r.readAsDataURL(f);
+}
+function updateLogoSize(){
+ const w=Number(document.getElementById("logoWidth").value)||75;
+ const h=Number(document.getElementById("logoHeight").value)||75;
+ const img=document.getElementById("pUniversityLogo");
+ const prev=document.getElementById("logoPreview");
+ img.style.width=w+"px"; img.style.height=h+"px";
+ prev.style.width=w+"px"; prev.style.height=h+"px";
+}
+
+function loadPhoto(e){
+ const f=e.target.files[0];if(!f)return;
+ const r=new FileReader();r.onload=()=>{document.getElementById("photoPreview").src=r.result;document.getElementById("pPhoto").src=r.result};r.readAsDataURL(f);
+}
+function sampleData(){
+ document.getElementById("name").value="";document.getElementById("roll").value="GU2026SAMPLE";
+ document.getElementById("reg").value="REG2026SAMPLE";document.getElementById("father").value="Sample Parent";
+ document.getElementById("course").value="";document.getElementById("semester").value="";
+ document.getElementById("session").value="";document.getElementById("exam").value="";
+ document.getElementById("subjects").innerHTML="";subjectData.forEach(x=>addSubject(...x));generate();
+}
+function resetAll(){location.reload()}
+
+/* Apply EASY EDIT AREA values to the form and document */
+document.querySelector("header h1").textContent = EDIT_UNIVERSITY.name + " — Marksheet Generator";
+document.querySelector(".uni h1").textContent = EDIT_UNIVERSITY.name;
+document.querySelector(".uni h2").textContent = EDIT_UNIVERSITY.documentTitle;
+document.querySelector(".uni p").textContent = EDIT_UNIVERSITY.location;
+document.querySelector(".title").textContent = EDIT_UNIVERSITY.statementTitle;
+document.querySelector(".notice").textContent = EDIT_UNIVERSITY.notice;
+document.getElementById("controllerSignature").src = EDIT_UNIVERSITY.controllerSignature;
+if (EDIT_UNIVERSITY.logo) {
+  const configuredLogo = document.getElementById("pUniversityLogo");
+  configuredLogo.src = EDIT_UNIVERSITY.logo;
+  configuredLogo.style.display = "block";
+  document.getElementById("logoPreview").src = EDIT_UNIVERSITY.logo;
+}
+document.getElementById("logoWidth").value = EDIT_UNIVERSITY.logoWidth;
+document.getElementById("logoHeight").value = EDIT_UNIVERSITY.logoHeight;
+
+document.documentElement.style.setProperty("--primary", EDIT_STYLE.primary);
+document.documentElement.style.setProperty("--page-bg", EDIT_STYLE.pageBackground);
+
+document.getElementById("name").value = EDIT_STUDENT.name;
+document.getElementById("roll").value = EDIT_STUDENT.roll;
+document.getElementById("reg").value = EDIT_STUDENT.registration;
+document.getElementById("father").value = EDIT_STUDENT.father;
+document.getElementById("mother").value = EDIT_STUDENT.mother;
+document.getElementById("course").value = EDIT_STUDENT.course;
+document.getElementById("semester").value = EDIT_STUDENT.semester;
+document.getElementById("session").value = EDIT_STUDENT.session;
+document.getElementById("exam").value = EDIT_STUDENT.examination;
+
+if (EDIT_STUDENT.photo) {
+  document.getElementById("photoPreview").src = EDIT_STUDENT.photo;
+  document.getElementById("pPhoto").src = EDIT_STUDENT.photo;
+}
+
+init();
+updateLogoSize();
+
+</script>
+</body>
+</html>
