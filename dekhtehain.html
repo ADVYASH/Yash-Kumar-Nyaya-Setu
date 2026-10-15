@@ -1,0 +1,1025 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>18+ Photo Gallery</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 1.5cm 0 1.5cm 1.5cm;
+    width: 100%;
+    background: #10131b;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+/* RED 18+ CIRCLE CURSOR */
+@media (hover: hover) and (pointer: fine) {
+    body,
+    body * {
+        cursor: none !important;
+    }
+
+    .custom-cursor {
+        display: flex;
+    }
+}
+
+.custom-cursor {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    pointer-events: none;
+
+    width: 46px;
+    height: 46px;
+    border: 3px solid #ff2020;
+    border-radius: 50%;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 0, 0, 0.12);
+    color: #ff2020;
+
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 900;
+
+    transform: translate(-50%, -50%);
+    transition:
+        color 0.1s ease,
+        border-color 0.1s ease,
+        background 0.1s ease;
+}
+
+.custom-cursor.clicking {
+    color: #fff;
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* PAGE HEADING */
+h1 {
+    text-align: center;
+    font-size: clamp(28px, 3vw, 42px);
+    margin: 10px 0;
+}
+
+.subtitle {
+    text-align: center;
+    color: #aab2c5;
+    margin-bottom: 25px;
+}
+
+/* MAIN BUTTONS */
+.main-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 0;
+    width: 100%;
+}
+
+.main-btn {
+    width: auto;
+    padding: 11px 16px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    transition: filter .2s, transform .2s;
+}
+
+.main-btn:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+}
+
+.main-btn.active {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+/* INTRODUCTION */
+.intro-section {
+    width: 100%;
+    margin: 25px 0;
+    padding: 24px;
+    background: #171c29;
+    border: 1px solid #2b3347;
+    border-radius: 14px;
+}
+
+/* FOUR LANDSCAPE GIFS */
+.gif-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+}
+
+.gif-card {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #202638;
+    border: 1px solid #343b50;
+}
+
+.gif-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* INTRODUCTION TEXT */
+.intro-text {
+    margin-top: 25px;
+    line-height: 1.8;
+    font-size: 16px;
+    color: #e2e8f0;
+}
+
+.intro-line {
+    margin: 8px 0;
+}
+
+/* 18+ NOTICE */
+.age-notice {
+    margin-top: 22px;
+    padding: 16px;
+    background: #291a20;
+    border-left: 4px solid #e53935;
+    border-radius: 6px;
+    line-height: 1.7;
+}
+
+.age-notice h3 {
+    margin: 0 0 8px;
+    color: #ff7777;
+}
+
+.age-notice p {
+    margin: 0;
+}
+
+/* CONTENT SECTIONS */
+.content-section {
+    width: 100%;
+    margin-top: 25px;
+    padding: 24px;
+    background: #171c29;
+    border: 1px solid #2b3347;
+    border-radius: 14px;
+}
+
+.content-section h2 {
+    margin: 0 0 20px;
+    font-size: 25px;
+}
+
+/* CATEGORY BUTTONS */
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.category-btn {
+    padding: 12px 18px;
+    color: #fff;
+    background: #202638;
+    border: 1px solid #343b50;
+    border-radius: 9px;
+    font-size: 15px;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background: #4169e1;
+    border-color: #86a3ff;
+}
+
+/* LANDSCAPE PHOTO GALLERIES */
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.photo-card {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    background: #202638;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid #343b50;
+    border-radius: 11px;
+    transition: transform .2s, border-color .2s;
+}
+
+.photo-card:hover {
+    transform: translateY(-4px);
+    border-color: #7192ff;
+}
+
+.photo-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #292f40;
+}
+
+.photo-caption {
+    padding: 13px 10px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* RESPONSIVE LAYOUT */
+@media (min-width: 1600px) {
+    .photo-gallery {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1000px) {
+    .photo-gallery {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .gif-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .photo-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .intro-section,
+    .content-section {
+        padding: 14px;
+    }
+
+    .main-buttons {
+        gap: 9px;
+    }
+
+    .main-btn {
+        padding: 9px 12px;
+        font-size: 14px;
+    }
+
+    .category-list {
+        gap: 8px;
+    }
+
+    .category-btn {
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    .photo-gallery {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Photo Gallery</h1>
+<p class="subtitle">Select a section, choose a category, and explore.</p>
+
+<!-- 30 MAIN BUTTONS -->
+<div class="main-buttons">
+    <button class="main-btn" style="background:#e53935" data-target="home">Home</button>
+    <button class="main-btn" style="background:#8e24aa" data-target="about">About</button>
+    <button class="main-btn" style="background:#3949ab" data-target="services">Services</button>
+    <button class="main-btn" style="background:#039be5" data-target="gallery">Gallery</button>
+    <button class="main-btn" style="background:#00897b" data-target="contact">Contact</button>
+    <button class="main-btn" style="background:#43a047" data-target="news">News</button>
+    <button class="main-btn" style="background:#7cb342" data-target="articles">Articles</button>
+    <button class="main-btn" style="background:#c0a000" data-target="resources">Resources</button>
+    <button class="main-btn" style="background:#fb8c00" data-target="projects">Projects</button>
+    <button class="main-btn" style="background:#f4511e" data-target="portfolio">Portfolio</button>
+    <button class="main-btn" style="background:#d81b60" data-target="blog">Blog</button>
+    <button class="main-btn" style="background:#6d4c41" data-target="events">Events</button>
+    <button class="main-btn" style="background:#546e7a" data-target="support">Support</button>
+    <button class="main-btn" style="background:#5e35b1" data-target="careers">Careers</button>
+    <button class="main-btn" style="background:#00acc1" data-target="community">Community</button>
+    <button class="main-btn" style="background:#00838f" data-target="products">Products</button>
+    <button class="main-btn" style="background:#2e7d32" data-target="downloads">Downloads</button>
+    <button class="main-btn" style="background:#9e9d24" data-target="tutorials">Tutorials</button>
+    <button class="main-btn" style="background:#ef6c00" data-target="faq">FAQ</button>
+    <button class="main-btn" style="background:#ad1457" data-target="partners">Partners</button>
+    <button class="main-btn" style="background:#4527a0" data-target="reviews">Reviews</button>
+    <button class="main-btn" style="background:#1565c0" data-target="media">Media</button>
+    <button class="main-btn" style="background:#00695c" data-target="education">Education</button>
+    <button class="main-btn" style="background:#558b2f" data-target="legal">Legal</button>
+    <button class="main-btn" style="background:#c62828" data-target="offers">Offers</button>
+    <button class="main-btn" style="background:#283593" data-target="team">Team</button>
+    <button class="main-btn" style="background:#0277bd" data-target="care">Care</button>
+    <button class="main-btn" style="background:#6a1b9a" data-target="account">Account</button>
+    <button class="main-btn" style="background:#00897b" data-target="updates">Updates</button>
+    <button class="main-btn" style="background:#37474f" data-target="contact-us">Contact Us</button>
+</div>
+
+<!-- INTRODUCTION AND GIFS -->
+<section class="intro-section">
+    <div class="gif-row">
+        <div class="gif-card"><img src="gifs/1.gif" alt="GIF 1"></div>
+        <div class="gif-card"><img src="gifs/2.gif" alt="GIF 2"></div>
+        <div class="gif-card"><img src="gifs/3.gif" alt="GIF 3"></div>
+        <div class="gif-card"><img src="gifs/4.gif" alt="GIF 4"></div>
+    </div>
+
+    <div class="intro-text">
+        <p class="intro-line"><strong>First line:</strong> Write your first introduction here.</p>
+        <p class="intro-line"><strong>Second line:</strong> Write your second introduction here.</p>
+        <p class="intro-line"><strong>Third line:</strong> Write your third introduction here.</p>
+    </div>
+
+    <div class="age-notice">
+        <h3>18+ Website Notice</h3>
+        <p>This website is intended for adults aged 18 and over. By continuing, you confirm that you meet the minimum age requirement applicable in your location.</p>
+    </div>
+</section>
+
+<!-- SECTION TEMPLATE: EACH CATEGORY HAS ITS OWN GALLERY -->
+
+<section class="content-section" id="home" hidden>
+    <h2>Home</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="home-welcome">Welcome</button>
+        <button class="category-btn" data-category="home-latest">Latest</button>
+        <button class="category-btn" data-category="home-featured">Featured</button>
+    </div>
+    <div class="photo-gallery" id="home-welcome" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/1.jpg" alt="Welcome"><div class="photo-caption">Welcome</div></a>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/2.jpg" alt="Welcome 2"><div class="photo-caption">Welcome Photo 2</div></a>
+    </div>
+    <div class="photo-gallery" id="home-latest" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/3.jpg" alt="Latest"><div class="photo-caption">Latest Photo</div></a>
+    </div>
+    <div class="photo-gallery" id="home-featured" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/4.jpg" alt="Featured"><div class="photo-caption">Featured Photo</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="about" hidden>
+    <h2>About</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="about-story">Our Story</button>
+        <button class="category-btn" data-category="about-mission">Our Mission</button>
+        <button class="category-btn" data-category="about-team">Our Team</button>
+    </div>
+    <div class="photo-gallery" id="about-story" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/5.jpg" alt="Our Story"><div class="photo-caption">Our Story</div></a>
+    </div>
+    <div class="photo-gallery" id="about-mission" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/6.jpg" alt="Our Mission"><div class="photo-caption">Our Mission</div></a>
+    </div>
+    <div class="photo-gallery" id="about-team" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/7.jpg" alt="Our Team"><div class="photo-caption">Our Team</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="services" hidden>
+    <h2>Services</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="services-a">Service A</button>
+        <button class="category-btn" data-category="services-b">Service B</button>
+        <button class="category-btn" data-category="services-c">Service C</button>
+    </div>
+    <div class="photo-gallery" id="services-a" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/8.jpg" alt="Service A"><div class="photo-caption">Service A</div></a>
+    </div>
+    <div class="photo-gallery" id="services-b" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/9.jpg" alt="Service B"><div class="photo-caption">Service B</div></a>
+    </div>
+    <div class="photo-gallery" id="services-c" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/10.jpg" alt="Service C"><div class="photo-caption">Service C</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="gallery" hidden>
+    <h2>Gallery</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="gallery-photos">Photos</button>
+        <button class="category-btn" data-category="gallery-videos">Videos</button>
+        <button class="category-btn" data-category="gallery-collections">Collections</button>
+    </div>
+    <div class="photo-gallery" id="gallery-photos" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/11.jpg" alt="Photos"><div class="photo-caption">Photo Collection</div></a>
+    </div>
+    <div class="photo-gallery" id="gallery-videos" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/12.jpg" alt="Videos"><div class="photo-caption">Video Collection</div></a>
+    </div>
+    <div class="photo-gallery" id="gallery-collections" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/13.jpg" alt="Collections"><div class="photo-caption">Collections</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="contact" hidden>
+    <h2>Contact</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="contact-email">Email</button>
+        <button class="category-btn" data-category="contact-phone">Phone</button>
+        <button class="category-btn" data-category="contact-address">Address</button>
+    </div>
+    <div class="photo-gallery" id="contact-email" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/14.jpg" alt="Email"><div class="photo-caption">Email</div></a>
+    </div>
+    <div class="photo-gallery" id="contact-phone" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/15.jpg" alt="Phone"><div class="photo-caption">Phone</div></a>
+    </div>
+    <div class="photo-gallery" id="contact-address" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/16.jpg" alt="Address"><div class="photo-caption">Address</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="news" hidden>
+    <h2>News</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="news-latest">Latest News</button>
+        <button class="category-btn" data-category="news-updates">Updates</button>
+        <button class="category-btn" data-category="news-announcements">Announcements</button>
+    </div>
+    <div class="photo-gallery" id="news-latest" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/17.jpg" alt="Latest News"><div class="photo-caption">Latest News</div></a>
+    </div>
+    <div class="photo-gallery" id="news-updates" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/18.jpg" alt="Updates"><div class="photo-caption">Updates</div></a>
+    </div>
+    <div class="photo-gallery" id="news-announcements" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/19.jpg" alt="Announcements"><div class="photo-caption">Announcements</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="articles" hidden>
+    <h2>Articles</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="articles-latest">Latest Articles</button>
+        <button class="category-btn" data-category="articles-popular">Popular</button>
+        <button class="category-btn" data-category="articles-featured">Featured</button>
+    </div>
+    <div class="photo-gallery" id="articles-latest" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/20.jpg" alt="Latest Articles"><div class="photo-caption">Latest Articles</div></a>
+    </div>
+    <div class="photo-gallery" id="articles-popular" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/21.jpg" alt="Popular Articles"><div class="photo-caption">Popular Articles</div></a>
+    </div>
+    <div class="photo-gallery" id="articles-featured" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/22.jpg" alt="Featured Articles"><div class="photo-caption">Featured Articles</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="resources" hidden>
+    <h2>Resources</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="resources-documents">Documents</button>
+        <button class="category-btn" data-category="resources-downloads">Downloads</button>
+        <button class="category-btn" data-category="resources-links">Useful Links</button>
+    </div>
+    <div class="photo-gallery" id="resources-documents" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/23.jpg" alt="Documents"><div class="photo-caption">Documents</div></a>
+    </div>
+    <div class="photo-gallery" id="resources-downloads" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/24.jpg" alt="Downloads"><div class="photo-caption">Downloads</div></a>
+    </div>
+    <div class="photo-gallery" id="resources-links" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/25.jpg" alt="Useful Links"><div class="photo-caption">Useful Links</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="projects" hidden>
+    <h2>Projects</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="projects-a">Project A</button>
+        <button class="category-btn" data-category="projects-b">Project B</button>
+        <button class="category-btn" data-category="projects-c">Project C</button>
+    </div>
+    <div class="photo-gallery" id="projects-a" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/26.jpg" alt="Project A"><div class="photo-caption">Project A</div></a>
+    </div>
+    <div class="photo-gallery" id="projects-b" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/27.jpg" alt="Project B"><div class="photo-caption">Project B</div></a>
+    </div>
+    <div class="photo-gallery" id="projects-c" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/28.jpg" alt="Project C"><div class="photo-caption">Project C</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="portfolio" hidden>
+    <h2>Portfolio</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="portfolio-designs">Designs</button>
+        <button class="category-btn" data-category="portfolio-work">Work</button>
+        <button class="category-btn" data-category="portfolio-achievements">Achievements</button>
+    </div>
+    <div class="photo-gallery" id="portfolio-designs" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/29.jpg" alt="Designs"><div class="photo-caption">Designs</div></a>
+    </div>
+    <div class="photo-gallery" id="portfolio-work" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/30.jpg" alt="Work"><div class="photo-caption">Work</div></a>
+    </div>
+    <div class="photo-gallery" id="portfolio-achievements" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/31.jpg" alt="Achievements"><div class="photo-caption">Achievements</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="blog" hidden>
+    <h2>Blog</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="blog-recent">Recent Posts</button>
+        <button class="category-btn" data-category="blog-categories">Categories</button>
+        <button class="category-btn" data-category="blog-archive">Archive</button>
+    </div>
+    <div class="photo-gallery" id="blog-recent" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/32.jpg" alt="Recent Posts"><div class="photo-caption">Recent Posts</div></a>
+    </div>
+    <div class="photo-gallery" id="blog-categories" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/33.jpg" alt="Categories"><div class="photo-caption">Categories</div></a>
+    </div>
+    <div class="photo-gallery" id="blog-archive" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/34.jpg" alt="Archive"><div class="photo-caption">Archive</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="events" hidden>
+    <h2>Events</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="events-upcoming">Upcoming</button>
+        <button class="category-btn" data-category="events-past">Past Events</button>
+        <button class="category-btn" data-category="events-highlights">Highlights</button>
+    </div>
+    <div class="photo-gallery" id="events-upcoming" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/35.jpg" alt="Upcoming"><div class="photo-caption">Upcoming</div></a>
+    </div>
+    <div class="photo-gallery" id="events-past" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/36.jpg" alt="Past Events"><div class="photo-caption">Past Events</div></a>
+    </div>
+    <div class="photo-gallery" id="events-highlights" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/37.jpg" alt="Highlights"><div class="photo-caption">Highlights</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="support" hidden>
+    <h2>Support</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="support-help">Help Center</button>
+        <button class="category-btn" data-category="support-faq">FAQs</button>
+        <button class="category-btn" data-category="support-contact">Contact Support</button>
+    </div>
+    <div class="photo-gallery" id="support-help" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/38.jpg" alt="Help Center"><div class="photo-caption">Help Center</div></a>
+    </div>
+    <div class="photo-gallery" id="support-faq" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/39.jpg" alt="FAQs"><div class="photo-caption">FAQs</div></a>
+    </div>
+    <div class="photo-gallery" id="support-contact" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/40.jpg" alt="Contact Support"><div class="photo-caption">Contact Support</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="careers" hidden>
+    <h2>Careers</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="careers-open">Open Positions</button>
+        <button class="category-btn" data-category="careers-internships">Internships</button>
+        <button class="category-btn" data-category="careers-apply">Apply</button>
+    </div>
+    <div class="photo-gallery" id="careers-open" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/41.jpg" alt="Open Positions"><div class="photo-caption">Open Positions</div></a>
+    </div>
+    <div class="photo-gallery" id="careers-internships" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/42.jpg" alt="Internships"><div class="photo-caption">Internships</div></a>
+    </div>
+    <div class="photo-gallery" id="careers-apply" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/43.jpg" alt="Apply"><div class="photo-caption">Apply</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="community" hidden>
+    <h2>Community</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="community-members">Members</button>
+        <button class="category-btn" data-category="community-discussions">Discussions</button>
+        <button class="category-btn" data-category="community-groups">Groups</button>
+    </div>
+    <div class="photo-gallery" id="community-members" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/44.jpg" alt="Members"><div class="photo-caption">Members</div></a>
+    </div>
+    <div class="photo-gallery" id="community-discussions" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/45.jpg" alt="Discussions"><div class="photo-caption">Discussions</div></a>
+    </div>
+    <div class="photo-gallery" id="community-groups" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/46.jpg" alt="Groups"><div class="photo-caption">Groups</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="products" hidden>
+    <h2>Products</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="products-a">Product A</button>
+        <button class="category-btn" data-category="products-b">Product B</button>
+        <button class="category-btn" data-category="products-c">Product C</button>
+    </div>
+    <div class="photo-gallery" id="products-a" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/47.jpg" alt="Product A"><div class="photo-caption">Product A</div></a>
+    </div>
+    <div class="photo-gallery" id="products-b" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/48.jpg" alt="Product B"><div class="photo-caption">Product B</div></a>
+    </div>
+    <div class="photo-gallery" id="products-c" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/49.jpg" alt="Product C"><div class="photo-caption">Product C</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="downloads" hidden>
+    <h2>Downloads</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="downloads-pdfs">PDFs</button>
+        <button class="category-btn" data-category="downloads-images">Images</button>
+        <button class="category-btn" data-category="downloads-files">Files</button>
+    </div>
+    <div class="photo-gallery" id="downloads-pdfs" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/50.jpg" alt="PDFs"><div class="photo-caption">PDFs</div></a>
+    </div>
+    <div class="photo-gallery" id="downloads-images" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/51.jpg" alt="Images"><div class="photo-caption">Images</div></a>
+    </div>
+    <div class="photo-gallery" id="downloads-files" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/52.jpg" alt="Files"><div class="photo-caption">Files</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="tutorials" hidden>
+    <h2>Tutorials</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="tutorials-beginner">Beginner</button>
+        <button class="category-btn" data-category="tutorials-intermediate">Intermediate</button>
+        <button class="category-btn" data-category="tutorials-advanced">Advanced</button>
+    </div>
+    <div class="photo-gallery" id="tutorials-beginner" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/53.jpg" alt="Beginner"><div class="photo-caption">Beginner</div></a>
+    </div>
+    <div class="photo-gallery" id="tutorials-intermediate" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/54.jpg" alt="Intermediate"><div class="photo-caption">Intermediate</div></a>
+    </div>
+    <div class="photo-gallery" id="tutorials-advanced" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/55.jpg" alt="Advanced"><div class="photo-caption">Advanced</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="faq" hidden>
+    <h2>FAQ</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="faq-general">General</button>
+        <button class="category-btn" data-category="faq-account">Account</button>
+        <button class="category-btn" data-category="faq-technical">Technical</button>
+    </div>
+    <div class="photo-gallery" id="faq-general" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/56.jpg" alt="General FAQ"><div class="photo-caption">General</div></a>
+    </div>
+    <div class="photo-gallery" id="faq-account" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/57.jpg" alt="Account FAQ"><div class="photo-caption">Account</div></a>
+    </div>
+    <div class="photo-gallery" id="faq-technical" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/58.jpg" alt="Technical FAQ"><div class="photo-caption">Technical</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="partners" hidden>
+    <h2>Partners</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="partners-our">Our Partners</button>
+        <button class="category-btn" data-category="partners-collaborations">Collaborations</button>
+        <button class="category-btn" data-category="partners-network">Network</button>
+    </div>
+    <div class="photo-gallery" id="partners-our" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/59.jpg" alt="Our Partners"><div class="photo-caption">Our Partners</div></a>
+    </div>
+    <div class="photo-gallery" id="partners-collaborations" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/60.jpg" alt="Collaborations"><div class="photo-caption">Collaborations</div></a>
+    </div>
+    <div class="photo-gallery" id="partners-network" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/61.jpg" alt="Network"><div class="photo-caption">Network</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="reviews" hidden>
+    <h2>Reviews</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="reviews-customers">Customer Reviews</button>
+        <button class="category-btn" data-category="reviews-testimonials">Testimonials</button>
+        <button class="category-btn" data-category="reviews-feedback">Feedback</button>
+    </div>
+    <div class="photo-gallery" id="reviews-customers" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/62.jpg" alt="Customer Reviews"><div class="photo-caption">Customer Reviews</div></a>
+    </div>
+    <div class="photo-gallery" id="reviews-testimonials" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/63.jpg" alt="Testimonials"><div class="photo-caption">Testimonials</div></a>
+    </div>
+    <div class="photo-gallery" id="reviews-feedback" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/64.jpg" alt="Feedback"><div class="photo-caption">Feedback</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="media" hidden>
+    <h2>Media</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="media-images">Images</button>
+        <button class="category-btn" data-category="media-videos">Videos</button>
+        <button class="category-btn" data-category="media-press">Press</button>
+    </div>
+    <div class="photo-gallery" id="media-images" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/65.jpg" alt="Images"><div class="photo-caption">Images</div></a>
+    </div>
+    <div class="photo-gallery" id="media-videos" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/66.jpg" alt="Videos"><div class="photo-caption">Videos</div></a>
+    </div>
+    <div class="photo-gallery" id="media-press" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/67.jpg" alt="Press"><div class="photo-caption">Press</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="education" hidden>
+    <h2>Education</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="education-courses">Courses</button>
+        <button class="category-btn" data-category="education-study">Study Material</button>
+        <button class="category-btn" data-category="education-guides">Guides</button>
+    </div>
+    <div class="photo-gallery" id="education-courses" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/68.jpg" alt="Courses"><div class="photo-caption">Courses</div></a>
+    </div>
+    <div class="photo-gallery" id="education-study" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/69.jpg" alt="Study Material"><div class="photo-caption">Study Material</div></a>
+    </div>
+    <div class="photo-gallery" id="education-guides" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/70.jpg" alt="Guides"><div class="photo-caption">Guides</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="legal" hidden>
+    <h2>Legal</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="legal-policies">Policies</button>
+        <button class="category-btn" data-category="legal-terms">Terms</button>
+        <button class="category-btn" data-category="legal-privacy">Privacy</button>
+    </div>
+    <div class="photo-gallery" id="legal-policies" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/71.jpg" alt="Policies"><div class="photo-caption">Policies</div></a>
+    </div>
+    <div class="photo-gallery" id="legal-terms" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/72.jpg" alt="Terms"><div class="photo-caption">Terms</div></a>
+    </div>
+    <div class="photo-gallery" id="legal-privacy" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/73.jpg" alt="Privacy"><div class="photo-caption">Privacy</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="offers" hidden>
+    <h2>Offers</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="offers-latest">Latest Offers</button>
+        <button class="category-btn" data-category="offers-featured">Featured</button>
+        <button class="category-btn" data-category="offers-archive">Archive</button>
+    </div>
+    <div class="photo-gallery" id="offers-latest" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/74.jpg" alt="Latest Offers"><div class="photo-caption">Latest Offers</div></a>
+    </div>
+    <div class="photo-gallery" id="offers-featured" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/75.jpg" alt="Featured Offers"><div class="photo-caption">Featured</div></a>
+    </div>
+    <div class="photo-gallery" id="offers-archive" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/76.jpg" alt="Archive"><div class="photo-caption">Archive</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="team" hidden>
+    <h2>Team</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="team-management">Management</button>
+        <button class="category-btn" data-category="team-members">Members</button>
+        <button class="category-btn" data-category="team-join">Join Us</button>
+    </div>
+    <div class="photo-gallery" id="team-management" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/77.jpg" alt="Management"><div class="photo-caption">Management</div></a>
+    </div>
+    <div class="photo-gallery" id="team-members" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/78.jpg" alt="Members"><div class="photo-caption">Members</div></a>
+    </div>
+    <div class="photo-gallery" id="team-join" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/79.jpg" alt="Join Us"><div class="photo-caption">Join Us</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="care" hidden>
+    <h2>Care</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="care-help">Help</button>
+        <button class="category-btn" data-category="care-guidance">Guidance</button>
+        <button class="category-btn" data-category="care-assistance">Assistance</button>
+    </div>
+    <div class="photo-gallery" id="care-help" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/80.jpg" alt="Help"><div class="photo-caption">Help</div></a>
+    </div>
+    <div class="photo-gallery" id="care-guidance" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/81.jpg" alt="Guidance"><div class="photo-caption">Guidance</div></a>
+    </div>
+    <div class="photo-gallery" id="care-assistance" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/82.jpg" alt="Assistance"><div class="photo-caption">Assistance</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="account" hidden>
+    <h2>Account</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="account-profile">Profile</button>
+        <button class="category-btn" data-category="account-settings">Settings</button>
+        <button class="category-btn" data-category="account-preferences">Preferences</button>
+    </div>
+    <div class="photo-gallery" id="account-profile" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/83.jpg" alt="Profile"><div class="photo-caption">Profile</div></a>
+    </div>
+    <div class="photo-gallery" id="account-settings" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/84.jpg" alt="Settings"><div class="photo-caption">Settings</div></a>
+    </div>
+    <div class="photo-gallery" id="account-preferences" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/85.jpg" alt="Preferences"><div class="photo-caption">Preferences</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="updates" hidden>
+    <h2>Updates</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="updates-new">What's New</button>
+        <button class="category-btn" data-category="updates-releases">Releases</button>
+        <button class="category-btn" data-category="updates-changelog">Changelog</button>
+    </div>
+    <div class="photo-gallery" id="updates-new" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/86.jpg" alt="What's New"><div class="photo-caption">What's New</div></a>
+    </div>
+    <div class="photo-gallery" id="updates-releases" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/87.jpg" alt="Releases"><div class="photo-caption">Releases</div></a>
+    </div>
+    <div class="photo-gallery" id="updates-changelog" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/88.jpg" alt="Changelog"><div class="photo-caption">Changelog</div></a>
+    </div>
+</section>
+
+<section class="content-section" id="contact-us" hidden>
+    <h2>Contact Us</h2>
+    <div class="category-list">
+        <button class="category-btn" data-category="contact-us-email">Email Us</button>
+        <button class="category-btn" data-category="contact-us-call">Call Us</button>
+        <button class="category-btn" data-category="contact-us-location">Location</button>
+    </div>
+    <div class="photo-gallery" id="contact-us-email" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/89.jpg" alt="Email Us"><div class="photo-caption">Email Us</div></a>
+    </div>
+    <div class="photo-gallery" id="contact-us-call" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/90.jpg" alt="Call Us"><div class="photo-caption">Call Us</div></a>
+    </div>
+    <div class="photo-gallery" id="contact-us-location" hidden>
+        <a class="photo-card" href="https://example.com/" target="_blank" rel="noopener noreferrer"><img src="asdfasdf/91.jpg" alt="Location"><div class="photo-caption">Location</div></a>
+    </div>
+</section>
+
+<!-- CUSTOM CURSOR -->
+<div class="custom-cursor" id="customCursor" aria-hidden="true">18+</div>
+
+<script>
+/* MAIN BUTTON INTERACTION */
+const mainButtons = document.querySelectorAll(".main-btn");
+const sections = document.querySelectorAll(".content-section");
+
+mainButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const target = document.getElementById(button.dataset.target);
+        const wasOpen = !target.hidden;
+
+        sections.forEach(section => {
+            section.hidden = true;
+
+            section.querySelectorAll(".photo-gallery").forEach(gallery => {
+                gallery.hidden = true;
+            });
+
+            section.querySelectorAll(".category-btn").forEach(categoryButton => {
+                categoryButton.classList.remove("active");
+            });
+        });
+
+        mainButtons.forEach(item => item.classList.remove("active"));
+
+        if (!wasOpen) {
+            target.hidden = false;
+            button.classList.add("active");
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    });
+});
+
+/* CATEGORY INTERACTION */
+document.querySelectorAll(".content-section").forEach(section => {
+    const categoryButtons = section.querySelectorAll(".category-btn");
+
+    categoryButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const gallery = document.getElementById(button.dataset.category);
+
+            section.querySelectorAll(".photo-gallery").forEach(item => {
+                item.hidden = true;
+            });
+
+            categoryButtons.forEach(item => item.classList.remove("active"));
+            button.classList.add("active");
+
+            if (gallery) {
+                gallery.hidden = false;
+
+                gallery.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest"
+                });
+            }
+        });
+    });
+});
+
+/* RED CIRCULAR 18+ CURSOR */
+const customCursor = document.getElementById("customCursor");
+let cursorReset;
+
+document.addEventListener("mousemove", function(event) {
+    customCursor.style.left = event.clientX + "px";
+    customCursor.style.top = event.clientY + "px";
+});
+
+document.addEventListener("click", function() {
+    customCursor.classList.add("clicking");
+
+    clearTimeout(cursorReset);
+
+    cursorReset = setTimeout(function() {
+        customCursor.classList.remove("clicking");
+    }, 300);
+});
+
+document.addEventListener("mouseleave", function() {
+    customCursor.style.display = "none";
+});
+
+document.addEventListener("mouseenter", function() {
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        customCursor.style.display = "flex";
+    }
+});
+</script>
+
+</body>
+</html>
